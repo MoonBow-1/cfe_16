@@ -80,7 +80,7 @@ public class SessionManager implements Runnable, LifeCycle {
     private Configuration configuration;
 
     /**
-     * 
+     *
      */
     public SessionManager() {
         this.sessions = new HashMap<String, Session>();

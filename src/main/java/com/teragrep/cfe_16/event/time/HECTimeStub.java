@@ -43,50 +43,27 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.event.time;
 
-import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+public final class HECTimeStub implements HECTime {
 
-import java.io.IOException;
-
-public class TcpConnection extends AbstractConnection {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
-
-    public TcpConnection(String hostname, int port) {
-        super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
+    @Override
+    public long instant(long defaultValue) {
+        throw new UnsupportedOperationException("HECTimeStub does not support this");
     }
 
     @Override
-    public void sendMessages(List<SyslogMessage> syslogMessages) throws IOException {
-        LOGGER.debug("Sending messages");
-        for (SyslogMessage syslogMessage : syslogMessages) {
-            this.sender.sendMessage(syslogMessage);
-        }
+    public boolean parsed() {
+        throw new UnsupportedOperationException("HECTimeStub does not support this");
     }
 
     @Override
-    public void sendMessage(SyslogMessage syslogMessage) throws IOException {
-        LOGGER.debug("Sending message");
-        this.sender.sendMessage(syslogMessage);
+    public String source() {
+        throw new UnsupportedOperationException("HECTimeStub does not support this");
     }
 
     @Override
-    public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
-    }
-
-    public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
+    public boolean isStub() {
+        return true;
     }
 }

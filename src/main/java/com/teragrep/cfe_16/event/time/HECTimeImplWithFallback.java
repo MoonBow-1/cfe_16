@@ -43,50 +43,76 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.event.time;
 
-import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Objects;
 
-import java.io.IOException;
+public final class HECTimeImplWithFallback implements HECTime {
 
-public class TcpConnection extends AbstractConnection {
+    private final HECTime currentTime;
+    private final HECTime fallbackTime;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
-
-    public TcpConnection(String hostname, int port) {
-        super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
+    public HECTimeImplWithFallback(HECTime currentTime, HECTime fallbackTime) {
+        this.currentTime = currentTime;
+        this.fallbackTime = fallbackTime;
     }
 
     @Override
-    public void sendMessages(List<SyslogMessage> syslogMessages) throws IOException {
-        LOGGER.debug("Sending messages");
-        for (SyslogMessage syslogMessage : syslogMessages) {
-            this.sender.sendMessage(syslogMessage);
+    public long instant(long defaultValue) {
+        final long currentTime = this.currentTime.instant(defaultValue);
+
+        // Check if the currentTime relied on the defaultValue
+        if (currentTime == defaultValue && !this.fallbackTime.isStub()) {
+            return this.fallbackTime.instant(defaultValue);
+        }
+        else {
+            return currentTime;
         }
     }
 
     @Override
-    public void sendMessage(SyslogMessage syslogMessage) throws IOException {
-        LOGGER.debug("Sending message");
-        this.sender.sendMessage(syslogMessage);
+    public boolean parsed() {
+        if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
+            return false;
+        }
+        else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
+            return this.currentTime.parsed();
+        }
+        else {
+            return this.fallbackTime.parsed();
+        }
     }
 
     @Override
-    public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
+    public String source() {
+        if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
+            return "generated";
+        }
+        else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
+            return this.currentTime.source();
+        }
+        else {
+            return this.fallbackTime.source();
+        }
     }
 
-    public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        HECTimeImplWithFallback that = (HECTimeImplWithFallback) o;
+        return Objects.equals(currentTime, that.currentTime) && Objects.equals(fallbackTime, that.fallbackTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentTime, fallbackTime);
+    }
+
+    @Override
+    public boolean isStub() {
+        return false;
     }
 }

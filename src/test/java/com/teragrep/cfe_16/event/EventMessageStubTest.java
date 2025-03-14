@@ -43,91 +43,52 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.event;
 
-import com.teragrep.cfe_16.event.EventMessage;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-/**
- */
-public final class HttpEventData {
+class EventMessageStubTest {
 
-    private String channel;
-    private EventMessage event;
-    private String authenticationToken;
-    private String timeSource;
-    private String time;
-    private long timeAsLong;
-    private boolean timeParsed;
-    private Integer ackID;
+    @Test
+    @DisplayName("isStub() returns true")
+    void isStubReturnsTrue() {
+        final EventMessageStub eventStub = new EventMessageStub();
 
-    public EventMessage getEvent() {
-        return event;
+        Assertions.assertTrue(eventStub::isStub);
     }
 
-    public void setEvent(final EventMessage event) {
-        this.event = event;
+    @Test
+    @DisplayName("asString() throws UnsupportedOperationException if called")
+    void asStringThrowsUnsupportedOperationExceptionIfCalled() {
+        final EventMessageStub eventStub = new EventMessageStub();
+
+        final Exception exception = Assertions
+                .assertThrowsExactly(UnsupportedOperationException.class, eventStub::asString);
+
+        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
     }
 
-    public String getChannel() {
-        return channel;
+    @Test
+    @DisplayName("hashCode() throws UnsupportedOperationException if called")
+    void hashCodeThrowsUnsupportedOperationExceptionIfCalled() {
+        final EventMessageStub eventStub = new EventMessageStub();
+
+        final Exception exception = Assertions
+                .assertThrowsExactly(UnsupportedOperationException.class, eventStub::hashCode);
+
+        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
+    @Test
+    @DisplayName("equals() throws UnsupportedOperationException if called")
+    void equalsThrowsUnsupportedOperationExceptionIfCalled() {
+        final EventMessageStub eventStub = new EventMessageStub();
 
-    public String getAuthenticationToken() {
-        return authenticationToken;
-    }
+        final Exception exception = Assertions
+                .assertThrowsExactly(UnsupportedOperationException.class, () -> eventStub.equals(new Object()));
 
-    public void setAuthenticationToken(String authenticationToken) {
-        this.authenticationToken = authenticationToken;
-    }
-
-    public String getTimeSource() {
-        return timeSource;
-    }
-
-    public void setTimeSource(String timeSource) {
-        this.timeSource = timeSource;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public long getTimeAsLong() {
-        return timeAsLong;
-    }
-
-    public void setTimeAsLong(long timeAsLong) {
-        this.timeAsLong = timeAsLong;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public boolean isTimeParsed() {
-        return timeParsed;
-    }
-
-    public void setTimeParsed(boolean timeParsed) {
-        this.timeParsed = timeParsed;
-    }
-
-    public Integer getAckID() {
-        return ackID;
-    }
-
-    public void setAckID(Integer ackID) {
-        this.ackID = ackID;
-    }
-
-    @Override
-    public String toString() {
-        return "HttpEventData [channel=" + channel + ", event=" + event + ", authenticationToken=" + authenticationToken
-                + ", timeSource=" + timeSource + ", time=" + time + ", timeAsLong=" + timeAsLong + ", timeParsed="
-                + timeParsed + ", ackID=" + ackID + "]";
+        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
     }
 }

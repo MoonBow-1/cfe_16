@@ -43,50 +43,62 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.bo;
 
 import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.teragrep.cfe_16.event.EventMessage;
+import com.teragrep.cfe_16.event.time.HECTime;
+import com.teragrep.cfe_16.event.time.HECTimeStub;
 
-import java.io.IOException;
+public final class HECRecordStub implements HECRecord {
 
-public class TcpConnection extends AbstractConnection {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
-
-    public TcpConnection(String hostname, int port) {
-        super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
+    @Override
+    public EventMessage event() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 
     @Override
-    public void sendMessages(List<SyslogMessage> syslogMessages) throws IOException {
-        LOGGER.debug("Sending messages");
-        for (SyslogMessage syslogMessage : syslogMessages) {
-            this.sender.sendMessage(syslogMessage);
-        }
+    public String channel() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 
     @Override
-    public void sendMessage(SyslogMessage syslogMessage) throws IOException {
-        LOGGER.debug("Sending message");
-        this.sender.sendMessage(syslogMessage);
+    public String authenticationToken() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 
     @Override
-    public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
+    public Integer ackID() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 
-    public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
+    @Override
+    public HECTime time() {
+        return new HECTimeStub();
+    }
+
+    @Override
+    public SyslogMessage toSyslogMessage() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
+    }
+
+    @Override
+    public SyslogMessage toSyslogMessage(long defaultValue) {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
+    }
+
+    @Override
+    public boolean isStub() {
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 }

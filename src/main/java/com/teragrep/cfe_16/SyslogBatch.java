@@ -43,50 +43,28 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16;
 
 import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
+import com.teragrep.cfe_16.bo.HECRecord;
+import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+public final class SyslogBatch {
 
-public class TcpConnection extends AbstractConnection {
+    private final List<HECRecord> eventData;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
-
-    public TcpConnection(String hostname, int port) {
-        super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
+    public SyslogBatch(List<HECRecord> eventData) {
+        this.eventData = eventData;
     }
 
-    @Override
-    public void sendMessages(List<SyslogMessage> syslogMessages) throws IOException {
-        LOGGER.debug("Sending messages");
-        for (SyslogMessage syslogMessage : syslogMessages) {
-            this.sender.sendMessage(syslogMessage);
+    public List<SyslogMessage> asSyslogMessages() {
+        final List<SyslogMessage> syslogMessages = new ArrayList<>();
+
+        for (final HECRecord HECRecord : this.eventData) {
+            syslogMessages.add(HECRecord.toSyslogMessage());
         }
-    }
 
-    @Override
-    public void sendMessage(SyslogMessage syslogMessage) throws IOException {
-        LOGGER.debug("Sending message");
-        this.sender.sendMessage(syslogMessage);
-    }
-
-    @Override
-    public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
-    }
-
-    public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
+        return syslogMessages;
     }
 }

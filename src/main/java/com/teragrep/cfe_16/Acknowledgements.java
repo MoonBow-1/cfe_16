@@ -65,7 +65,7 @@ import java.util.Map;
 /*
  * Handles the acknowledgement statuses of the sent events (acks).
  * A background thread is used to clean up NRU ACK objects.
- * 
+ *
  * This class is thread safe.
  *
  */
@@ -160,7 +160,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
     /**
      * A private Accessor for the State object indexed by the given auth token and channel. If no State object is found,
      * a new object is created and added to the map.
-     * 
+     *
      * @param authToken
      * @param channel
      * @return
@@ -179,7 +179,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
     /**
      * This method has to be called first before calling any other Ack related methods.
-     * 
+     *
      * @param authToken
      * @param channel
      */
@@ -262,7 +262,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
     /**
      * Adds a new Ack object for given channel. If this is the first time a channel is assigned a new Ack, a new State
      * object is created.
-     * 
+     *
      * @param channel
      * @param ack
      */
@@ -353,7 +353,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
     /*
      * Checks if there is room in the Ack list for a new entry
-     * 
+     *
      * Not thread safe, needs external synchronization.
      */
     private boolean acksAvailable(State state) {
@@ -370,7 +370,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
     /*
      * Deletes a given Ack from the Ack list.
-     * 
+     *
      * This is an O(n) operation..
      */
     public boolean deleteAckFromList(String authToken, String channel, Ack ack) {
@@ -421,7 +421,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
     /**
      * Returns the size of the Ack set of given channel.
-     * 
+     *
      * @param channel
      * @return
      */
@@ -438,7 +438,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
     /**
      * Returns the unmodifiable set of Acks for a channel.
-     * 
+     *
      * @param channel
      * @return
      */
@@ -456,7 +456,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
     /**
      * Returns the current Ack value for given token and channel. A new State is created, so this method must be called
      * first before other Ack manipulating methods are called.
-     * 
+     *
      * @param authToken
      * @param channel
      * @return

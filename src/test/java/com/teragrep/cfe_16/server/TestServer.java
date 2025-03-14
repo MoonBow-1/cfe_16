@@ -43,50 +43,37 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.server;
 
-import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.teragrep.net_01.eventloop.EventLoop;
+import com.teragrep.net_01.server.Server;
 
-import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
-public class TcpConnection extends AbstractConnection {
+public class TestServer implements Runnable, AutoCloseable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
+    private final EventLoop eventLoop;
+    private final Thread eventLoopThread;
+    private final ExecutorService executorService;
+    private final Server server;
 
-    public TcpConnection(String hostname, int port) {
-        super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
+    public TestServer(EventLoop eventLoop, Thread eventLoopThread, ExecutorService executorService, Server server) {
+        this.eventLoop = eventLoop;
+        this.eventLoopThread = eventLoopThread;
+        this.executorService = executorService;
+        this.server = server;
     }
 
     @Override
-    public void sendMessages(List<SyslogMessage> syslogMessages) throws IOException {
-        LOGGER.debug("Sending messages");
-        for (SyslogMessage syslogMessage : syslogMessages) {
-            this.sender.sendMessage(syslogMessage);
-        }
+    public void close() throws Exception {
+        eventLoop.stop();
+        executorService.shutdown();
+        eventLoopThread.join();
+        server.close(); // closes port
     }
 
     @Override
-    public void sendMessage(SyslogMessage syslogMessage) throws IOException {
-        LOGGER.debug("Sending message");
-        this.sender.sendMessage(syslogMessage);
-    }
-
-    @Override
-    public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
-    }
-
-    public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
+    public void run() {
+        eventLoopThread.start();
     }
 }

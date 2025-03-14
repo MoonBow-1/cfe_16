@@ -40,8 +40,8 @@ import java.util.logging.Level;
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
  */
 public class SyslogMessageSender extends AbstractSyslogMessageSender implements Closeable  {
-    public final static int SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE = 500;
-    public final static int SETTING_MAX_RETRY = 2;
+    public static final int SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE = 500;
+    public static final int SETTING_MAX_RETRY = 2;
 
     /**
      * {@link java.net.InetAddress InetAddress} of the remote Syslog Server.
@@ -119,7 +119,7 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         InetAddress inetAddress = syslogServerHostnameReference.get();
         if (socket != null && !Objects.equals(socket.getInetAddress(), inetAddress)) {
             logger.info("InetAddress of the Syslog Server have changed, create a new connection. " +
-                    "Before=" + socket.getInetAddress() + ", new=" + inetAddress);
+                "Before=" + socket.getInetAddress() + ", new=" + inetAddress);
             IoUtils.closeQuietly(socket, writer);
             writer = null;
             socket = null;
@@ -127,11 +127,11 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         boolean socketIsValid;
         try {
             socketIsValid = socket != null &&
-                    socket.isConnected()
-                    && socket.isBound()
-                    && !socket.isClosed()
-                    && !socket.isInputShutdown()
-                    && !socket.isOutputShutdown();
+                socket.isConnected()
+                && socket.isBound()
+                && !socket.isClosed()
+                && !socket.isInputShutdown()
+                && !socket.isOutputShutdown();
         } catch (Exception e) {
             socketIsValid = false;
         }
@@ -149,8 +149,8 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                 }
                 socket.setKeepAlive(true);
                 socket.connect(
-                        new InetSocketAddress(inetAddress, syslogServerPort),
-                        socketConnectTimeoutInMillis);
+                    new InetSocketAddress(inetAddress, syslogServerPort),
+                    socketConnectTimeoutInMillis);
 
                 if (socket instanceof SSLSocket && logger.isLoggable(Level.FINER)) {
                     try {
@@ -224,13 +224,13 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
     public void setSsl(boolean ssl) {
         this.ssl = ssl;
     }
-    
+
     public synchronized void setSSLContext(SSLContext sslContext) {
-        this.sslContext = sslContext; 
+        this.sslContext = sslContext;
     }
-    
+
     public synchronized SSLContext getSSLContext() {
-        return this.sslContext; 
+        return this.sslContext;
     }
 
     public int getSocketConnectTimeoutInMillis() {
@@ -260,21 +260,21 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
     @Override
     public String toString() {
         return getClass().getName() + "{" +
-                "syslogServerHostname='" + this.getSyslogServerHostname() + '\'' +
-                ", syslogServerPort='" + this.getSyslogServerPort() + '\'' +
-                ", ssl=" + ssl +
-                ", maxRetryCount=" + maxRetryCount +
-                ", socketConnectTimeoutInMillis=" + socketConnectTimeoutInMillis +
-                ", defaultAppName='" + defaultAppName + '\'' +
-                ", defaultFacility=" + defaultFacility +
-                ", defaultMessageHostname='" + defaultMessageHostname + '\'' +
-                ", defaultSeverity=" + defaultSeverity +
-                ", messageFormat=" + messageFormat +
-                ", sendCounter=" + sendCounter +
-                ", sendDurationInNanosCounter=" + sendDurationInNanosCounter +
-                ", sendErrorCounter=" + sendErrorCounter +
-                ", trySendErrorCounter=" + trySendErrorCounter +
-                '}';
+            "syslogServerHostname='" + this.getSyslogServerHostname() + '\'' +
+            ", syslogServerPort='" + this.getSyslogServerPort() + '\'' +
+            ", ssl=" + ssl +
+            ", maxRetryCount=" + maxRetryCount +
+            ", socketConnectTimeoutInMillis=" + socketConnectTimeoutInMillis +
+            ", defaultAppName='" + defaultAppName + '\'' +
+            ", defaultFacility=" + defaultFacility +
+            ", defaultMessageHostname='" + defaultMessageHostname + '\'' +
+            ", defaultSeverity=" + defaultSeverity +
+            ", messageFormat=" + messageFormat +
+            ", sendCounter=" + sendCounter +
+            ", sendDurationInNanosCounter=" + sendDurationInNanosCounter +
+            ", sendErrorCounter=" + sendErrorCounter +
+            ", trySendErrorCounter=" + trySendErrorCounter +
+            '}';
     }
 
     @Override

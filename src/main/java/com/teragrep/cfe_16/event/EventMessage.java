@@ -50,6 +50,7 @@ import com.teragrep.cfe_16.Stubable;
 /**
  * Interface for objects that work with the Event (message)
  */
+
 public interface EventMessage extends Stubable {
 
     String asString();
