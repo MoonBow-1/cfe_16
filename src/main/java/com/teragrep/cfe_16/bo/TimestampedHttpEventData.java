@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.math.BigDecimal;
 
 public final class TimestampedHttpEventData implements HttpEventData {
+
     private final DefaultHttpEventData eventData;
     private final String timeSource;
     private final String time;
@@ -47,8 +48,10 @@ public final class TimestampedHttpEventData implements HttpEventData {
     }
 
 
-
-    public TimestampedHttpEventData handleTime(final JsonNode jsonObject,final TimestampedHttpEventData previousEvent) {
+    public TimestampedHttpEventData handleTime(
+        final JsonNode jsonObject,
+        final TimestampedHttpEventData previousEvent
+    ) {
         JsonNode timeObject = jsonObject.get("time");
         /*
          * If the time is given as a string rather than as a numeral value, the time is
@@ -60,16 +63,18 @@ public final class TimestampedHttpEventData implements HttpEventData {
         boolean timeParsed;
 
         if (timeObject == null || timeObject.isTextual()) {
-            timeParsed= false;
-            timeSource= "generated";
+            timeParsed = false;
+            timeSource = "generated";
             if (previousEvent != null) {
                 if (previousEvent.isTimeParsed()) {
-                    time=previousEvent.getTime();
-                    timeAsLong=new EpochTimeString(time,previousEvent.getTimeAsLong()).asEpochMillis();
-                    timeParsed=true;
-                    timeSource="reported";
-                }
-                else {
+                    time = previousEvent.getTime();
+                    timeAsLong = new EpochTimeString(
+                        time,
+                        previousEvent.getTimeAsLong()
+                    ).asEpochMillis();
+                    timeParsed = true;
+                    timeSource = "reported";
+                } else {
                     time = previousEvent.getTime();
                     timeAsLong = previousEvent.getTimeAsLong();
                 }
@@ -84,33 +89,42 @@ public final class TimestampedHttpEventData implements HttpEventData {
              * that correct time format is used.
              */
         } else if (timeObject.isDouble()) {
-            time=String.valueOf(this.timeAsLong);
-            timeAsLong=new EpochTimeString(time,removeDecimal(timeObject.asDouble())).asEpochMillis();
-            timeParsed=true;
-            timeSource="reported";
+            time = String.valueOf(this.timeAsLong);
+            timeAsLong = new EpochTimeString(
+                time,
+                removeDecimal(timeObject.asDouble())
+            ).asEpochMillis();
+            timeParsed = true;
+            timeSource = "reported";
             /*
              * If the time is given in a numeral value, it is assigned to HttpEventData
              * object as a long value. convertTimeToEpochMillis() will check that correct
              * time format is used.
              */
         } else if (timeObject.canConvertToLong()) {
-            time=jsonObject.get("time").asText();
-            timeAsLong=new EpochTimeString(time,timeObject.asLong()).asEpochMillis();
-            timeParsed=true;
-            timeSource="reported";
+            time = jsonObject.get("time").asText();
+            timeAsLong = new EpochTimeString(time, timeObject.asLong()).asEpochMillis();
+            timeParsed = true;
+            timeSource = "reported";
         } else {
             time = previousEvent.getTime();
             timeAsLong = previousEvent.getTimeAsLong();
-            timeParsed=false;
-            timeSource="generated";
+            timeParsed = false;
+            timeSource = "generated";
         }
 
-        return new TimestampedHttpEventData(this.eventData, timeSource, time, timeAsLong, timeParsed);
+        return new TimestampedHttpEventData(
+            this.eventData,
+            timeSource,
+            time,
+            timeAsLong,
+            timeParsed
+        );
     }
 
     /**
-     * Takes a double value as a parameter, removes the decimal point from that
-     * value and returns the number as a long value.
+     * Takes a double value as a parameter, removes the decimal point from that value and returns
+     * the number as a long value.
      */
     private long removeDecimal(double doubleValue) {
         BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);

@@ -51,7 +51,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.AckManager;
 import com.teragrep.cfe_16.EventManager;
 import com.teragrep.cfe_16.bo.HeaderInfo;
-import com.teragrep.cfe_16.bo.DefaultHttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.exceptionhandling.*;
 import com.teragrep.cfe_16.service.HECService;
@@ -61,7 +60,6 @@ import com.teragrep.rlp_03.config.Config;
 import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
 import com.teragrep.rlp_03.delegate.FrameDelegate;
 import org.junit.jupiter.api.*;
-import org.powermock.reflect.Whitebox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,17 +86,45 @@ import static org.junit.Assert.*;
 		"max.ack.value=1000000", 
 		"max.ack.age=20000", 
 		"max.session.age=30000", 
-		"poll.time=30000", 
-		"server.print.times=true"
+		"poll.time=30000",
+		"server.print.times=true" 
 		})
 public class ServiceAndEventManagerIT {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceAndEventManagerIT.class);
-    private static Server server;
     private static final String hostname = "localhost";
-    private static Integer port = 1601;
+    private static final ServerSocket serverSocket = getSocket();
+    private static final Integer port = 1601;
+    private static Server server;
+    private final HeaderInfo headerInfo = new HeaderInfo();
+    @Autowired
+    private HECService service;
+    @Autowired
+    private AckManager ackManager;
+    private MockHttpServletRequest request1;
+    private MockHttpServletRequest request2;
+    private MockHttpServletRequest request3;
+    private MockHttpServletRequest request4;
+    private MockHttpServletRequest request5;
+    private String eventInJson;
+    private String channel1;
+    private String channel2;
+    private String channel3;
+    private String defaultChannel;
+    private String authToken1;
+    private String authToken2;
+    private String authToken3;
+    private String authToken4;
+    private String ackRequest;
+    private ObjectMapper objectMapper;
+    private JsonNode ackRequestNode;
+    @Autowired
+    private EventManager eventManager;
+
     @BeforeAll
     public static void init_x() throws IOException, InterruptedException {
-        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate((frame) -> LOGGER.debug(frame.relpFrame().payload().toString()));
+        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
+            (frame) -> LOGGER.debug(frame.relpFrame().payload().toString()));
         Config config = new Config(port, 1);
         ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
 
@@ -112,36 +138,6 @@ public class ServiceAndEventManagerIT {
     public static void cleanup() throws InterruptedException {
         server.stop();
     }
-    @Autowired
-    private HECService service;
-    @Autowired
-    private AckManager ackManager;
-    private static final ServerSocket serverSocket = getSocket();
-
-    private MockHttpServletRequest request1;
-    private MockHttpServletRequest request2;
-    private MockHttpServletRequest request3;
-    private MockHttpServletRequest request4;
-    private MockHttpServletRequest request5;
-
-    private String eventInJson;
-    private String channel1;
-    private String channel2;
-    private String channel3;
-    private String defaultChannel;
-    private String authToken1;
-    private String authToken2;
-    private String authToken3;    
-    private String authToken4;
-
-    private String ackRequest;
-    private ObjectMapper objectMapper;
-    private JsonNode ackRequestNode;
-
-    @Autowired
-    private EventManager eventManager;
-
-    private HeaderInfo headerInfo = new HeaderInfo();
 
     private static ServerSocket getSocket() {
         ServerSocket socket = null;
@@ -184,7 +180,8 @@ public class ServiceAndEventManagerIT {
         request4 = new MockHttpServletRequest();
         request5 = new MockHttpServletRequest();
 
-        eventInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        eventInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\":"
+            + " \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
 
         channel1 = "CHANNEL_11111";
         channel2 = "CHANNEL_22222";
@@ -219,25 +216,33 @@ public class ServiceAndEventManagerIT {
     @Test
     public void sendEventsAndGetAcksTest() {
         String supposedResponse;
-        
+
         supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals("Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString());
+        assertEquals(
+            "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID "
+                + "should be 0)",
+            supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString());
 
         supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":1}";
-        assertEquals("Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString());
+        assertEquals(
+            "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID "
+                + "should be 1)",
+            supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString());
 
         supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals("Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel2, eventInJson).toString());
+        assertEquals(
+            "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID "
+                + "should be 0)",
+            supposedResponse, service.sendEvents(request1, channel2, eventInJson).toString());
 
-        assertEquals("Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request3, channel3, eventInJson).toString());
+        assertEquals(
+            "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID "
+                + "should be 0)",
+            supposedResponse, service.sendEvents(request3, channel3, eventInJson).toString());
 
         supposedResponse = "{\"acks\":{\"1\":true,\"3\":false,\"4\":false}}";
         assertEquals("JSON object should be returned with ack statuses.", supposedResponse,
-                service.getAcks(request1, channel3, ackRequestNode).toString());
+            service.getAcks(request1, channel3, ackRequestNode).toString());
     }
 
     /*
@@ -246,9 +251,9 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void sendEventsWithoutAuthTokenTest() {
-    	Assertions.assertThrows(AuthenticationTokenMissingException.class, () -> {
-    		service.sendEvents(request2, eventInJson, channel1);
-    	});
+        Assertions.assertThrows(AuthenticationTokenMissingException.class, () -> {
+            service.sendEvents(request2, eventInJson, channel1);
+        });
     }
 
     /*
@@ -259,8 +264,9 @@ public class ServiceAndEventManagerIT {
     public void sendEventsWithoutChannelTest() {
         String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
         String response = service.sendEvents(request1, null, eventInJson).toString();
-        assertEquals("Service should return JSON object with fields 'text' and 'code'", supposedResponse,
-                response);
+        assertEquals("Service should return JSON object with fields 'text' and 'code'",
+            supposedResponse,
+            response);
     }
 
     /*
@@ -269,9 +275,9 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void getAcksWithoutChannel() {
-    	Assertions.assertThrows(ChannelNotProvidedException.class, () -> {
-    		service.getAcks(request1, null, ackRequestNode);
-    	});
+        Assertions.assertThrows(ChannelNotProvidedException.class, () -> {
+            service.getAcks(request1, null, ackRequestNode);
+        });
     }
 
     /*
@@ -281,9 +287,9 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void getAcksWithoutAuthTokenTest() {
-    	Assertions.assertThrows(AuthenticationTokenMissingException.class, () -> {
-    		service.getAcks(request2, channel1, ackRequestNode);
-    	});
+        Assertions.assertThrows(AuthenticationTokenMissingException.class, () -> {
+            service.getAcks(request2, channel1, ackRequestNode);
+        });
     }
 
     /*
@@ -292,9 +298,9 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void getAcksWithUnusedAuthToken() {
-    	Assertions.assertThrows(SessionNotFoundException.class, () -> {
-    		service.getAcks(request4, channel1, ackRequestNode);
-    	});
+        Assertions.assertThrows(SessionNotFoundException.class, () -> {
+            service.getAcks(request4, channel1, ackRequestNode);
+        });
     }
 
     /*
@@ -303,10 +309,10 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void getAcksWithUnusedChannel() {
-    	Assertions.assertThrows(ChannelNotFoundException.class, () -> {
-        service.sendEvents(request5, channel1, eventInJson);
-        service.getAcks(request5, channel2, ackRequestNode);
-    	});
+        Assertions.assertThrows(ChannelNotFoundException.class, () -> {
+            service.sendEvents(request5, channel1, eventInJson);
+            service.getAcks(request5, channel2, ackRequestNode);
+        });
     }
 
     /*
@@ -318,11 +324,15 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void convertDataTest() {
-    	 /*AckManager ackManager = new AckManager();*/
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        /*AckManager ackManager = new AckManager();*/
+        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, "
+            + "world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": "
+            + "\"myindex\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":2}";
-        String response = eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager).toString();
-        assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse, response);
+        String response = eventManager.convertData(authToken1, channel1, allEventsInJson,
+            headerInfo, ackManager).toString();
+        assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse,
+            response);
     }
 
     /*
@@ -335,12 +345,15 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void convertDataTestWithDefaultChannel() {
-    	/* AckManager ackManager = new AckManager(); */
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        /* AckManager ackManager = new AckManager(); */
+        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, "
+            + "world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": "
+            + "\"myindex\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
 
         assertEquals("Should get a JSON with fields text and code.", supposedResponse, eventManager
-                .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, ackManager).toString());
+            .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, ackManager)
+            .toString());
 
     }
 
@@ -350,11 +363,12 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void noEventFieldInRequestTest() {
-    	Assertions.assertThrows(EventFieldMissingException.class, () -> {
-    		/*AckManager ackManager = new AckManager();*/
-	        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-	        eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager);
-    	});
+        Assertions.assertThrows(EventFieldMissingException.class, () -> {
+            /*AckManager ackManager = new AckManager();*/
+            String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\","
+                + " \"source\": \"mysource\", \"index\": \"myindex\"}";
+            eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager);
+        });
     }
 
     /*
@@ -363,11 +377,12 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void eventFieldBlankInRequestTest() {
-    	Assertions.assertThrows(EventFieldBlankException.class, () -> {
-    		/*AckManager ackManager = new AckManager();*/
-	        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-	        eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager);
-    	});
+        Assertions.assertThrows(EventFieldBlankException.class, () -> {
+            /*AckManager ackManager = new AckManager();*/
+            String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", "
+                + "\"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+            eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager);
+        });
     }
 
     /*
@@ -376,10 +391,14 @@ public class ServiceAndEventManagerIT {
      */
     public void sendingMultipleEventsTest() {
         AckManager ackManager = new AckManager();
-        String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
+        String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": "
+            + "\"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the "
+            + "barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": "
+            + "\"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
         assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse,
-                eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager).toString());
+            eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, ackManager)
+                .toString());
 
     }
 
@@ -389,9 +408,14 @@ public class ServiceAndEventManagerIT {
      */
     public void sendingMultipleEventsWithDefaultChannelTest() {
         AckManager ackManager = new AckManager();
-        String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
+        String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": "
+            + "\"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the "
+            + "barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": "
+            + "\"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse, eventManager
-                .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, ackManager).toString());
+        assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse,
+            eventManager
+                .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, ackManager)
+                .toString());
     }
 }
