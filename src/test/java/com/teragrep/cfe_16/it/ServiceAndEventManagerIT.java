@@ -51,7 +51,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.AckManager;
 import com.teragrep.cfe_16.EventManager;
 import com.teragrep.cfe_16.bo.HeaderInfo;
-import com.teragrep.cfe_16.bo.HttpEventData;
+import com.teragrep.cfe_16.bo.DefaultHttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.exceptionhandling.*;
 import com.teragrep.cfe_16.service.HECService;
@@ -419,14 +419,14 @@ public class ServiceAndEventManagerIT {
             throw new RuntimeException(e);
         }
 
-        HttpEventData testData1 = new HttpEventData();
-        HttpEventData testData2 = new HttpEventData();
-        HttpEventData testData3 = new HttpEventData();
-        HttpEventData testData4 = new HttpEventData();
-        HttpEventData testData5 = new HttpEventData();
-        HttpEventData testData6 = new HttpEventData();
-        HttpEventData testData7 = new HttpEventData();
-        HttpEventData testData8 = new HttpEventData();
+        DefaultHttpEventData testData1 = new DefaultHttpEventData();
+        DefaultHttpEventData testData2 = new DefaultHttpEventData();
+        DefaultHttpEventData testData3 = new DefaultHttpEventData();
+        DefaultHttpEventData testData4 = new DefaultHttpEventData();
+        DefaultHttpEventData testData5 = new DefaultHttpEventData();
+        DefaultHttpEventData testData6 = new DefaultHttpEventData();
+        DefaultHttpEventData testData7 = new DefaultHttpEventData();
+        DefaultHttpEventData testData8 = new DefaultHttpEventData();
 
         // Accessing a private method handleTime() in EventManager and using the created
         // nodes and empty HttpEventData objects as parameters

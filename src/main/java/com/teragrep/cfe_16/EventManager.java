@@ -53,7 +53,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.JsonStreamParser;
 import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
-import com.teragrep.cfe_16.bo.HttpEventData;
+import com.teragrep.cfe_16.bo.DefaultHttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.EventFieldBlankException;
@@ -114,7 +114,7 @@ public class EventManager {
                                   String allEventsInJson, 
                                   HeaderInfo headerInfo,
                                   AckManager ackManager) {
-        HttpEventData previousEvent = null;
+        DefaultHttpEventData previousEvent = null;
         
         ackManager.initializeContext(authToken, channel);
         int ackId = ackManager.getCurrentAckValue(authToken, channel);
@@ -137,7 +137,7 @@ public class EventManager {
          * After the event is handled, it is assigned as a value to previousEvent
          * variable.
          */
-        HttpEventData eventData = null;
+        DefaultHttpEventData eventData = null;
         Converter converter = new Converter();
         List<SyslogMessage> syslogMessages = new ArrayList<SyslogMessage>();
         while (parser.hasNext()) {
@@ -202,9 +202,9 @@ public class EventManager {
      * the value is overridden, it will stay as so for the following events if it is
      * not overridden.
      */
-    private HttpEventData verifyJsonData(String eventInJson, HttpEventData previousEvent) {
+    private DefaultHttpEventData verifyJsonData(String eventInJson, DefaultHttpEventData previousEvent) {
 
-        HttpEventData eventData = new HttpEventData();
+        DefaultHttpEventData eventData = new DefaultHttpEventData();
 
         /*
          * Event field cannot be missing or blank. Throws an exception if this is the
@@ -235,7 +235,7 @@ public class EventManager {
     /*
      * The time stamp of the event can be given as epoch time in the request.
      */
-    private HttpEventData handleTime(HttpEventData eventData, JsonNode jsonObject, HttpEventData previousEvent) {
+    private DefaultHttpEventData handleTime(DefaultHttpEventData eventData, JsonNode jsonObject, DefaultHttpEventData previousEvent) {
         JsonNode timeObject = jsonObject.get("time");
 
         /*
@@ -303,7 +303,7 @@ public class EventManager {
      * HttpEventData object. If the time value in the object has 13 digits, it means
      * that time has been already given in epoch milliseconds.
      */
-    private HttpEventData convertTimeToEpochMillis(HttpEventData eventData) {
+    private DefaultHttpEventData convertTimeToEpochMillis(DefaultHttpEventData eventData) {
         String timeString = eventData.getTime();
         if (timeString.length() == 13) {
             return eventData;
@@ -320,7 +320,7 @@ public class EventManager {
      * Assigns the metadata (authentication token and channel name) to the
      * HttpEventData object.
      */
-    private HttpEventData assignMetaData(HttpEventData eventData, String authToken, String channel) {
+    private DefaultHttpEventData assignMetaData(DefaultHttpEventData eventData, String authToken, String channel) {
 
         eventData.setAuthenticationToken(authToken);
         eventData.setChannel(channel);

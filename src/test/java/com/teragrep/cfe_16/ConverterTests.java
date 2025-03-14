@@ -48,7 +48,7 @@ package com.teragrep.cfe_16;
 
 import com.cloudbees.syslog.*;
 import com.teragrep.cfe_16.bo.HeaderInfo;
-import com.teragrep.cfe_16.bo.HttpEventData;
+import com.teragrep.cfe_16.bo.DefaultHttpEventData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,9 +65,9 @@ import static org.junit.Assert.*;
 public class ConverterTests {
 
     private Converter converter;
-    private HttpEventData eventData1;
-    private HttpEventData eventData2;
-    private HttpEventData eventData3;
+    private DefaultHttpEventData eventData1;
+    private DefaultHttpEventData eventData2;
+    private DefaultHttpEventData eventData3;
     private Severity supposedSeverity;
     private Facility supposedFacility;
     private SyslogMessage supposedSyslogMessage1;
@@ -99,9 +99,9 @@ public class ConverterTests {
 
         converter = new Converter();
 
-        eventData1 = new HttpEventData();
-        eventData2 = new HttpEventData();
-        eventData3 = new HttpEventData();
+        eventData1 = new DefaultHttpEventData();
+        eventData2 = new DefaultHttpEventData();
+        eventData3 = new DefaultHttpEventData();
 
         supposedSyslogMessage1 = null;
         supposedSyslogMessage2 = null;

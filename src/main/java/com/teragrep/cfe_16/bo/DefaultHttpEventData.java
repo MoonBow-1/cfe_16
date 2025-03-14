@@ -46,9 +46,7 @@
 
 package com.teragrep.cfe_16.bo;
 
-/**
- */
-public class HttpEventData {
+public final class DefaultHttpEventData {
 
     private String channel;
     private String event;
