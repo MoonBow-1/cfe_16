@@ -46,16 +46,27 @@
 
 package com.teragrep.cfe_16.bo;
 
-public final class DefaultHttpEventData {
+public final class DefaultHttpEventData implements HttpEventData {
 
     private String channel;
     private String event;
     private String authenticationToken;
-    private String timeSource;
-    private String time;
-    private long timeAsLong;
-    private boolean timeParsed;
     private Integer ackID;
+
+    public DefaultHttpEventData() {
+    }
+
+    public DefaultHttpEventData(
+        String channel,
+        String event,
+        String authenticationToken,
+        Integer ackID
+    ) {
+        this.channel = channel;
+        this.event = event;
+        this.authenticationToken = authenticationToken;
+        this.ackID = ackID;
+    }
 
     public String getEvent() {
         return event;
@@ -81,38 +92,6 @@ public final class DefaultHttpEventData {
         this.authenticationToken = authenticationToken;
     }
 
-    public String getTimeSource() {
-        return timeSource;
-    }
-
-    public void setTimeSource(String timeSource) {
-        this.timeSource = timeSource;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public long getTimeAsLong() {
-        return timeAsLong;
-    }
-
-    public void setTimeAsLong(long timeAsLong) {
-        this.timeAsLong = timeAsLong;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public boolean isTimeParsed() {
-        return timeParsed;
-    }
-
-    public void setTimeParsed(boolean timeParsed) {
-        this.timeParsed = timeParsed;
-    }
-
     public Integer getAckID() {
         return ackID;
     }
@@ -123,8 +102,11 @@ public final class DefaultHttpEventData {
 
     @Override
     public String toString() {
-        return "HttpEventData [channel=" + channel + ", event=" + event + ", authenticationToken=" + authenticationToken
-                + ", timeSource=" + timeSource + ", time=" + time + ", timeAsLong=" + timeAsLong + ", timeParsed="
-                + timeParsed + ", ackID=" + ackID + "]";
+        return "DefaultHttpEventData{" +
+            "channel='" + channel + '\'' +
+            ", event='" + event + '\'' +
+            ", authenticationToken='" + authenticationToken + '\'' +
+            ", ackID=" + ackID +
+            '}';
     }
 }
