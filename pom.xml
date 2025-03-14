@@ -47,229 +47,42 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <packaging>jar</packaging>
-  <modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>cfe_16</artifactId>
-  <version>${revision}${sha1}${changelist}</version>
-  <name>cfe_16</name>
-  <description>cfe_16</description>
-  <groupId>com.teragrep</groupId>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>17</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <revision>0.0.1</revision>
-    <changelist>-SNAPSHOT</changelist>
-    <sha1/>
-    <aspectj.version>1.9.21.1</aspectj.version>
-    <log4j.version>2.23.1</log4j.version>
-    <spring.boot.version>3.4.3</spring.boot.version>
-    <spring.session.version>3.4.2</spring.session.version>
-    <junit.version>5.12.0</junit.version>
-    <junit.platform.version>1.12.0</junit.platform.version>
-    <rlp_01.version>4.0.1</rlp_01.version>
-    <rlp_03.version>3.0.0</rlp_03.version>
-    <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
-    <jackson.version>2.16.2</jackson.version>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${log4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${log4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
-      <version>${log4j.version}</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>${jakarta.servlet.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.teragrep</groupId>
-      <artifactId>rlp_01</artifactId>
-      <version>${rlp_01.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.teragrep</groupId>
-      <artifactId>rlp_03</artifactId>
-      <version>${rlp_03.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${spring.boot.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-logging</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring.boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>${spring.boot.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-log4j2</artifactId>
-      <version>${spring.boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <version>${spring.boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-core</artifactId>
-      <version>${spring.session.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-jdbc</artifactId>
-      <version>${spring.session.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>${aspectj.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>${aspectj.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.cloudbees</groupId>
-      <artifactId>syslog-java-client</artifactId>
-      <version>1.1.7</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.10.1</version>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-all</artifactId>
-      <version>2024.1.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
-      <version>2.0.9</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-commons</artifactId>
-      <version>${junit.platform.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
   <build>
     <directory>${project.basedir}/target</directory>
     <finalName>cfe_16</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.4.1</version>
         <executions>
           <execution>
             <id>enforce</id>
             <phase>none</phase>
           </execution>
           <execution>
-            <id>enforce-maven</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
             <configuration>
               <rules>
-                <requireMavenVersion>
-                  <version>3.2.5</version>
-                </requireMavenVersion>
                 <requireJavaVersion>
                   <version>1.8</version>
                 </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>3.2.5</version>
+                </requireMavenVersion>
               </rules>
             </configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <id>enforce-maven</id>
           </execution>
         </executions>
+        <version>3.4.1</version>
       </plugin>
       <plugin>
-        <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
-        <version>0.15</version>
-        <inherited>false</inherited>
-        <executions>
-          <execution>
-            <phase>test</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
           <addDefaultLicenseMatchers>false</addDefaultLicenseMatchers>
-          <licenses>
-            <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
-              <notes>Also allow the license url to be https.</notes>
-              <patterns>
-                <pattern>Copyright (C) 2021  Suomen Kanuuna Oy</pattern>
-              </patterns>
-            </license>
-          </licenses>
           <consoleOutput>true</consoleOutput>
           <excludeSubProjects>false</excludeSubProjects>
           <excludes>
@@ -289,7 +102,9 @@
             <exclude>README.adoc</exclude>
             <exclude>README.md</exclude>
             <!-- third party -->
-            <exclude>src/main/java/com/teragrep/cfe_16/ThirdParty/SyslogMessageSender/SyslogMessageSender.java</exclude>
+            <exclude>
+              src/main/java/com/teragrep/cfe_16/ThirdParty/SyslogMessageSender/SyslogMessageSender.java
+            </exclude>
             <!-- resources -->
             <exclude>src/main/resources/*</exclude>
             <exclude>src/test/resources/cfe-16-test-plan.jmx</exclude>
@@ -299,15 +114,34 @@
             <exclude>config/*</exclude>
             <exclude>*.sh</exclude>
           </excludes>
+          <licenses>
+            <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+              <notes>Also allow the license url to be https.</notes>
+              <patterns>
+                <pattern>Copyright (C) 2021 Suomen Kanuuna Oy</pattern>
+              </patterns>
+            </license>
+          </licenses>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>test</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.rat</groupId>
+        <inherited>false</inherited>
+        <version>0.15</version>
       </plugin>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring.boot.version}</version>
         <configuration>
+          <agents>
+            ${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+          </agents>
           <mainClass>com.teragrep.cfe_16.Cfe16Application</mainClass>
-          <agents>${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar</agents>
         </configuration>
         <executions>
           <execution>
@@ -316,48 +150,212 @@
             </goals>
           </execution>
         </executions>
+        <groupId>org.springframework.boot</groupId>
+        <version>${spring.boot.version}</version>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
         <configuration>
           <threadCount>1</threadCount>
         </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.2.5</version>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
         <version>3.1.1</version>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.2.5</version>
         <configuration>
           <classesDirectory>${project.build.outputDirectory}</classesDirectory>
         </configuration>
         <executions>
           <execution>
-            <id>integration-tests</id>
             <goals>
               <goal>integration-test</goal>
             </goals>
+            <id>integration-tests</id>
           </execution>
           <execution>
-            <id>verify</id>
             <goals>
               <goal>verify</goal>
             </goals>
+            <id>verify</id>
           </execution>
         </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.2.5</version>
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <artifactId>log4j-api</artifactId>
+      <groupId>org.apache.logging.log4j</groupId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>log4j-core</artifactId>
+      <groupId>org.apache.logging.log4j</groupId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <groupId>org.apache.logging.log4j</groupId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+    <dependency>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <groupId>jakarta.servlet</groupId>
+      <version>${jakarta.servlet.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>rlp_01</artifactId>
+      <groupId>com.teragrep</groupId>
+      <version>${rlp_01.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>rlp_03</artifactId>
+      <groupId>com.teragrep</groupId>
+      <scope>test</scope>
+      <version>${rlp_03.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-boot-starter-logging</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+      </exclusions>
+      <groupId>org.springframework.boot</groupId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-session-core</artifactId>
+      <groupId>org.springframework.session</groupId>
+      <version>${spring.session.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-session-jdbc</artifactId>
+      <groupId>org.springframework.session</groupId>
+      <version>${spring.session.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>aspectjrt</artifactId>
+      <groupId>org.aspectj</groupId>
+      <scope>provided</scope>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>aspectjweaver</artifactId>
+      <groupId>org.aspectj</groupId>
+      <scope>provided</scope>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-databind</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-annotations</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>syslog-java-client</artifactId>
+      <groupId>com.cloudbees</groupId>
+      <version>1.1.7</version>
+    </dependency>
+    <dependency>
+      <artifactId>gson</artifactId>
+      <groupId>com.google.code.gson</groupId>
+      <version>2.10.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>manifold-all</artifactId>
+      <groupId>systems.manifold</groupId>
+      <version>2024.1.6</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit-jupiter-api</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <scope>test</scope>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit-vintage-engine</artifactId>
+      <groupId>org.junit.vintage</groupId>
+      <scope>test</scope>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <scope>test</scope>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit-platform-commons</artifactId>
+      <groupId>org.junit.platform</groupId>
+      <scope>test</scope>
+      <version>${junit.platform.version}</version>
+    </dependency>
+  </dependencies>
+  <description>cfe_16</description>
   <distributionManagement>
     <repository>
       <id>github</id>
       <url>https://maven.pkg.github.com/${env.GITHUB_REPOSITORY}</url>
     </repository>
   </distributionManagement>
+  <groupId>com.teragrep</groupId>
+  <modelVersion>4.0.0</modelVersion>
+  <name>cfe_16</name>
+  <packaging>jar</packaging>
+  <properties>
+    <aspectj.version>1.9.21.1</aspectj.version>
+    <changelist>-SNAPSHOT</changelist>
+    <jackson.version>2.16.2</jackson.version>
+    <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
+    <java.version>17</java.version>
+    <junit.platform.version>1.12.0</junit.platform.version>
+    <junit.version>5.12.0</junit.version>
+    <log4j.version>2.23.1</log4j.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>0.0.1</revision>
+    <rlp_01.version>4.0.1</rlp_01.version>
+    <rlp_03.version>3.0.0</rlp_03.version>
+    <sha1/>
+    <spring.boot.version>3.4.3</spring.boot.version>
+    <spring.session.version>3.4.2</spring.session.version>
+  </properties>
+  <version>${revision}${sha1}${changelist}</version>
 </project>
