@@ -88,7 +88,7 @@ public class HECServiceImpl implements HECService {
 
     @Override
     // @LogAnnotation(type = LogType.METRIC_COUNTER)
-    public ObjectNode sendEvents(HttpServletRequest request,
+    public synchronized ObjectNode sendEvents(HttpServletRequest request,
         String channel,
         String eventInJson) {
         LOGGER.debug("Sending events to channel <{}>", channel);

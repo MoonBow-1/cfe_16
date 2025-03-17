@@ -46,26 +46,20 @@
 
 package com.teragrep.cfe_16.it;
 
+import com.teragrep.cfe_16.server.TestServer;
+import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.channels.Selector;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @TestPropertySource(properties = {
     "syslog.server.host=127.0.0.1",
@@ -79,26 +73,48 @@ import java.util.concurrent.atomic.AtomicInteger;
     "server.print.times=true"
 })
 @SpringBootTest
-public class SendEventsIT implements Runnable {
+public class SendMultipleEventsIT {
 
     private final static int SERVER_PORT = 1236;
+    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+    private static final AtomicLong openCount = new AtomicLong();
+    private static final AtomicLong closeCount = new AtomicLong();
+    private static TestServer server;
     @Autowired
     private HECService service;
-    private ServerSocket serverSocket;
-    private Thread thread;
-    private AtomicInteger numberOfRequestsMade;
     private MockHttpServletRequest request1;
     private String eventInJson;
     private String channel1;
-    private Selector selector;
-    private CountDownLatch countDownLatch = new CountDownLatch(0);
+
+    @BeforeAll
+    public static void init() {
+        TestServerFactory serverFactory = new TestServerFactory();
+        try {
+            server = serverFactory.create(SERVER_PORT, messageList, openCount, closeCount);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        server.run();
+    }
+
+    @AfterAll
+    public static void close() {
+        try {
+            server.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AfterEach
+    public void clear() {
+        openCount.set(0);
+        closeCount.set(0);
+        messageList.clear();
+    }
 
     @BeforeEach
-    public void init() throws IOException {
-        this.thread = new Thread(this);
-        this.numberOfRequestsMade = new AtomicInteger(0);
-        this.serverSocket = new ServerSocket(SERVER_PORT);
-        this.selector = Selector.open();
+    public void initEach() {
 
         this.request1 = new MockHttpServletRequest();
         this.request1.addHeader("Authorization", "AUTH_TOKEN_11111");
@@ -108,44 +124,11 @@ public class SendEventsIT implements Runnable {
             + "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": "
             + "{\"message\":\"Access log test message 2\"}}";
 
-        this.thread.start();
-    }
-
-    @AfterEach
-    public void shutdown() {
-        this.thread.interrupt();
-    }
-
-    public void run() {
-        while (true) {
-            try {
-                Socket socket = this.serverSocket.accept();
-                BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    this.numberOfRequestsMade.getAndIncrement();
-                    countDownLatch.countDown();
-                }
-                bufferedReader.close();
-                socket.close();
-                if (this.numberOfRequestsMade.get() % 5 == 0) {
-                    this.serverSocket.close();
-                    this.serverSocket = new ServerSocket(SERVER_PORT);
-                }
-            } catch (InterruptedIOException e) {
-                break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Test
     public void sendEventsTest() throws IOException, InterruptedException, ExecutionException {
-        int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
-        countDownLatch = new CountDownLatch(NUMBER_OF_EVENTS_TO_BE_SENT);
-        ExecutorService es = Executors.newFixedThreadPool(8);
+        final int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
         List<CompletableFuture<String>> futures = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
@@ -153,7 +136,7 @@ public class SendEventsIT implements Runnable {
                 () -> service.sendEvents(request1, channel1, eventInJson).toString());
             futures.add(f);
         }
-        List<String> supposedResponses = new ArrayList<String>();
+        List<String> supposedResponses = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
             final String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":" + i + "}";
             supposedResponses.add(supposedResponse);
@@ -167,27 +150,8 @@ public class SendEventsIT implements Runnable {
                     + countFuture + ")");
             countFuture++;
         }
-        countDownLatch.await(1, TimeUnit.SECONDS);
-        Assertions.assertTimeoutPreemptively(Duration.ofSeconds(5), () -> {
-            while (NUMBER_OF_EVENTS_TO_BE_SENT * 2 != this.numberOfRequestsMade.get()) {
-                Thread.sleep(500);
-            }
-        });
-        es.shutdownNow();
+        Assertions.assertEquals(NUMBER_OF_EVENTS_TO_BE_SENT * 2, messageList.size());
     }
 
-    @Test
-    public void send1EventTest() throws IOException, InterruptedException {
-        countDownLatch = new CountDownLatch(1);
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":" + 0 + "}";
-        Assertions.assertEquals(service.sendEvents(request1, channel1, eventInJson).toString(),
-            supposedResponse,
-            "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID "
-                + "should be "
-                + 0 + ")");
 
-        countDownLatch.await(5, TimeUnit.SECONDS);
-        Assertions.assertEquals(2, this.numberOfRequestsMade,
-            "Number of events received should match the number of sent ones");
-    }
 }
