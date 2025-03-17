@@ -89,10 +89,11 @@ public final class TimestampedHttpEventData implements HttpEventData {
              * that correct time format is used.
              */
         } else if (timeObject.isDouble()) {
-            time = String.valueOf(this.timeAsLong);
+            final long decimalRemoved = removeDecimal(timeObject.asDouble());
+            time = String.valueOf(decimalRemoved);
             timeAsLong = new EpochTimeString(
                 time,
-                removeDecimal(timeObject.asDouble())
+                decimalRemoved
             ).asEpochMillis();
             timeParsed = true;
             timeSource = "reported";
