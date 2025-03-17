@@ -79,14 +79,15 @@ import java.util.List;
  */
 @Component
 public class EventManager {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EventManager.class);
     private final ObjectMapper objectMapper;
 
     @Autowired
     private Configuration configuration;
-    
+
     private AbstractSender sender;
-    
+
     public EventManager() {
         this.objectMapper = new ObjectMapper();
     }
@@ -96,27 +97,27 @@ public class EventManager {
         LOGGER.debug("Setting up sender");
         try {
             this.sender = SenderFactory.createSender(this.configuration.getSysLogProtocol(),
-                                                     this.configuration.getSyslogHost(),
-                                                     this.configuration.getSyslogPort());
+                this.configuration.getSyslogHost(),
+                this.configuration.getSyslogPort());
         } catch (IOException e) {
             LOGGER.error("Error creating sender", e);
             throw new InternalServerErrorException();
-        }        
+        }
     }
-    
+
     /*
      * Method used when converting data and the channel is specified in the request.
      * Takes authentication token, all events sent in a request (in JSON format) and
      * the channel name as string parameters. Returns a JSON node with ack id if
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
-    public ObjectNode convertData(String authToken, 
-                                  String channel, 
-                                  String allEventsInJson, 
-                                  HeaderInfo headerInfo,
-                                  AckManager ackManager) {
+    public ObjectNode convertData(String authToken,
+        String channel,
+        String allEventsInJson,
+        HeaderInfo headerInfo,
+        AckManager ackManager) {
         TimestampedHttpEventData previousEvent;
-        
+
         ackManager.initializeContext(authToken, channel);
         int ackId = ackManager.getCurrentAckValue(authToken, channel);
         boolean incremented = ackManager.incrementAckValue(authToken, channel);
@@ -126,7 +127,8 @@ public class EventManager {
         Ack ack = new Ack(ackId, false);
         boolean addedAck = ackManager.addAck(authToken, channel, ack);
         if (!addedAck) {
-            throw new InternalServerErrorException("Ack ID " + ackId + " couldn't be added to the Ack set.");
+            throw new InternalServerErrorException(
+                "Ack ID " + ackId + " couldn't be added to the Ack set.");
         }
         JsonStreamParser parser = new JsonStreamParser(allEventsInJson);
 
@@ -166,14 +168,15 @@ public class EventManager {
         // create a new object to avoid blocking of threads because
         // the SyslogMessageSender.sendMessage() is synchronized
         try {
-            SyslogMessage[] messages = syslogMessages.toArray(new SyslogMessage[syslogMessages.size()]);
+            SyslogMessage[] messages = syslogMessages.toArray(
+                new SyslogMessage[syslogMessages.size()]);
             this.sender.sendMessages(messages);
         } catch (IOException e) {
             throw new InternalServerErrorException(e);
         }
 
         boolean shouldAck = channel != null && !channel.equals(Session.DEFAULT_CHANNEL);
-        
+
         if (shouldAck) {
             boolean acked = ackManager.acknowledge(authToken, channel, ackId);
             if (!acked) {
@@ -203,7 +206,8 @@ public class EventManager {
      * the value is overridden, it will stay as so for the following events if it is
      * not overridden.
      */
-    private TimestampedHttpEventData verifyJsonData(String eventInJson, TimestampedHttpEventData previousEvent) {
+    private TimestampedHttpEventData verifyJsonData(String eventInJson,
+        TimestampedHttpEventData previousEvent) {
         /*
          * Event field cannot be missing or blank. Throws an exception if this is the
          * case.
@@ -225,14 +229,13 @@ public class EventManager {
                 defaultHttpEventData.setEvent(eventString);
 
                 eventData = new TimestampedHttpEventData(defaultHttpEventData);
-
             } else {
                 throw new EventFieldMissingException();
             }
             if (eventData.getEvent().matches("\"\"")) {
                 throw new EventFieldBlankException();
             }
-            eventData.handleTime(jsonObject, previousEvent);
+            eventData = eventData.handleTime(jsonObject, previousEvent);
         }
         return eventData;
     }
@@ -241,7 +244,8 @@ public class EventManager {
      * Assigns the metadata (authentication token and channel name) to the
      * HttpEventData object.
      */
-    private void assignMetaData(TimestampedHttpEventData eventData, String authToken, String channel) {
+    private void assignMetaData(TimestampedHttpEventData eventData, String authToken,
+        String channel) {
         eventData.eventData().setAuthenticationToken(authToken);
         eventData.eventData().setChannel(channel);
     }

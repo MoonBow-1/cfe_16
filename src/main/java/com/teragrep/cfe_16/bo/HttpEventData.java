@@ -1,11 +1,10 @@
 package com.teragrep.cfe_16.bo;
 
 public interface HttpEventData {
-    public String getEvent();
 
-    public String getChannel();
+    String getEvent();
 
-    public String getAuthenticationToken();
+    String getChannel();
 
-    public Integer getAckID();
+    String getAuthenticationToken();
 }

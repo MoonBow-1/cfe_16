@@ -177,9 +177,4 @@ public final class TimestampedHttpEventData implements HttpEventData {
         }
         return this.timeParsed;
     }
-
-
-    public Integer getAckID() {
-        return this.eventData.getAckID();
-    }
 }

@@ -114,20 +114,17 @@ public class ConverterTests {
         final DefaultHttpEventData defaultEventData1 = new DefaultHttpEventData(
             "CHANNEL_11111",
             "Event 1",
-            "AUTH_TOKEN_11111",
-            0
+            "AUTH_TOKEN_11111"
         );
         final DefaultHttpEventData defaultEventData2 = new DefaultHttpEventData(
             "CHANNEL_22222",
             "Event 2",
-            "AUTH_TOKEN_22222",
-            1
+            "AUTH_TOKEN_22222"
         );
         final DefaultHttpEventData defaultEventData3 = new DefaultHttpEventData(
             "defaultchannel",
             "Event 3",
-            "AUTH_TOKEN_33333",
-            null
+            "AUTH_TOKEN_33333"
         );
 
         eventData1 = new TimestampedHttpEventData(
@@ -154,14 +151,12 @@ public class ConverterTests {
 
         metadataSDE1.addSDParam("authentication_token", eventData1.getAuthenticationToken());
         metadataSDE1.addSDParam("channel", eventData1.getChannel());
-        metadataSDE1.addSDParam("ack_id", String.valueOf(eventData1.getAckID()));
         metadataSDE1.addSDParam("time_source", eventData1.getTimeSource());
         metadataSDE1.addSDParam("time_parsed", "true");
         metadataSDE1.addSDParam("time", eventData1.getTime());
 
         metadataSDE2.addSDParam("authentication_token", eventData2.getAuthenticationToken());
         metadataSDE2.addSDParam("channel", eventData2.getChannel());
-        metadataSDE2.addSDParam("ack_id", String.valueOf(eventData2.getAckID()));
         metadataSDE2.addSDParam("time_source", eventData2.getTimeSource());
 
         metadataSDE3.addSDParam("authentication_token", eventData3.getAuthenticationToken());

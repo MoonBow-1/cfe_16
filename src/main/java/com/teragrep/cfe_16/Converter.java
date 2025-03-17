@@ -58,29 +58,29 @@ import org.springframework.stereotype.Component;
 
 /*
  * Converts HTTP Event Data into a Syslog message.
- * 
+ *
  * This class is NOT thread safe!
  *
  */
 @Component
 public class Converter {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Converter.class);
+    private final String hostName = "cfe-16";
     private Severity severity;
     private Facility facility;
-
     private SDElement metadataSDE;
     private SDElement headerSDE;
 
-    private final String hostName = "cfe-16";
-
-    public SyslogMessage httpToSyslog(TimestampedHttpEventData httpEventData, HeaderInfo headerInfo) {
+    public SyslogMessage httpToSyslog(TimestampedHttpEventData httpEventData,
+        HeaderInfo headerInfo) {
 
         setEventSeverity();
         setEventFacility();
 
         setStructuredDataParams(httpEventData);
         setHeaderSDE(headerInfo);
-        
+
         SyslogMessage syslogMessage;
         if (httpEventData.isTimeParsed()) {
 
@@ -88,9 +88,11 @@ public class Converter {
              * Creates a Syslogmessage with a time stamp
              */
             LOGGER.debug("Creating new syslog message with timestamp");
-            syslogMessage = new SyslogMessage().withTimestamp(httpEventData.getTimeAsLong()).withSeverity(severity)
-                    .withAppName("capsulated").withHostname(hostName).withFacility(facility).withSDElement(metadataSDE)
-                    .withSDElement(headerSDE).withMsg(httpEventData.getEvent());
+            syslogMessage = new SyslogMessage().withTimestamp(httpEventData.getTimeAsLong())
+                .withSeverity(severity)
+                .withAppName("capsulated").withHostname(hostName).withFacility(facility)
+                .withSDElement(metadataSDE)
+                .withSDElement(headerSDE).withMsg(httpEventData.getEvent());
 
         } else {
             /*
@@ -98,9 +100,10 @@ public class Converter {
              * in the request.
              */
             LOGGER.debug("Creating new syslog message without timestamp");
-            syslogMessage = new SyslogMessage().withSeverity(severity).withAppName("capsulated").withHostname(hostName)
-                    .withFacility(facility).withSDElement(metadataSDE).withSDElement(headerSDE)
-                    .withMsg(httpEventData.getEvent());
+            syslogMessage = new SyslogMessage().withSeverity(severity).withAppName("capsulated")
+                .withHostname(hostName)
+                .withFacility(facility).withSDElement(metadataSDE).withSDElement(headerSDE)
+                .withMsg(httpEventData.getEvent());
         }
 
         return syslogMessage;
@@ -138,11 +141,6 @@ public class Converter {
             metadataSDE.addSDParam("channel", eventData.getChannel());
         }
 
-        if (eventData.getAckID() != null) {
-            LOGGER.debug("Setting ack id");
-            metadataSDE.addSDParam("ack_id", String.valueOf(eventData.getAckID()));
-        }
-
         if (eventData.getTimeSource() != null) {
             LOGGER.debug("Setting time source");
             metadataSDE.addSDParam("time_source", eventData.getTimeSource());
@@ -159,8 +157,9 @@ public class Converter {
 
         SyslogMessage syslogMessage = null;
         setHeaderSDE(headerInfo);
-        syslogMessage = new SyslogMessage().withSeverity(severity).withAppName("capsulated").withHostname(hostName)
-                .withFacility(facility).withSDElement(headerSDE);
+        syslogMessage = new SyslogMessage().withSeverity(severity).withAppName("capsulated")
+            .withHostname(hostName)
+            .withFacility(facility).withSDElement(headerSDE);
 
         return syslogMessage;
     }
