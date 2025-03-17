@@ -50,6 +50,7 @@ import com.teragrep.cfe_16.service.HECService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -66,17 +67,17 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@TestPropertySource(properties = { 
-        "syslog.server.host=127.0.0.1", 
-        "syslog.server.port=1236",
-        "syslog.server.protocol=TCP", 
-        "max.channels=1000000", 
-        "max.ack.value=1000000", 
-        "max.ack.age=20000", 
-        "max.session.age=30000",
-        "poll.time=30000",
-        "server.print.times=true" 
-        })
+@TestPropertySource(properties = {
+    "syslog.server.host=127.0.0.1",
+    "syslog.server.port=1236",
+    "syslog.server.protocol=RELP",
+    "max.channels=1000000",
+    "max.ack.value=1000000",
+    "max.ack.age=20000",
+    "max.session.age=30000",
+    "poll.time=30000",
+    "server.print.times=true"
+})
 @SpringBootTest
 public class SendEventsIT implements Runnable {
 
@@ -175,7 +176,6 @@ public class SendEventsIT implements Runnable {
         es.shutdownNow();
     }
 
-    @Disabled
     @Test
     public void send1EventTest() throws IOException, InterruptedException {
         countDownLatch = new CountDownLatch(1);

@@ -48,12 +48,15 @@ package com.teragrep.cfe_16.it;
 
 
 import com.teragrep.cfe_16.config.Configuration;
-import com.teragrep.rlp_03.Server;
-import com.teragrep.rlp_03.ServerFactory;
-import com.teragrep.rlp_03.config.Config;
-import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
-import com.teragrep.rlp_03.delegate.FrameDelegate;
+import com.teragrep.cfe_16.server.TestServer;
+import com.teragrep.cfe_16.server.TestServerFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -72,26 +75,38 @@ public class ConfigurationIT {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationIT.class);
     private static final String hostname = "localhost";
     private static final Integer port = 1235;
-    private static Server server;
+    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+    private static final AtomicLong openCount = new AtomicLong();
+    private static final AtomicLong closeCount = new AtomicLong();
+    private static TestServer server;
     @Autowired
     private Configuration configuration;
 
     @BeforeAll
-    public static void init() throws IOException, InterruptedException {
-        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
-            (frame) -> LOGGER.debug(frame.relpFrame().payload().toString()));
-        Config config = new Config(port, 1);
-        ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
-
-        server = serverFactory.create();
-        Thread serverThread = new Thread(server);
-        serverThread.start();
-        server.startup.waitForCompletion();
+    public static void init() {
+        TestServerFactory serverFactory = new TestServerFactory();
+        try {
+            server = serverFactory.create(port, messageList, openCount, closeCount);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        server.run();
     }
 
     @AfterAll
-    public static void cleanup() throws InterruptedException {
-        server.stop();
+    public static void close() {
+        try {
+            server.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AfterEach
+    public void clear() {
+        openCount.set(0);
+        closeCount.set(0);
+        messageList.clear();
     }
 
     @Test
@@ -103,5 +118,8 @@ public class ConfigurationIT {
         LOGGER.debug(configuration.toString());
 
         assertEquals(expected, configuration.toString());
+        assertEquals(0, messageList.size());
+        assertEquals(1, openCount.get());
+        assertEquals(0, closeCount.get()); // FIXME: does not close
     }
 }

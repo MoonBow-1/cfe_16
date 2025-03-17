@@ -43,7 +43,7 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.jla_01.server;
+package com.teragrep.cfe_16.server;
 
 import com.teragrep.net_01.eventloop.EventLoop;
 import com.teragrep.net_01.server.Server;
