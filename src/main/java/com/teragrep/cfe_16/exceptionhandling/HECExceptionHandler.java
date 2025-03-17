@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -55,9 +55,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class HECExceptionHandler {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HECExceptionHandler.class);
+
     @ExceptionHandler
-    public ResponseEntity<HECErrorResponse> handleException(AuthenticationTokenMissingException exc) {
+    public ResponseEntity<HECErrorResponse> handleException(
+        AuthenticationTokenMissingException exc) {
 
         HECErrorResponse error = new HECErrorResponse("Token is required", 2, 0);
 
@@ -99,21 +102,23 @@ public class HECExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<HECErrorResponse> handleException(EventFieldBlankException exc) {
 
-        HECErrorResponse error = new HECErrorResponse("Event field cannot be blank", 13, 0); // TODO: when support for
-                                                                                             // multiple events with one
-                                                                                             // request is implemented,
-                                                                                             // get the real invalid
-                                                                                             // event number here.
+        HECErrorResponse error = new HECErrorResponse("Event field cannot be blank", 13,
+            0); // TODO: when support for
+        // multiple events with one
+        // request is implemented,
+        // get the real invalid
+        // event number here.
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     public ResponseEntity<HECErrorResponse> handleException(ServerIsBusyException exc) {
 
-        HECErrorResponse error = new HECErrorResponse("Server is busy", 9, 0); // TODO: when support for multiple events
-                                                                               // with one request is implemented,
-                                                                               // get the real invalid event number
-                                                                               // here.
+        HECErrorResponse error = new HECErrorResponse("Server is busy", 9,
+            0); // TODO: when support for multiple events
+        // with one request is implemented,
+        // get the real invalid event number
+        // here.
         return new ResponseEntity<>(error, HttpStatus.SERVICE_UNAVAILABLE);
     }
 

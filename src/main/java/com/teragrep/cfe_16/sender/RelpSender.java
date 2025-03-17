@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -59,15 +59,15 @@ import java.util.concurrent.TimeoutException;
 
 public class RelpSender extends AbstractSender {
 
-    private final RelpConnection sender;
     private static final Logger LOGGER = LoggerFactory.getLogger(RelpSender.class);
+    private final RelpConnection sender;
     //settings for timeouts, if they are 0 that we skip them
     //default are 0
-    private int connectionTimeout = 10000;
-    private int readTimeout = 15000;
-    private int writeTimeout = 5000;
-    private int reconnectInterval = 500;
-    
+    private final int connectionTimeout = 10000;
+    private final int readTimeout = 15000;
+    private final int writeTimeout = 5000;
+    private final int reconnectInterval = 500;
+
     public RelpSender(String hostname, int port) {
         super(hostname, port);
         this.sender = new RelpConnection();
@@ -111,12 +111,11 @@ public class RelpSender extends AbstractSender {
             this.sender.disconnect();
         } catch (IllegalStateException | IOException | TimeoutException e) {
             LOGGER.warn("Failed to disconnect from RELP Server: ", e);
-        }
-        finally {
+        } finally {
             this.tearDown();
         }
     }
-    
+
     @Override
     synchronized public void close() {
         this.disconnect();
@@ -126,7 +125,8 @@ public class RelpSender extends AbstractSender {
     synchronized public void sendMessages(SyslogMessage[] syslogMessages) throws IOException {
         final RelpBatch relpBatch = new RelpBatch();
         for (SyslogMessage syslogMessage : syslogMessages) {
-            relpBatch.insert(syslogMessage.toRfc5424SyslogMessage().getBytes("UTF-8"));
+            relpBatch.insert(
+                syslogMessage.toRfc5424SyslogMessage().getBytes(StandardCharsets.UTF_8));
         }
         doSend(relpBatch);
     }
@@ -134,7 +134,7 @@ public class RelpSender extends AbstractSender {
     @Override
     synchronized public void sendMessage(SyslogMessage syslogMessage) throws IOException {
         final RelpBatch relpBatch = new RelpBatch();
-        relpBatch.insert(syslogMessage.toRfc5424SyslogMessage().getBytes("UTF-8"));
+        relpBatch.insert(syslogMessage.toRfc5424SyslogMessage().getBytes(StandardCharsets.UTF_8));
         doSend(relpBatch);
     }
 

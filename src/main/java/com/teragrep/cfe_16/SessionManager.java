@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -65,6 +65,7 @@ import java.util.Map;
  */
 @Component
 public class SessionManager implements Runnable, LifeCycle {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionManager.class);
     /**
      * Maps auth token string => session object.
@@ -75,17 +76,17 @@ public class SessionManager implements Runnable, LifeCycle {
      * Cleans up outdated Session objects.
      */
     private Thread cleanerThread;
-    
+
     @Autowired
     private Configuration configuration;
-    
+
     /**
-     * 
+     *
      */
     public SessionManager() {
         this.sessions = new HashMap<String, Session>();
     }
-    
+
     @Override
     @PostConstruct
     public void start() {
@@ -97,12 +98,13 @@ public class SessionManager implements Runnable, LifeCycle {
     public void stop() {
         this.cleanerThread.interrupt();
     }
-    
+
     @Override
     public void run() {
         while (true) {
             try {
-                LOGGER.debug("Sleeping for <{}>  while waiting for poll", this.configuration.getPollTime());
+                LOGGER.debug("Sleeping for <{}>  while waiting for poll",
+                    this.configuration.getPollTime());
                 Thread.sleep(this.configuration.getPollTime());
             } catch (InterruptedException e) {
                 break;
@@ -112,15 +114,15 @@ public class SessionManager implements Runnable, LifeCycle {
                 while (iterator.hasNext()) {
                     Map.Entry<String, Session> entry = iterator.next();
                     long now = System.currentTimeMillis();
-                    long thresholdInLong = entry.getValue().getLastTouchedTimestamp() + this.configuration.getMaxSessionAge();
+                    long thresholdInLong = entry.getValue().getLastTouchedTimestamp()
+                        + this.configuration.getMaxSessionAge();
                     if (now >= thresholdInLong) {
                         iterator.remove();
-                    }                    
+                    }
                 }
             }
         }
     }
-
 
 
     /*
@@ -129,23 +131,24 @@ public class SessionManager implements Runnable, LifeCycle {
      */
     public Session getSession(String authenticationToken) {
         synchronized (this) {
-            Session session =  this.sessions.get(authenticationToken);
+            Session session = this.sessions.get(authenticationToken);
             return session;
         }
     }
 
     /**
-     * Returns an existing Session object based on authentication token.
-     * If no Session exists, a new one is created.
+     * Returns an existing Session object based on authentication token. If no Session exists, a new
+     * one is created.
      *
      * @param authenticationToken
      * @return
      */
     public Session getOrCreateSession(String authenticationToken) {
         LOGGER.debug("Getting or creating session");
-        LOGGER.trace("Getting or creating session for authenticationToken: {}", authenticationToken);
+        LOGGER.trace("Getting or creating session for authenticationToken: {}",
+            authenticationToken);
         synchronized (this) {
-            Session session =  this.sessions.get(authenticationToken);
+            Session session = this.sessions.get(authenticationToken);
             if (session == null) {
                 session = new Session(null, authenticationToken);
                 this.sessions.put(authenticationToken, session);

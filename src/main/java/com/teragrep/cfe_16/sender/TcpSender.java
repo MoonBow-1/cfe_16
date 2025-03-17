@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -54,16 +54,17 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class TcpSender extends AbstractSender {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TcpSender.class);
-    private TcpSyslogMessageSender sender;
-    
+    private final TcpSyslogMessageSender sender;
+
     public TcpSender(String hostname, int port) {
         super(hostname, port);
         this.sender = new TcpSyslogMessageSender();
         this.sender.setSyslogServerHostname(this.hostname);
         this.sender.setSyslogServerPort(this.port);
     }
-    
+
     @Override
     public void sendMessages(SyslogMessage[] syslogMessages) throws IOException {
         LOGGER.debug("Sending messages");
@@ -86,6 +87,6 @@ public class TcpSender extends AbstractSender {
 
     public void setSsl(boolean ssl) {
         LOGGER.debug("Set Ssl to <{}>", ssl);
-       this.sender.setSsl(ssl);
+        this.sender.setSsl(ssl);
     }
 }

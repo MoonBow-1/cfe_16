@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -47,12 +47,12 @@
 package com.teragrep.cfe_16.bo;
 
 /*
- * Saves the status of the sent events. 
+ * Saves the status of the sent events.
  * If the Ack is acknowledged, the event is sent succesfully.
  *
  */
 public class Ack {
-    
+
     private int id;
     private boolean acknowledged;
     private long lastUsedTimestampInMilliseconds;
@@ -95,7 +95,7 @@ public class Ack {
         result = prime * result + this.id;
         return result;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -108,7 +108,7 @@ public class Ack {
     public void touch() {
         this.lastUsedTimestampInMilliseconds = System.currentTimeMillis();
     }
-    
+
     public long getLastUsedTimestamp() {
         return this.lastUsedTimestampInMilliseconds;
     }

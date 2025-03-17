@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -52,9 +52,12 @@ import java.util.regex.Pattern;
 
 /*
  * Cleans the request body so, that only the body of the request is left in the string.
- * This is needed when calling the endpoint that consumes MediaType.APPLICATION_FORM_URLENCODED_VALUE
- * Example of body sent as a parameter: {channel=[CHANNEL_11111], {"sourcetype": "mysourcetype", "event": "Hello, world!"}=[]}
- * Example of cleaned body returned by the cleanAckRequestBody(): {"sourcetype": "mysourcetype", "event": "Hello, world!"}
+ * This is needed when calling the endpoint that consumes MediaType
+ * .APPLICATION_FORM_URLENCODED_VALUE
+ * Example of body sent as a parameter: {channel=[CHANNEL_11111], {"sourcetype": "mysourcetype",
+ * "event": "Hello, world!"}=[]}
+ * Example of cleaned body returned by the cleanAckRequestBody(): {"sourcetype": "mysourcetype",
+ * "event": "Hello, world!"}
  * TODO: Try to implement a better way to get the body of the request.
  *
  */
@@ -62,7 +65,8 @@ import java.util.regex.Pattern;
 public class RequestBodyCleaner {
 
     public String cleanAckRequestBody(String body, String channel) {
-        String bodyWithoutChannel = body.replaceAll("channel=\\[" + Pattern.quote(channel) + "\\]\\, ", "");
+        String bodyWithoutChannel = body.replaceAll(
+            "channel=\\[" + Pattern.quote(channel) + "\\]\\, ", "");
         String bodywithoutChannelLastCharRemoved = removeLastChar(bodyWithoutChannel);
 
         String cleanedBody = bodywithoutChannelLastCharRemoved.substring(1);

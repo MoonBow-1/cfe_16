@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -54,34 +54,33 @@ import org.springframework.http.ResponseEntity;
 
 /**
  * An interface that specified the REST back end API.
- *
  */
 public interface HECService {
 
     /**
      * Returns the JSON object as a response of given HTTP event request.
-     * 
+     *
      * @param request
      * @param channel
      * @param eventInJson
      * @return
      */
-    public ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson);
-    
+    ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson);
+
     /**
-     * 
      * @param request
      * @param channel
      * @param requestedAcksInJson
      * @return
      */
-    public JsonNode getAcks(HttpServletRequest request, String channel, JsonNode requestedAcksInJson);
-    
+    JsonNode getAcks(HttpServletRequest request, String channel,
+        JsonNode requestedAcksInJson);
+
     /**
      * Ping.
-     * 
+     *
      * @param request
      * @return
      */
-    public ResponseEntity<String> healthCheck(HttpServletRequest request);
+    ResponseEntity<String> healthCheck(HttpServletRequest request);
 }

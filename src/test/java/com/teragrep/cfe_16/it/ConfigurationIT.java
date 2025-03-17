@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -68,16 +68,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ConfigurationIT {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationIT.class);
+    private static final String hostname = "localhost";
+    private static final Integer port = 1235;
+    private static Server server;
     @Autowired
     private Configuration configuration;
 
-    private static Server server;
-    private static final String hostname = "localhost";
-    private static Integer port = 1235;
     @BeforeAll
     public static void init() throws IOException, InterruptedException {
-        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate((frame) -> LOGGER.debug(frame.relpFrame().payload().toString()));
+        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
+            (frame) -> LOGGER.debug(frame.relpFrame().payload().toString()));
         Config config = new Config(port, 1);
         ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
 
@@ -94,11 +96,12 @@ public class ConfigurationIT {
 
     @Test
     public void instantiateConfigurationTest() {
-    	String expected =
-    	"Configuration [sysLogHost=127.0.0.1, sysLogProtocol=relp, sysLogPort=1235, maxAckValue=1000000, maxAckAge=20000, maxSessionAge=30000, "
-    	+ "maxChannels=1000000, pollTime=1000000, printTimes=true]";
+        String expected =
+            "Configuration [sysLogHost=127.0.0.1, sysLogProtocol=relp, sysLogPort=1235, "
+                + "maxAckValue=1000000, maxAckAge=20000, maxSessionAge=30000, "
+                + "maxChannels=1000000, pollTime=1000000, printTimes=true]";
         LOGGER.debug(configuration.toString());
 
-    	assertEquals(expected, configuration.toString());
+        assertEquals(expected, configuration.toString());
     }
 }

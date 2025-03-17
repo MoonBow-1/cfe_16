@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -54,7 +54,7 @@ public class EventFieldBlankException extends RuntimeException {
     }
 
     public EventFieldBlankException(String message, Throwable cause, boolean enableSuppression,
-            boolean writableStackTrace) {
+        boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

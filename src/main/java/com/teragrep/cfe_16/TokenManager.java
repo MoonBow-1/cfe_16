@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -53,15 +53,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /*
- * Manager that handles the authentication token 
+ * Manager that handles the authentication token
  *
  */
 @Component
 public class TokenManager {
 
-    public TokenManager() {    
+    public TokenManager() {
     }
-    
+
     /*
      * Checks if the authentication token is in the request. Returns true if the
      * authentication token is NOT in the request. Returns false if authentication
@@ -87,11 +87,7 @@ public class TokenManager {
     // @LogAnnotation(type = LogType.DEBUG)
     public boolean isTokenInBasic(String authHeader) {
 
-        boolean isInBasic = false;
-
-        if (authHeader != null && authHeader.toLowerCase().startsWith("basic")) {
-            isInBasic = true;
-        }
+        boolean isInBasic = authHeader != null && authHeader.toLowerCase().startsWith("basic");
 
         return isInBasic;
     }

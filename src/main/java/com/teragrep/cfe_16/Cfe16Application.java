@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -53,9 +53,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({ "com.teragrep.cfe_16" })
+@ComponentScan({"com.teragrep.cfe_16"})
 public class Cfe16Application {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Cfe16Application.class);
+
     public static void main(String[] args) {
         LOGGER.info("Starting Cfe16Application...");
         SpringApplication.run(Cfe16Application.class, args);

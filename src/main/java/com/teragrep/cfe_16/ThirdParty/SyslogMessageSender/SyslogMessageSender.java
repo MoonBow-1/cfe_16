@@ -1,17 +1,47 @@
 /*
- * Copyright 2010-2014, CloudBees Inc.
+ * HTTP Event Capture to RFC5424 CFE_16
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ *
+ * Additional permission under GNU Affero General Public License version 3
+ * section 7
+ *
+ * If you modify this Program, or any covered work, by linking or combining it
+ * with other code, such other code is not for that reason alone subject to any
+ * of the requirements of the GNU Affero GPL version 3 as long as this Program
+ * is the same Program as licensed from Suomen Kanuuna Oy without any additional
+ * modifications.
+ *
+ * Supplemented terms under GNU Affero General Public License version 3
+ * section 7
+ *
+ * Origin of the software must be attributed to Suomen Kanuuna Oy. Any modified
+ * versions must be marked as "Modified version of" The Program.
+ *
+ * Names of the licensors and authors may not be used for publicity purposes.
+ *
+ * No rights are granted for use of trade names, trademarks, or service marks
+ * which are in The Program if any.
+ *
+ * Licensee must indemnify licensors and authors for any liability that these
+ * contractual assumptions impose on licensors and authors.
+ *
+ * To the extent this program is licensed as part of the Commercial versions of
+ * Teragrep, the applicable Commercial License may apply to this file if you as
+ * a licensee so wish it.
  */
 package com.teragrep.cfe_16.ThirdParty.SyslogMessageSender;
 
@@ -35,18 +65,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
 /**
- * See <a href="http://tools.ietf.org/html/rfc6587">RFC 6587 - Transmission of Syslog Messages over TCP</a>
+ * See <a href="http://tools.ietf.org/html/rfc6587">RFC 6587 - Transmission of Syslog Messages over
+ * TCP</a>
  *
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
  */
-public class SyslogMessageSender extends AbstractSyslogMessageSender implements Closeable  {
+public class SyslogMessageSender extends AbstractSyslogMessageSender implements Closeable {
+
     public final static int SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE = 500;
     public final static int SETTING_MAX_RETRY = 2;
-
+    /**
+     * Number of exceptions trying to send message.
+     */
+    protected final AtomicInteger trySendErrorCounter = new AtomicInteger();
     /**
      * {@link java.net.InetAddress InetAddress} of the remote Syslog Server.
      *
-     * The {@code InetAddress} is refreshed regularly to handle DNS changes (default {@link #DEFAULT_INET_ADDRESS_TTL_IN_MILLIS})
+     * The {@code InetAddress} is refreshed regularly to handle DNS changes (default
+     * {@link #DEFAULT_INET_ADDRESS_TTL_IN_MILLIS})
      *
      * Default value: {@link #DEFAULT_SYSLOG_HOST}
      */
@@ -57,21 +93,16 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
      * Default: {@link #DEFAULT_SYSLOG_PORT}
      */
     protected int syslogServerPort = DEFAULT_SYSLOG_PORT;
-
     private Socket socket;
     private Writer writer;
-    private int socketConnectTimeoutInMillis = SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE;
+    private int socketConnectTimeoutInMillis =
+        SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE;
     private boolean ssl;
     private SSLContext sslContext;
     /**
      * Number of retries to send a message before throwing an exception.
      */
     private int maxRetryCount = SETTING_MAX_RETRY;
-    /**
-     * Number of exceptions trying to send message.
-     */
-    protected final AtomicInteger trySendErrorCounter = new AtomicInteger();
-
     // use the CR LF non transparent framing as described in "3.4.2.  Non-Transparent-Framing"
     private String postfix = "\n";
 
@@ -85,7 +116,8 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
             for (int i = 0; i <= maxRetryCount; i++) {
                 try {
                     if (logger.isLoggable(Level.FINEST)) {
-                        logger.finest("Send syslog message " + message.toSyslogMessage(messageFormat));
+                        logger.finest(
+                            "Send syslog message " + message.toSyslogMessage(messageFormat));
                     }
                     ensureSyslogServerConnection();
                     message.toSyslogMessage(messageFormat, writer);
@@ -119,7 +151,7 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         InetAddress inetAddress = syslogServerHostnameReference.get();
         if (socket != null && !Objects.equals(socket.getInetAddress(), inetAddress)) {
             logger.info("InetAddress of the Syslog Server have changed, create a new connection. " +
-                    "Before=" + socket.getInetAddress() + ", new=" + inetAddress);
+                "Before=" + socket.getInetAddress() + ", new=" + inetAddress);
             IoUtils.closeQuietly(socket, writer);
             writer = null;
             socket = null;
@@ -127,11 +159,11 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         boolean socketIsValid;
         try {
             socketIsValid = socket != null &&
-                    socket.isConnected()
-                    && socket.isBound()
-                    && !socket.isClosed()
-                    && !socket.isInputShutdown()
-                    && !socket.isOutputShutdown();
+                socket.isConnected()
+                && socket.isBound()
+                && !socket.isClosed()
+                && !socket.isInputShutdown()
+                && !socket.isOutputShutdown();
         } catch (Exception e) {
             socketIsValid = false;
         }
@@ -149,8 +181,8 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                 }
                 socket.setKeepAlive(true);
                 socket.connect(
-                        new InetSocketAddress(inetAddress, syslogServerPort),
-                        socketConnectTimeoutInMillis);
+                    new InetSocketAddress(inetAddress, syslogServerPort),
+                    socketConnectTimeoutInMillis);
 
                 if (socket instanceof SSLSocket && logger.isLoggable(Level.FINER)) {
                     try {
@@ -158,8 +190,7 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                         SSLSession session = sslSocket.getSession();
                         logger.finer("The Certificates used by peer");
                         for (Certificate certificate : session.getPeerCertificates()) {
-                            if (certificate instanceof X509Certificate) {
-                                X509Certificate x509Certificate = (X509Certificate) certificate;
+                            if (certificate instanceof X509Certificate x509Certificate) {
                                 logger.finer("" + x509Certificate.getSubjectDN());
                             } else {
                                 logger.finer("" + certificate);
@@ -176,7 +207,8 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                     }
                 }
             } catch (IOException e) {
-                ConnectException ce = new ConnectException("Exception connecting to " + inetAddress + ":" + syslogServerPort);
+                ConnectException ce = new ConnectException(
+                    "Exception connecting to " + inetAddress + ":" + syslogServerPort);
                 ce.initCause(e);
                 throw ce;
             }
@@ -186,9 +218,16 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         }
     }
 
+    public String getSyslogServerHostname() {
+        if (syslogServerHostnameReference == null) {return null;}
+        InetAddress inetAddress = syslogServerHostnameReference.get();
+        return inetAddress == null ? null : inetAddress.getHostName();
+    }
+
     @Override
     public void setSyslogServerHostname(final String syslogServerHostname) {
-        this.syslogServerHostnameReference = new CachingReference<InetAddress>(DEFAULT_INET_ADDRESS_TTL_IN_NANOS) {
+        this.syslogServerHostnameReference = new CachingReference<InetAddress>(
+            DEFAULT_INET_ADDRESS_TTL_IN_NANOS) {
 
             @Override
             protected InetAddress newObject() {
@@ -201,20 +240,13 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         };
     }
 
+    public int getSyslogServerPort() {
+        return syslogServerPort;
+    }
+
     @Override
     public void setSyslogServerPort(int syslogServerPort) {
         this.syslogServerPort = syslogServerPort;
-    }
-
-    public String getSyslogServerHostname() {
-        if (syslogServerHostnameReference == null)
-            return null;
-        InetAddress inetAddress = syslogServerHostnameReference.get();
-        return inetAddress == null ? null : inetAddress.getHostName();
-    }
-
-    public int getSyslogServerPort() {
-        return syslogServerPort;
     }
 
     public boolean isSsl() {
@@ -224,33 +256,33 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
     public void setSsl(boolean ssl) {
         this.ssl = ssl;
     }
-    
-    public synchronized void setSSLContext(SSLContext sslContext) {
-        this.sslContext = sslContext; 
-    }
-    
+
     public synchronized SSLContext getSSLContext() {
-        return this.sslContext; 
+        return this.sslContext;
+    }
+
+    public synchronized void setSSLContext(SSLContext sslContext) {
+        this.sslContext = sslContext;
     }
 
     public int getSocketConnectTimeoutInMillis() {
         return socketConnectTimeoutInMillis;
     }
 
-    public int getMaxRetryCount() {
-        return maxRetryCount;
-    }
-
-    public int getTrySendErrorCounter() {
-        return trySendErrorCounter.get();
-    }
-
     public void setSocketConnectTimeoutInMillis(int socketConnectTimeoutInMillis) {
         this.socketConnectTimeoutInMillis = socketConnectTimeoutInMillis;
     }
 
+    public int getMaxRetryCount() {
+        return maxRetryCount;
+    }
+
     public void setMaxRetryCount(int maxRetryCount) {
         this.maxRetryCount = maxRetryCount;
+    }
+
+    public int getTrySendErrorCounter() {
+        return trySendErrorCounter.get();
     }
 
     public synchronized void setPostfix(String postfix) {
@@ -260,21 +292,21 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
     @Override
     public String toString() {
         return getClass().getName() + "{" +
-                "syslogServerHostname='" + this.getSyslogServerHostname() + '\'' +
-                ", syslogServerPort='" + this.getSyslogServerPort() + '\'' +
-                ", ssl=" + ssl +
-                ", maxRetryCount=" + maxRetryCount +
-                ", socketConnectTimeoutInMillis=" + socketConnectTimeoutInMillis +
-                ", defaultAppName='" + defaultAppName + '\'' +
-                ", defaultFacility=" + defaultFacility +
-                ", defaultMessageHostname='" + defaultMessageHostname + '\'' +
-                ", defaultSeverity=" + defaultSeverity +
-                ", messageFormat=" + messageFormat +
-                ", sendCounter=" + sendCounter +
-                ", sendDurationInNanosCounter=" + sendDurationInNanosCounter +
-                ", sendErrorCounter=" + sendErrorCounter +
-                ", trySendErrorCounter=" + trySendErrorCounter +
-                '}';
+            "syslogServerHostname='" + this.getSyslogServerHostname() + '\'' +
+            ", syslogServerPort='" + this.getSyslogServerPort() + '\'' +
+            ", ssl=" + ssl +
+            ", maxRetryCount=" + maxRetryCount +
+            ", socketConnectTimeoutInMillis=" + socketConnectTimeoutInMillis +
+            ", defaultAppName='" + defaultAppName + '\'' +
+            ", defaultFacility=" + defaultFacility +
+            ", defaultMessageHostname='" + defaultMessageHostname + '\'' +
+            ", defaultSeverity=" + defaultSeverity +
+            ", messageFormat=" + messageFormat +
+            ", sendCounter=" + sendCounter +
+            ", sendDurationInNanosCounter=" + sendDurationInNanosCounter +
+            ", sendErrorCounter=" + sendErrorCounter +
+            ", trySendErrorCounter=" + trySendErrorCounter +
+            '}';
     }
 
     @Override

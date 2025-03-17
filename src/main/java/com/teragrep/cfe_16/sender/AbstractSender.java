@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -53,7 +53,6 @@ import java.io.IOException;
 
 /**
  * An abstract sender class for sending batch messages.
- *
  */
 public abstract class AbstractSender extends AbstractSyslogMessageSender {
 
@@ -65,10 +64,10 @@ public abstract class AbstractSender extends AbstractSyslogMessageSender {
         this.hostname = hostname;
         this.port = port;
     }
-    
+
     /**
      * Sends a batch of syslog messages.
-     * 
+     *
      * @param syslogMessages
      */
     public abstract void sendMessages(SyslogMessage[] syslogMessages) throws IOException;

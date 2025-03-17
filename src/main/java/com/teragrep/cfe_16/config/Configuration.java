@@ -1,6 +1,6 @@
 /*
  * HTTP Event Capture to RFC5424 CFE_16
- * Copyright (C) 2021  Suomen Kanuuna Oy
+ * Copyright (C) 2025 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -45,51 +45,54 @@
  */
 
 package com.teragrep.cfe_16.config;
-        
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-        
+
 /**
  * A Spring-utilizing class for getting configuration data.
- *
  */
 
 @Component
 public class Configuration {
-    
+
     @Value("${syslog.server.host}")
     private String sysLogHost;
-        
+
     @Value("${syslog.server.protocol}")
     private String sysLogProtocol;
-    
+
     @Value("${syslog.server.port}")
     private int sysLogPort;
-    
+
     @Value("${max.ack.value}")
     private int maxAckValue;
 
     @Value("${max.ack.age}")
     private int maxAckAge;
-    
+
     @Value("${max.session.age}")
     private int maxSessionAge;
-    
+
     @Value("${max.channels}")
     private int maxChannels;
 
     @Value("${max.ack.value}")
     private long pollTime;
-    
+
     @Value("${server.print.times}")
     private boolean printTimes;
 
     public Configuration() {
-        
+
     }
-    
+
     public String getSyslogHost() {
         return this.sysLogHost;
+    }
+
+    public void setSyslogHost(String syslogHost) {
+        this.sysLogHost = syslogHost;
     }
 
     public String getSysLogProtocol() {
@@ -98,10 +101,6 @@ public class Configuration {
 
     public void setSysLogProtocol(String sysLogProtocol) {
         this.sysLogProtocol = sysLogProtocol;
-    }
-
-    public void setSyslogHost(String syslogHost) {
-        this.sysLogHost = syslogHost;
     }
 
     public int getSyslogPort() {
@@ -142,10 +141,13 @@ public class Configuration {
 
     @Override
     public String toString() {
-        return "Configuration [sysLogHost=" + this.sysLogHost + ", sysLogProtocol=" + this.sysLogProtocol
-                + ", sysLogPort=" + this.sysLogPort + ", maxAckValue=" + this.maxAckValue + ", maxAckAge="
-                + this.maxAckAge + ", maxSessionAge=" + this.maxSessionAge + ", maxChannels=" + this.maxChannels
-                + ", pollTime=" + this.pollTime + ", printTimes=" + this.printTimes + "]";
+        return "Configuration [sysLogHost=" + this.sysLogHost + ", sysLogProtocol="
+            + this.sysLogProtocol
+            + ", sysLogPort=" + this.sysLogPort + ", maxAckValue=" + this.maxAckValue
+            + ", maxAckAge="
+            + this.maxAckAge + ", maxSessionAge=" + this.maxSessionAge + ", maxChannels="
+            + this.maxChannels
+            + ", pollTime=" + this.pollTime + ", printTimes=" + this.printTimes + "]";
     }
-    
+
 }
