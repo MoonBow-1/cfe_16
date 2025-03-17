@@ -151,6 +151,12 @@ public final class TimestampedHttpEventData implements HttpEventData {
     }
 
     public String getTimeSource() {
+        if (this.time == null) {
+            return "generated";
+        }
+        if (this.time.length() < 10 || this.time.length() > 13) {
+            return "generated";
+        }
         return this.timeSource;
     }
 
@@ -163,6 +169,12 @@ public final class TimestampedHttpEventData implements HttpEventData {
     }
 
     public boolean isTimeParsed() {
+        if (this.time == null) {
+            return false;
+        }
+        if (this.time.length() < 10 || this.time.length() > 13) {
+            return false;
+        }
         return this.timeParsed;
     }
 
