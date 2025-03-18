@@ -54,9 +54,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class TcpSender extends AbstractSender {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TcpSender.class);
-    private final TcpSyslogMessageSender sender;
+    private TcpSyslogMessageSender sender;
 
     public TcpSender(String hostname, int port) {
         super(hostname, port);

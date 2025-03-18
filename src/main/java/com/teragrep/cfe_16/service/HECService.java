@@ -54,6 +54,7 @@ import org.springframework.http.ResponseEntity;
 
 /**
  * An interface that specified the REST back end API.
+ *
  */
 public interface HECService {
 
@@ -65,16 +66,16 @@ public interface HECService {
      * @param eventInJson
      * @return
      */
-    ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson);
+    public ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson);
 
     /**
+     *
      * @param request
      * @param channel
      * @param requestedAcksInJson
      * @return
      */
-    JsonNode getAcks(HttpServletRequest request, String channel,
-        JsonNode requestedAcksInJson);
+    public JsonNode getAcks(HttpServletRequest request, String channel, JsonNode requestedAcksInJson);
 
     /**
      * Ping.
@@ -82,5 +83,5 @@ public interface HECService {
      * @param request
      * @return
      */
-    ResponseEntity<String> healthCheck(HttpServletRequest request);
+    public ResponseEntity<String> healthCheck(HttpServletRequest request);
 }

@@ -72,20 +72,64 @@ import java.util.Map;
  */
 @Component
 public class AckManager implements Runnable, LifeCycle {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AckManager.class);
+    /**
+     * A class that encapsulates state of individual channels regarding to ACKs.
+     *
+     */
+    private class State {
+        private int currentAckValue;
+        private Ack ackToCompare;
+        private Map<Integer, Ack> ackMap;
+
+        public State() {
+            this.currentAckValue = 0;
+            this.ackToCompare = new Ack();
+            this.ackMap = new HashMap<Integer, Ack>();
+        }
+
+        public int getCurrentAckValue() {
+            return this.currentAckValue;
+        }
+
+        public void setCurrentAckValue(int currentAckValue) {
+            this.currentAckValue = currentAckValue;
+        }
+
+        public Ack getAckToCompare() {
+            return this.ackToCompare;
+        }
+
+        public void setAckToCompare(Ack ackToCompare) {
+            this.ackToCompare = ackToCompare;
+        }
+
+        public Map<Integer, Ack> getAckMap() {
+            return this.ackMap;
+        }
+
+        @Override
+        public String toString() {
+            return "State [currentAckValue=" + this.currentAckValue + ", ackToCompare=" + this.ackToCompare
+                + ", ackMap=" + this.ackMap + "]";
+        }
+    }
+
     /**
      * Does the JSON <-> Java conversions.
      */
     private final ObjectMapper objectMapper;
+
     /**
      * A hash for mapping channels to ACK status objects.
      */
     private final Map<String, State> ackStates;
+
     /**
      * The background thread for cleaning up ACKs.
      */
     private Thread cleanerThread;
+
     @Autowired
     private Configuration configuration;
 
@@ -113,8 +157,8 @@ public class AckManager implements Runnable, LifeCycle {
     }
 
     /**
-     * A private Accessor for the State object indexed by the given auth token and channel. If no
-     * State object is found, a new object is created and added to the map.
+     * A private Accessor for the State object indexed by the given auth token and channel.
+     * If no State object is found, a new object is created and added to the map.
      *
      * @param authToken
      * @param channel
@@ -133,7 +177,8 @@ public class AckManager implements Runnable, LifeCycle {
     }
 
     /**
-     * This method has to be called first before calling any other Ack related methods.
+     * This method has to be called first before calling any other Ack related
+     * methods.
      *
      * @param authToken
      * @param channel
@@ -201,15 +246,13 @@ public class AckManager implements Runnable, LifeCycle {
         State state = this.ackStates.get(key);
         LOGGER.debug("Acknowledging ackId <{}> on channel <{}>", ackId, channel);
         if (state == null) {
-            throw new IllegalStateException(
-                "An Ack cannot be acknowledge before it is added to the Ack list.");
+            throw new IllegalStateException("An Ack cannot be acknowledge before it is added to the Ack list.");
         }
         synchronized (state) {
             Map<Integer, Ack> ackMap = state.getAckMap();
             Ack ack = ackMap.get(ackId);
             if (ack == null) {
-                throw new InternalServerErrorException(
-                    "Couldn't set the acknowledge status for Ack ID " + ackId);
+                throw new InternalServerErrorException("Couldn't set the acknowledge status for Ack ID " + ackId);
             }
             ack.acknowledge();
             return true;
@@ -217,8 +260,8 @@ public class AckManager implements Runnable, LifeCycle {
     }
 
     /**
-     * Adds a new Ack object for given channel. If this is the first time a channel is assigned a
-     * new Ack, a new State object is created.
+     * Adds a new Ack object for given channel. If this is the first time a channel
+     * is assigned a new Ack, a new State object is created.
      *
      * @param channel
      * @param ack
@@ -256,11 +299,10 @@ public class AckManager implements Runnable, LifeCycle {
     }
 
     /**
-     * Returns the Ack statuses of requested Ack id:s as a JSON node. JSON node with the id:s is
-     * given as a parameter. Example: {"acks": [1,3,4]}
+     * Returns the Ack statuses of requested Ack id:s as a JSON node. JSON node with
+     * the id:s is given as a parameter. Example: {"acks": [1,3,4]}
      */
-    public JsonNode getRequestedAckStatuses(String authToken, String channel,
-        JsonNode requestedAcksInJson) {
+    public JsonNode getRequestedAckStatuses(String authToken, String channel, JsonNode requestedAcksInJson) {
         JsonNode jsonNode = this.objectMapper.createObjectNode();
         if (requestedAcksInJson == null) {
             return jsonNode;
@@ -272,8 +314,7 @@ public class AckManager implements Runnable, LifeCycle {
          */
         int[] requestedAckIds = null;
         if (requestedAcksInJson.get("acks") != null && requestedAcksInJson.get("acks").isArray()) {
-            requestedAckIds = this.objectMapper.convertValue(requestedAcksInJson.get("acks"),
-                int[].class);
+            requestedAckIds = this.objectMapper.convertValue(requestedAcksInJson.get("acks"), int[].class);
         }
 
         /*
@@ -318,7 +359,11 @@ public class AckManager implements Runnable, LifeCycle {
         Map<Integer, Ack> ackMap = state.getAckMap();
         int ackMapSize = ackMap.size();
         int maxAckValue = this.configuration.getMaxAckValue();
-        return ackMapSize <= maxAckValue;
+        if (ackMapSize > maxAckValue) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /*
@@ -342,8 +387,7 @@ public class AckManager implements Runnable, LifeCycle {
 
         while (true) {
             try {
-                LOGGER.debug("Sleeping for <{}> while waiting for polls",
-                    this.configuration.getPollTime());
+                LOGGER.debug("Sleeping for <{}> while waiting for polls", this.configuration.getPollTime());
                 Thread.sleep(this.configuration.getPollTime());
             } catch (InterruptedException e) {
                 break;
@@ -357,8 +401,7 @@ public class AckManager implements Runnable, LifeCycle {
                     Iterator<Ack> iterator = ackMap.values().iterator();
                     while (iterator.hasNext()) {
                         Ack ack = iterator.next();
-                        long thresholdInLong =
-                            ack.getLastUsedTimestamp() + this.configuration.getMaxAckAge();
+                        long thresholdInLong = ack.getLastUsedTimestamp() + this.configuration.getMaxAckAge();
 
                         /**
                          * If the Ack object is too old we'll remove it from the Ack set.
@@ -408,8 +451,9 @@ public class AckManager implements Runnable, LifeCycle {
     }
 
     /**
-     * Returns the current Ack value for given token and channel. A new State is created, so this
-     * method must be called first before other Ack manipulating methods are called.
+     * Returns the current Ack value for given token and channel.
+     * A new State is created, so this method must be called
+     * first before other Ack manipulating methods are called.
      *
      * @param authToken
      * @param channel
@@ -419,49 +463,6 @@ public class AckManager implements Runnable, LifeCycle {
         State state = this.getOrCreateState(authToken, channel);
         synchronized (state) {
             return state.getCurrentAckValue();
-        }
-    }
-
-    /**
-     * A class that encapsulates state of individual channels regarding to ACKs.
-     */
-    private class State {
-
-        private final Map<Integer, Ack> ackMap;
-        private int currentAckValue;
-        private Ack ackToCompare;
-
-        public State() {
-            this.currentAckValue = 0;
-            this.ackToCompare = new Ack();
-            this.ackMap = new HashMap<Integer, Ack>();
-        }
-
-        public int getCurrentAckValue() {
-            return this.currentAckValue;
-        }
-
-        public void setCurrentAckValue(int currentAckValue) {
-            this.currentAckValue = currentAckValue;
-        }
-
-        public Ack getAckToCompare() {
-            return this.ackToCompare;
-        }
-
-        public void setAckToCompare(Ack ackToCompare) {
-            this.ackToCompare = ackToCompare;
-        }
-
-        public Map<Integer, Ack> getAckMap() {
-            return this.ackMap;
-        }
-
-        @Override
-        public String toString() {
-            return "State [currentAckValue=" + this.currentAckValue + ", ackToCompare="
-                + this.ackToCompare
-                + ", ackMap=" + this.ackMap + "]";
         }
     }
 }

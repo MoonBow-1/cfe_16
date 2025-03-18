@@ -55,12 +55,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class HECExceptionHandler {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(HECExceptionHandler.class);
-
     @ExceptionHandler
-    public ResponseEntity<HECErrorResponse> handleException(
-        AuthenticationTokenMissingException exc) {
+    public ResponseEntity<HECErrorResponse> handleException(AuthenticationTokenMissingException exc) {
 
         HECErrorResponse error = new HECErrorResponse("Token is required", 2, 0);
 
@@ -102,8 +99,7 @@ public class HECExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<HECErrorResponse> handleException(EventFieldBlankException exc) {
 
-        HECErrorResponse error = new HECErrorResponse("Event field cannot be blank", 13,
-            0); // TODO: when support for
+        HECErrorResponse error = new HECErrorResponse("Event field cannot be blank", 13, 0); // TODO: when support for
         // multiple events with one
         // request is implemented,
         // get the real invalid
@@ -114,8 +110,7 @@ public class HECExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<HECErrorResponse> handleException(ServerIsBusyException exc) {
 
-        HECErrorResponse error = new HECErrorResponse("Server is busy", 9,
-            0); // TODO: when support for multiple events
+        HECErrorResponse error = new HECErrorResponse("Server is busy", 9, 0); // TODO: when support for multiple events
         // with one request is implemented,
         // get the real invalid event number
         // here.

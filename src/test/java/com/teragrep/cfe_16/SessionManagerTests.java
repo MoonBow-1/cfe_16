@@ -85,11 +85,9 @@ public class SessionManagerTests {
             sessionManager.getSession(authToken1));
         assertSame("Same session should be returned with the same authentication token", session2,
             sessionManager.getSession(authToken2));
-        assertNotSame("Different session should be returned with a different authentication token",
-            session1,
+        assertNotSame("Different session should be returned with a different authentication token", session1,
             sessionManager.getSession(authToken2));
-        assertNotSame("Different session should be returned with a different authentication token",
-            session2,
+        assertNotSame("Different session should be returned with a different authentication token", session2,
             sessionManager.getSession(authToken1));
         assertNull("Getting a session with an unused authentication token should return null",
             sessionManager.getSession(authToken3));
@@ -102,6 +100,6 @@ public class SessionManagerTests {
         assertFalse(session.addChannel(Session.DEFAULT_CHANNEL));
         assertTrue(session.doesChannelExist(Session.DEFAULT_CHANNEL));
         assertTrue(session.removeChannel(Session.DEFAULT_CHANNEL));
-        assertFalse(session.doesChannelExist(Session.DEFAULT_CHANNEL));
+        assertTrue(!session.doesChannelExist(Session.DEFAULT_CHANNEL));
     }
 }

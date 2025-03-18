@@ -50,15 +50,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CleanRequestBodyTests {
-
     @Test
     public void testCleanRequestBodyNormal() {
-        String input = "{channel=[CHANNEL_11111], {\"sourcetype\": \"mysourcetype\", \"event\": "
-            + "\"Hello, world!\"}=[]}";
+        String input = "{channel=[CHANNEL_11111], {\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\"}=[]}";
         String channel = "CHANNEL_11111";
         RequestBodyCleaner requestBodyCleaner = new RequestBodyCleaner();
         String cleaned = requestBodyCleaner.cleanAckRequestBody(input, channel);
-        Assertions.assertEquals("{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\"}",
-            cleaned, "Did not clean channel properly");
+        Assertions.assertEquals("{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\"}", cleaned, "Did not clean channel properly");
     }
 }

@@ -47,7 +47,6 @@
 package com.teragrep.cfe_16.bo;
 
 /**
- *
  */
 public class HeaderInfo {
 

@@ -51,6 +51,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * A Spring-utilizing class for getting configuration data.
+ *
  */
 
 @Component
@@ -91,16 +92,16 @@ public class Configuration {
         return this.sysLogHost;
     }
 
-    public void setSyslogHost(String syslogHost) {
-        this.sysLogHost = syslogHost;
-    }
-
     public String getSysLogProtocol() {
         return this.sysLogProtocol;
     }
 
     public void setSysLogProtocol(String sysLogProtocol) {
         this.sysLogProtocol = sysLogProtocol;
+    }
+
+    public void setSyslogHost(String syslogHost) {
+        this.sysLogHost = syslogHost;
     }
 
     public int getSyslogPort() {
@@ -141,12 +142,9 @@ public class Configuration {
 
     @Override
     public String toString() {
-        return "Configuration [sysLogHost=" + this.sysLogHost + ", sysLogProtocol="
-            + this.sysLogProtocol
-            + ", sysLogPort=" + this.sysLogPort + ", maxAckValue=" + this.maxAckValue
-            + ", maxAckAge="
-            + this.maxAckAge + ", maxSessionAge=" + this.maxSessionAge + ", maxChannels="
-            + this.maxChannels
+        return "Configuration [sysLogHost=" + this.sysLogHost + ", sysLogProtocol=" + this.sysLogProtocol
+            + ", sysLogPort=" + this.sysLogPort + ", maxAckValue=" + this.maxAckValue + ", maxAckAge="
+            + this.maxAckAge + ", maxSessionAge=" + this.maxSessionAge + ", maxChannels=" + this.maxChannels
             + ", pollTime=" + this.pollTime + ", printTimes=" + this.printTimes + "]";
     }
 

@@ -57,7 +57,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RequestHandler {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandler.class);
     private String xForwardedFor;
     private String xForwardedHost;

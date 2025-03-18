@@ -87,7 +87,11 @@ public class TokenManager {
     // @LogAnnotation(type = LogType.DEBUG)
     public boolean isTokenInBasic(String authHeader) {
 
-        boolean isInBasic = authHeader != null && authHeader.toLowerCase().startsWith("basic");
+        boolean isInBasic = false;
+
+        if (authHeader != null && authHeader.toLowerCase().startsWith("basic")) {
+            isInBasic = true;
+        }
 
         return isInBasic;
     }

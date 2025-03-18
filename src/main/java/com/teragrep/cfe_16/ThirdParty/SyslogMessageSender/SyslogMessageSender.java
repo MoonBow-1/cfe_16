@@ -65,24 +65,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
 /**
- * See <a href="http://tools.ietf.org/html/rfc6587">RFC 6587 - Transmission of Syslog Messages over
- * TCP</a>
+ * See <a href="http://tools.ietf.org/html/rfc6587">RFC 6587 - Transmission of Syslog Messages over TCP</a>
  *
  * @author <a href="mailto:cleclerc@cloudbees.com">Cyrille Le Clerc</a>
  */
-public class SyslogMessageSender extends AbstractSyslogMessageSender implements Closeable {
-
+public class SyslogMessageSender extends AbstractSyslogMessageSender implements Closeable  {
     public final static int SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE = 500;
     public final static int SETTING_MAX_RETRY = 2;
-    /**
-     * Number of exceptions trying to send message.
-     */
-    protected final AtomicInteger trySendErrorCounter = new AtomicInteger();
+
     /**
      * {@link java.net.InetAddress InetAddress} of the remote Syslog Server.
      *
-     * The {@code InetAddress} is refreshed regularly to handle DNS changes (default
-     * {@link #DEFAULT_INET_ADDRESS_TTL_IN_MILLIS})
+     * The {@code InetAddress} is refreshed regularly to handle DNS changes (default {@link #DEFAULT_INET_ADDRESS_TTL_IN_MILLIS})
      *
      * Default value: {@link #DEFAULT_SYSLOG_HOST}
      */
@@ -93,16 +87,21 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
      * Default: {@link #DEFAULT_SYSLOG_PORT}
      */
     protected int syslogServerPort = DEFAULT_SYSLOG_PORT;
+
     private Socket socket;
     private Writer writer;
-    private int socketConnectTimeoutInMillis =
-        SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE;
+    private int socketConnectTimeoutInMillis = SETTING_SOCKET_CONNECT_TIMEOUT_IN_MILLIS_DEFAULT_VALUE;
     private boolean ssl;
     private SSLContext sslContext;
     /**
      * Number of retries to send a message before throwing an exception.
      */
     private int maxRetryCount = SETTING_MAX_RETRY;
+    /**
+     * Number of exceptions trying to send message.
+     */
+    protected final AtomicInteger trySendErrorCounter = new AtomicInteger();
+
     // use the CR LF non transparent framing as described in "3.4.2.  Non-Transparent-Framing"
     private String postfix = "\n";
 
@@ -116,8 +115,7 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
             for (int i = 0; i <= maxRetryCount; i++) {
                 try {
                     if (logger.isLoggable(Level.FINEST)) {
-                        logger.finest(
-                            "Send syslog message " + message.toSyslogMessage(messageFormat));
+                        logger.finest("Send syslog message " + message.toSyslogMessage(messageFormat));
                     }
                     ensureSyslogServerConnection();
                     message.toSyslogMessage(messageFormat, writer);
@@ -190,7 +188,8 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                         SSLSession session = sslSocket.getSession();
                         logger.finer("The Certificates used by peer");
                         for (Certificate certificate : session.getPeerCertificates()) {
-                            if (certificate instanceof X509Certificate x509Certificate) {
+                            if (certificate instanceof X509Certificate) {
+                                X509Certificate x509Certificate = (X509Certificate) certificate;
                                 logger.finer("" + x509Certificate.getSubjectDN());
                             } else {
                                 logger.finer("" + certificate);
@@ -207,8 +206,7 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
                     }
                 }
             } catch (IOException e) {
-                ConnectException ce = new ConnectException(
-                    "Exception connecting to " + inetAddress + ":" + syslogServerPort);
+                ConnectException ce = new ConnectException("Exception connecting to " + inetAddress + ":" + syslogServerPort);
                 ce.initCause(e);
                 throw ce;
             }
@@ -218,16 +216,9 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         }
     }
 
-    public String getSyslogServerHostname() {
-        if (syslogServerHostnameReference == null) {return null;}
-        InetAddress inetAddress = syslogServerHostnameReference.get();
-        return inetAddress == null ? null : inetAddress.getHostName();
-    }
-
     @Override
     public void setSyslogServerHostname(final String syslogServerHostname) {
-        this.syslogServerHostnameReference = new CachingReference<InetAddress>(
-            DEFAULT_INET_ADDRESS_TTL_IN_NANOS) {
+        this.syslogServerHostnameReference = new CachingReference<InetAddress>(DEFAULT_INET_ADDRESS_TTL_IN_NANOS) {
 
             @Override
             protected InetAddress newObject() {
@@ -240,13 +231,20 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         };
     }
 
-    public int getSyslogServerPort() {
-        return syslogServerPort;
-    }
-
     @Override
     public void setSyslogServerPort(int syslogServerPort) {
         this.syslogServerPort = syslogServerPort;
+    }
+
+    public String getSyslogServerHostname() {
+        if (syslogServerHostnameReference == null)
+            return null;
+        InetAddress inetAddress = syslogServerHostnameReference.get();
+        return inetAddress == null ? null : inetAddress.getHostName();
+    }
+
+    public int getSyslogServerPort() {
+        return syslogServerPort;
     }
 
     public boolean isSsl() {
@@ -257,32 +255,32 @@ public class SyslogMessageSender extends AbstractSyslogMessageSender implements 
         this.ssl = ssl;
     }
 
-    public synchronized SSLContext getSSLContext() {
-        return this.sslContext;
-    }
-
     public synchronized void setSSLContext(SSLContext sslContext) {
         this.sslContext = sslContext;
+    }
+
+    public synchronized SSLContext getSSLContext() {
+        return this.sslContext;
     }
 
     public int getSocketConnectTimeoutInMillis() {
         return socketConnectTimeoutInMillis;
     }
 
-    public void setSocketConnectTimeoutInMillis(int socketConnectTimeoutInMillis) {
-        this.socketConnectTimeoutInMillis = socketConnectTimeoutInMillis;
-    }
-
     public int getMaxRetryCount() {
         return maxRetryCount;
     }
 
-    public void setMaxRetryCount(int maxRetryCount) {
-        this.maxRetryCount = maxRetryCount;
-    }
-
     public int getTrySendErrorCounter() {
         return trySendErrorCounter.get();
+    }
+
+    public void setSocketConnectTimeoutInMillis(int socketConnectTimeoutInMillis) {
+        this.socketConnectTimeoutInMillis = socketConnectTimeoutInMillis;
+    }
+
+    public void setMaxRetryCount(int maxRetryCount) {
+        this.maxRetryCount = maxRetryCount;
     }
 
     public synchronized void setPostfix(String postfix) {

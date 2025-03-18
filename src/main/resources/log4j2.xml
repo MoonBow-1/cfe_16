@@ -49,18 +49,18 @@
   <Appenders>
     <Console name="console" target="SYSTEM_OUT">
       <PatternLayout
-        pattern="[%-5level] %X{sessionId} %d{yyyy-MM-dd HH:mm:ss} %X{username} :  %msg%n"/>
+        pattern="[%-5level] %X{sessionId} %d{yyyy-MM-dd HH:mm:ss} %X{username} :  %msg%n" />
     </Console>
     <Console name="console_aspect" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %msg%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %msg%n" />
     </Console>
   </Appenders>
   <Loggers>
-    <Logger additivity="false" name="ASPECT_LOGGER">
-      <AppenderRef ref="console_aspect"/>
-    </Logger>
-    <Root additivity="false" level="info">
-      <AppenderRef ref="console"/>
+    <Root level="info" additivity="false">
+      <AppenderRef ref="console" />
     </Root>
+    <Logger name="ASPECT_LOGGER" additivity="false">
+      <AppenderRef ref="console_aspect" />
+    </Logger>
   </Loggers>
 </Configuration>

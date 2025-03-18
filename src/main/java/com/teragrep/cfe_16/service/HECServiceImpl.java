@@ -66,29 +66,34 @@ import org.springframework.stereotype.Service;
 
 /**
  * Implementation of the REST Service back end.
+ *
  */
 @Service
 public class HECServiceImpl implements HECService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(HECServiceImpl.class);
-    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private AckManager ackManager;
+
     @Autowired
     private SessionManager sessionManager;
+
     @Autowired
     private TokenManager tokenManager;
+
     @Autowired
     private EventManager eventManager;
+
     @Autowired
     private RequestHandler requestHandler;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public HECServiceImpl() {
     }
 
     @Override
     // @LogAnnotation(type = LogType.METRIC_COUNTER)
-    public synchronized ObjectNode sendEvents(HttpServletRequest request,
+    public ObjectNode sendEvents(HttpServletRequest request,
         String channel,
         String eventInJson) {
         LOGGER.debug("Sending events to channel <{}>", channel);
@@ -160,8 +165,7 @@ public class HECServiceImpl implements HECService {
 
         // channel is required
         if (channel == null) {
-            throw new ChannelNotProvidedException(
-                "Channel must be provided when requesting ack statuses");
+            throw new ChannelNotProvidedException("Channel must be provided when requesting ack statuses");
         }
 
         // session is also required
@@ -177,8 +181,7 @@ public class HECServiceImpl implements HECService {
         session.touch();
 
         ObjectNode responseNode = objectMapper.createObjectNode();
-        JsonNode requestedAckStatuses = this.ackManager.getRequestedAckStatuses(authToken, channel,
-            requestedAcksInJson);
+        JsonNode requestedAckStatuses = this.ackManager.getRequestedAckStatuses(authToken, channel, requestedAcksInJson);
         responseNode.put("acks", requestedAckStatuses);
         return responseNode;
     }

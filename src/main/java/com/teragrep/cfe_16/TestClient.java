@@ -56,105 +56,30 @@ import java.net.SocketException;
 
 /**
  * A multithreaded load test client for the cfe_16 server.
+ *
  */
 public class TestClient implements Runnable {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TestClient.class);
     /**
      * How many loops a single thread does.
      */
-    private final int n;
+    private int n;
 
     /**
      * Hostname or IP address of the cfe_16 server.
      */
-    private final String host;
+    private String host;
 
     /**
      * TCP port of the cfe_16 server.
      */
-    private final int port;
+    private int port;
 
     public TestClient(int n, String host, int port) throws IOException {
         this.n = n;
         this.host = host;
         this.port = port;
-        LOGGER.info("Initialized TestClient, sending <[{}]> messages to <[{}]>:<[{}]>", n, host,
-            port);
-    }
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        if (args.length >= 4) {
-            String host = args[0];
-            int port = Integer.valueOf(args[1]);
-            LOGGER.info("Connecting to <[{}]>:<[{}]>", host, port);
-            int numberOfThreads = Integer.valueOf(args[2]);
-            int numberOfLoops = Integer.valueOf(args[3]);
-            TestClient[] testClients = createTestClients(host, port, numberOfThreads,
-                numberOfLoops);
-            Thread[] threads = createThreads(numberOfThreads, testClients);
-            long t1 = System.currentTimeMillis();
-            startThreads(numberOfThreads, threads);
-            waitThreadsToFinish(numberOfThreads, threads);
-            long t2 = System.currentTimeMillis();
-            long dt = t2 - t1;
-            int numberOfRequests = numberOfThreads * numberOfLoops;
-            double millisecsPerRequest = (double) dt / (double) numberOfRequests;
-            double throughput = 1000.0 / millisecsPerRequest;
-            LOGGER.info(
-                "Did <[{}]> requests in <{}> milliseconds, that is <{}> ms/req., which is <{}> "
-                    + "transactions/sec.",
-                numberOfRequests, dt, millisecsPerRequest, throughput);
-            FileOutputStream fileOutputStream = new FileOutputStream("stats.csv", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(fileOutputStream));
-            String line = numberOfThreads + "," + millisecsPerRequest + "," + throughput + "\n";
-            bufferedWriter.write(line);
-            bufferedWriter.close();
-            fileOutputStream.close();
-        } else {
-            LOGGER.error("Usage: Usage: <host> <port> <n threads> <n loops>");
-        }
-    }
-
-    private static void waitThreadsToFinish(int numberOfThreads, Thread[] threads)
-        throws InterruptedException {
-        for (int i = 0; i < numberOfThreads; i++) {
-            LOGGER.debug("Waiting for thread <{}> out of <{}> threads to finish", i,
-                numberOfThreads);
-            threads[i].join();
-            LOGGER.debug("Thread <[{}]> of <[{}]> threads finished", i, numberOfThreads);
-        }
-    }
-
-    private static void startThreads(int numberOfThreads, Thread[] threads) {
-        LOGGER.debug("Starting <[{}]> threads", numberOfThreads);
-        for (int i = 0; i < numberOfThreads; i++) {
-            LOGGER.debug("Starting thread <{}> of <{}>", i, numberOfThreads);
-            threads[i].start();
-        }
-    }
-
-    private static Thread[] createThreads(int numberOfThreads, TestClient[] testClients) {
-        LOGGER.debug("Creating <[{}]> threads", numberOfThreads);
-        Thread[] threads = new Thread[numberOfThreads];
-        for (int i = 0; i < numberOfThreads; i++) {
-            LOGGER.debug("Creating thread <{}> of <[{}]>", i, numberOfThreads);
-            threads[i] = new Thread(testClients[i]);
-        }
-        return threads;
-    }
-
-    private static TestClient[] createTestClients(String host, int port, int numberOfThreads,
-        int numberOfLoops)
-        throws IOException {
-        LOGGER.debug("Creating <[{}]> test clients", numberOfThreads);
-        TestClient[] testClients = new TestClient[numberOfThreads];
-        for (int i = 0; i < numberOfThreads; i++) {
-            LOGGER.debug("Creating testClient <{}> of <[{}]>", i, numberOfThreads);
-            testClients[i] = new TestClient(numberOfLoops, host, port);
-        }
-        return testClients;
+        LOGGER.info("Initialized TestClient, sending <[{}]> messages to <[{}]>:<[{}]>", n, host, port);
     }
 
     public void run() {
@@ -188,54 +113,44 @@ public class TestClient implements Runnable {
     private Socket testGetAcksWithInvalidChannel(Socket socket) {
         String path = "/services/collector/ack?channel=CHANNEL_22222";
         String request = "{\"acks\": [1,3,4]}";
-        String expectedRegex = "\\{\"text\":\"Invalid data channel\",\"code\":11,"
-            + "\"invalid-event-number\":0\\}";
+        String expectedRegex = "\\{\"text\":\"Invalid data channel\",\"code\":11,\"invalid-event-number\":0\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_BAD_REQUEST);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_BAD_REQUEST);
         return socket;
     }
 
     private Socket testGetAcksWithoutChannel(Socket socket) {
         String path = "/services/collector/ack";
         String request = "{\"acks\": [1,3,4]}";
-        String expectedRegex = "\\{\"text\":\"Data channel is missing\",\"code\":10,"
-            + "\"invalid-event-number\":0\\}";
+        String expectedRegex = "\\{\"text\":\"Data channel is missing\",\"code\":10,\"invalid-event-number\":0\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_BAD_REQUEST);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_BAD_REQUEST);
         return socket;
     }
 
     private Socket testSendEventWithBlankEventField(Socket socket) {
         String path = "/services/collector?channel=00872DC6-AC83-4EDE-8AFE-8413C3825C4C";
         String request = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\"}";
-        String expectedRegex = "\\{\"text\":\"Event field cannot be blank\",\"code\":13,"
-            + "\"invalid-event-number\":0\\}";
+        String expectedRegex = "\\{\"text\":\"Event field cannot be blank\",\"code\":13,\"invalid-event-number\":0\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_BAD_REQUEST);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_BAD_REQUEST);
         return socket;
     }
 
     private Socket testSendEventWithoutEventField(Socket socket) {
         String path = "/services/collector?channel=00872DC6-AC83-4EDE-8AFE-8413C3825C4C";
         String request = "{\"sourcetype\": \"mysourcetype\"}";
-        String expectedRegex = "\\{\"text\":\"Event field is required\",\"code\":12,"
-            + "\"invalid-event-number\":0\\}";
+        String expectedRegex = "\\{\"text\":\"Event field is required\",\"code\":12,\"invalid-event-number\":0\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_BAD_REQUEST);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_BAD_REQUEST);
         return socket;
     }
 
     private Socket testSendEventWithoutAuthorization(Socket socket) {
         String path = "/services/collector?channel=00872DC6-AC83-4EDE-8AFE-8413C3825C4C";
         String request = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\"}}";
-        String expectedRegex = "\\{\"text\":\"Token is required\",\"code\":2,"
-            + "\"invalid-event-number\":0\\}";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, null,
-            HttpURLConnection.HTTP_UNAUTHORIZED);
+        String expectedRegex = "\\{\"text\":\"Token is required\",\"code\":2,\"invalid-event-number\":0\\}";
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, null, HttpURLConnection.HTTP_UNAUTHORIZED);
         return socket;
     }
 
@@ -244,21 +159,16 @@ public class TestClient implements Runnable {
         String request = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\"}";
         String expectedRegex = "\\{\"text\":\"Success\",\"code\":0,\"ackID\":([0-9])+\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_OK);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_OK);
         return socket;
     }
 
     private Socket testSendEvent(Socket socket) {
         String path = "/services/collector";
-        String request = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", "
-            + "\"event\": {\"message\":\"Access log test message\"}} {\"sourcetype\":\"access\", "
-            + "\"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test "
-            + "message 2\"}}";
+        String request = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message\"}} {\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 2\"}}";
         String expectedRegex = "\\{\"text\":\"Success\",\"code\":0\\}";
         String authorization = "AUTH_TOKEN_11111";
-        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization,
-            HttpURLConnection.HTTP_OK);
+        socket = doRequestAndVerifyReply(socket, path, expectedRegex, request, authorization, HttpURLConnection.HTTP_OK);
         return socket;
     }
 
@@ -323,7 +233,8 @@ public class TestClient implements Runnable {
     }
 
     /**
-     * Validates the response body line against the given regural expression.
+     * Validates the response body line against the given
+     * regural expression.
      *
      * @param expectedRegex
      * @param responseBody
@@ -335,7 +246,8 @@ public class TestClient implements Runnable {
     }
 
     /**
-     * Verifies that the HTTP reply status code was what it was supposed to me.
+     * Verifies that the HTTP reply status code was what it was
+     * supposed to me.
      *
      * @param expectedHttpStatusCode
      * @param line
@@ -349,8 +261,9 @@ public class TestClient implements Runnable {
     }
 
     /**
-     * Advances buffered reader through HTTP headers. If "Connection: close" header is seen, the
-     * socket is closed and a new one is created.
+     * Advances buffered reader through HTTP headers.
+     * If "Connection: close" header is seen, the socket
+     * is closed and a new one is created.
      *
      * @param socket
      * @param bufferedReader
@@ -374,7 +287,8 @@ public class TestClient implements Runnable {
     }
 
     /**
-     * Reads the reply line from the servere. Chunked transfer is assumed.
+     * Reads the reply line from the servere. Chunked transfer
+     * is assumed.
      *
      * @param bufferedReader
      * @return
@@ -390,13 +304,13 @@ public class TestClient implements Runnable {
     }
 
     private BufferedReader getReader(Socket socket) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(
-            new InputStreamReader(socket.getInputStream()));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         return bufferedReader;
     }
 
     /**
-     * Checks that the TCP connection is open, otherwis a new connection is created and returned.
+     * Checks that the TCP connection is open, otherwis a new
+     * connection is created and returned.
      *
      * @param socket
      * @return
@@ -441,5 +355,71 @@ public class TestClient implements Runnable {
     private void cleanup(Socket socket, BufferedReader bufferedReader) throws IOException {
         bufferedReader.close();
         socket.close();
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        if (args.length >= 4) {
+            String host = args[0];
+            int port = Integer.valueOf(args[1]);
+            LOGGER.info("Connecting to <[{}]>:<[{}]>", host, port);
+            int numberOfThreads = Integer.valueOf(args[2]);
+            int numberOfLoops = Integer.valueOf(args[3]);
+            TestClient[] testClients = createTestClients(host, port, numberOfThreads, numberOfLoops);
+            Thread[] threads = createThreads(numberOfThreads, testClients);
+            long t1 = System.currentTimeMillis();
+            startThreads(numberOfThreads, threads);
+            waitThreadsToFinish(numberOfThreads, threads);
+            long t2 = System.currentTimeMillis();
+            long dt = t2 - t1;
+            int numberOfRequests = numberOfThreads * numberOfLoops;
+            double millisecsPerRequest = (double)dt / (double)numberOfRequests;
+            double throughput = 1000.0 / millisecsPerRequest;
+            LOGGER.info("Did <[{}]> requests in <{}> milliseconds, that is <{}> ms/req., which is <{}> transactions/sec.", numberOfRequests, dt, millisecsPerRequest, throughput);
+            FileOutputStream fileOutputStream = new FileOutputStream("stats.csv", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            String line = numberOfThreads + "," + millisecsPerRequest + "," + throughput + "\n";
+            bufferedWriter.write(line);
+            bufferedWriter.close();
+            fileOutputStream.close();
+        } else {
+            LOGGER.error("Usage: Usage: <host> <port> <n threads> <n loops>");
+        }
+    }
+
+    private static void waitThreadsToFinish(int numberOfThreads, Thread[] threads) throws InterruptedException {
+        for (int i = 0; i < numberOfThreads; i++) {
+            LOGGER.debug("Waiting for thread <{}> out of <{}> threads to finish", i, numberOfThreads);
+            threads[i].join();
+            LOGGER.debug("Thread <[{}]> of <[{}]> threads finished", i, numberOfThreads);
+        }
+    }
+
+    private static void startThreads(int numberOfThreads, Thread[] threads) {
+        LOGGER.debug("Starting <[{}]> threads", numberOfThreads);
+        for (int i = 0; i < numberOfThreads; i++) {
+            LOGGER.debug("Starting thread <{}> of <{}>", i, numberOfThreads);
+            threads[i].start();
+        }
+    }
+
+    private static Thread[] createThreads(int numberOfThreads, TestClient[] testClients) {
+        LOGGER.debug("Creating <[{}]> threads", numberOfThreads);
+        Thread[] threads = new Thread[numberOfThreads];
+        for (int i = 0; i < numberOfThreads; i++) {
+            LOGGER.debug("Creating thread <{}> of <[{}]>", i, numberOfThreads);
+            threads[i] = new Thread(testClients[i]);
+        }
+        return threads;
+    }
+
+    private static TestClient[] createTestClients(String host, int port, int numberOfThreads, int numberOfLoops)
+        throws IOException {
+        LOGGER.debug("Creating <[{}]> test clients", numberOfThreads);
+        TestClient[] testClients = new TestClient[numberOfThreads];
+        for (int i = 0; i < numberOfThreads; i++) {
+            LOGGER.debug("Creating testClient <{}> of <[{}]>", i, numberOfThreads);
+            testClients[i] = new TestClient(numberOfLoops, host, port);
+        }
+        return testClients;
     }
 }

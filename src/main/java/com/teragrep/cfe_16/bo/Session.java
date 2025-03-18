@@ -55,8 +55,9 @@ import java.util.Set;
 
 
 /**
- * A Session keeps track of channels that are contained inside one Session. This class is not
- * thread-safe.
+ * A Session keeps track of channels that are contained
+ * inside one Session. This class is not thread-safe.
+ *
  */
 public class Session {
 
@@ -65,12 +66,12 @@ public class Session {
     /**
      * Channels of this Session object.
      */
-    private final Set<String> channels;
+    private Set<String> channels;
 
     /**
      * Authentication key of this Session.
      */
-    private final String authenticationToken;
+    private String authenticationToken;
 
     private long lastTouchedTimestamp;
 
@@ -110,26 +111,30 @@ public class Session {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.authenticationToken == null) ? 0
-            : this.authenticationToken.hashCode());
+        result = prime * result + ((this.authenticationToken == null) ? 0 : this.authenticationToken.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {return true;}
-        if (obj == null) {return false;}
-        if (getClass() != obj.getClass()) {return false;}
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Session other = (Session) obj;
         if (this.authenticationToken == null) {
-            return other.authenticationToken == null;
-        } else {return this.authenticationToken.equals(other.authenticationToken);}
+            if (other.authenticationToken != null)
+                return false;
+        } else if (!this.authenticationToken.equals(other.authenticationToken))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "channels=" + this.channels + ", authenticationToken=" + this.authenticationToken
-            + "]";
+        return "channels=" + this.channels + ", authenticationToken=" + this.authenticationToken + "]";
     }
 
     public void touch() {

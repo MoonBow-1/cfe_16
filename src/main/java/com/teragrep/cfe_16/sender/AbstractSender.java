@@ -53,6 +53,7 @@ import java.io.IOException;
 
 /**
  * An abstract sender class for sending batch messages.
+ *
  */
 public abstract class AbstractSender extends AbstractSyslogMessageSender {
 

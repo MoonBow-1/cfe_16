@@ -65,8 +65,7 @@ public class AuthenticationTokenMissingException extends RuntimeException {
         super(message, cause);
     }
 
-    public AuthenticationTokenMissingException(String message, Throwable cause,
-        boolean enableSuppression,
+    public AuthenticationTokenMissingException(String message, Throwable cause, boolean enableSuppression,
         boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }

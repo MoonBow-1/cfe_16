@@ -52,11 +52,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class SenderFactory {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SenderFactory.class);
-
-    public static AbstractSender createSender(String type, String hostname, int port)
-        throws IOException {
+    public static AbstractSender createSender(String type, String hostname, int port) throws IOException {
         LOGGER.debug("Creating sender for type <[{}]> to <[{}]>:<[{}]>", type, hostname, port);
         if (type.equalsIgnoreCase("UDP")) {
             return new UdpSender(hostname, port);

@@ -75,12 +75,9 @@ public class TokenManagerTests {
         requestWithHttpHeaderAuth.addHeader("Authorization", authToken);
         requestWithBasicAuth.addHeader("Authorization", "Basic x:" + authToken);
 
-        assertFalse("Token should be found from the request",
-            manager.tokenIsMissing(requestWithHttpHeaderAuth));
-        assertFalse("Token should be found from the request",
-            manager.tokenIsMissing(requestWithBasicAuth));
-        assertTrue("Token should not be found from the request",
-            manager.tokenIsMissing(requestWithoutAuth));
+        assertFalse("Token should be found from the request", manager.tokenIsMissing(requestWithHttpHeaderAuth));
+        assertFalse("Token should be found from the request", manager.tokenIsMissing(requestWithBasicAuth));
+        assertTrue("Token should not be found from the request", manager.tokenIsMissing(requestWithoutAuth));
     }
 
     /*
@@ -93,11 +90,8 @@ public class TokenManagerTests {
         String authToken = "AUTH_TOKEN_11111";
         String basicAuthHeader = "Basic x:" + authToken;
 
-        assertTrue("Authorization header should be in basic format",
-            manager.isTokenInBasic(basicAuthHeader));
-        assertFalse(
-            "Authorization should not be in basic format when querying with only the "
-                + "authentication token.",
+        assertTrue("Authorization header should be in basic format", manager.isTokenInBasic(basicAuthHeader));
+        assertFalse("Authorization should not be in basic format when querying with only the authentication token.",
             manager.isTokenInBasic(authToken));
     }
 
@@ -109,13 +103,10 @@ public class TokenManagerTests {
     public void getTokenFromBasicAuthTest() {
         String authToken = "AUTH_TOKEN_11111";
         String basicAuthCredentials = "x:" + authToken;
-        String credentialsEncoded = Base64.getEncoder()
-            .encodeToString(basicAuthCredentials.getBytes());
+        String credentialsEncoded = Base64.getEncoder().encodeToString(basicAuthCredentials.getBytes());
         String basicAuthHeader = "Basic " + credentialsEncoded;
 
-        assertEquals(
-            "Method should return the authentication token extracted from the Basic "
-                + "Authentication format",
+        assertEquals("Method should return the authentication token extracted from the Basic Authentication format",
             authToken, manager.getTokenFromBasic(basicAuthHeader));
     }
 
