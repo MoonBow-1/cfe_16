@@ -322,13 +322,7 @@ class TimestampedHttpEventDataTest {
             + "\"sourcetype\":\"mysourcetype\", \"time\": 1433188255252321}";
         TimestampedHttpEventData eventData = new TimestampedHttpEventData();
 
-        JsonNode jsonNode;
-
-        try {
-            jsonNode = objectMapper.readTree(content);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
 
         final TimestampedHttpEventData httpEventDataWithHandledTime = eventData.handleTime(
             jsonNode,
