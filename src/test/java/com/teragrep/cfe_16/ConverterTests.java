@@ -356,7 +356,7 @@ public class ConverterTests {
                 "SDParam '" + returnedSDParams.get(i) + "' should not be in returned SDElement.",
                 supposedSDParams.contains(returnedSDParams.get(i)));
         }
-        Assertions.assertEquals(returnedSDParams.size(), loopedReturnedSDParamsAssertions1, "All returnedSDParams were looped through");
+        Assertions.assertEquals(returnedSDParams.size(), loopedReturnedSDParamsAssertions1, "All returnedSDParams were NOT looped through");
 
         // Goes through all supposed SDParams and checks that they are all found in
         // returned SDParams
@@ -366,7 +366,7 @@ public class ConverterTests {
             assertTrue("SDParam '" + supposedSDParams.get(i) + "' should be in returned SDElement.",
                 returnedSDParams.contains(supposedSDParams.get(i)));
         }
-        Assertions.assertEquals(supposedSDParams.size(), loopedSupposedSDParamsAssertions1, "All supposedSDParams were looped through");
+        Assertions.assertEquals(supposedSDParams.size(), loopedSupposedSDParamsAssertions1, "All supposedSDParams were NOT looped through");
 
         // Create new empty ArrayList that we can save SDParams from the next SDElement
         supposedSDParams = new ArrayList<SDParam>();
@@ -400,7 +400,7 @@ public class ConverterTests {
                 "SDParam '" + returnedSDParams.get(i) + "' should not be in returned SDElement.",
                 supposedSDParams.contains(returnedSDParams.get(i)));
         }
-        Assertions.assertEquals(returnedSDParams.size(), loopedReturnedSDParamsAssertions2, "All returnedSDParams were looped through");
+        Assertions.assertEquals(returnedSDParams.size(), loopedReturnedSDParamsAssertions2, "All returnedSDParams were NOT looped through");
 
         // Goes through all supposed SDParams and checks that they are all found in
         // returned SDParams
@@ -410,6 +410,6 @@ public class ConverterTests {
             assertTrue("SDParam '" + supposedSDParams.get(i) + "' should be in returned SDElement.",
                 returnedSDParams.contains(supposedSDParams.get(i)));
         }
-        Assertions.assertEquals(supposedSDParams.size(), loopedSupposedSDParamsAssertions2, "All supposedSDParams were looped through");
+        Assertions.assertEquals(supposedSDParams.size(), loopedSupposedSDParamsAssertions2, "All supposedSDParams were NOT looped through");
     }
 }
