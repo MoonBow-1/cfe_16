@@ -60,10 +60,8 @@ public final class EpochTimeString {
     }
 
     /**
-     * Converts the given time stamp into epoch milliseconds. Takes a HttpEventData object as a
-     * parameter. Gets the time from the variable set in the HttpEventData object. If the time value
-     * in the object has 13 digits, it means that time has been already given in epoch
-     * milliseconds.
+     * Converts the given time stamp into epoch milliseconds. If the time value
+     * in the object has 13 digits, it means that time has been already given in epoch milliseconds.
      */
     public long asEpochMillis() {
         if (timeString.length() >= 10 && timeString.length() < 13) {
