@@ -45,6 +45,7 @@
  */
 package com.teragrep.cfe_16.config;
 
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +54,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class Configuration {
+public final class Configuration {
 
     @Value("${syslog.server.host}")
     private String sysLogHost;
@@ -146,4 +147,27 @@ public class Configuration {
                 + ", pollTime=" + this.pollTime + ", printTimes=" + this.printTimes + "]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Configuration that = (Configuration) o;
+        return sysLogPort == that.sysLogPort
+                && getMaxAckValue() == that.getMaxAckValue() && getMaxAckAge() == that.getMaxAckAge()
+                && getMaxSessionAge() == that.getMaxSessionAge() && getMaxChannels() == that.getMaxChannels()
+                && getPollTime() == that.getPollTime() && getPrintTimes() == that.getPrintTimes() && Objects
+                        .equals(sysLogHost, that.sysLogHost)
+                && Objects.equals(getSysLogProtocol(), that.getSysLogProtocol());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(
+                        sysLogHost, sysLogProtocol, sysLogPort, maxAckValue, maxAckAge, maxSessionAge, maxChannels,
+                        pollTime, printTimes
+                );
+    }
 }

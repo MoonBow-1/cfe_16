@@ -51,8 +51,11 @@ import com.teragrep.rlp_03.ServerFactory;
 import com.teragrep.rlp_03.config.Config;
 import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
 import com.teragrep.rlp_03.delegate.FrameDelegate;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +93,7 @@ public class ConfigurationIT {
     }
 
     @AfterAll
-    public static void cleanup() throws InterruptedException {
+    public static void cleanup() {
         server.stop();
     }
 
@@ -101,5 +104,11 @@ public class ConfigurationIT {
         LOGGER.debug(configuration.toString());
 
         assertEquals(expected, configuration.toString());
+    }
+
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(Configuration.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }
