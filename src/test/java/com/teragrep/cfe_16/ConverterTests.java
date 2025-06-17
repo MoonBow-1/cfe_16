@@ -48,7 +48,10 @@ package com.teragrep.cfe_16;
 import com.cloudbees.syslog.*;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -408,5 +411,11 @@ public class ConverterTests {
                     "SDParam '" + supposedSDParams.get(i) + "' should be in returned SDElement.", returnedSDParams.contains(supposedSDParams.get(i))
             );
         }
+    }
+
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(Converter.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }

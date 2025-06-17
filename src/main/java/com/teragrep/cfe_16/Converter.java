@@ -51,6 +51,7 @@ import com.cloudbees.syslog.Severity;
 import com.cloudbees.syslog.SyslogMessage;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -62,7 +63,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class Converter {
+public final class Converter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Converter.class);
     private Severity severity;
@@ -71,7 +72,11 @@ public class Converter {
     private SDElement metadataSDE;
     private SDElement headerSDE;
 
-    private final String hostName = "cfe-16";
+    private final String hostName;
+
+    public Converter() {
+        this.hostName = "cfe-16";
+    }
 
     public SyslogMessage httpToSyslog(HttpEventData httpEventData, HeaderInfo headerInfo) {
 
@@ -197,5 +202,22 @@ public class Converter {
             LOGGER.debug("Adding X-Forwarded-Proto to headerSDE");
             headerSDE.addSDParam("X-Forwarded-Proto", headerInfo.getxForwardedProto());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Converter converter = (Converter) o;
+        return Objects.equals(severity, converter.severity) && Objects.equals(facility, converter.facility) && Objects
+                .equals(metadataSDE, converter.metadataSDE) && Objects.equals(headerSDE, converter.headerSDE)
+                && Objects.equals(hostName, converter.hostName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(severity, facility, metadataSDE, headerSDE, hostName);
     }
 }
