@@ -52,8 +52,11 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.ServerIsBusyException;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -345,5 +348,11 @@ public class AckManagerIT {
             ackManager.incrementAckValue(this.authToken1, this.channel1);
             ackManager.addAck(this.authToken1, this.channel1, new Ack(ackId, false));
         });
+    }
+
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(AckManager.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }

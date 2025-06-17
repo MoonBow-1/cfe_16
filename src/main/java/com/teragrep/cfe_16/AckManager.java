@@ -51,6 +51,8 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.exceptionhandling.ServerIsBusyException;
+import java.util.Objects;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,23 +72,23 @@ import java.util.Map;
  *
  */
 @Component
-public class AckManager implements Runnable, LifeCycle {
+public final class AckManager implements Runnable, LifeCycle {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AckManager.class);
 
     /**
-     * A class that encapsulates state of individual channels regarding to ACKs.
+     * A class that encapsulates state of individual channels regarding ACKs.
      */
-    private class State {
+    private static final class State {
 
         private int currentAckValue;
         private Ack ackToCompare;
-        private Map<Integer, Ack> ackMap;
+        private final Map<Integer, Ack> ackMap;
 
         public State() {
             this.currentAckValue = 0;
             this.ackToCompare = new Ack();
-            this.ackMap = new HashMap<Integer, Ack>();
+            this.ackMap = new HashMap<>();
         }
 
         public int getCurrentAckValue() {
@@ -139,7 +141,7 @@ public class AckManager implements Runnable, LifeCycle {
      */
     public AckManager() {
         this.objectMapper = new ObjectMapper();
-        this.ackStates = Collections.synchronizedMap(new HashMap<String, State>());
+        this.ackStates = Collections.synchronizedMap(new HashMap<>());
     }
 
     @Override
@@ -426,14 +428,17 @@ public class AckManager implements Runnable, LifeCycle {
      * @return
      */
     public int getAckListSize(String authToken, String channel) {
-        String key = authToken + channel;
-        State state = this.ackStates.get(key);
-        if (state == null) {
-            throw new InternalServerErrorException("No State for key " + key);
+        String mapKey = authToken + channel;
+
+        synchronized (ackStates) {
+            final Set<String> keySet = this.ackStates.keySet();
+            for (String key : keySet) {
+                if (key.equals(mapKey)) {
+                    return ackStates.get(key).getAckMap().size();
+                }
+            }
         }
-        synchronized (state) {
-            return state.getAckMap().size();
-        }
+        throw new InternalServerErrorException("No State for key " + mapKey);
     }
 
     /**
@@ -443,14 +448,17 @@ public class AckManager implements Runnable, LifeCycle {
      * @return
      */
     public Map<Integer, Ack> getAckList(String authToken, String channel) {
-        String key = authToken + channel;
-        State state = this.ackStates.get(key);
-        if (state == null) {
-            throw new InternalServerErrorException("No State for key " + key);
+        String mapKey = authToken + channel;
+
+        synchronized (ackStates) {
+            final Set<String> keySet = this.ackStates.keySet();
+            for (String key : keySet) {
+                if (key.equals(mapKey)) {
+                    return ackStates.get(key).getAckMap();
+                }
+            }
         }
-        synchronized (state) {
-            return state.getAckMap();
-        }
+        throw new InternalServerErrorException("No State for key " + mapKey);
     }
 
     /**
@@ -466,5 +474,21 @@ public class AckManager implements Runnable, LifeCycle {
         synchronized (state) {
             return state.getCurrentAckValue();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        AckManager that = (AckManager) o;
+        return Objects.equals(objectMapper, that.objectMapper) && Objects.equals(ackStates, that.ackStates) && Objects
+                .equals(cleanerThread, that.cleanerThread) && Objects.equals(configuration, that.configuration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectMapper, ackStates, cleanerThread, configuration);
     }
 }
