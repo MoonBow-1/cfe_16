@@ -45,71 +45,16 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import java.util.Objects;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-/*
- * Saves the status of the sent events. 
- * If the Ack is acknowledged, the event is sent successfully.
- *
- */
-public final class Ack {
+class AckTest {
 
-    private int id;
-    private boolean acknowledged;
-    private long lastUsedTimestampInMilliseconds;
-
-    public Ack() {
-        this(0, false);
-    }
-
-    public Ack(int id, boolean acknowledged) {
-        this.id = id;
-        this.acknowledged = acknowledged;
-        this.lastUsedTimestampInMilliseconds = System.currentTimeMillis();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isAcknowledged() {
-        return acknowledged;
-    }
-
-    public void acknowledge() {
-        this.acknowledged = true;
-    }
-
-    @Override
-    public String toString() {
-        return "Ack [id=" + id + ", acknowledged=" + acknowledged + "]";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Ack ack = (Ack) o;
-        return id == ack.id && acknowledged == ack.acknowledged
-                && lastUsedTimestampInMilliseconds == ack.lastUsedTimestampInMilliseconds;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, acknowledged, lastUsedTimestampInMilliseconds);
-    }
-
-    public void touch() {
-        this.lastUsedTimestampInMilliseconds = System.currentTimeMillis();
-    }
-
-    public long getLastUsedTimestamp() {
-        return this.lastUsedTimestampInMilliseconds;
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(Ack.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }
