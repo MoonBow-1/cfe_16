@@ -56,6 +56,7 @@ import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ import org.springframework.stereotype.Service;
  * Implementation of the REST Service back end.
  */
 @Service
-public class HECServiceImpl implements HECService {
+public final class HECServiceImpl implements HECService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HECServiceImpl.class);
     @Autowired
@@ -85,9 +86,10 @@ public class HECServiceImpl implements HECService {
     @Autowired
     private RequestHandler requestHandler;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     public HECServiceImpl() {
+        this.objectMapper = new ObjectMapper();
     }
 
     @Override
@@ -188,5 +190,21 @@ public class HECServiceImpl implements HECService {
             return new ResponseEntity<String>("Invalid HEC token", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>("HEC is available and accepting input", HttpStatus.OK);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        HECServiceImpl that = (HECServiceImpl) o;
+        return Objects.equals(ackManager, that.ackManager)
+                && Objects.equals(sessionManager, that.sessionManager) && Objects.equals(tokenManager, that.tokenManager) && Objects.equals(eventManager, that.eventManager) && Objects.equals(requestHandler, that.requestHandler) && Objects.equals(objectMapper, that.objectMapper);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ackManager, sessionManager, tokenManager, eventManager, requestHandler, objectMapper);
     }
 }
