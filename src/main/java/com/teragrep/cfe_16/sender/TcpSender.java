@@ -47,15 +47,16 @@ package com.teragrep.cfe_16.sender;
 
 import com.cloudbees.syslog.SyslogMessage;
 import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TcpSender extends AbstractSender {
+public final class TcpSender extends AbstractSender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TcpSender.class);
-    private TcpSyslogMessageSender sender;
+    private final TcpSyslogMessageSender sender;
 
     public TcpSender(String hostname, int port) {
         super(hostname, port);
@@ -87,5 +88,26 @@ public class TcpSender extends AbstractSender {
     public void setSsl(boolean ssl) {
         LOGGER.debug("Set Ssl to <{}>", ssl);
         this.sender.setSsl(ssl);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TcpSender that = (TcpSender) o;
+        return Objects.equals(defaultAppName, that.defaultAppName) && Objects
+                .equals(defaultFacility, that.defaultFacility)
+                && Objects.equals(defaultMessageHostname, that.defaultMessageHostname) && Objects.equals(defaultSeverity, that.defaultSeverity) && Objects.equals(messageFormat, that.messageFormat) && Objects.equals(sendCounter, that.sendCounter) && Objects.equals(sendDurationInNanosCounter, that.sendDurationInNanosCounter) && Objects.equals(sendErrorCounter, that.sendErrorCounter) && Objects.equals(hostname, that.hostname) && Objects.equals(port, that.port) && Objects.equals(sender, that.sender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(
+                        defaultAppName, defaultFacility, defaultMessageHostname, defaultSeverity, messageFormat,
+                        sendCounter, sendDurationInNanosCounter, sendErrorCounter, hostname, port, sender
+                );
     }
 }
