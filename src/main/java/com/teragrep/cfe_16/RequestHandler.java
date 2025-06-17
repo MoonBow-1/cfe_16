@@ -51,23 +51,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/**
- *
- */
 @Component
-public class RequestHandler {
+public final class RequestHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandler.class);
-    private String xForwardedFor;
-    private String xForwardedHost;
-    private String xForwardedProto;
 
     public HeaderInfo createHeaderInfoObject(HttpServletRequest request) {
         LOGGER.debug("Creating new Header Info");
-        HeaderInfo headerInfo = new HeaderInfo();
-        xForwardedFor = request.getHeader("X-Forwarded-For");
-        xForwardedHost = request.getHeader("X-Forwarded-Host");
-        xForwardedProto = request.getHeader("X-Forwarded-Proto");
+        final HeaderInfo headerInfo = new HeaderInfo();
+        final String xForwardedFor = request.getHeader("X-Forwarded-For");
+        final String xForwardedHost = request.getHeader("X-Forwarded-Host");
+        final String xForwardedProto = request.getHeader("X-Forwarded-Proto");
+
         if (xForwardedFor != null) {
             LOGGER.debug("Setting X-Forwarded-For");
             LOGGER.trace("Setting X-Forwarded-For to value <[{}]>", xForwardedFor);
@@ -86,5 +81,4 @@ public class RequestHandler {
 
         return headerInfo;
     }
-
 }
