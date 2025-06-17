@@ -45,6 +45,7 @@
  */
 package com.teragrep.cfe_16.bo;
 
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,26 +56,25 @@ import java.util.Set;
 /**
  * A Session keeps track of channels that are contained inside one Session. This class is not thread-safe.
  */
-public class Session {
+public final class Session {
 
     public static final String DEFAULT_CHANNEL = "defaultchannel";
     private static final Logger LOGGER = LoggerFactory.getLogger(Session.class);
     /**
      * Channels of this Session object.
      */
-    private Set<String> channels;
+    private final Set<String> channels;
 
     /**
      * Authentication key of this Session.
      */
-    private String authenticationToken;
+    private final String authenticationToken;
 
     private long lastTouchedTimestamp;
 
-    @SuppressWarnings("unchecked")
     public Session(String channel, String authenticationToken) {
         LOGGER.info("Creating new session with channel <{}>", channel);
-        this.channels = Collections.synchronizedSet(new HashSet<String>());
+        this.channels = Collections.synchronizedSet(new HashSet<>());
         if (channel != null) {
             LOGGER.info("Adding channel <[{}]>", channel);
             this.channels.add(channel);
@@ -104,29 +104,19 @@ public class Session {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.authenticationToken == null) ? 0 : this.authenticationToken.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Session session = (Session) o;
+        return lastTouchedTimestamp == session.lastTouchedTimestamp && Objects.equals(channels, session.channels)
+                && Objects.equals(authenticationToken, session.authenticationToken);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Session other = (Session) obj;
-        if (this.authenticationToken == null) {
-            if (other.authenticationToken != null)
-                return false;
-        }
-        else if (!this.authenticationToken.equals(other.authenticationToken))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(channels, authenticationToken, lastTouchedTimestamp);
     }
 
     @Override
