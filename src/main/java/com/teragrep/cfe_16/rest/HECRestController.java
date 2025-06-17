@@ -51,6 +51,7 @@ import com.teragrep.cfe_16.RequestBodyCleaner;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.service.HECService;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
-public class HECRestController {
+public final class HECRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HECRestController.class);
     @Autowired
@@ -73,7 +74,7 @@ public class HECRestController {
     @Autowired
     private Configuration configuration;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @SuppressWarnings("rawtypes")
     @RequestMapping(
@@ -293,5 +294,21 @@ public class HECRestController {
     @PostMapping("services/collector/raw/1.0")
     public void sendRawDataWithProtocolVersion(@RequestBody String rawData) {
         // TODO: Implement endpoint
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        HECRestController that = (HECRestController) o;
+        return Objects.equals(service, that.service) && Objects.equals(requestBodyCleaner, that.requestBodyCleaner)
+                && Objects.equals(configuration, that.configuration) && Objects.equals(objectMapper, that.objectMapper);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(service, requestBodyCleaner, configuration, objectMapper);
     }
 }
