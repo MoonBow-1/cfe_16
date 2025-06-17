@@ -45,46 +45,15 @@
  */
 package com.teragrep.cfe_16.exceptionhandling;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Objects;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public final class HECErrorResponse {
+class HECErrorResponseTest {
 
-    private final String text;
-    private final int code;
-    @JsonProperty("invalid-event-number")
-    private final int invalidEventNumber;
-
-    public HECErrorResponse(String text, int code, int invalidEventNumber) {
-        this.code = code;
-        this.text = text;
-        this.invalidEventNumber = invalidEventNumber;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public int getInvalidEventNumber() {
-        return invalidEventNumber;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        HECErrorResponse that = (HECErrorResponse) o;
-        return code == that.code && invalidEventNumber == that.invalidEventNumber && Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text, code, invalidEventNumber);
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(HECErrorResponse.class).verify();
     }
 }
