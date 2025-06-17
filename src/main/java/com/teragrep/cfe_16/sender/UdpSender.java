@@ -47,15 +47,16 @@ package com.teragrep.cfe_16.sender;
 
 import com.cloudbees.syslog.SyslogMessage;
 import com.cloudbees.syslog.sender.UdpSyslogMessageSender;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class UdpSender extends AbstractSender {
+public final class UdpSender extends AbstractSender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UdpSender.class);
-    private UdpSyslogMessageSender sender;
+    private final UdpSyslogMessageSender sender;
 
     public UdpSender(String hostname, int port) {
         super(hostname, port);
@@ -82,5 +83,26 @@ public class UdpSender extends AbstractSender {
     public void close() throws IOException {
         LOGGER.debug("Closing sender");
         this.sender.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        UdpSender that = (UdpSender) o;
+        return Objects.equals(defaultAppName, that.defaultAppName) && Objects
+                .equals(defaultFacility, that.defaultFacility)
+                && Objects.equals(defaultMessageHostname, that.defaultMessageHostname) && Objects.equals(defaultSeverity, that.defaultSeverity) && Objects.equals(messageFormat, that.messageFormat) && Objects.equals(sendCounter, that.sendCounter) && Objects.equals(sendDurationInNanosCounter, that.sendDurationInNanosCounter) && Objects.equals(sendErrorCounter, that.sendErrorCounter) && Objects.equals(hostname, that.hostname) && Objects.equals(port, that.port) && Objects.equals(sender, that.sender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(
+                        defaultAppName, defaultFacility, defaultMessageHostname, defaultSeverity, messageFormat,
+                        sendCounter, sendDurationInNanosCounter, sendErrorCounter, hostname, port, sender
+                );
     }
 }
