@@ -45,60 +45,16 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import java.util.Objects;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public final class HeaderInfo {
+class HeaderInfoTest {
 
-    private String xForwardedFor;
-    private String xForwardedHost;
-    private String xForwardedProto;
-
-    public HeaderInfo() {
-    }
-
-    public HeaderInfo(String xForwardedFor, String xForwardedHost, String xForwardedProto) {
-        this.xForwardedFor = xForwardedFor;
-        this.xForwardedHost = xForwardedHost;
-        this.xForwardedProto = xForwardedProto;
-    }
-
-    public String getxForwardedFor() {
-        return xForwardedFor;
-    }
-
-    public void setxForwardedFor(String xForwardedFor) {
-        this.xForwardedFor = xForwardedFor;
-    }
-
-    public String getxForwardedHost() {
-        return xForwardedHost;
-    }
-
-    public void setxForwardedHost(String xForwardedHost) {
-        this.xForwardedHost = xForwardedHost;
-    }
-
-    public String getxForwardedProto() {
-        return xForwardedProto;
-    }
-
-    public void setxForwardedProto(String xForwardedProto) {
-        this.xForwardedProto = xForwardedProto;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        HeaderInfo that = (HeaderInfo) o;
-        return Objects.equals(xForwardedFor, that.xForwardedFor) && Objects.equals(xForwardedHost, that.xForwardedHost)
-                && Objects.equals(xForwardedProto, that.xForwardedProto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(xForwardedFor, xForwardedHost, xForwardedProto);
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(HeaderInfo.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }
