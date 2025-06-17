@@ -48,29 +48,30 @@ package com.teragrep.cfe_16.sender;
 import com.cloudbees.syslog.SyslogMessage;
 import com.teragrep.rlp_01.RelpBatch;
 import com.teragrep.rlp_01.RelpConnection;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class RelpSender extends AbstractSender {
+public final class RelpSender extends AbstractSender {
 
-    private final RelpConnection sender;
-    private static final Logger LOGGER = LoggerFactory.getLogger(RelpSender.class);
     //settings for timeouts, if they are 0 that we skip them
     //default are 0
-    private int connectionTimeout = 10000;
-    private int readTimeout = 15000;
-    private int writeTimeout = 5000;
-    private int reconnectInterval = 500;
+    private static final int RECONNECT_INTERVAL = 500;
+    private static final int CONNECTION_TIMEOUT = 10000;
+    private static final int READ_TIMEOUT = 15000;
+    private static final int WRITE_TIMEOUT = 5000;
+    private final RelpConnection sender;
+    private static final Logger LOGGER = LoggerFactory.getLogger(RelpSender.class);
 
     public RelpSender(String hostname, int port) {
         super(hostname, port);
         this.sender = new RelpConnection();
-        this.sender.setConnectionTimeout(connectionTimeout);
-        this.sender.setReadTimeout(this.readTimeout);
-        this.sender.setWriteTimeout(this.writeTimeout);
+        sender.setConnectionTimeout(CONNECTION_TIMEOUT);
+        sender.setReadTimeout(READ_TIMEOUT);
+        sender.setWriteTimeout(WRITE_TIMEOUT);
         connect();
     }
 
@@ -90,8 +91,8 @@ public class RelpSender extends AbstractSender {
             }
             else {
                 try {
-                    LOGGER.debug("Sleeping for <[{}]> before reconnecting", this.reconnectInterval);
-                    Thread.sleep(this.reconnectInterval);
+                    LOGGER.debug("Sleeping for <[{}]> before reconnecting", RECONNECT_INTERVAL);
+                    Thread.sleep(RECONNECT_INTERVAL);
                 }
                 catch (InterruptedException e) {
                     LOGGER.warn("Sleep interrupted: ", e);
@@ -161,5 +162,26 @@ public class RelpSender extends AbstractSender {
                 notSent = false;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        RelpSender that = (RelpSender) o;
+        return Objects.equals(defaultAppName, that.defaultAppName) && Objects
+                .equals(defaultFacility, that.defaultFacility)
+                && Objects.equals(defaultMessageHostname, that.defaultMessageHostname) && Objects.equals(defaultSeverity, that.defaultSeverity) && Objects.equals(messageFormat, that.messageFormat) && Objects.equals(sendCounter, that.sendCounter) && Objects.equals(sendDurationInNanosCounter, that.sendDurationInNanosCounter) && Objects.equals(sendErrorCounter, that.sendErrorCounter) && Objects.equals(hostname, that.hostname) && Objects.equals(port, that.port) && Objects.equals(sender, that.sender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(
+                        defaultAppName, defaultFacility, defaultMessageHostname, defaultSeverity, messageFormat,
+                        sendCounter, sendDurationInNanosCounter, sendErrorCounter, hostname, port, sender
+                );
     }
 }
