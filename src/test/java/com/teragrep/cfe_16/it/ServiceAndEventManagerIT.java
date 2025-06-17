@@ -59,6 +59,8 @@ import com.teragrep.rlp_03.ServerFactory;
 import com.teragrep.rlp_03.config.Config;
 import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
 import com.teragrep.rlp_03.delegate.FrameDelegate;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.*;
 import org.powermock.reflect.Whitebox;
 import org.slf4j.Logger;
@@ -574,5 +576,11 @@ public class ServiceAndEventManagerIT {
                 "Should get a JSON with fields text, code and ackID", supposedResponse,
                 eventManager.convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, ackManager).toString()
         );
+    }
+
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(EventManager.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }

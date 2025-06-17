@@ -60,6 +60,7 @@ import com.teragrep.cfe_16.exceptionhandling.EventFieldMissingException;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.sender.AbstractSender;
 import com.teragrep.cfe_16.sender.SenderFactory;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ import java.util.List;
  *
  */
 @Component
-public class EventManager {
+public final class EventManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventManager.class);
     private final ObjectMapper objectMapper;
@@ -339,5 +340,21 @@ public class EventManager {
         eventData.setChannel(channel);
 
         return eventData;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EventManager that = (EventManager) o;
+        return Objects.equals(objectMapper, that.objectMapper) && Objects.equals(configuration, that.configuration)
+                && Objects.equals(sender, that.sender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectMapper, configuration, sender);
     }
 }
