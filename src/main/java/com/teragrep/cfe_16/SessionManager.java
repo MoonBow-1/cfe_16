@@ -47,6 +47,7 @@ package com.teragrep.cfe_16;
 
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ import java.util.Map;
  *
  */
 @Component
-public class SessionManager implements Runnable, LifeCycle {
+public final class SessionManager implements Runnable, LifeCycle {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionManager.class);
     /**
@@ -83,7 +84,7 @@ public class SessionManager implements Runnable, LifeCycle {
      * 
      */
     public SessionManager() {
-        this.sessions = new HashMap<String, Session>();
+        this.sessions = new HashMap<>();
     }
 
     @Override
@@ -172,5 +173,21 @@ public class SessionManager implements Runnable, LifeCycle {
             this.sessions.put(authenticationToken, session);
             return session;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SessionManager that = (SessionManager) o;
+        return Objects.equals(sessions, that.sessions) && Objects.equals(cleanerThread, that.cleanerThread)
+                && Objects.equals(configuration, that.configuration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sessions, cleanerThread, configuration);
     }
 }

@@ -46,7 +46,10 @@
 package com.teragrep.cfe_16;
 
 import com.teragrep.cfe_16.bo.Session;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -109,5 +112,11 @@ public class SessionManagerTests {
         assertTrue(session.doesChannelExist(Session.DEFAULT_CHANNEL));
         assertTrue(session.removeChannel(Session.DEFAULT_CHANNEL));
         assertTrue(!session.doesChannelExist(Session.DEFAULT_CHANNEL));
+    }
+
+    @Test
+    @DisplayName("equalsVerifier test")
+    void equalsVerifierTest() {
+        EqualsVerifier.forClass(SessionManager.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 }
