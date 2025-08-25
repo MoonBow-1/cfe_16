@@ -63,7 +63,7 @@ public final class EventMessageStub implements EventMessage {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         throw new UnsupportedOperationException("EventStub does not support this");
     }
 }
