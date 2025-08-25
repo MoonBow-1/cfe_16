@@ -43,13 +43,15 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16;
+package com.teragrep.cfe_16.event;
 
-import org.junit.jupiter.api.Test;
+import com.fasterxml.jackson.databind.JsonNode;
 
-public class Cfe16ApplicationTests {
+public interface JsonEvent {
 
-    @Test
-    public void contextLoads() {
-    }
+    EventMessage asEvent();
+
+    JsonNode asNode();
+
+    JsonNode asTimeNode();
 }
