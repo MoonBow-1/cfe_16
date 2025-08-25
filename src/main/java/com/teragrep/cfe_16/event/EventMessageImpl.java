@@ -51,7 +51,7 @@ public final class EventMessageImpl implements EventMessage {
 
     private final String eventAsString;
 
-    public EventMessageImpl(String eventAsString) {
+    public EventMessageImpl(final String eventAsString) {
         this.eventAsString = eventAsString;
     }
 
@@ -66,12 +66,12 @@ public final class EventMessageImpl implements EventMessage {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        EventMessageImpl event = (EventMessageImpl) o;
+        final EventMessageImpl event = (EventMessageImpl) o;
         return eventAsString.equals(event.eventAsString);
     }
 
