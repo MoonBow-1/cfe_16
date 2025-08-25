@@ -92,12 +92,12 @@ public final class JsonEventImpl implements JsonEvent {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        JsonEventImpl that = (JsonEventImpl) o;
+        final JsonEventImpl that = (JsonEventImpl) o;
         return Objects.equals(jsonNode, that.jsonNode);
     }
 
