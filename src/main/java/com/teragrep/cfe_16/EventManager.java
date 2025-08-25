@@ -162,19 +162,6 @@ public class EventManager {
             }
         }
 
-        /*
-         * SyslogMessage syslogMessage =
-         * converter.getHeaderInfoSyslogMessage(headerInfo);
-         * requestInfo.getConvertedData().add(syslogMessage);
-         */
-        /*
-         * After all the events are sent, previousEvent object is set to null, the
-         * events are sent with the Acknowledgements and ack id and JSON node with an ack id
-         * will be returned informing that the sending of the events has been
-         * successful.
-         */
-        previousEvent = null;
-
         // create a new object to avoid blocking of threads because
         // the SyslogMessageSender.sendMessage() is synchronized
         try {
