@@ -98,7 +98,7 @@ public final class Converter {
                     .withFacility(facility)
                     .withSDElement(metadataSDE)
                     .withSDElement(this.headerInfo.asSDElement())
-                    .withMsg(httpEventData.getEvent());
+                    .withMsg(httpEventData.getEvent().asString());
 
         }
         else {
@@ -114,7 +114,7 @@ public final class Converter {
                     .withFacility(facility)
                     .withSDElement(metadataSDE)
                     .withSDElement(this.headerInfo.asSDElement())
-                    .withMsg(httpEventData.getEvent());
+                    .withMsg(httpEventData.getEvent().asString());
         }
 
         return syslogMessage;

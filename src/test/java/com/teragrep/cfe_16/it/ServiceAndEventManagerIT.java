@@ -341,12 +341,12 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void convertDataTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":2}";
-        String response = eventManager
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        final String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
+        final String response = eventManager
                 .convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements)
                 .toString();
-        assertEquals("Should get a JSON with fields text, code and ackID", supposedResponse, response);
+        Assertions.assertEquals(supposedResponse, response, "Should get a JSON with fields text, code and ackID");
     }
 
     /*
@@ -372,24 +372,24 @@ public class ServiceAndEventManagerIT {
 
     /*
      * Tests attempting to send a request, which has no "event"-field in it's body.
-     * When this is the case, EventFieldMissingException is expected to happen.
+     * When this is the case, UnsupportedOperationException is expected to happen.
      */
     @Test
-    public void noEventFieldInRequestTest() {
-        Assertions.assertThrows(EventFieldMissingException.class, () -> {
-            String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+    public void unsupportedOperationExceptionThrownIfEventIsMissing() {
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
             eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements);
         });
     }
 
     /*
      * Tests attempting to send a request, which has a blank "event"-field. When
-     * this is the case, EventFieldBlankException is expected to happen.
+     * this is the case, UnsupportedOperationException is expected to happen.
      */
     @Test
-    public void eventFieldBlankInRequestTest() {
-        Assertions.assertThrows(EventFieldBlankException.class, () -> {
-            String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+    public void unsupportedOperationExceptionThrownIfEventIsEmpty() {
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
             eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements);
         });
     }

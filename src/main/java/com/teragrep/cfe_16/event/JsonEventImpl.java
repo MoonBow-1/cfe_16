@@ -52,7 +52,7 @@ public final class JsonEventImpl implements JsonEvent {
 
     private final JsonNode jsonNode;
 
-    public JsonEventImpl(JsonNode jsonNode) {
+    public JsonEventImpl(final JsonNode jsonNode) {
         this.jsonNode = jsonNode;
     }
 

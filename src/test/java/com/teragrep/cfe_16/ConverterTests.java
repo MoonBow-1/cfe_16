@@ -51,6 +51,7 @@ import com.teragrep.cfe_16.bo.HttpEventData;
 import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
+import com.teragrep.cfe_16.event.EventMessageImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -124,20 +125,20 @@ public class ConverterTests {
         eventData1.setTime("1433188255253");
         eventData1.setTimeParsed(true);
         eventData1.setTimeAsLong(1433188255253L);
-        eventData1.setEvent("Event 1");
+        eventData1.setEvent(new EventMessageImpl("Event 1"));
 
         eventData2.setAuthenticationToken("AUTH_TOKEN_22222");
         eventData2.setChannel("CHANNEL_22222");
         eventData2.setAckID(1);
         eventData2.setTimeSource("generated");
         eventData2.setTimeParsed(false);
-        eventData2.setEvent("Event 2");
+        eventData2.setEvent(new EventMessageImpl("Event 2"));
 
         eventData3.setAuthenticationToken("AUTH_TOKEN_33333");
         eventData3.setChannel("defaultchannel");
         eventData3.setTimeSource("generated");
         eventData3.setTimeParsed(false);
-        eventData3.setEvent("Event 3");
+        eventData3.setEvent(new EventMessageImpl("Event 3"));
 
         metadataSDE1.addSDParam("authentication_token", eventData1.getAuthenticationToken());
         metadataSDE1.addSDParam("channel", eventData1.getChannel());
@@ -162,7 +163,7 @@ public class ConverterTests {
                 .withHostname("cfe-16")
                 .withFacility(supposedFacility)
                 .withSDElement(metadataSDE1)
-                .withMsg(eventData1.getEvent());
+                .withMsg(eventData1.getEvent().asString());
 
         supposedSyslogMessage2 = new SyslogMessage()
                 .withSeverity(supposedSeverity)
@@ -170,7 +171,7 @@ public class ConverterTests {
                 .withHostname("cfe-16")
                 .withFacility(supposedFacility)
                 .withSDElement(metadataSDE2)
-                .withMsg(eventData2.getEvent());
+                .withMsg(eventData2.getEvent().asString());
 
         supposedSyslogMessage3 = new SyslogMessage()
                 .withSeverity(supposedSeverity)
@@ -178,7 +179,7 @@ public class ConverterTests {
                 .withHostname("cfe-16")
                 .withFacility(supposedFacility)
                 .withSDElement(metadataSDE3)
-                .withMsg(eventData3.getEvent());
+                .withMsg(eventData3.getEvent().asString());
 
         returnedMessage1 = converter.httpToSyslog(eventData1);
         returnedMessage2 = converter.httpToSyslog(eventData2);
