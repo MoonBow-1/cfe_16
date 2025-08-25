@@ -98,7 +98,7 @@ public class ServiceAndEventManagerIT {
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceAndEventManagerIT.class);
     private static Server server;
     private static final String hostname = "localhost";
-    private static Integer port = 1601;
+    private static Integer port = 1610;
 
     @BeforeAll
     public static void init_x() throws IOException, InterruptedException {
