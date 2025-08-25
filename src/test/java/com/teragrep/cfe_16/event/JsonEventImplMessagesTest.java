@@ -80,8 +80,8 @@ class JsonEventImplMessagesTest {
     }
 
     @Test
-    @DisplayName("asEvent() returns EventStub if message node value is an empty Object")
-    void eventReturnsEventStubIfMessageNodeValueIsAnEmptyObject() {
+    @DisplayName("asEvent() returns EventMessageStub if message node value is an empty Object")
+    void eventReturnsEventMessageStubIfMessageNodeValueIsAnEmptyObject() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper
                 .createObjectNode()
@@ -95,12 +95,27 @@ class JsonEventImplMessagesTest {
     }
 
     @Test
-    @DisplayName("asEvent() returns EventImpl if message exists and is a filled String")
-    void eventReturnsJsonNodeIfMessageExistsAndIsAFilledString() {
+    @DisplayName("asEvent() returns EventMessage if message exists and is a filled String")
+    void eventReturnsEventMessageIfMessageExistsAndIsAFilledString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper
                 .createObjectNode()
                 .set("event", mapper.createObjectNode().put("message", "Valid event"));
+
+        final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
+
+        final EventMessage returnedNode = jsonEventImpl.asEvent();
+
+        final EventMessage expectedNode = new EventMessageImpl("Valid event");
+
+        Assertions.assertEquals(expectedNode, returnedNode);
+    }
+
+    @Test
+    @DisplayName("asEvent() returns EventMessage if event field is textual")
+    void asEventReturnsEventMessageIfEventFieldIsTextual() {
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.createObjectNode().put("event", "Valid event");
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
