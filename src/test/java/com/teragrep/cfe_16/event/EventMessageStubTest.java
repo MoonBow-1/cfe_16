@@ -45,11 +45,18 @@
  */
 package com.teragrep.cfe_16.event;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EventMessageStubTest {
+
+    @Test
+    @DisplayName("EqualsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(EventMessageStub.class).verify();
+    }
 
     @Test
     @DisplayName("isStub() returns true")
@@ -77,14 +84,5 @@ class EventMessageStubTest {
         final EventMessageStub eventStub2 = new EventMessageStub();
 
         Assertions.assertEquals(eventStub1.hashCode(), eventStub2.hashCode());
-    }
-
-    @Test
-    @DisplayName("Two EventMessageStubs are equal")
-    void twoEventMessageStubsAreEqual() {
-        final EventMessageStub eventStub1 = new EventMessageStub();
-        final EventMessageStub eventStub2 = new EventMessageStub();
-
-        Assertions.assertEquals(eventStub1, eventStub2);
     }
 }
