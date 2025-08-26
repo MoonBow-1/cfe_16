@@ -84,7 +84,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @TestPropertySource(properties = {
         "syslog.server.host=127.0.0.1",
-        "syslog.server.port=1601",
+        "syslog.server.port=1610",
         "syslog.server.protocol=RELP",
         "max.channels=1000000",
         "max.ack.value=1000000",
