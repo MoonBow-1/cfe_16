@@ -59,11 +59,16 @@ public final class EventMessageStub implements EventMessage {
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("EventStub does not support this");
+        return 123678;
     }
 
     @Override
     public boolean equals(final Object obj) {
-        throw new UnsupportedOperationException("EventStub does not support this");
+        if (obj == null) {
+            return false;
+        }
+        else {
+            return obj.getClass().equals(EventMessageStub.class);
+        }
     }
 }

@@ -71,24 +71,20 @@ class EventMessageStubTest {
     }
 
     @Test
-    @DisplayName("hashCode() throws UnsupportedOperationException if called")
-    void hashCodeThrowsUnsupportedOperationExceptionIfCalled() {
-        final EventMessageStub eventStub = new EventMessageStub();
+    @DisplayName("hashCode() matches with two EventMessageStubs")
+    void hashCodeMatchesWithTwoEventMessageStubs() {
+        final EventMessageStub eventStub1 = new EventMessageStub();
+        final EventMessageStub eventStub2 = new EventMessageStub();
 
-        final Exception exception = Assertions
-                .assertThrowsExactly(UnsupportedOperationException.class, eventStub::hashCode);
-
-        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
+        Assertions.assertEquals(eventStub1.hashCode(), eventStub2.hashCode());
     }
 
     @Test
-    @DisplayName("equals() throws UnsupportedOperationException if called")
-    void equalsThrowsUnsupportedOperationExceptionIfCalled() {
-        final EventMessageStub eventStub = new EventMessageStub();
+    @DisplayName("Two EventMessageStubs are equal")
+    void twoEventMessageStubsAreEqual() {
+        final EventMessageStub eventStub1 = new EventMessageStub();
+        final EventMessageStub eventStub2 = new EventMessageStub();
 
-        final Exception exception = Assertions
-                .assertThrowsExactly(UnsupportedOperationException.class, () -> eventStub.equals(new Object()));
-
-        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
+        Assertions.assertEquals(eventStub1, eventStub2);
     }
 }
