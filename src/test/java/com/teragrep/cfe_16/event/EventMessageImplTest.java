@@ -45,6 +45,7 @@
  */
 package com.teragrep.cfe_16.event;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,20 +69,8 @@ class EventMessageImplTest {
     }
 
     @Test
-    @DisplayName("Happy equals test")
-    void happyEqualsTest() {
-        final EventMessageImpl event1 = new EventMessageImpl("event");
-        final EventMessageImpl event2 = new EventMessageImpl("event");
-
-        Assertions.assertEquals(event1, event2);
-    }
-
-    @Test
-    @DisplayName("Unhappy equals test")
-    void unhappyEqualsTest() {
-        final EventMessageImpl event1 = new EventMessageImpl("event");
-        final EventMessageImpl event2 = new EventMessageImpl("event123");
-
-        Assertions.assertNotEquals(event1, event2);
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(EventMessageImpl.class).verify();
     }
 }

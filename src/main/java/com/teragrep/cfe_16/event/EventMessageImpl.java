@@ -71,12 +71,12 @@ public final class EventMessageImpl implements EventMessage {
             return false;
         }
 
-        final EventMessageImpl event = (EventMessageImpl) o;
-        return eventAsString.equals(event.eventAsString);
+        final EventMessageImpl that = (EventMessageImpl) o;
+        return Objects.equals(eventAsString, that.eventAsString);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.eventAsString);
+        return Objects.hashCode(eventAsString);
     }
 }
