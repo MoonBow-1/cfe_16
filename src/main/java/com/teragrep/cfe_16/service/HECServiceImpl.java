@@ -64,6 +64,7 @@ import com.teragrep.cfe_16.exceptionhandling.AuthenticationTokenMissingException
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
+import com.teragrep.cfe_16.response.Response;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,7 +106,7 @@ public class HECServiceImpl implements HECService {
 
     @Override
     // @LogAnnotation(type = LogType.METRIC_COUNTER)
-    public ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson) {
+    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson) {
         LOGGER.debug("Sending events to channel <{}>", channel);
         if (this.tokenManager.tokenIsMissing(request)) {
             throw new AuthenticationTokenMissingException("Authentication token must be provided");
@@ -174,10 +175,7 @@ public class HECServiceImpl implements HECService {
         }
 
         // TODO: find a nice way of not passing Acknowledgements
-        ObjectNode ackNode = this.eventManager
-                .convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
-
-        return ackNode;
+        return this.eventManager.convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)

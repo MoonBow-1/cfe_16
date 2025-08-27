@@ -43,41 +43,46 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.service;
+package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.teragrep.cfe_16.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 
-/**
- * An interface that specified the REST back end API.
- */
-public interface HECService {
+class JsonResponseTest {
 
-    /**
-     * Returns the JSON object as a response of given HTTP event request.
-     * 
-     * @param request
-     * @param channel
-     * @param eventInJson
-     * @return
-     */
-    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson);
+    @Test
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(JsonResponse.class).verify();
+    }
 
-    /**
-     * @param request
-     * @param channel
-     * @param requestedAcksInJson
-     * @return
-     */
-    public JsonNode getAcks(HttpServletRequest request, String channel, JsonNode requestedAcksInJson);
+    @Test
+    @DisplayName("status() returns the status")
+    void statusReturnsTheStatus() {
+        final Response response = new JsonResponse(HttpStatus.OK, "Body");
 
-    /**
-     * Ping.
-     * 
-     * @param request
-     * @return
-     */
-    public ResponseEntity<String> healthCheck(HttpServletRequest request);
+        Assertions.assertEquals(HttpStatus.OK, response.status());
+    }
+
+    @Test
+    @DisplayName("body() returns the body")
+    void bodyReturnsTheBody() {
+        final Response response = new JsonResponse(HttpStatus.OK, "Body");
+
+        final ObjectNode expectedObjectNode = new ObjectMapper().createObjectNode().put("message", "Body");
+        Assertions.assertEquals(expectedObjectNode, response.body());
+    }
+
+    @Test
+    @DisplayName("contentType() returns the content type")
+    void contentTypeReturnsTheContentType() {
+        final Response response = new JsonResponse(HttpStatus.OK, "Body");
+
+        Assertions.assertEquals("application/json", response.contentType());
+    }
 }

@@ -43,41 +43,16 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.service;
+package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.teragrep.cfe_16.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.http.HttpStatus;
 
-/**
- * An interface that specified the REST back end API.
- */
-public interface HECService {
+public interface Response {
 
-    /**
-     * Returns the JSON object as a response of given HTTP event request.
-     * 
-     * @param request
-     * @param channel
-     * @param eventInJson
-     * @return
-     */
-    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson);
+    public abstract HttpStatus status();
 
-    /**
-     * @param request
-     * @param channel
-     * @param requestedAcksInJson
-     * @return
-     */
-    public JsonNode getAcks(HttpServletRequest request, String channel, JsonNode requestedAcksInJson);
+    public abstract ObjectNode body();
 
-    /**
-     * Ping.
-     * 
-     * @param request
-     * @return
-     */
-    public ResponseEntity<String> healthCheck(HttpServletRequest request);
+    public abstract String contentType();
 }

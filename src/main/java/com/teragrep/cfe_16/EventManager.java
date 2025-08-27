@@ -49,7 +49,6 @@ import com.cloudbees.syslog.SyslogMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.JsonStreamParser;
 import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
@@ -61,9 +60,14 @@ import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.ExceptionJsonResponse;
+import com.teragrep.cfe_16.response.JsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
@@ -80,7 +84,6 @@ import java.util.List;
 public class EventManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventManager.class);
-    private final ObjectMapper objectMapper;
 
     @Autowired
     private Configuration configuration;
@@ -88,7 +91,6 @@ public class EventManager {
     private AbstractConnection connection;
 
     public EventManager() {
-        this.objectMapper = new ObjectMapper();
     }
 
     @PostConstruct
@@ -113,7 +115,7 @@ public class EventManager {
      * the channel name as string parameters. Returns a JSON node with ack id if
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
-    public ObjectNode convertData(
+    public Response convertData(
             final String authToken,
             final String channel,
             final String allEventsInJson,
@@ -158,7 +160,7 @@ public class EventManager {
                 syslogMessages.add(converter.httpToSyslog(eventData));
             }
             catch (final JsonProcessingException e) {
-                LOGGER.error(e.getMessage());
+                return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, e);
             }
         }
 
@@ -180,15 +182,12 @@ public class EventManager {
             }
         }
 
-        ObjectNode responseNode = this.objectMapper.createObjectNode();
-
-        responseNode.put("text", "Success");
-        responseNode.put("code", 0);
         if (shouldAck) {
-            responseNode.put("ackID", ackId);
+            return new AcknowledgedJsonResponse(HttpStatus.OK, "Success", ackId);
         }
-
-        return responseNode;
+        else {
+            return new JsonResponse(HttpStatus.OK, "Success");
+        }
     }
 
     /*

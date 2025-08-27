@@ -43,41 +43,50 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.service;
+package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.teragrep.cfe_16.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Objects;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
-/**
- * An interface that specified the REST back end API.
- */
-public interface HECService {
+public final class AcknowledgedJsonResponse implements Response {
 
-    /**
-     * Returns the JSON object as a response of given HTTP event request.
-     * 
-     * @param request
-     * @param channel
-     * @param eventInJson
-     * @return
-     */
-    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson);
+    private final HttpStatus status;
+    private final String body;
+    private final int ackID;
 
-    /**
-     * @param request
-     * @param channel
-     * @param requestedAcksInJson
-     * @return
-     */
-    public JsonNode getAcks(HttpServletRequest request, String channel, JsonNode requestedAcksInJson);
+    public AcknowledgedJsonResponse(final HttpStatus status, final String body, final int ackID) {
+        this.status = status;
+        this.body = body;
+        this.ackID = ackID;
+    }
 
-    /**
-     * Ping.
-     * 
-     * @param request
-     * @return
-     */
-    public ResponseEntity<String> healthCheck(HttpServletRequest request);
+    public HttpStatus status() {
+        return status;
+    }
+
+    public ObjectNode body() {
+        return new ObjectMapper().createObjectNode().put("message", body).put("ackID", ackID);
+    }
+
+    public String contentType() {
+        return MediaType.APPLICATION_JSON_VALUE;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final AcknowledgedJsonResponse that = (AcknowledgedJsonResponse) o;
+        return ackID == that.ackID && status == that.status && Objects.equals(body, that.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, body, ackID);
+    }
 }

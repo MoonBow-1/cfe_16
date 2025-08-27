@@ -56,6 +56,9 @@ import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.*;
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.JsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.service.HECService;
 import com.teragrep.rlp_03.Server;
 import com.teragrep.rlp_03.ServerFactory;
@@ -68,6 +71,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -232,36 +236,25 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void sendEventsAndGetAcksTest() {
-        String supposedResponse;
+        final Response expectedResponse = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString()
-        );
+        Assertions
+                .assertEquals(expectedResponse, service.sendEvents(request1, channel3, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)");
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":1}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString()
-        );
+        final Response expectedResponse1 = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 1);
+        Assertions
+                .assertEquals(expectedResponse1, service.sendEvents(request1, channel3, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)");
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel2, eventInJson).toString()
-        );
+        final Response expectedResponse2 = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
+        Assertions
+                .assertEquals(expectedResponse2, service.sendEvents(request1, channel2, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)");
 
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request3, channel3, eventInJson).toString()
-        );
+        Assertions
+                .assertEquals(expectedResponse2, service.sendEvents(request3, channel3, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)");
 
-        supposedResponse = "{\"acks\":{\"1\":true,\"3\":false,\"4\":false}}";
-        assertEquals(
-                "JSON object should be returned with ack statuses.", supposedResponse,
-                service.getAcks(request1, channel3, ackRequestNode).toString()
-        );
+        final String expectedResponse3 = "{\"acks\":{\"1\":true,\"3\":false,\"4\":false}}";
+        Assertions
+                .assertEquals(expectedResponse3, service.getAcks(request1, channel3, ackRequestNode).toString(), "JSON object should be returned with ack statuses.");
     }
 
     /*
@@ -281,9 +274,13 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void sendEventsWithoutChannelTest() {
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
-        String response = service.sendEvents(request1, null, eventInJson).toString();
-        assertEquals("Service should return JSON object with fields 'text' and 'code'", supposedResponse, response);
+        final Response expectedResponse = new JsonResponse(HttpStatus.OK, "Success");
+        final Response response = service.sendEvents(request1, null, eventInJson);
+
+        Assertions
+                .assertEquals(
+                        expectedResponse, response, "Service should return JSON object with fields 'text' and 'code'"
+                );
     }
 
     /*
@@ -332,41 +329,44 @@ public class ServiceAndEventManagerIT {
         });
     }
 
-    /*
-     * Tests the EventManager's convertData() method. First we create a Json node as
-     * string, that we give as a parameter for convertData(). We also create a
-     * supposed response Json node as string. convertData() returns an ObjectNode
-     * object, which we convert to string here, so we can easily compare it to our
-     * supposed response.
+    /**
+     * Tests the EventManager's convertData() method. First we create a Json node as string, that we give as a parameter
+     * for convertData(). We also create a supposed response Json node as string. convertData() returns a Response and
+     * because the request is using the channel 1, Response should be {@link AcknowledgedJsonResponse}
      */
     @Test
     public void convertDataTest() {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-        final String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        final String response = eventManager
-                .convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements)
-                .toString();
-        Assertions.assertEquals(supposedResponse, response, "Should get a JSON with fields text, code and ackID");
+
+        final Response expectedResponse = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
+
+        Assertions
+                .assertEquals(
+                        expectedResponse, eventManager
+                                .convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements),
+                        "Should get a JSON with fields text, code and ackID"
+                );
     }
 
-    /*
-     * Tests the EventManager's convertDataWithDefaultChannel() method which is
-     * called when a channel is not provided in a request. First we create a Json
-     * node as string, that we give as a parameter for convertData(). We also create
-     * a supposed response Json node as string. convertData() returns an ObjectNode
-     * object, which we convert to string here, so we can easily compare it to our
-     * supposed response.
+    /**
+     * Tests the EventManager's convertDataWithDefaultChannel() method which is called when a channel is not provided in
+     * a request. First we create a Json node as string, that we give as a parameter for convertData(). We also create a
+     * supposed response Json node as string. convertData() returns a Response, and because the request is using the
+     * Default channel, Response should be {@link JsonResponse}
      */
     @Test
     public void convertDataTestWithDefaultChannel() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
 
-        assertEquals(
-                "Should get a JSON with fields text and code.", supposedResponse, eventManager
-                        .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, acknowledgements)
-                        .toString()
-        );
+        final Response expectedResponse = new JsonResponse(HttpStatus.OK, "Success");
+
+        Assertions
+                .assertEquals(
+                        expectedResponse,
+                        eventManager
+                                .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, acknowledgements),
+                        "Should get a JSON with fields text and code."
+                );
 
     }
 
