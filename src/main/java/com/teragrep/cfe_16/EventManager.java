@@ -49,6 +49,7 @@ import com.cloudbees.syslog.SyslogMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonStreamParser;
 import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
@@ -61,9 +62,11 @@ import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.ExceptionEvent;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,8 +162,10 @@ public class EventManager {
 
                 syslogMessages.add(converter.httpToSyslog(eventData));
             }
-            catch (final JsonProcessingException e) {
-                return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, e);
+            catch (final JsonProcessingException | JsonParseException e) {
+                final ExceptionEvent event = new ExceptionEvent(UUID.randomUUID(), e);
+                event.logException();
+                return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
             }
         }
 

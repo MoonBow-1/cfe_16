@@ -57,6 +57,8 @@ import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.*;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.ExceptionEvent;
+import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.service.HECService;
@@ -65,6 +67,7 @@ import com.teragrep.rlp_03.ServerFactory;
 import com.teragrep.rlp_03.config.Config;
 import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
 import com.teragrep.rlp_03.delegate.FrameDelegate;
+import java.util.UUID;
 import org.junit.jupiter.api.*;
 import org.powermock.reflect.Whitebox;
 import org.slf4j.Logger;
@@ -579,5 +582,25 @@ public class ServiceAndEventManagerIT {
                         .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, acknowledgements)
                         .toString()
         );
+    }
+
+    @Test
+    @DisplayName("convertData() method returns ExceptionJsonReport if event was not read")
+    void convertDataMethodReturnsExceptionJsonReportIfEventWasNotRead() {
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {\"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+
+        final Response expectedResponse = new ExceptionJsonResponse(
+                HttpStatus.BAD_REQUEST,
+                new ExceptionEvent(UUID.randomUUID(), new Throwable())
+        );
+        final Response actualResponse = Assertions
+                .assertDoesNotThrow(
+                        () -> eventManager
+                                .convertData(authToken1, defaultChannel, allEventsInJson, headerInfo, acknowledgements)
+                );
+
+        Assertions.assertEquals(expectedResponse.status(), actualResponse.status());
+
+        Assertions.assertEquals(ExceptionJsonResponse.class, actualResponse.getClass());
     }
 }

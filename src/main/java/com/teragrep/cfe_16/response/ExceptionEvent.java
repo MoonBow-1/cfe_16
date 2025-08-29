@@ -45,59 +45,42 @@
  */
 package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Objects;
 import java.util.UUID;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-class ExceptionJsonResponseTest {
+public final class ExceptionEvent {
 
-    @Test
-    @DisplayName("equalsVerifier")
-    void equalsVerifier() {
-        EqualsVerifier.forClass(ExceptionJsonResponse.class).verify();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionEvent.class);
+    private final UUID uuid;
+    private final Throwable throwable;
+
+    public ExceptionEvent(final UUID uuid, final Throwable throwable) {
+        this.uuid = uuid;
+        this.throwable = throwable;
     }
 
-    @Test
-    @DisplayName("status() returns the status")
-    void statusReturnsTheStatus() {
-        final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
-        );
-
-        Assertions.assertEquals(HttpStatus.OK, response.status());
+    public void logException() {
+        LOGGER.error("Event_{}", uuid, throwable);
     }
 
-    @Test
-    @DisplayName("body() returns the body")
-    void bodyReturnsTheBody() {
-        final UUID uuid = UUID.randomUUID();
-        final Response response = new ExceptionJsonResponse(HttpStatus.OK, new ExceptionEvent(uuid, new Throwable()));
-
-        final ObjectNode expectedObjectNode = new ObjectMapper()
-                .createObjectNode()
-                .put(
-                        "message",
-                        "An error occurred while processing your Request. See event id " + uuid
-                                + " in the technical log for details."
-                );
-
-        Assertions.assertEquals(expectedObjectNode, response.body());
+    public UUID uuid() {
+        return uuid;
     }
 
-    @Test
-    @DisplayName("contentType() returns the content type")
-    void contentTypeReturnsTheContentType() {
-        final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
-        );
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        Assertions.assertEquals("application/json", response.contentType());
+        final ExceptionEvent event = (ExceptionEvent) o;
+        return Objects.equals(uuid, event.uuid) && Objects.equals(throwable, event.throwable);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, throwable);
     }
 }

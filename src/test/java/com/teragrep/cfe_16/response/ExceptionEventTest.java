@@ -45,59 +45,27 @@
  */
 package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.UUID;
 import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
 
-class ExceptionJsonResponseTest {
+class ExceptionEventTest {
 
     @Test
     @DisplayName("equalsVerifier")
     void equalsVerifier() {
-        EqualsVerifier.forClass(ExceptionJsonResponse.class).verify();
+        EqualsVerifier.forClass(ExceptionEvent.class).verify();
     }
 
     @Test
-    @DisplayName("status() returns the status")
-    void statusReturnsTheStatus() {
-        final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
-        );
-
-        Assertions.assertEquals(HttpStatus.OK, response.status());
-    }
-
-    @Test
-    @DisplayName("body() returns the body")
-    void bodyReturnsTheBody() {
+    @DisplayName("uuid() returns the UUID")
+    void uuidReturnsTheUuid() {
         final UUID uuid = UUID.randomUUID();
-        final Response response = new ExceptionJsonResponse(HttpStatus.OK, new ExceptionEvent(uuid, new Throwable()));
+        final ExceptionEvent exceptionEvent = new ExceptionEvent(uuid, new Throwable());
 
-        final ObjectNode expectedObjectNode = new ObjectMapper()
-                .createObjectNode()
-                .put(
-                        "message",
-                        "An error occurred while processing your Request. See event id " + uuid
-                                + " in the technical log for details."
-                );
-
-        Assertions.assertEquals(expectedObjectNode, response.body());
-    }
-
-    @Test
-    @DisplayName("contentType() returns the content type")
-    void contentTypeReturnsTheContentType() {
-        final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
-        );
-
-        Assertions.assertEquals("application/json", response.contentType());
+        Assertions.assertEquals(uuid, exceptionEvent.uuid());
     }
 }

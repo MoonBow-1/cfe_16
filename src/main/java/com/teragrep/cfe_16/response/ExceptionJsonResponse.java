@@ -48,27 +48,17 @@ package com.teragrep.cfe_16.response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Objects;
-import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 public final class ExceptionJsonResponse implements Response {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionJsonResponse.class);
-    private final UUID eventId;
+    private final ExceptionEvent exceptionEvent;
     private final HttpStatus status;
-    private final Throwable throwable;
 
-    public ExceptionJsonResponse(final HttpStatus status, final Throwable throwable) {
-        this(status, throwable, UUID.randomUUID());
-    }
-
-    public ExceptionJsonResponse(final HttpStatus status, final Throwable throwable, final UUID eventId) {
+    public ExceptionJsonResponse(final HttpStatus status, final ExceptionEvent exceptionEvent) {
         this.status = status;
-        this.throwable = throwable;
-        this.eventId = eventId;
+        this.exceptionEvent = exceptionEvent;
     }
 
     public HttpStatus status() {
@@ -76,16 +66,14 @@ public final class ExceptionJsonResponse implements Response {
     }
 
     public ObjectNode body() {
-        LOGGER.error("Event_{}", eventId, throwable);
         final ObjectMapper jsonObjectBuilder = new ObjectMapper();
         return jsonObjectBuilder
                 .createObjectNode()
                 .put(
                         "message",
-                        "An error occurred while processing your Request. See event id " + eventId
+                        "An error occurred while processing your Request. See event id " + exceptionEvent.uuid()
                                 + " in the technical log for details."
                 );
-
     }
 
     public String contentType() {
@@ -99,12 +87,11 @@ public final class ExceptionJsonResponse implements Response {
         }
 
         final ExceptionJsonResponse that = (ExceptionJsonResponse) o;
-        return Objects.equals(eventId, that.eventId) && status == that.status
-                && Objects.equals(throwable, that.throwable);
+        return Objects.equals(exceptionEvent, that.exceptionEvent) && status == that.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, status, throwable);
+        return Objects.hash(exceptionEvent, status);
     }
 }
