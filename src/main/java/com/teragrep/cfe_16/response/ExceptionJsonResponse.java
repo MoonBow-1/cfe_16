@@ -46,7 +46,6 @@
 package com.teragrep.cfe_16.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,7 +64,7 @@ public final class ExceptionJsonResponse implements Response {
         return status;
     }
 
-    public ObjectNode body() {
+    public String asJsonString() {
         final ObjectMapper jsonObjectBuilder = new ObjectMapper();
         return jsonObjectBuilder
                 .createObjectNode()
@@ -73,7 +72,8 @@ public final class ExceptionJsonResponse implements Response {
                         "message",
                         "An error occurred while processing your Request. See event id " + exceptionEvent.uuid()
                                 + " in the technical log for details."
-                );
+                )
+                .toString();
     }
 
     public String contentType() {

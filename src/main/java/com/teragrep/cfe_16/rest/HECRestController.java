@@ -100,7 +100,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.body().toString();
+        return response.asJsonString();
     }
 
     @RequestMapping(
@@ -121,7 +121,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.body().toString();
+        return response.asJsonString();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
@@ -211,7 +211,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.body().toString();
+        return response.asJsonString();
     }
 
     @RequestMapping(
@@ -235,7 +235,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.body().toString();
+        return response.asJsonString();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
@@ -256,7 +256,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}¦ nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.body().toString();
+        return response.asJsonString();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)

@@ -46,7 +46,6 @@
 package com.teragrep.cfe_16.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,23 +53,20 @@ import org.springframework.http.MediaType;
 public final class JsonResponse implements Response {
 
     private final HttpStatus status;
-    private final ObjectNode json;
+    private final String message;
 
-    public JsonResponse(final HttpStatus status, final String body) {
-        this(status, new ObjectMapper().createObjectNode().put("message", body));
-    }
-
-    public JsonResponse(final HttpStatus status, final ObjectNode body) {
+    public JsonResponse(final HttpStatus status, final String message) {
         this.status = status;
-        this.json = body;
+        this.message = message;
     }
 
     public HttpStatus status() {
         return status;
     }
 
-    public ObjectNode body() {
-        return json;
+    public String asJsonString() {
+        final ObjectMapper jsonObjectBuilder = new ObjectMapper();
+        return jsonObjectBuilder.createObjectNode().put("message", message).toString();
     }
 
     public String contentType() {
@@ -84,11 +80,11 @@ public final class JsonResponse implements Response {
         }
 
         final JsonResponse that = (JsonResponse) o;
-        return status == that.status && Objects.equals(json, that.json);
+        return status == that.status && Objects.equals(message, that.message);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, json);
+        return Objects.hash(status, message);
     }
 }

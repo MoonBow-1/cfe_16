@@ -45,8 +45,6 @@
  */
 package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.UUID;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
@@ -74,20 +72,15 @@ class ExceptionJsonResponseTest {
     }
 
     @Test
-    @DisplayName("body() returns the body")
-    void bodyReturnsTheBody() {
+    @DisplayName("asJsonString() returns the correct message")
+    void asJsonStringReturnsTheCorrectMessage() {
         final UUID uuid = UUID.randomUUID();
         final Response response = new ExceptionJsonResponse(HttpStatus.OK, new ExceptionEvent(uuid, new Throwable()));
 
-        final ObjectNode expectedObjectNode = new ObjectMapper()
-                .createObjectNode()
-                .put(
-                        "message",
-                        "An error occurred while processing your Request. See event id " + uuid
-                                + " in the technical log for details."
-                );
+        final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id "
+                + uuid + " in the technical log for details.\"}";
 
-        Assertions.assertEquals(expectedObjectNode, response.body());
+        Assertions.assertEquals(expectedString, response.asJsonString());
     }
 
     @Test

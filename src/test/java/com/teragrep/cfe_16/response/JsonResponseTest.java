@@ -45,8 +45,6 @@
  */
 package com.teragrep.cfe_16.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -70,12 +68,12 @@ class JsonResponseTest {
     }
 
     @Test
-    @DisplayName("body() returns the body")
-    void bodyReturnsTheBody() {
+    @DisplayName("asJsonString() returns the correct message")
+    void asJsonStringReturnsTheCorrectMessage() {
         final Response response = new JsonResponse(HttpStatus.OK, "Body");
 
-        final ObjectNode expectedObjectNode = new ObjectMapper().createObjectNode().put("message", "Body");
-        Assertions.assertEquals(expectedObjectNode, response.body());
+        final String expectedString = "{\"message\":\"Body\"}";
+        Assertions.assertEquals(expectedString, response.asJsonString());
     }
 
     @Test

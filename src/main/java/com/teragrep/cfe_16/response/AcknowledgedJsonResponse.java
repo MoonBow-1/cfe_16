@@ -46,7 +46,6 @@
 package com.teragrep.cfe_16.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,8 +66,8 @@ public final class AcknowledgedJsonResponse implements Response {
         return status;
     }
 
-    public ObjectNode body() {
-        return new ObjectMapper().createObjectNode().put("message", body).put("ackID", ackID);
+    public String asJsonString() {
+        return new ObjectMapper().createObjectNode().put("message", body).put("ackID", ackID).toString();
     }
 
     public String contentType() {
