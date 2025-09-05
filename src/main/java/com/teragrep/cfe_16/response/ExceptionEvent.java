@@ -62,7 +62,7 @@ public final class ExceptionEvent {
     }
 
     public void logException() {
-        LOGGER.error("Event_{}", uuid, throwable);
+        LOGGER.error("Technical error while processing request <[{}]> correlation id <{}>", uuid, throwable);
     }
 
     public UUID uuid() {
