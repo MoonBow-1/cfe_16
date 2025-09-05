@@ -109,10 +109,11 @@ class JsonEventImplTest {
 
     @Test
     @DisplayName("node() throws IllegalStateException if field is null")
-    void asNodeThrowsIllegalStateExceptionIfFieldIsNull() {
+    void asPayloadJsonNodeThrowsIllegalStateExceptionIfFieldIsNull() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(null);
 
-        final Exception exception = Assertions.assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
@@ -122,7 +123,8 @@ class JsonEventImplTest {
     void nodeThrowsIllegalStateExceptionIfNodeIsNull() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(new ObjectMapper().nullNode());
 
-        final Exception exception = Assertions.assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
@@ -132,7 +134,8 @@ class JsonEventImplTest {
     void nodeThrowsIllegalStateExceptionIfNodeIsNotAnObject() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(new ObjectMapper().createArrayNode());
 
-        final Exception exception = Assertions.assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalStateException.class, jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
@@ -145,7 +148,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final JsonNode returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asNode);
+        final JsonNode returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals(jsonNode, returnedNode);
     }

@@ -51,7 +51,7 @@ public interface JsonEvent {
 
     EventMessage asEventMessage();
 
-    JsonNode asNode();
+    JsonNode asPayloadJsonNode();
 
     JsonNode asTimeNode();
 }

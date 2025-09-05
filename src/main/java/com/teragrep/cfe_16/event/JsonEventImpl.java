@@ -60,23 +60,28 @@ public final class JsonEventImpl implements JsonEvent {
     public EventMessage asEventMessage() {
         final EventMessage eventMessage;
         // Event field completely missing
-        if (!this.asNode().has("event")) {
+        if (!this.asPayloadJsonNode().has("event")) {
             eventMessage = new EventMessageStub();
         }
         // Event field contains subfield "message"
-        else if (this.asNode().get("event").isObject() && this.asNode().get("event").has("message")) {
+        else if (
+            this.asPayloadJsonNode().get("event").isObject() && this.asPayloadJsonNode().get("event").has("message")
+        ) {
             if (
-                this.asNode().get("event").get("message").isTextual()
-                        && !Objects.equals(this.asNode().get("event").get("message").asText(), "")
+                this.asPayloadJsonNode().get("event").get("message").isTextual()
+                        && !Objects.equals(this.asPayloadJsonNode().get("event").get("message").asText(), "")
             ) {
-                eventMessage = new EventMessageImpl(this.asNode().get("event").get("message").asText());
+                eventMessage = new EventMessageImpl(this.asPayloadJsonNode().get("event").get("message").asText());
             }
             else {
                 eventMessage = new EventMessageStub();
             }
         }
         // Event field has a String value
-        else if (this.asNode().get("event").isTextual() && !Objects.equals(this.asNode().get("event").asText(), "")) {
+        else if (
+            this.asPayloadJsonNode().get("event").isTextual()
+                    && !Objects.equals(this.asPayloadJsonNode().get("event").asText(), "")
+        ) {
             eventMessage = new EventMessageImpl(this.jsonNode.get("event").asText());
         }
         else {
@@ -87,7 +92,7 @@ public final class JsonEventImpl implements JsonEvent {
     }
 
     @Override
-    public JsonNode asNode() {
+    public JsonNode asPayloadJsonNode() {
         if (this.jsonNode != null && this.jsonNode.isObject()) {
             return this.jsonNode;
         }
