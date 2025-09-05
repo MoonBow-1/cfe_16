@@ -61,7 +61,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -74,7 +74,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -87,7 +87,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -100,7 +100,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         final EventMessage expectedEventMessage = new EventMessageImpl("Valid event");
 

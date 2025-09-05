@@ -61,7 +61,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -74,7 +74,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -89,7 +89,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEvent();
+        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
 
         Assertions.assertTrue(returnedEventMessage::isStub);
     }
@@ -104,7 +104,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedNode = jsonEventImpl.asEvent();
+        final EventMessage returnedNode = jsonEventImpl.asEventMessage();
 
         final EventMessage expectedNode = new EventMessageImpl("Valid event");
 
@@ -113,13 +113,13 @@ class JsonEventImplMessagesTest {
 
     @Test
     @DisplayName("asEvent() returns EventMessage if event field is textual")
-    void asEventReturnsEventMessageIfEventFieldIsTextual() {
+    void asEventMessageReturnsEventMessageIfEventFieldIsTextual() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("event", "Valid event");
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedNode = jsonEventImpl.asEvent();
+        final EventMessage returnedNode = jsonEventImpl.asEventMessage();
 
         final EventMessage expectedNode = new EventMessageImpl("Valid event");
 

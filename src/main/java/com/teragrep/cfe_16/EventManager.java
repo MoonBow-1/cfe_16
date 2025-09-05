@@ -156,7 +156,7 @@ public class EventManager {
                 previousEvent = eventData;
                 final JsonNode jsonNode = new ObjectMapper().readTree(parser.next().toString());
                 final JsonEvent jsonEvent = new JsonEventImpl(jsonNode);
-                eventData.setEvent(jsonEvent.asEvent());
+                eventData.setEvent(jsonEvent.asEventMessage());
                 eventData = handleTime(eventData, jsonNode, previousEvent);
                 eventData = assignMetaData(eventData, authToken, channel);
 

@@ -57,7 +57,7 @@ public final class JsonEventImpl implements JsonEvent {
     }
 
     @Override
-    public EventMessage asEvent() {
+    public EventMessage asEventMessage() {
         final EventMessage eventMessage;
         // Event field completely missing
         if (!this.asNode().has("event")) {
