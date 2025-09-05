@@ -58,9 +58,10 @@ public final class JsonEventImpl implements JsonEvent {
 
     @Override
     public EventMessage asEvent() {
+        final EventMessage eventMessage;
         // Event field completely missing
         if (!this.asNode().has("event")) {
-            return new EventMessageStub();
+            eventMessage = new EventMessageStub();
         }
         // Event field contains subfield "message"
         else if (this.asNode().get("event").isObject() && this.asNode().get("event").has("message")) {
@@ -68,14 +69,21 @@ public final class JsonEventImpl implements JsonEvent {
                 this.asNode().get("event").get("message").isTextual()
                         && !Objects.equals(this.asNode().get("event").get("message").asText(), "")
             ) {
-                return new EventMessageImpl(this.asNode().get("event").get("message").asText());
+                eventMessage = new EventMessageImpl(this.asNode().get("event").get("message").asText());
+            }
+            else {
+                eventMessage = new EventMessageStub();
             }
         }
         // Event field has a String value
         else if (this.asNode().get("event").isTextual() && !Objects.equals(this.asNode().get("event").asText(), "")) {
-            return new EventMessageImpl(this.jsonNode.get("event").asText());
+            eventMessage = new EventMessageImpl(this.jsonNode.get("event").asText());
         }
-        return new EventMessageStub();
+        else {
+            eventMessage = new EventMessageStub();
+        }
+
+        return eventMessage;
     }
 
     @Override
