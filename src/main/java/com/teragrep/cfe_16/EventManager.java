@@ -56,6 +56,7 @@ import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.event.EventMessageStub;
 import com.teragrep.cfe_16.event.JsonEvent;
 import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
@@ -151,11 +152,14 @@ public class EventManager {
         HttpEventData eventData = new HttpEventData();
         final Converter converter = new Converter(headerInfo);
         final List<SyslogMessage> syslogMessages = new ArrayList<>();
+
+        // Shared EventMessageStub that is used in case parsed Event is a Stub
+        final EventMessageStub eventMessageStub = new EventMessageStub();
         while (parser.hasNext()) {
             try {
                 previousEvent = eventData;
                 final JsonNode jsonNode = new ObjectMapper().readTree(parser.next().toString());
-                final JsonEvent jsonEvent = new JsonEventImpl(jsonNode);
+                final JsonEvent jsonEvent = new JsonEventImpl(jsonNode, eventMessageStub);
                 eventData.setEvent(jsonEvent.asEventMessage());
                 eventData = handleTime(eventData, jsonNode, previousEvent);
                 eventData = assignMetaData(eventData, authToken, channel);

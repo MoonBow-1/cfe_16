@@ -51,9 +51,15 @@ import java.util.Objects;
 public final class JsonEventImpl implements JsonEvent {
 
     private final JsonNode jsonNode;
+    private final EventMessageStub eventMessageStub;
+
+    public JsonEventImpl(final JsonNode jsonNode, final EventMessageStub eventMessageStub) {
+        this.jsonNode = jsonNode;
+        this.eventMessageStub = eventMessageStub;
+    }
 
     public JsonEventImpl(final JsonNode jsonNode) {
-        this.jsonNode = jsonNode;
+        this(jsonNode, new EventMessageStub());
     }
 
     @Override
@@ -61,7 +67,7 @@ public final class JsonEventImpl implements JsonEvent {
         final EventMessage eventMessage;
         // Event field completely missing
         if (!this.asPayloadJsonNode().has("event")) {
-            eventMessage = new EventMessageStub();
+            eventMessage = eventMessageStub;
         }
         // Event field contains subfield "message"
         else if (
@@ -74,7 +80,7 @@ public final class JsonEventImpl implements JsonEvent {
                 eventMessage = new EventMessageImpl(this.asPayloadJsonNode().get("event").get("message").asText());
             }
             else {
-                eventMessage = new EventMessageStub();
+                eventMessage = eventMessageStub;
             }
         }
         // Event field has a String value
@@ -85,7 +91,7 @@ public final class JsonEventImpl implements JsonEvent {
             eventMessage = new EventMessageImpl(this.jsonNode.get("event").asText());
         }
         else {
-            eventMessage = new EventMessageStub();
+            eventMessage = eventMessageStub;
         }
 
         return eventMessage;
@@ -111,11 +117,11 @@ public final class JsonEventImpl implements JsonEvent {
         }
 
         final JsonEventImpl that = (JsonEventImpl) o;
-        return Objects.equals(jsonNode, that.jsonNode);
+        return Objects.equals(jsonNode, that.jsonNode) && Objects.equals(eventMessageStub, that.eventMessageStub);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(jsonNode);
+        return Objects.hash(jsonNode, eventMessageStub);
     }
 }

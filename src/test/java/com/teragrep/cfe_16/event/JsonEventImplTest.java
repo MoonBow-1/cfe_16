@@ -47,11 +47,18 @@ package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class JsonEventImplTest {
+
+    @Test
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(JsonEventImpl.class).verify();
+    }
 
     @Test
     @DisplayName("event() returns EventStub if node does not have event node")
@@ -151,33 +158,5 @@ class JsonEventImplTest {
         final JsonNode returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals(jsonNode, returnedNode);
-    }
-
-    @Test
-    @DisplayName("Happy equals test")
-    void happyEqualsTest() {
-        final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode jsonNode = mapper.createObjectNode().set("event", mapper.createObjectNode());
-
-        final JsonEventImpl jsonEventImpl1 = new JsonEventImpl(jsonNode);
-
-        final JsonEventImpl jsonEventImpl2 = new JsonEventImpl(jsonNode);
-
-        Assertions.assertEquals(jsonEventImpl1, jsonEventImpl2);
-    }
-
-    @Test
-    @DisplayName("Unhappy equals test")
-    void unhappyEqualsTest() {
-        final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode jsonNode = mapper.createObjectNode().set("event", mapper.createObjectNode());
-
-        final JsonEventImpl jsonEventImpl1 = new JsonEventImpl(jsonNode);
-
-        final JsonEventImpl jsonEventImpl2 = new JsonEventImpl(
-                mapper.createObjectNode().set("event", mapper.createObjectNode().put("data", "data"))
-        );
-
-        Assertions.assertNotEquals(jsonEventImpl1, jsonEventImpl2);
     }
 }
