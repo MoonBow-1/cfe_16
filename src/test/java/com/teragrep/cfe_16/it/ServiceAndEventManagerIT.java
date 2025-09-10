@@ -347,10 +347,13 @@ public class ServiceAndEventManagerIT {
         Assertions
                 .assertEquals(
                         expectedResponse,
-                        eventManager
-                                .convertData(
-                                        new MockHttpServletRequest(), authToken1, channel1, allEventsInJson, headerInfo,
-                                        acknowledgements
+                        Assertions
+                                .assertDoesNotThrow(
+                                        () -> eventManager
+                                                .convertData(
+                                                        authToken1, channel1, allEventsInJson, headerInfo,
+                                                        acknowledgements
+                                                )
                                 ),
                         "Should get a JSON with fields text, code and ackID"
                 );
@@ -371,10 +374,13 @@ public class ServiceAndEventManagerIT {
         Assertions
                 .assertEquals(
                         expectedResponse,
-                        eventManager
-                                .convertData(
-                                        new MockHttpServletRequest(), authToken1, defaultChannel, allEventsInJson,
-                                        headerInfo, acknowledgements
+                        Assertions
+                                .assertDoesNotThrow(
+                                        () -> eventManager
+                                                .convertData(
+                                                        authToken1, defaultChannel, allEventsInJson, headerInfo,
+                                                        acknowledgements
+                                                )
                                 ),
                         "Should get a JSON with fields text and code."
                 );
@@ -389,11 +395,7 @@ public class ServiceAndEventManagerIT {
     public void unsupportedOperationExceptionThrownIfEventIsMissing() {
         Assertions.assertThrows(UnsupportedOperationException.class, () -> {
             final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-            eventManager
-                    .convertData(
-                            new MockHttpServletRequest(), authToken1, channel1, allEventsInJson, headerInfo,
-                            acknowledgements
-                    );
+            eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements);
         });
     }
 
@@ -405,11 +407,7 @@ public class ServiceAndEventManagerIT {
     public void unsupportedOperationExceptionThrownIfEventIsEmpty() {
         Assertions.assertThrows(UnsupportedOperationException.class, () -> {
             final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-            eventManager
-                    .convertData(
-                            new MockHttpServletRequest(), authToken1, channel1, allEventsInJson, headerInfo,
-                            acknowledgements
-                    );
+            eventManager.convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements);
         });
     }
 
@@ -580,10 +578,10 @@ public class ServiceAndEventManagerIT {
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
         assertEquals(
                 "Should get a JSON with fields text, code and ackID", supposedResponse,
-                eventManager
-                        .convertData(
-                                new MockHttpServletRequest(), authToken1, channel1, allEventsInJson, headerInfo,
-                                acknowledgements
+                Assertions
+                        .assertDoesNotThrow(
+                                () -> eventManager
+                                        .convertData(authToken1, channel1, allEventsInJson, headerInfo, acknowledgements)
                         )
                         .toString()
         );
@@ -600,10 +598,13 @@ public class ServiceAndEventManagerIT {
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
         assertEquals(
                 "Should get a JSON with fields text, code and ackID", supposedResponse,
-                eventManager
-                        .convertData(
-                                new MockHttpServletRequest(), authToken1, defaultChannel, allEventsInJson, headerInfo,
-                                acknowledgements
+                Assertions
+                        .assertDoesNotThrow(
+                                () -> eventManager
+                                        .convertData(
+                                                authToken1, defaultChannel, allEventsInJson, headerInfo,
+                                                acknowledgements
+                                        )
                         )
                         .toString()
         );
@@ -623,14 +624,11 @@ public class ServiceAndEventManagerIT {
                 HttpStatus.BAD_REQUEST,
                 new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), new Throwable())
         );
+
+        final MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addHeader("authorization", "AUTH_TOKEN_12223");
         final Response actualResponse = Assertions
-                .assertDoesNotThrow(
-                        () -> eventManager
-                                .convertData(
-                                        new MockHttpServletRequest(), authToken1, defaultChannel, allEventsInJson,
-                                        headerInfo, acknowledgements
-                                )
-                );
+                .assertDoesNotThrow(() -> service.sendEvents(request, Session.DEFAULT_CHANNEL, allEventsInJson));
 
         Assertions.assertEquals(expectedResponse.status(), actualResponse.status());
 

@@ -49,8 +49,8 @@ import com.cloudbees.syslog.SyslogMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonStreamParser;
+import com.google.gson.JsonSyntaxException;
 import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
@@ -63,13 +63,8 @@ import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
-import com.teragrep.cfe_16.response.ExceptionEvent;
-import com.teragrep.cfe_16.response.ExceptionEventContext;
-import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
-import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,13 +117,12 @@ public class EventManager {
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
     public Response convertData(
-            final HttpServletRequest request,
             final String authToken,
             final String channel,
             final String allEventsInJson,
             final HeaderInfo headerInfo,
             final Acknowledgements acknowledgements
-    ) {
+    ) throws JsonProcessingException, JsonSyntaxException {
         HttpEventData previousEvent;
 
         acknowledgements.initializeContext(authToken, channel);
@@ -159,29 +153,16 @@ public class EventManager {
         // Shared EventMessageStub that is used in case parsed Event is a Stub
         final EventMessageStub eventMessageStub = new EventMessageStub();
         while (parser.hasNext()) {
-            try {
-                previousEvent = eventData;
-                final String eventAsString = parser.next().toString();
-                final JsonNode jsonNode = new ObjectMapper().readTree(eventAsString);
-                final JsonEvent jsonEvent = new JsonEventImpl(jsonNode, eventMessageStub);
-                eventData.setEvent(jsonEvent.asEventMessage());
-                eventData = handleTime(eventData, jsonNode, previousEvent);
-                eventData = assignMetaData(eventData, authToken, channel);
+            previousEvent = eventData;
+            final String eventAsString = parser.next().toString();
+            final JsonNode jsonNode = new ObjectMapper().readTree(eventAsString);
+            final JsonEvent jsonEvent = new JsonEventImpl(jsonNode, eventMessageStub);
+            eventData.setEvent(jsonEvent.asEventMessage());
+            eventData = handleTime(eventData, jsonNode, previousEvent);
+            eventData = assignMetaData(eventData, authToken, channel);
 
-                final SyslogMessage syslogMessage = converter.httpToSyslog(eventData);
-                syslogMessages.add(syslogMessage);
-            }
-            catch (final JsonProcessingException | JsonParseException e) {
-                final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
-                        headerInfo,
-                        request.getHeader("user-agent"),
-                        request.getRequestURI(),
-                        request.getRemoteHost()
-                );
-                final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
-                event.logException();
-                return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
-            }
+            final SyslogMessage syslogMessage = converter.httpToSyslog(eventData);
+            syslogMessages.add(syslogMessage);
         }
 
         // create a new object to avoid blocking of threads because

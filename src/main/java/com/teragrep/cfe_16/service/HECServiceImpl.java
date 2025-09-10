@@ -45,9 +45,11 @@
  */
 package com.teragrep.cfe_16.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonSyntaxException;
 import com.teragrep.cfe_16.*;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.Session;
@@ -64,8 +66,12 @@ import com.teragrep.cfe_16.exceptionhandling.AuthenticationTokenMissingException
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
+import com.teragrep.cfe_16.response.ExceptionEvent;
+import com.teragrep.cfe_16.response.ExceptionEventContext;
+import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.Response;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,8 +181,20 @@ public class HECServiceImpl implements HECService {
         }
 
         // TODO: find a nice way of not passing Acknowledgements
-        return this.eventManager
-                .convertData(request, authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        try {
+            return this.eventManager.convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        }
+        catch (final JsonProcessingException | JsonSyntaxException e) {
+            final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
+                    headerInfo,
+                    request.getHeader("user-agent"),
+                    request.getRequestURI(),
+                    request.getRemoteHost()
+            );
+            final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
+            event.logException();
+            return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
+        }
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)
