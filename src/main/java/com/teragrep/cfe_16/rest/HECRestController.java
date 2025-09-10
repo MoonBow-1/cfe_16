@@ -83,7 +83,7 @@ public class HECRestController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public String sendEvents(
+    public ResponseEntity<JsonNode> sendEvents(
             HttpServletRequest request,
             @RequestBody MultiValueMap body,
             @RequestParam(required = false) String channel
@@ -100,7 +100,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.asJsonString();
+        return response.asJsonNodeResponseEntity();
     }
 
     @RequestMapping(
@@ -108,7 +108,7 @@ public class HECRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public String sendEvents(
+    public ResponseEntity<JsonNode> sendEvents(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
@@ -121,7 +121,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.asJsonString();
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
@@ -193,7 +193,7 @@ public class HECRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
-    public String sendEventsWithFormatOption(
+    public ResponseEntity<JsonNode> sendEventsWithFormatOption(
             HttpServletRequest request,
             @RequestBody MultiValueMap body,
             @RequestParam(required = false) String channel
@@ -211,7 +211,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.asJsonString();
+        return response.asJsonNodeResponseEntity();
     }
 
     @RequestMapping(
@@ -219,7 +219,7 @@ public class HECRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public String sendEventsWithFormatOption(
+    public ResponseEntity<JsonNode> sendEventsWithFormatOption(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
@@ -235,12 +235,12 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.asJsonString();
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
     @PostMapping("services/collector/event/1.0")
-    public String sendEventsWithProtocolVersion(
+    public ResponseEntity<JsonNode> sendEventsWithProtocolVersion(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
@@ -256,7 +256,7 @@ public class HECRestController {
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}¦ nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response.asJsonString();
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)

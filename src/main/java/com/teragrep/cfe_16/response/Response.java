@@ -45,13 +45,15 @@
  */
 package com.teragrep.cfe_16.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 public interface Response {
 
     public abstract HttpStatus status();
 
-    public abstract String asJsonString();
+    public abstract ResponseEntity<JsonNode> asJsonNodeResponseEntity();
 
     public abstract String contentType();
 }

@@ -45,10 +45,12 @@
  */
 package com.teragrep.cfe_16.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 public final class ExceptionJsonResponse implements Response {
 
@@ -64,16 +66,17 @@ public final class ExceptionJsonResponse implements Response {
         return status;
     }
 
-    public String asJsonString() {
+    public ResponseEntity<JsonNode> asJsonNodeResponseEntity() {
         final ObjectMapper jsonObjectBuilder = new ObjectMapper();
-        return jsonObjectBuilder
+        final var jsonNode = jsonObjectBuilder
                 .createObjectNode()
                 .put(
                         "message",
                         "An error occurred while processing your Request. See event id in the technical log for details."
                 )
-                .put("id", exceptionEvent.uuid().toString())
-                .toString();
+                .put("id", exceptionEvent.uuid().toString());
+
+        return ResponseEntity.badRequest().body(jsonNode);
     }
 
     public String contentType() {

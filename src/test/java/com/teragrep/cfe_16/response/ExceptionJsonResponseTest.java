@@ -45,6 +45,7 @@
  */
 package com.teragrep.cfe_16.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
@@ -90,7 +91,7 @@ class ExceptionJsonResponseTest {
 
     @Test
     @DisplayName("asJsonString() returns the correct message")
-    void asJsonStringReturnsTheCorrectMessage() {
+    void asJsonNodeResponseEntityReturnsTheCorrectMessage() {
         final UUID uuid = UUID.randomUUID();
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
@@ -113,7 +114,9 @@ class ExceptionJsonResponseTest {
         final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id in the technical log for details.\",\"id\":\""
                 + uuid + "\"}";
 
-        Assertions.assertEquals(expectedString, response.asJsonString());
+        final JsonNode actualJsonNode = response.asJsonNodeResponseEntity().getBody();
+        Assertions.assertNotNull(actualJsonNode);
+        Assertions.assertEquals(expectedString, actualJsonNode.toString());
     }
 
     @Test

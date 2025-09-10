@@ -45,6 +45,7 @@
  */
 package com.teragrep.cfe_16.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -69,11 +70,13 @@ class AcknowledgedJsonResponseTest {
 
     @Test
     @DisplayName("asJsonString() returns the correct message")
-    void asJsonStringReturnsTheCorrectMessage() {
+    void asJsonNodeResponseEntityReturnsTheCorrectMessage() {
         final Response response = new AcknowledgedJsonResponse(HttpStatus.OK, "Body", 1);
 
-        final String expectedObjectNode = "{\"message\":\"Body\",\"ackID\":1}";
-        Assertions.assertEquals(expectedObjectNode, response.asJsonString());
+        final String expectedString = "{\"message\":\"Body\",\"ackID\":1}";
+        final JsonNode actualJsonNode = response.asJsonNodeResponseEntity().getBody();
+        Assertions.assertNotNull(actualJsonNode);
+        Assertions.assertEquals(expectedString, actualJsonNode.toString());
     }
 
     @Test
