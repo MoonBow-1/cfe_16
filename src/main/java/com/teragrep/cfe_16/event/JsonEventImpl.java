@@ -109,7 +109,7 @@ public final class JsonEventImpl implements JsonEvent {
     }
 
     @Override
-    public JsonNode asTimeNode() {
+    public JsonNode asTimeJsonNode() {
         return this.jsonNode.get("time");
     }
 
