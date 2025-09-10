@@ -45,13 +45,16 @@
  */
 package com.teragrep.cfe_16.response;
 
+import com.teragrep.cfe_16.bo.HeaderInfo;
+import com.teragrep.cfe_16.bo.XForwardedForStub;
+import com.teragrep.cfe_16.bo.XForwardedHostStub;
+import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import java.util.UUID;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.mock.web.MockHttpServletRequest;
 
 class ExceptionJsonResponseTest {
 
@@ -66,7 +69,20 @@ class ExceptionJsonResponseTest {
     void statusReturnsTheStatus() {
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
-                new ExceptionEvent(new MockHttpServletRequest(), UUID.randomUUID(), new Throwable())
+                new ExceptionEvent(
+                        new ExceptionEventContext(
+                                new HeaderInfo(
+                                        new XForwardedForStub(),
+                                        new XForwardedHostStub(),
+                                        new XForwardedProtoStub()
+                                ),
+                                "user-agent",
+                                "uriPath",
+                                "host"
+                        ),
+                        UUID.randomUUID(),
+                        new Throwable()
+                )
         );
 
         Assertions.assertEquals(HttpStatus.OK, response.status());
@@ -78,7 +94,20 @@ class ExceptionJsonResponseTest {
         final UUID uuid = UUID.randomUUID();
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
-                new ExceptionEvent(new MockHttpServletRequest(), uuid, new Throwable())
+                new ExceptionEvent(
+                        new ExceptionEventContext(
+                                new HeaderInfo(
+                                        new XForwardedForStub(),
+                                        new XForwardedHostStub(),
+                                        new XForwardedProtoStub()
+                                ),
+                                "user-agent",
+                                "uriPath",
+                                "host"
+                        ),
+                        uuid,
+                        new Throwable()
+                )
         );
 
         final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id in the technical log for details.\",\"id\":\""
@@ -92,7 +121,20 @@ class ExceptionJsonResponseTest {
     void contentTypeReturnsTheContentType() {
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
-                new ExceptionEvent(new MockHttpServletRequest(), UUID.randomUUID(), new Throwable())
+                new ExceptionEvent(
+                        new ExceptionEventContext(
+                                new HeaderInfo(
+                                        new XForwardedForStub(),
+                                        new XForwardedHostStub(),
+                                        new XForwardedProtoStub()
+                                ),
+                                "user-agent",
+                                "uriPath",
+                                "host"
+                        ),
+                        UUID.randomUUID(),
+                        new Throwable()
+                )
         );
 
         Assertions.assertEquals("application/json", response.contentType());

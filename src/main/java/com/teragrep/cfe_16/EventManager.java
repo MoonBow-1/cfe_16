@@ -64,6 +64,7 @@ import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.ExceptionEvent;
+import com.teragrep.cfe_16.response.ExceptionEventContext;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
@@ -171,7 +172,13 @@ public class EventManager {
                 syslogMessages.add(syslogMessage);
             }
             catch (final JsonProcessingException | JsonParseException e) {
-                final ExceptionEvent event = new ExceptionEvent(request, UUID.randomUUID(), e);
+                final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
+                        headerInfo,
+                        request.getHeader("user-agent"),
+                        request.getRequestURI(),
+                        request.getRemoteHost()
+                );
+                final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
                 event.logException();
                 return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
             }

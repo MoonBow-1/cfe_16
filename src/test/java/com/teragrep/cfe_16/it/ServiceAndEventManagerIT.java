@@ -58,6 +58,7 @@ import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.*;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.ExceptionEvent;
+import com.teragrep.cfe_16.response.ExceptionEventContext;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
@@ -612,10 +613,15 @@ public class ServiceAndEventManagerIT {
     @DisplayName("convertData() method returns ExceptionJsonReport if event was not read")
     void convertDataMethodReturnsExceptionJsonReportIfEventWasNotRead() {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {\"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
-
+        final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
+                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub()),
+                "user-agent",
+                "uriPath",
+                "host"
+        );
         final Response expectedResponse = new ExceptionJsonResponse(
                 HttpStatus.BAD_REQUEST,
-                new ExceptionEvent(new MockHttpServletRequest(), UUID.randomUUID(), new Throwable())
+                new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), new Throwable())
         );
         final Response actualResponse = Assertions
                 .assertDoesNotThrow(

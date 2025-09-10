@@ -43,30 +43,37 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.response;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import com.teragrep.cfe_16.bo.HeaderInfo;
+import com.teragrep.cfe_16.bo.XForwardedForStub;
+import com.teragrep.cfe_16.bo.XForwardedHostStub;
+import com.teragrep.cfe_16.bo.XForwardedProtoStub;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-    @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+class ExceptionEventContextTest {
+
+    @Test
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(ExceptionEventContext.class).verify();
     }
 
-    @Override
-    public int hashCode() {
-        return 231987;
-    }
+    @Test
+    @DisplayName("toString returns expected String")
+    void toStringReturnsExpectedString() {
+        final String expectedValue = "ExceptionEventContext{headerInfo=HeaderInfo{xForwardedFor=com.teragrep.cfe_16.bo.XForwardedForStub@f10da, xForwardedHost=com.teragrep.cfe_16.bo.XForwardedHostStub@3b90c, xForwardedProto=com.teragrep.cfe_16.bo.XForwardedProtoStub@38a33}, userAgent='user agent 1', uriPath='uri/path', host='localhost'}";
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
+        final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
+                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub()),
+                "user agent 1",
+                "uri/path",
+                "localhost"
+        );
 
-    @Override
-    public boolean isStub() {
-        return true;
+        Assertions.assertEquals(expectedValue, exceptionEventContext.toString());
     }
 }

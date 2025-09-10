@@ -45,7 +45,6 @@
  */
 package com.teragrep.cfe_16.response;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -54,18 +53,26 @@ import org.slf4j.LoggerFactory;
 public final class ExceptionEvent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionEvent.class);
-    private final HttpServletRequest request;
+    private final ExceptionEventContext exceptionEventContext;
     private final UUID uuid;
     private final Throwable throwable;
 
-    public ExceptionEvent(final HttpServletRequest request, final UUID uuid, final Throwable throwable) {
-        this.request = request;
+    public ExceptionEvent(
+            final ExceptionEventContext exceptionEventContext,
+            final UUID uuid,
+            final Throwable throwable
+    ) {
+        this.exceptionEventContext = exceptionEventContext;
         this.uuid = uuid;
         this.throwable = throwable;
     }
 
     public void logException() {
-        LOGGER.error("Technical error while processing request <[{}]> correlation id <{}>", request, uuid, throwable);
+        LOGGER
+                .error(
+                        "Technical error while processing request <[{}]> correlation id <{}>", exceptionEventContext,
+                        uuid, throwable
+                );
     }
 
     public UUID uuid() {
@@ -79,12 +86,12 @@ public final class ExceptionEvent {
         }
 
         final ExceptionEvent event = (ExceptionEvent) o;
-        return Objects.equals(request, event.request) && Objects.equals(uuid, event.uuid)
+        return Objects.equals(exceptionEventContext, event.exceptionEventContext) && Objects.equals(uuid, event.uuid)
                 && Objects.equals(throwable, event.throwable);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(request, uuid, throwable);
+        return Objects.hash(exceptionEventContext, uuid, throwable);
     }
 }
