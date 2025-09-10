@@ -70,9 +70,9 @@ public final class ExceptionJsonResponse implements Response {
                 .createObjectNode()
                 .put(
                         "message",
-                        "An error occurred while processing your Request. See event id " + exceptionEvent.uuid()
-                                + " in the technical log for details."
+                        "An error occurred while processing your Request. See event id in the technical log for details."
                 )
+                .put("id", exceptionEvent.uuid().toString())
                 .toString();
     }
 

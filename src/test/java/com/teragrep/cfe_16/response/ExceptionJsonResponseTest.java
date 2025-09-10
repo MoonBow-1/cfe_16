@@ -77,8 +77,8 @@ class ExceptionJsonResponseTest {
         final UUID uuid = UUID.randomUUID();
         final Response response = new ExceptionJsonResponse(HttpStatus.OK, new ExceptionEvent(uuid, new Throwable()));
 
-        final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id "
-                + uuid + " in the technical log for details.\"}";
+        final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id in the technical log for details.\",\"id\":\""
+                + uuid + "\"}";
 
         Assertions.assertEquals(expectedString, response.asJsonString());
     }
