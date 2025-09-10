@@ -158,13 +158,15 @@ public class EventManager {
         while (parser.hasNext()) {
             try {
                 previousEvent = eventData;
-                final JsonNode jsonNode = new ObjectMapper().readTree(parser.next().toString());
+                final String eventAsString = parser.next().toString();
+                final JsonNode jsonNode = new ObjectMapper().readTree(eventAsString);
                 final JsonEvent jsonEvent = new JsonEventImpl(jsonNode, eventMessageStub);
                 eventData.setEvent(jsonEvent.asEventMessage());
                 eventData = handleTime(eventData, jsonNode, previousEvent);
                 eventData = assignMetaData(eventData, authToken, channel);
 
-                syslogMessages.add(converter.httpToSyslog(eventData));
+                final SyslogMessage syslogMessage = converter.httpToSyslog(eventData);
+                syslogMessages.add(syslogMessage);
             }
             catch (final JsonProcessingException | JsonParseException e) {
                 final ExceptionEvent event = new ExceptionEvent(UUID.randomUUID(), e);
