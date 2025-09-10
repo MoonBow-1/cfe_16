@@ -46,7 +46,6 @@
 package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Objects;
 
 public final class JsonEventImpl implements JsonEvent {
@@ -103,9 +102,7 @@ public final class JsonEventImpl implements JsonEvent {
         if (this.jsonNode != null && this.jsonNode.isObject()) {
             return this.jsonNode;
         }
-        else {
-            return new ObjectMapper().createObjectNode();
-        }
+        throw new IllegalArgumentException("jsonEvent node not valid");
     }
 
     @Override

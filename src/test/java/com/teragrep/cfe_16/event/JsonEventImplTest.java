@@ -115,33 +115,36 @@ class JsonEventImplTest {
     }
 
     @Test
-    @DisplayName("node() returns empty JsonNode if field is null")
-    void asPayloadJsonNodereturnsEmptyJsonNodeIfFieldIsNull() {
+    @DisplayName("node() throws IllegalArgumentException if field is null")
+    void asPayloadJsonNodeThrowsIllegalArgumentExceptionIfFieldIsNull() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(null);
 
-        final JsonNode jsonNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalArgumentException.class, jsonEventImpl::asPayloadJsonNode);
 
-        Assertions.assertEquals(new ObjectMapper().createObjectNode(), jsonNode);
+        Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
 
     @Test
-    @DisplayName("node() returns empty JsonNode if node is null")
-    void nodeReturnsEmptyJsonNodeIfNodeIsNull() {
+    @DisplayName("node() throws IllegalArgumentException if node is null")
+    void nodeThrowsIllegalArgumentExceptionIfNodeIsNull() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(new ObjectMapper().nullNode());
 
-        final JsonNode jsonNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalArgumentException.class, jsonEventImpl::asPayloadJsonNode);
 
-        Assertions.assertEquals(new ObjectMapper().createObjectNode(), jsonNode);
+        Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
 
     @Test
-    @DisplayName("node() returns empty JsonNode if node is not an object")
-    void nodeReturnsEmptyJsonNodeIfNodeIsNotAnObject() {
+    @DisplayName("node() throws IllegalArgumentException if node is not an object")
+    void nodeThrowsIllegalArgumentExceptionIfNodeIsNotAnObject() {
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(new ObjectMapper().createArrayNode());
 
-        final JsonNode jsonNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
+        final Exception exception = Assertions
+                .assertThrowsExactly(IllegalArgumentException.class, jsonEventImpl::asPayloadJsonNode);
 
-        Assertions.assertEquals(new ObjectMapper().createObjectNode(), jsonNode);
+        Assertions.assertEquals("jsonEvent node not valid", exception.getMessage());
     }
 
     @Test
