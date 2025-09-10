@@ -67,6 +67,7 @@ import com.teragrep.cfe_16.response.ExceptionEvent;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,6 +121,7 @@ public class EventManager {
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
     public Response convertData(
+            final HttpServletRequest request,
             final String authToken,
             final String channel,
             final String allEventsInJson,
@@ -169,7 +171,7 @@ public class EventManager {
                 syslogMessages.add(syslogMessage);
             }
             catch (final JsonProcessingException | JsonParseException e) {
-                final ExceptionEvent event = new ExceptionEvent(UUID.randomUUID(), e);
+                final ExceptionEvent event = new ExceptionEvent(request, UUID.randomUUID(), e);
                 event.logException();
                 return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
             }

@@ -51,6 +51,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 class ExceptionEventTest {
 
@@ -64,7 +65,7 @@ class ExceptionEventTest {
     @DisplayName("uuid() returns the UUID")
     void uuidReturnsTheUuid() {
         final UUID uuid = UUID.randomUUID();
-        final ExceptionEvent exceptionEvent = new ExceptionEvent(uuid, new Throwable());
+        final ExceptionEvent exceptionEvent = new ExceptionEvent(new MockHttpServletRequest(), uuid, new Throwable());
 
         Assertions.assertEquals(uuid, exceptionEvent.uuid());
     }

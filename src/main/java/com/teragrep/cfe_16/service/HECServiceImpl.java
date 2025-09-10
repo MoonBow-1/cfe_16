@@ -175,7 +175,8 @@ public class HECServiceImpl implements HECService {
         }
 
         // TODO: find a nice way of not passing Acknowledgements
-        return this.eventManager.convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        return this.eventManager
+                .convertData(request, authToken, channel, eventInJson, headerInfo, this.acknowledgements);
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)

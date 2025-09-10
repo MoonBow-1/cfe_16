@@ -51,6 +51,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 class ExceptionJsonResponseTest {
 
@@ -65,7 +66,7 @@ class ExceptionJsonResponseTest {
     void statusReturnsTheStatus() {
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
+                new ExceptionEvent(new MockHttpServletRequest(), UUID.randomUUID(), new Throwable())
         );
 
         Assertions.assertEquals(HttpStatus.OK, response.status());
@@ -75,7 +76,10 @@ class ExceptionJsonResponseTest {
     @DisplayName("asJsonString() returns the correct message")
     void asJsonStringReturnsTheCorrectMessage() {
         final UUID uuid = UUID.randomUUID();
-        final Response response = new ExceptionJsonResponse(HttpStatus.OK, new ExceptionEvent(uuid, new Throwable()));
+        final Response response = new ExceptionJsonResponse(
+                HttpStatus.OK,
+                new ExceptionEvent(new MockHttpServletRequest(), uuid, new Throwable())
+        );
 
         final String expectedString = "{\"message\":\"An error occurred while processing your Request. See event id in the technical log for details.\",\"id\":\""
                 + uuid + "\"}";
@@ -88,7 +92,7 @@ class ExceptionJsonResponseTest {
     void contentTypeReturnsTheContentType() {
         final Response response = new ExceptionJsonResponse(
                 HttpStatus.OK,
-                new ExceptionEvent(UUID.randomUUID(), new Throwable())
+                new ExceptionEvent(new MockHttpServletRequest(), UUID.randomUUID(), new Throwable())
         );
 
         Assertions.assertEquals("application/json", response.contentType());
