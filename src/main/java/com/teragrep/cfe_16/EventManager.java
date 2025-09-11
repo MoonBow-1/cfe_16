@@ -68,7 +68,6 @@ import com.teragrep.cfe_16.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
@@ -184,10 +183,10 @@ public class EventManager {
         }
 
         if (shouldAck) {
-            return new AcknowledgedJsonResponse(HttpStatus.OK, "Success", ackId);
+            return new AcknowledgedJsonResponse("Success", ackId);
         }
         else {
-            return new JsonResponse(HttpStatus.OK, "Success");
+            return new JsonResponse("Success");
         }
     }
 

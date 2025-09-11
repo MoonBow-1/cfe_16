@@ -193,7 +193,7 @@ public class HECServiceImpl implements HECService {
             );
             final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
             event.logException();
-            return new ExceptionJsonResponse(HttpStatus.BAD_REQUEST, event);
+            return new ExceptionJsonResponse(event);
         }
     }
 

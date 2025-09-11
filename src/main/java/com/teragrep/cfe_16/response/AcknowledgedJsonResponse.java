@@ -48,33 +48,22 @@ package com.teragrep.cfe_16.response;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Objects;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 public final class AcknowledgedJsonResponse implements Response {
 
-    private final HttpStatus status;
     private final String body;
     private final int ackID;
 
-    public AcknowledgedJsonResponse(final HttpStatus status, final String body, final int ackID) {
-        this.status = status;
+    public AcknowledgedJsonResponse(final String body, final int ackID) {
         this.body = body;
         this.ackID = ackID;
     }
 
-    public HttpStatus status() {
-        return status;
-    }
-
     public ResponseEntity<JsonNode> asJsonNodeResponseEntity() {
         final var jsonNode = new ObjectMapper().createObjectNode().put("message", body).put("ackID", ackID);
-        return ResponseEntity.ok().body(jsonNode);
-    }
-
-    public String contentType() {
-        return MediaType.APPLICATION_JSON_VALUE;
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(jsonNode);
     }
 
     @Override
@@ -84,11 +73,11 @@ public final class AcknowledgedJsonResponse implements Response {
         }
 
         final AcknowledgedJsonResponse that = (AcknowledgedJsonResponse) o;
-        return ackID == that.ackID && status == that.status && Objects.equals(body, that.body);
+        return ackID == that.ackID && Objects.equals(body, that.body);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, body, ackID);
+        return Objects.hash(body, ackID);
     }
 }

@@ -46,11 +46,14 @@
 package com.teragrep.cfe_16.response;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import java.util.List;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
 class JsonResponseTest {
 
@@ -61,17 +64,9 @@ class JsonResponseTest {
     }
 
     @Test
-    @DisplayName("status() returns the status")
-    void statusReturnsTheStatus() {
-        final Response response = new JsonResponse(HttpStatus.OK, "Body");
-
-        Assertions.assertEquals(HttpStatus.OK, response.status());
-    }
-
-    @Test
-    @DisplayName("asJsonString() returns the correct message")
+    @DisplayName("asJsonNodeResponseEntity() returns the correct message")
     void asJsonNodeResponseEntityReturnsTheCorrectMessage() {
-        final Response response = new JsonResponse(HttpStatus.OK, "Body");
+        final Response response = new JsonResponse("Body");
 
         final String expectedString = "{\"message\":\"Body\"}";
         final JsonNode actualJsonNode = response.asJsonNodeResponseEntity().getBody();
@@ -80,10 +75,23 @@ class JsonResponseTest {
     }
 
     @Test
+    @DisplayName("asJsonNodeResponseEntity() returns the correct status")
+    void asJsonNodeResponseEntityReturnsTheCorrectStatus() {
+        final Response response = new JsonResponse("Body");
+
+        final HttpStatus expectedStatusCode = HttpStatus.OK;
+        final HttpStatusCode actualHttpStatus = response.asJsonNodeResponseEntity().getStatusCode();
+        Assertions.assertEquals(expectedStatusCode, actualHttpStatus);
+    }
+
+    @Test
     @DisplayName("contentType() returns the content type")
     void contentTypeReturnsTheContentType() {
-        final Response response = new JsonResponse(HttpStatus.OK, "Body");
+        final Response response = new JsonResponse("Body");
 
-        Assertions.assertEquals("application/json", response.contentType());
+        final ResponseEntity<JsonNode> responseEntity = response.asJsonNodeResponseEntity();
+        final List<String> actualContentTypeHeader = responseEntity.getHeaders().get("Content-Type");
+        Assertions.assertNotNull(actualContentTypeHeader);
+        Assertions.assertEquals("application/json", actualContentTypeHeader.get(0));
     }
 }

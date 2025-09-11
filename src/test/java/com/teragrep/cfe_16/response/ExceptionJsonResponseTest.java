@@ -50,12 +50,15 @@ import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
+import java.util.List;
 import java.util.UUID;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
 class ExceptionJsonResponseTest {
 
@@ -66,35 +69,10 @@ class ExceptionJsonResponseTest {
     }
 
     @Test
-    @DisplayName("status() returns the status")
-    void statusReturnsTheStatus() {
-        final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
-                new ExceptionEvent(
-                        new ExceptionEventContext(
-                                new HeaderInfo(
-                                        new XForwardedForStub(),
-                                        new XForwardedHostStub(),
-                                        new XForwardedProtoStub()
-                                ),
-                                "user-agent",
-                                "uriPath",
-                                "host"
-                        ),
-                        UUID.randomUUID(),
-                        new Throwable()
-                )
-        );
-
-        Assertions.assertEquals(HttpStatus.OK, response.status());
-    }
-
-    @Test
-    @DisplayName("asJsonString() returns the correct message")
+    @DisplayName("asJsonNodeResponseEntity() returns the correct message")
     void asJsonNodeResponseEntityReturnsTheCorrectMessage() {
         final UUID uuid = UUID.randomUUID();
         final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
                 new ExceptionEvent(
                         new ExceptionEventContext(
                                 new HeaderInfo(
@@ -120,10 +98,36 @@ class ExceptionJsonResponseTest {
     }
 
     @Test
+    @DisplayName("asJsonNodeResponseEntity() returns the correct status")
+    void asJsonNodeResponseEntityReturnsTheCorrectStatus() {
+        final UUID uuid = UUID.randomUUID();
+
+        final Response response = new ExceptionJsonResponse(
+                new ExceptionEvent(
+                        new ExceptionEventContext(
+                                new HeaderInfo(
+                                        new XForwardedForStub(),
+                                        new XForwardedHostStub(),
+                                        new XForwardedProtoStub()
+                                ),
+                                "user-agent",
+                                "uriPath",
+                                "host"
+                        ),
+                        uuid,
+                        new Throwable()
+                )
+        );
+
+        final HttpStatus expectedStatusCode = HttpStatus.BAD_REQUEST;
+        final HttpStatusCode actualHttpStatus = response.asJsonNodeResponseEntity().getStatusCode();
+        Assertions.assertEquals(expectedStatusCode, actualHttpStatus);
+    }
+
+    @Test
     @DisplayName("contentType() returns the content type")
     void contentTypeReturnsTheContentType() {
         final Response response = new ExceptionJsonResponse(
-                HttpStatus.OK,
                 new ExceptionEvent(
                         new ExceptionEventContext(
                                 new HeaderInfo(
@@ -140,6 +144,9 @@ class ExceptionJsonResponseTest {
                 )
         );
 
-        Assertions.assertEquals("application/json", response.contentType());
+        final ResponseEntity<JsonNode> responseEntity = response.asJsonNodeResponseEntity();
+        final List<String> actualContentTypeHeader = responseEntity.getHeaders().get("Content-Type");
+        Assertions.assertNotNull(actualContentTypeHeader);
+        Assertions.assertEquals("application/json", actualContentTypeHeader.get(0));
     }
 }

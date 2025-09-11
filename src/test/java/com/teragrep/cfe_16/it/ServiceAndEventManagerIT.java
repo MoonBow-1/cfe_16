@@ -75,7 +75,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -240,16 +239,16 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void sendEventsAndGetAcksTest() {
-        final Response expectedResponse = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
+        final Response expectedResponse = new AcknowledgedJsonResponse("Success", 0);
 
         Assertions
                 .assertEquals(expectedResponse, service.sendEvents(request1, channel3, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)");
 
-        final Response expectedResponse1 = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 1);
+        final Response expectedResponse1 = new AcknowledgedJsonResponse("Success", 1);
         Assertions
                 .assertEquals(expectedResponse1, service.sendEvents(request1, channel3, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)");
 
-        final Response expectedResponse2 = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
+        final Response expectedResponse2 = new AcknowledgedJsonResponse("Success", 0);
         Assertions
                 .assertEquals(expectedResponse2, service.sendEvents(request1, channel2, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)");
 
@@ -278,7 +277,7 @@ public class ServiceAndEventManagerIT {
      */
     @Test
     public void sendEventsWithoutChannelTest() {
-        final Response expectedResponse = new JsonResponse(HttpStatus.OK, "Success");
+        final Response expectedResponse = new JsonResponse("Success");
         final Response response = service.sendEvents(request1, null, eventInJson);
 
         Assertions
@@ -342,7 +341,7 @@ public class ServiceAndEventManagerIT {
     public void convertDataTest() {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
 
-        final Response expectedResponse = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", 0);
+        final Response expectedResponse = new AcknowledgedJsonResponse("Success", 0);
 
         Assertions
                 .assertEquals(
@@ -369,7 +368,7 @@ public class ServiceAndEventManagerIT {
     public void convertDataTestWithDefaultChannel() {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
 
-        final Response expectedResponse = new JsonResponse(HttpStatus.OK, "Success");
+        final Response expectedResponse = new JsonResponse("Success");
 
         Assertions
                 .assertEquals(
@@ -621,7 +620,6 @@ public class ServiceAndEventManagerIT {
                 "host"
         );
         final Response expectedResponse = new ExceptionJsonResponse(
-                HttpStatus.BAD_REQUEST,
                 new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), new Throwable())
         );
 
@@ -629,8 +627,6 @@ public class ServiceAndEventManagerIT {
         request.addHeader("authorization", "AUTH_TOKEN_12223");
         final Response actualResponse = Assertions
                 .assertDoesNotThrow(() -> service.sendEvents(request, Session.DEFAULT_CHANNEL, allEventsInJson));
-
-        Assertions.assertEquals(expectedResponse.status(), actualResponse.status());
 
         Assertions.assertEquals(ExceptionJsonResponse.class, actualResponse.getClass());
     }

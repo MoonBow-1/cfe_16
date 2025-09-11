@@ -51,7 +51,6 @@ import com.teragrep.cfe_16.service.HECService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -156,7 +155,7 @@ public class SendEventsIT implements Runnable {
         }
         final List<Response> supposedResponses = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
-            final Response supposedResponse = new AcknowledgedJsonResponse(HttpStatus.OK, "Success", i);
+            final Response supposedResponse = new AcknowledgedJsonResponse("Success", i);
             supposedResponses.add(supposedResponse);
         }
         int countFuture = 0;
