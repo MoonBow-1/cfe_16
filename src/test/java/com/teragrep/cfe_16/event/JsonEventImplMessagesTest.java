@@ -47,6 +47,7 @@ package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,34 +55,36 @@ import org.junit.jupiter.api.Test;
 class JsonEventImplMessagesTest {
 
     @Test
-    @DisplayName("asEvent() returns EventStub if message node value is not a String")
-    void eventReturnsEventStubIfMessageNodeValueIsNotAString() {
+    @DisplayName("asEvent() throws EventFieldException if message node value is not a String")
+    void asEventThrowsEventFieldExceptionIfMessageNodeValueIsNotAString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().set("event", mapper.createObjectNode().put("message", 123));
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
     }
 
     @Test
-    @DisplayName("asEvent() returns EventStub if message node value is an empty String")
-    void eventReturnsEventStubIfMessageNodeValueIsAnEmptyString() {
+    @DisplayName("asEvent() throws EventFieldException if message node value is an empty String")
+    void asEventThrowsEventFieldExceptionIfMessageNodeValueIsAnEmptyString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().set("event", mapper.createObjectNode().put("message", ""));
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
     }
 
     @Test
-    @DisplayName("asEvent() returns EventMessageStub if message node value is an empty Object")
-    void eventReturnsEventMessageStubIfMessageNodeValueIsAnEmptyObject() {
+    @DisplayName("asEvent() throws EventFieldException if message node value is an empty Object")
+    void asEventThrowsEventFieldExceptionIfMessageNodeValueIsAnEmptyObject() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper
                 .createObjectNode()
@@ -89,14 +92,15 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
     }
 
     @Test
     @DisplayName("asEvent() returns EventMessage if message exists and is a filled String")
-    void eventReturnsEventMessageIfMessageExistsAndIsAFilledString() {
+    void asEventReturnsEventMessageIfMessageExistsAndIsAFilledString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper
                 .createObjectNode()
@@ -104,7 +108,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedNode = jsonEventImpl.asEventMessage();
+        final EventMessage returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asEventMessage);
 
         final EventMessage expectedNode = new EventMessageImpl("Valid event");
 
@@ -119,7 +123,7 @@ class JsonEventImplMessagesTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedNode = jsonEventImpl.asEventMessage();
+        final EventMessage returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asEventMessage);
 
         final EventMessage expectedNode = new EventMessageImpl("Valid event");
 

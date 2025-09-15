@@ -56,9 +56,9 @@ import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
-import com.teragrep.cfe_16.event.EventMessageStub;
 import com.teragrep.cfe_16.event.JsonEvent;
 import com.teragrep.cfe_16.event.JsonEventImpl;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
@@ -121,7 +121,7 @@ public class EventManager {
             final String allEventsInJson,
             final HeaderInfo headerInfo,
             final Acknowledgements acknowledgements
-    ) throws JsonProcessingException, JsonSyntaxException {
+    ) throws JsonProcessingException, JsonSyntaxException, EventFieldException {
         HttpEventData previousEvent;
 
         acknowledgements.initializeContext(authToken, channel);
@@ -149,13 +149,12 @@ public class EventManager {
         final Converter converter = new Converter(headerInfo);
         final List<SyslogMessage> syslogMessages = new ArrayList<>();
 
-        // Shared EventMessageStub that is used in case parsed Event is a Stub
-        final EventMessageStub eventMessageStub = new EventMessageStub();
         while (parser.hasNext()) {
             previousEvent = eventData;
             final String eventAsString = parser.next().toString();
             final JsonNode jsonNode = new ObjectMapper().readTree(eventAsString);
-            final JsonEvent jsonEvent = new JsonEventImpl(jsonNode, eventMessageStub);
+            final JsonEvent jsonEvent = new JsonEventImpl(jsonNode);
+
             eventData.setEvent(jsonEvent.asEventMessage());
             eventData = handleTime(eventData, jsonNode, previousEvent);
             eventData = assignMetaData(eventData, authToken, channel);

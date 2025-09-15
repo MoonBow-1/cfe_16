@@ -45,31 +45,23 @@
  */
 package com.teragrep.cfe_16.exceptionhandling;
 
-@SuppressWarnings("serial")
-public class EventFieldBlankException extends RuntimeException {
+import java.io.IOException;
 
-    public EventFieldBlankException() {
+public class EventFieldException extends IOException {
+
+    public EventFieldException() {
         super();
     }
 
-    public EventFieldBlankException(
-            String message,
-            Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace
-    ) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
-
-    public EventFieldBlankException(String message, Throwable cause) {
+    public EventFieldException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public EventFieldBlankException(String message) {
+    public EventFieldException(final String message) {
         super(message);
     }
 
-    public EventFieldBlankException(Throwable cause) {
+    public EventFieldException(final Throwable cause) {
         super(cause);
     }
 

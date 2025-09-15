@@ -65,6 +65,7 @@ import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.AuthenticationTokenMissingException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
 import com.teragrep.cfe_16.response.ExceptionEvent;
 import com.teragrep.cfe_16.response.ExceptionEventContext;
@@ -184,7 +185,7 @@ public class HECServiceImpl implements HECService {
         try {
             return this.eventManager.convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
         }
-        catch (final JsonProcessingException | JsonSyntaxException e) {
+        catch (final JsonProcessingException | JsonSyntaxException | EventFieldException e) {
             final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
                     headerInfo,
                     request.getHeader("user-agent"),

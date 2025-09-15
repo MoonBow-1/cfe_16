@@ -47,6 +47,7 @@ package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -61,42 +62,45 @@ class JsonEventImplTest {
     }
 
     @Test
-    @DisplayName("event() returns EventStub if node does not have event node")
-    void eventReturnsEventStubIfNodeDoesNotHaveEventNode() {
+    @DisplayName("event() throws EventFieldException if node does not have event node")
+    void eventThrowsEventFieldExceptionIfNodeDoesNotHaveEventNode() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("NotEvent", "eventData");
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field is missing", returnedEventMessage.getMessage());
     }
 
     @Test
-    @DisplayName("event() returns EventStub if event node is an integer")
-    void eventReturnsEventStubIfEventNodeIsAnInteger() {
+    @DisplayName("event() throws EventFieldException if event node is an integer")
+    void eventThrowsEventFieldExceptionIfEventNodeIsAnInteger() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("event", 123);
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
     }
 
     @Test
-    @DisplayName("event() returns EventStub is event is an empty string")
-    void eventReturnsEventStubIsEventIsAnEmptyString() {
+    @DisplayName("event() throws EventFieldException is event is an empty string")
+    void eventThrowsEventFieldExceptionIsEventIsAnEmptyString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("event", "");
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertTrue(returnedEventMessage::isStub);
+        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
     }
 
     @Test
@@ -107,7 +111,7 @@ class JsonEventImplTest {
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final EventMessage returnedEventMessage = jsonEventImpl.asEventMessage();
+        final EventMessage returnedEventMessage = Assertions.assertDoesNotThrow(jsonEventImpl::asEventMessage);
 
         final EventMessage expectedEventMessage = new EventMessageImpl("Valid event");
 

@@ -46,10 +46,11 @@
 package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 
 public interface JsonEvent {
 
-    EventMessage asEventMessage();
+    EventMessage asEventMessage() throws EventFieldException;
 
     JsonNode asPayloadJsonNode();
 

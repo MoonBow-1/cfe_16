@@ -46,28 +46,23 @@
 package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import java.util.Objects;
 
 public final class JsonEventImpl implements JsonEvent {
 
     private final JsonNode jsonNode;
-    private final EventMessageStub eventMessageStub;
-
-    public JsonEventImpl(final JsonNode jsonNode, final EventMessageStub eventMessageStub) {
-        this.jsonNode = jsonNode;
-        this.eventMessageStub = eventMessageStub;
-    }
 
     public JsonEventImpl(final JsonNode jsonNode) {
-        this(jsonNode, new EventMessageStub());
+        this.jsonNode = jsonNode;
     }
 
     @Override
-    public EventMessage asEventMessage() {
+    public EventMessage asEventMessage() throws EventFieldException {
         final EventMessage eventMessage;
         // Event field completely missing
         if (!this.asPayloadJsonNode().has("event")) {
-            eventMessage = eventMessageStub;
+            throw new EventFieldException("Event field is missing");
         }
         // Event field contains subfield "message"
         else if (
@@ -80,7 +75,7 @@ public final class JsonEventImpl implements JsonEvent {
                 eventMessage = new EventMessageImpl(this.asPayloadJsonNode().get("event").get("message").asText());
             }
             else {
-                eventMessage = eventMessageStub;
+                throw new EventFieldException("Event field was not textual");
             }
         }
         // Event field has a String value
@@ -91,7 +86,7 @@ public final class JsonEventImpl implements JsonEvent {
             eventMessage = new EventMessageImpl(this.jsonNode.get("event").asText());
         }
         else {
-            eventMessage = eventMessageStub;
+            throw new EventFieldException("Event field was not textual");
         }
 
         return eventMessage;
@@ -117,11 +112,11 @@ public final class JsonEventImpl implements JsonEvent {
         }
 
         final JsonEventImpl that = (JsonEventImpl) o;
-        return Objects.equals(jsonNode, that.jsonNode) && Objects.equals(eventMessageStub, that.eventMessageStub);
+        return Objects.equals(jsonNode, that.jsonNode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jsonNode, eventMessageStub);
+        return Objects.hashCode(jsonNode);
     }
 }
