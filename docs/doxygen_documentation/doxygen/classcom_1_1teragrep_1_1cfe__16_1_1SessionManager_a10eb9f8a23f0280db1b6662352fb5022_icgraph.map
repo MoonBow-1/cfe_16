@@ -1,0 +1,5 @@
+<map id="com.teragrep.cfe_16.SessionManager.getOrCreateSession" name="com.teragrep.cfe_16.SessionManager.getOrCreateSession">
+<area shape="rect" id="Node000001" title="Returns an existing Session object based on authentication token." alt="" coords="264,5,475,45"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a20ffffd4e0b55fea04396fd562ccef0c" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="5,5,216,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,28,216,28,216,23,250,23"/>
+</map>

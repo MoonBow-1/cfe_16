@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,80,228,105"/>
+<area shape="rect" id="Node000001" href="$classcom_1_1teragrep_1_1cfe__16_1_1ThirdParty_1_1SyslogMessageSender_1_1SyslogMessageSender.html" title="See RFC 6587 &#45; Transmission of Syslog Messages over TCP" alt="" coords="276,5,525,60"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="190,75,275,56,276,62,191,80"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html" title="An abstract connection class for sending batch messages." alt="" coords="283,85,518,125"/>
+<area shape="poly" id="edge2_Node000000_Node000003" title=" " alt="" coords="242,95,283,97,283,102,242,101"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html" title=" " alt="" coords="573,21,808,61"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="505,79,599,58,600,63,506,84"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1TcpConnection.html" title=" " alt="" coords="573,85,808,125"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="532,102,573,102,573,107,532,107"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1UdpConnection.html" title=" " alt="" coords="573,149,808,189"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="506,125,600,146,599,151,505,130"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="73,20,160,45"/>
+<area shape="poly" id="edge6_Node000002_Node000001" title=" " alt="" coords="174,30,276,30,276,35,174,35"/>
+</map>
