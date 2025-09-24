@@ -1,1 +1,1 @@
-var branches = ["master"]
+var branches = ["doxygen_documentation", "master"]
