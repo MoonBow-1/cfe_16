@@ -1,0 +1,44 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.State.getAckMap" name="com.teragrep.cfe_16.Acknowledgements.State.getAckMap">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1499,230,1791,270"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a8c6f0dff735fde04e0bc670136eb57d2" title=" " alt="" coords="1072,186,1451,212"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1485,231,1358,214,1359,209,1485,226"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a7a9570efce9732f5f674e9ea85017439" title=" " alt="" coords="1100,58,1423,98"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1611,222,1540,165,1496,136,1450,112,1415,100,1417,95,1452,107,1499,131,1543,161,1614,218"/>
+<area shape="rect" id="Node000009" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5307dc12a64ca957ae24430d09b372e1" title=" " alt="" coords="665,58,1024,98"/>
+<area shape="poly" id="edge21_Node000001_Node000009" title=" " alt="" coords="1623,219,1595,177,1556,129,1507,83,1479,63,1450,48,1378,24,1303,12,1227,8,1151,12,1079,20,1013,33,907,60,905,55,1012,28,1079,15,1151,6,1227,3,1304,6,1379,19,1452,43,1482,59,1510,79,1559,125,1599,174,1627,216"/>
+<area shape="rect" id="Node000012" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a225a9f18c21826dc1bbc4ce0a82550ed" title=" " alt="" coords="1095,415,1428,455"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="1617,282,1546,346,1501,378,1452,405,1419,417,1417,412,1450,401,1498,374,1543,342,1614,278"/>
+<area shape="rect" id="Node000014" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a524b6158e1c70b00480d167b944f14ad" title="Returns the unmodifiable set of Acks for a channel." alt="" coords="1105,287,1418,327"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="1497,274,1396,290,1395,284,1496,269"/>
+<area shape="rect" id="Node000015" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5287a2c95003a939f0314bc423d401cf" title="Returns the size of the Ack set of given channel." alt="" coords="1105,351,1418,391"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="1596,279,1529,312,1451,342,1405,354,1404,348,1450,336,1527,307,1594,274"/>
+<area shape="rect" id="Node000016" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a991efdd07c7cbf8d24b5da93e342b55c" title="Returns the Ack statuses of requested Ack id:s as a JSON node." alt="" coords="1105,122,1418,162"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="1586,227,1521,201,1450,178,1394,164,1395,159,1451,172,1523,196,1588,222"/>
+<area shape="rect" id="Node000017" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a9544ac800392336cc3fa19b72234d014" title="Checks if the Ack with a given id is acknowledged." alt="" coords="693,287,996,327"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="1485,255,1288,263,1072,278,972,290,972,284,1072,272,1288,257,1485,250"/>
+<area shape="rect" id="Node000018" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a2d2acb3e9942fdb720439eaad8fa1f5c" title=" " alt="" coords="1105,480,1418,505"/>
+<area shape="poly" id="edge24_Node000001_Node000018" title=" " alt="" coords="1627,283,1599,327,1559,378,1510,429,1482,451,1452,469,1419,483,1417,478,1449,465,1479,446,1506,425,1555,375,1595,324,1623,280"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#ad7d230669d75e6c83a2d4364e6ce1a10" title=" " alt="" coords="316,230,617,270"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1058,215,618,243,618,237,1058,209"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a7b24737679da20559ee1da24b25eed93" title=" " alt="" coords="368,144,565,184"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="1058,193,665,176,565,172,565,166,665,171,1058,188"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#adf6b572a31548b5d7c7e9780f8f79bac" title=" " alt="" coords="694,122,995,162"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="1151,187,1072,176,986,164,987,159,1072,171,1152,182"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a181af6902da37bde7ba1e56614540437" title=" " alt="" coords="5,108,268,148"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="354,155,268,145,269,140,355,149"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a5339949b5816661f5d3adaf45fa90319" title=" " alt="" coords="7,173,267,228"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="354,179,267,189,266,184,354,174"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1086,80,1024,80,1024,75,1086,75"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="675,107,667,112,650,131,643,153,636,176,619,198,590,218,558,232,556,227,587,213,616,194,632,173,638,151,645,129,664,108,672,102"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="711,103,666,112,539,147,537,142,665,107,710,98"/>
+<area shape="rect" id="Node000010" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a28a8273d6b136df113665a5032aa8ca3" title=" " alt="" coords="316,70,617,110"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="652,86,618,88,617,82,652,81"/>
+<area shape="rect" id="Node000011" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#afc4e73cfb46d7fbc19edc8d2c177e6bf" title=" " alt="" coords="316,6,617,46"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="685,58,612,48,613,43,686,53"/>
+<area shape="rect" id="Node000013" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a145cd25807c91ed7c62729cf106b5bbc" title=" " alt="" coords="694,351,995,391"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="1116,415,975,394,976,388,1117,410"/>
+<area shape="poly" id="edge16_Node000014_Node000013" title=" " alt="" coords="1117,332,976,354,975,348,1116,327"/>
+<area shape="poly" id="edge18_Node000015_Node000013" title=" " alt="" coords="1091,374,995,374,995,368,1091,368"/>
+<area shape="poly" id="edge20_Node000016_Node000007" title=" " alt="" coords="1091,144,995,144,995,139,1091,139"/>
+<area shape="poly" id="edge23_Node000017_Node000003" title=" " alt="" coords="698,288,599,272,600,267,699,282"/>
+</map>

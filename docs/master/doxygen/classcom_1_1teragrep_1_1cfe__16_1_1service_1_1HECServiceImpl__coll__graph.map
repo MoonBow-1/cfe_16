@@ -1,0 +1,19 @@
+<map id="com.teragrep.cfe_16.service.HECServiceImpl" name="com.teragrep.cfe_16.service.HECServiceImpl">
+<area shape="rect" id="Node000001" title="Implementation of the REST Service back end." alt="" coords="707,127,917,167"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html" title="An interface that specified the REST back end API." alt="" coords="277,5,488,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="502,43,592,62,684,88,771,124,769,129,682,93,590,68,501,48"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html" title=" " alt="" coords="239,134,527,159"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="540,144,707,144,707,149,540,149"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="56,75,139,101"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="153,99,239,119,305,131,304,137,238,124,151,104"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html" title=" " alt="" coords="277,69,488,109"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="152,85,213,84,277,84,277,90,213,89,152,90"/>
+<area shape="rect" id="Node000005" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1LifeCycle.html" title="An interface that own resources like threads for doing graceful shutdown." alt="" coords="5,129,189,169"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="204,147,215,147,239,146,239,152,215,152,204,152"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="202,125,287,107,288,112,204,130"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,101,683,124,707,127,706,133,682,129,501,106"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html" title=" " alt="" coords="284,184,481,224"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="495,188,682,164,706,161,707,166,683,169,495,194"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html" title=" " alt="" coords="284,248,481,288"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="494,247,587,228,682,201,771,164,773,169,684,207,588,233,496,253"/>
+</map>

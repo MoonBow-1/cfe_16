@@ -1,0 +1,13 @@
+<map id="com.teragrep.cfe_16.Converter.setStructuredDataParams" name="com.teragrep.cfe_16.Converter.setStructuredDataParams">
+<area shape="rect" id="Node000001" title=" " alt="" coords="889,73,1136,113"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#a602a68046d2d394249793b6d74b62050" title=" " alt="" coords="588,73,841,113"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="875,96,842,96,842,91,875,91"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a7b24737679da20559ee1da24b25eed93" title=" " alt="" coords="329,41,527,81"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="574,80,526,75,527,70,575,75"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a2918b5432a3d000c39a805847ba1c5de" title=" " alt="" coords="316,105,540,145"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="575,112,541,115,540,110,574,106"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a181af6902da37bde7ba1e56614540437" title=" " alt="" coords="5,5,268,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="315,50,268,44,269,39,316,45"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a5339949b5816661f5d3adaf45fa90319" title=" " alt="" coords="7,70,267,125"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="316,78,267,84,267,79,315,73"/>
+</map>

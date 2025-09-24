@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.TokenManager.isTokenInBasic" name="com.teragrep.cfe_16.TokenManager.isTokenInBasic">
+<area shape="rect" id="Node000001" title=" " alt="" coords="320,69,517,109"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManagerTests.html#a6349eb6c2cd7533ff9ec5815ab42b3c1" title=" " alt="" coords="5,5,272,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,69,226,48,227,43,318,64"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#ab231e6e42ecf628579fb8404b452695e" title=" " alt="" coords="33,69,244,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="307,92,244,92,244,87,307,87"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a20ffffd4e0b55fea04396fd562ccef0c" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="33,133,244,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="318,115,227,136,226,131,316,110"/>
+</map>
