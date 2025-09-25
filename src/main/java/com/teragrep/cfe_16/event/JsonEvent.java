@@ -54,5 +54,5 @@ public interface JsonEvent {
 
     JsonNode asPayloadJsonNode();
 
-    JsonNode asTimeJsonNode();
+    JsonNode asTimeJsonNode() throws EventFieldException;
 }

@@ -47,6 +47,7 @@ package com.teragrep.cfe_16.event;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
@@ -162,5 +163,32 @@ class JsonEventImplTest {
         final JsonNode returnedNode = Assertions.assertDoesNotThrow(jsonEventImpl::asPayloadJsonNode);
 
         Assertions.assertEquals(jsonNode, returnedNode);
+    }
+
+    @Test
+    @DisplayName("asTimeJsonNode throws EventFieldException if time field is missing")
+    void asTimeJsonNodeThrowsEventFieldExceptionIfTimeFieldIsMissing() {
+        final JsonEventImpl jsonEventImpl = new JsonEventImpl(
+                new ObjectMapper().createObjectNode().put("time1", "notATime")
+        );
+
+        final Exception exception = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asTimeJsonNode);
+
+        Assertions.assertEquals("Time field is missing", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("asTimeJsonNode returns the found JsonNode of time field if present")
+    void asTimeJsonNodeReturnsTheFoundJsonNodeOfTimeFieldIfPresent() {
+        final JsonEventImpl jsonEventImpl = new JsonEventImpl(
+                new ObjectMapper().createObjectNode().put("time", "notATime")
+        );
+
+        final JsonNode expectedJsonNode = new TextNode("notATime");
+
+        final JsonNode returnedJsonNode = Assertions.assertDoesNotThrow(jsonEventImpl::asTimeJsonNode);
+
+        Assertions.assertEquals(expectedJsonNode, returnedJsonNode);
     }
 }
