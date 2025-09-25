@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.addAck" name="com.teragrep.cfe_16.Acknowledgements.addAck">
+<area shape="rect" id="Node000001" title="Adds a new Ack object for given channel." alt="" coords="355,77,695,102"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#ad7d230669d75e6c83a2d4364e6ce1a10" title=" " alt="" coords="5,5,307,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="437,77,271,48,272,43,437,72"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a145cd25807c91ed7c62729cf106b5bbc" title=" " alt="" coords="5,69,307,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="341,92,307,92,307,87,341,87"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#adf6b572a31548b5d7c7e9780f8f79bac" title=" " alt="" coords="5,133,307,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="437,107,272,136,271,131,437,102"/>
+</map>

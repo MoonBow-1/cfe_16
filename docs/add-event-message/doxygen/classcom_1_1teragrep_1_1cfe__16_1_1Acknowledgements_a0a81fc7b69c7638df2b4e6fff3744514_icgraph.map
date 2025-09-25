@@ -1,0 +1,7 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.getCurrentAckValue" name="com.teragrep.cfe_16.Acknowledgements.getCurrentAckValue">
+<area shape="rect" id="Node000001" title="Returns the current Ack value for given token and channel." alt="" coords="355,37,668,77"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a28a8273d6b136df113665a5032aa8ca3" title=" " alt="" coords="5,5,307,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="340,45,307,42,307,36,341,39"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#afc4e73cfb46d7fbc19edc8d2c177e6bf" title=" " alt="" coords="5,69,307,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="341,75,307,78,307,73,340,70"/>
+</map>

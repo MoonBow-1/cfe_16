@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.EventManager.removeDecimal" name="com.teragrep.cfe_16.EventManager.removeDecimal">
+<area shape="rect" id="Node000001" title=" " alt="" coords="755,5,952,45"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e" title=" " alt="" coords="509,5,707,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="741,28,707,28,707,23,741,23"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#aa8573fed5af5faf4deeffe7dd8369851" title=" " alt="" coords="264,5,461,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="495,28,461,28,461,23,495,23"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a9ed9a0d5772181625f00edce5a2c611d" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="5,5,216,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="250,28,216,28,216,23,250,23"/>
+</map>

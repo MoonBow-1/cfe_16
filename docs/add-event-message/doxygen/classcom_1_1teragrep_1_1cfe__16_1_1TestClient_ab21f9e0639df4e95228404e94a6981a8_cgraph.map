@@ -1,0 +1,25 @@
+<map id="com.teragrep.cfe_16.TestClient.testSendEventWithoutAuthorization" name="com.teragrep.cfe_16.TestClient.testSendEventWithoutAuthorization">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,216,301,256"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a9e085118b18a5952fb6c4e702b0bbc8b" title=" " alt="" coords="349,216,581,256"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,233,335,233,335,239,302,239"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#af1e0ff46d1a0eb1865bc80ea89247cc8" title="Verifies that the HTTP reply status code was what it was supposed to me." alt="" coords="634,5,838,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="479,214,538,141,581,99,628,62,652,48,655,53,631,66,584,103,542,144,483,217"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a23f3e7e41dc4fd7b2f8a35dd386e5a6e" title=" " alt="" coords="891,92,1077,132"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="482,214,507,187,542,157,583,127,628,105,691,90,756,84,819,85,877,90,877,95,819,90,756,89,692,95,630,111,586,132,545,161,511,191,486,218"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#afa2ceaba677411954a4210a8e6d5cd49" title="Checks that the TCP connection is open, otherwis a new connection is created and returned." alt="" coords="635,248,837,288"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="582,247,621,252,621,257,581,252"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a50b2f87f7fce871bb32c52de3a19dd55" title=" " alt="" coords="643,184,829,224"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="581,220,629,214,629,219,582,225"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a0d90aaf874c60e700371e09e00828eaa" title="Advances buffered reader through HTTP headers." alt="" coords="643,120,829,160"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="514,213,628,169,652,162,653,167,630,175,516,218"/>
+<area shape="rect" id="Node000009" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a4bd78c601bcc5d6c6bafc899f8ffe1e6" title="Reads the reply line from the servere." alt="" coords="641,312,831,352"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="516,254,630,297,653,305,652,310,628,303,514,259"/>
+<area shape="rect" id="Node000010" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#af26faca7da3952332135d35bb9827e34" title="Does a HTTP request and keeps connection open." alt="" coords="643,376,829,416"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="489,254,549,307,589,336,631,362,645,369,643,373,628,366,586,341,546,312,485,258"/>
+<area shape="rect" id="Node000011" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a98be0c11009e1193c90cbf91576cc66a" title="Validates the response body line against the given regural expression." alt="" coords="629,440,843,480"/>
+<area shape="poly" id="edge12_Node000002_Node000011" title=" " alt="" coords="480,255,504,291,538,338,581,385,631,426,641,432,638,436,628,430,577,389,534,341,500,294,476,258"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ab44ab6c8d2bd008181c5e31a2a8dfaa3" title=" " alt="" coords="891,188,1077,228"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="819,245,887,229,888,234,820,251"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="829,127,877,121,878,127,830,132"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="810,157,898,182,897,187,809,163"/>
+</map>
