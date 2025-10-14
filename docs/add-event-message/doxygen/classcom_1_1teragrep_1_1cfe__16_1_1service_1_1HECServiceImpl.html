@@ -205,50 +205,50 @@ Static Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html#a58c88b3ea21f4e491a2a7e4b1ea6ed02">com.teragrep.cfe_16.service.HECService</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="HECServiceImpl_8java_source.html#l00204">204</a> of file <a class="el" href="HECServiceImpl_8java_source.html">HECServiceImpl.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  204</span>                                                                                                      {</div>
-<div class="line"><span class="lineno">  205</span> </div>
-<div class="line"><span class="lineno">  206</span>        <span class="comment">// filter out error cases</span></div>
-<div class="line"><span class="lineno">  207</span>        <span class="comment">// authentication header is required always</span></div>
-<div class="line"><span class="lineno">  208</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(request)) {</div>
-<div class="line"><span class="lineno">  209</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> AuthenticationTokenMissingException(<span class="stringliteral">&quot;Authentication token must be provided&quot;</span>);</div>
-<div class="line"><span class="lineno">  210</span>        }</div>
-<div class="line"><span class="lineno">  211</span> </div>
-<div class="line"><span class="lineno">  212</span>        String authHeader = request.getHeader(<span class="stringliteral">&quot;Authorization&quot;</span>);</div>
-<div class="line"><span class="lineno">  213</span> </div>
-<div class="line"><span class="lineno">  214</span>        String authToken;</div>
-<div class="line"><span class="lineno">  215</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(authHeader)) {</div>
-<div class="line"><span class="lineno">  216</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a3035608f50f30aae9ffdba17641a1aa0">LOGGER</a>.debug(<span class="stringliteral">&quot;Token was provided via Basic&quot;</span>);</div>
-<div class="line"><span class="lineno">  217</span>            authToken = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31">getTokenFromBasic</a>(authHeader);</div>
-<div class="line"><span class="lineno">  218</span>        }</div>
-<div class="line"><span class="lineno">  219</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  220</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a3035608f50f30aae9ffdba17641a1aa0">LOGGER</a>.debug(<span class="stringliteral">&quot;Token was provided via header&quot;</span>);</div>
-<div class="line"><span class="lineno">  221</span>            authToken = authHeader;</div>
+<p class="definition">Definition at line <a class="el" href="HECServiceImpl_8java_source.html#l00208">208</a> of file <a class="el" href="HECServiceImpl_8java_source.html">HECServiceImpl.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  208</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">  209</span> </div>
+<div class="line"><span class="lineno">  210</span>        <span class="comment">// filter out error cases</span></div>
+<div class="line"><span class="lineno">  211</span>        <span class="comment">// authentication header is required always</span></div>
+<div class="line"><span class="lineno">  212</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(request)) {</div>
+<div class="line"><span class="lineno">  213</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> AuthenticationTokenMissingException(<span class="stringliteral">&quot;Authentication token must be provided&quot;</span>);</div>
+<div class="line"><span class="lineno">  214</span>        }</div>
+<div class="line"><span class="lineno">  215</span> </div>
+<div class="line"><span class="lineno">  216</span>        String authHeader = request.getHeader(<span class="stringliteral">&quot;Authorization&quot;</span>);</div>
+<div class="line"><span class="lineno">  217</span> </div>
+<div class="line"><span class="lineno">  218</span>        String authToken;</div>
+<div class="line"><span class="lineno">  219</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(authHeader)) {</div>
+<div class="line"><span class="lineno">  220</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a3035608f50f30aae9ffdba17641a1aa0">LOGGER</a>.debug(<span class="stringliteral">&quot;Token was provided via Basic&quot;</span>);</div>
+<div class="line"><span class="lineno">  221</span>            authToken = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31">getTokenFromBasic</a>(authHeader);</div>
 <div class="line"><span class="lineno">  222</span>        }</div>
-<div class="line"><span class="lineno">  223</span> </div>
-<div class="line"><span class="lineno">  224</span>        <span class="comment">// channel is required</span></div>
-<div class="line"><span class="lineno">  225</span>        <span class="keywordflow">if</span> (channel == <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  226</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> ChannelNotProvidedException(<span class="stringliteral">&quot;Channel must be provided when requesting ack statuses&quot;</span>);</div>
-<div class="line"><span class="lineno">  227</span>        }</div>
-<div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span>        <span class="comment">// session is also required</span></div>
-<div class="line"><span class="lineno">  230</span>        Session session = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a65877a5e55759971db9843636b047e33">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken);</div>
-<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">if</span> (session == <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> SessionNotFoundException(<span class="stringliteral">&quot;Session not found for auth token &quot;</span> + authToken);</div>
-<div class="line"><span class="lineno">  233</span>        }</div>
-<div class="line"><span class="lineno">  234</span> </div>
-<div class="line"><span class="lineno">  235</span>        <span class="comment">// if channel is not inside Session, it is considered an error case</span></div>
-<div class="line"><span class="lineno">  236</span>        <span class="keywordflow">if</span> (!session.doesChannelExist(channel)) {</div>
-<div class="line"><span class="lineno">  237</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> ChannelNotFoundException();</div>
-<div class="line"><span class="lineno">  238</span>        }</div>
-<div class="line"><span class="lineno">  239</span>        session.touch();</div>
-<div class="line"><span class="lineno">  240</span> </div>
-<div class="line"><span class="lineno">  241</span>        ObjectNode responseNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2199658f29a3ef56b0cc5b42b67ea8dc">objectMapper</a>.createObjectNode();</div>
-<div class="line"><span class="lineno">  242</span>        JsonNode requestedAckStatuses = this.acknowledgements</div>
-<div class="line"><span class="lineno">  243</span>                .getRequestedAckStatuses(authToken, channel, requestedAcksInJson);</div>
-<div class="line"><span class="lineno">  244</span>        responseNode.put(<span class="stringliteral">&quot;acks&quot;</span>, requestedAckStatuses);</div>
-<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">return</span> responseNode;</div>
-<div class="line"><span class="lineno">  246</span>    }</div>
+<div class="line"><span class="lineno">  223</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  224</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a3035608f50f30aae9ffdba17641a1aa0">LOGGER</a>.debug(<span class="stringliteral">&quot;Token was provided via header&quot;</span>);</div>
+<div class="line"><span class="lineno">  225</span>            authToken = authHeader;</div>
+<div class="line"><span class="lineno">  226</span>        }</div>
+<div class="line"><span class="lineno">  227</span> </div>
+<div class="line"><span class="lineno">  228</span>        <span class="comment">// channel is required</span></div>
+<div class="line"><span class="lineno">  229</span>        <span class="keywordflow">if</span> (channel == <span class="keyword">null</span>) {</div>
+<div class="line"><span class="lineno">  230</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> ChannelNotProvidedException(<span class="stringliteral">&quot;Channel must be provided when requesting ack statuses&quot;</span>);</div>
+<div class="line"><span class="lineno">  231</span>        }</div>
+<div class="line"><span class="lineno">  232</span> </div>
+<div class="line"><span class="lineno">  233</span>        <span class="comment">// session is also required</span></div>
+<div class="line"><span class="lineno">  234</span>        Session session = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a65877a5e55759971db9843636b047e33">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken);</div>
+<div class="line"><span class="lineno">  235</span>        <span class="keywordflow">if</span> (session == <span class="keyword">null</span>) {</div>
+<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> SessionNotFoundException(<span class="stringliteral">&quot;Session not found for auth token &quot;</span> + authToken);</div>
+<div class="line"><span class="lineno">  237</span>        }</div>
+<div class="line"><span class="lineno">  238</span> </div>
+<div class="line"><span class="lineno">  239</span>        <span class="comment">// if channel is not inside Session, it is considered an error case</span></div>
+<div class="line"><span class="lineno">  240</span>        <span class="keywordflow">if</span> (!session.doesChannelExist(channel)) {</div>
+<div class="line"><span class="lineno">  241</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> ChannelNotFoundException();</div>
+<div class="line"><span class="lineno">  242</span>        }</div>
+<div class="line"><span class="lineno">  243</span>        session.touch();</div>
+<div class="line"><span class="lineno">  244</span> </div>
+<div class="line"><span class="lineno">  245</span>        ObjectNode responseNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2199658f29a3ef56b0cc5b42b67ea8dc">objectMapper</a>.createObjectNode();</div>
+<div class="line"><span class="lineno">  246</span>        JsonNode requestedAckStatuses = this.acknowledgements</div>
+<div class="line"><span class="lineno">  247</span>                .getRequestedAckStatuses(authToken, channel, requestedAcksInJson);</div>
+<div class="line"><span class="lineno">  248</span>        responseNode.put(<span class="stringliteral">&quot;acks&quot;</span>, requestedAckStatuses);</div>
+<div class="line"><span class="lineno">  249</span>        <span class="keywordflow">return</span> responseNode;</div>
+<div class="line"><span class="lineno">  250</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_a0018f26ecfa7a7c748e7a93522990422"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">com.teragrep.cfe_16.SessionManager.getSession</a></div><div class="ttdeci">Session getSession(String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00130">SessionManager.java:130</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1TokenManager_html_a5d298916fc03c198d49fbf53205f88e8"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">com.teragrep.cfe_16.TokenManager.tokenIsMissing</a></div><div class="ttdeci">boolean tokenIsMissing(HttpServletRequest request)</div><div class="ttdef"><b>Definition</b> <a href="TokenManager_8java_source.html#l00070">TokenManager.java:70</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1TokenManager_html_a687bbb785ceb8eeb5b314e44d0136279"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">com.teragrep.cfe_16.TokenManager.isTokenInBasic</a></div><div class="ttdeci">boolean isTokenInBasic(String authHeader)</div><div class="ttdef"><b>Definition</b> <a href="TokenManager_8java_source.html#l00087">TokenManager.java:87</a></div></div>
@@ -292,13 +292,13 @@ Here is the call graph for this function:</div>
 
 <p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html#a3b3e3cc2f7e911b355c9636c2781af1e">com.teragrep.cfe_16.service.HECService</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="HECServiceImpl_8java_source.html#l00250">250</a> of file <a class="el" href="HECServiceImpl_8java_source.html">HECServiceImpl.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  250</span>                                                                          {</div>
-<div class="line"><span class="lineno">  251</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(request)) {</div>
-<div class="line"><span class="lineno">  252</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;Invalid HEC token&quot;</span>, HttpStatus.BAD_REQUEST);</div>
-<div class="line"><span class="lineno">  253</span>        }</div>
-<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;HEC is available and accepting input&quot;</span>, HttpStatus.OK);</div>
-<div class="line"><span class="lineno">  255</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECServiceImpl_8java_source.html#l00254">254</a> of file <a class="el" href="HECServiceImpl_8java_source.html">HECServiceImpl.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  254</span>                                                                          {</div>
+<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a68e4622e0a4bc796f6b7444d69b7b4eb">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(request)) {</div>
+<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;Invalid HEC token&quot;</span>, HttpStatus.BAD_REQUEST);</div>
+<div class="line"><span class="lineno">  257</span>        }</div>
+<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;HEC is available and accepting input&quot;</span>, HttpStatus.OK);</div>
+<div class="line"><span class="lineno">  259</span>    }</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -421,33 +421,35 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  181</span>            session.addChannel(channel);</div>
 <div class="line"><span class="lineno">  182</span>        }</div>
 <div class="line"><span class="lineno">  183</span> </div>
-<div class="line"><span class="lineno">  184</span>        <span class="comment">// TODO: find a nice way of not passing Acknowledgements</span></div>
-<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  186</span>            <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2efb9b093e75788ceea32be8ea6de59d">eventManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#aa8573fed5af5faf4deeffe7dd8369851">convertData</a>(authToken, channel, eventInJson, headerInfo, this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a985ee306dd65f0eb1a77ed6f110fec3d">acknowledgements</a>);</div>
-<div class="line"><span class="lineno">  187</span>        }</div>
-<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> JsonProcessingException | JsonSyntaxException | EventFieldException e) {</div>
-<div class="line"><span class="lineno">  189</span>            <span class="keyword">final</span> ExceptionEventContext exceptionEventContext = <span class="keyword">new</span> ExceptionEventContext(</div>
-<div class="line"><span class="lineno">  190</span>                    headerInfo,</div>
-<div class="line"><span class="lineno">  191</span>                    request.getHeader(<span class="stringliteral">&quot;user-agent&quot;</span>),</div>
-<div class="line"><span class="lineno">  192</span>                    request.getRequestURI(),</div>
-<div class="line"><span class="lineno">  193</span>                    request.getRemoteHost()</div>
-<div class="line"><span class="lineno">  194</span>            );</div>
-<div class="line"><span class="lineno">  195</span>            <span class="keyword">final</span> ExceptionEvent <span class="keyword">event</span> = <span class="keyword">new</span> ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);</div>
-<div class="line"><span class="lineno">  196</span>            <span class="keyword">event</span>.logException();</div>
-<div class="line"><span class="lineno">  197</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ExceptionJsonResponse(event);</div>
-<div class="line"><span class="lineno">  198</span>        }</div>
-<div class="line"><span class="lineno">  199</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_aa8573fed5af5faf4deeffe7dd8369851"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#aa8573fed5af5faf4deeffe7dd8369851">com.teragrep.cfe_16.EventManager.convertData</a></div><div class="ttdeci">Response convertData(final String authToken, final String channel, final String allEventsInJson, final HeaderInfo headerInfo, final Acknowledgements acknowledgements)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00118">EventManager.java:118</a></div></div>
+<div class="line"><span class="lineno">  184</span>        Response response;</div>
+<div class="line"><span class="lineno">  185</span>        <span class="comment">// TODO: find a nice way of not passing Acknowledgements</span></div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  187</span>            response = this.eventManager</div>
+<div class="line"><span class="lineno">  188</span>                    .convertData(authToken, channel, eventInJson, headerInfo, this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a985ee306dd65f0eb1a77ed6f110fec3d">acknowledgements</a>);</div>
+<div class="line"><span class="lineno">  189</span>        }</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> JsonProcessingException | JsonSyntaxException | EventFieldException e) {</div>
+<div class="line"><span class="lineno">  191</span>            <span class="keyword">final</span> ExceptionEventContext exceptionEventContext = <span class="keyword">new</span> ExceptionEventContext(</div>
+<div class="line"><span class="lineno">  192</span>                    headerInfo,</div>
+<div class="line"><span class="lineno">  193</span>                    request.getHeader(<span class="stringliteral">&quot;user-agent&quot;</span>),</div>
+<div class="line"><span class="lineno">  194</span>                    request.getRequestURI(),</div>
+<div class="line"><span class="lineno">  195</span>                    request.getRemoteHost()</div>
+<div class="line"><span class="lineno">  196</span>            );</div>
+<div class="line"><span class="lineno">  197</span>            <span class="keyword">final</span> ExceptionEvent <span class="keyword">event</span> = <span class="keyword">new</span> ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);</div>
+<div class="line"><span class="lineno">  198</span>            <span class="keyword">event</span>.logException();</div>
+<div class="line"><span class="lineno">  199</span>            response = <span class="keyword">new</span> ExceptionJsonResponse(event);</div>
+<div class="line"><span class="lineno">  200</span>        }</div>
+<div class="line"><span class="lineno">  201</span> </div>
+<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">return</span> response;</div>
+<div class="line"><span class="lineno">  203</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_a10eb9f8a23f0280db1b6662352fb5022"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a10eb9f8a23f0280db1b6662352fb5022">com.teragrep.cfe_16.SessionManager.getOrCreateSession</a></div><div class="ttdeci">Session getOrCreateSession(String authenticationToken)</div><div class="ttdoc">Returns an existing Session object based on authentication token.</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00143">SessionManager.java:143</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_html_a0107710bdae951454246ae81915bd027"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a0107710bdae951454246ae81915bd027">com.teragrep.cfe_16.service.HECServiceImpl.xForwardedForStub</a></div><div class="ttdeci">final XForwardedForStub xForwardedForStub</div><div class="ttdef"><b>Definition</b> <a href="HECServiceImpl_8java_source.html#l00104">HECServiceImpl.java:104</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_html_a2efb9b093e75788ceea32be8ea6de59d"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2efb9b093e75788ceea32be8ea6de59d">com.teragrep.cfe_16.service.HECServiceImpl.eventManager</a></div><div class="ttdeci">EventManager eventManager</div><div class="ttdef"><b>Definition</b> <a href="HECServiceImpl_8java_source.html#l00100">HECServiceImpl.java:100</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_html_a30e7809afa6821805a24cbb55291e57d"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a30e7809afa6821805a24cbb55291e57d">com.teragrep.cfe_16.service.HECServiceImpl.xForwardedHostStub</a></div><div class="ttdeci">final XForwardedHostStub xForwardedHostStub</div><div class="ttdef"><b>Definition</b> <a href="HECServiceImpl_8java_source.html#l00105">HECServiceImpl.java:105</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_html_a985ee306dd65f0eb1a77ed6f110fec3d"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a985ee306dd65f0eb1a77ed6f110fec3d">com.teragrep.cfe_16.service.HECServiceImpl.acknowledgements</a></div><div class="ttdeci">Acknowledgements acknowledgements</div><div class="ttdef"><b>Definition</b> <a href="HECServiceImpl_8java_source.html#l00091">HECServiceImpl.java:91</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_html_abc4358268c4a24af7873f9eb80252949"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#abc4358268c4a24af7873f9eb80252949">com.teragrep.cfe_16.service.HECServiceImpl.xForwardedProtoStub</a></div><div class="ttdeci">final XForwardedProtoStub xForwardedProtoStub</div><div class="ttdef"><b>Definition</b> <a href="HECServiceImpl_8java_source.html#l00106">HECServiceImpl.java:106</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_a9ed9a0d5772181625f00edce5a2c611d_cgraph.svg" width="1082" height="371"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_a9ed9a0d5772181625f00edce5a2c611d_cgraph.svg" width="480" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

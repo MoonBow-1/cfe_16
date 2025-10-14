@@ -270,138 +270,141 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            }</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        }</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (shouldAck) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> AcknowledgedJsonResponse(<span class="stringliteral">&quot;Success&quot;</span>, ackId);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> JsonResponse(<span class="stringliteral">&quot;Success&quot;</span>);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
-</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keyword">final</span> Response responseToReturn;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">if</span> (shouldAck) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            responseToReturn = <span class="keyword">new</span> AcknowledgedJsonResponse(<span class="stringliteral">&quot;Success&quot;</span>, ackId);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            responseToReturn = <span class="keyword">new</span> JsonResponse(<span class="stringliteral">&quot;Success&quot;</span>);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">     * The time stamp of the event can be given as epoch time in the request.</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">  195</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">handleTime</a>(HttpEventData eventData, JsonNode jsonObject, HttpEventData previousEvent) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        JsonNode timeObject = jsonObject.get(<span class="stringliteral">&quot;time&quot;</span>);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="comment">/*</span></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         * If the time is given as a string rather than as a numeral value, the time is</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         * handled in a same way as it is handled when time is not given in a request.</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">if</span> (timeObject == <span class="keyword">null</span> || timeObject.isTextual()) {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">if</span> (previousEvent != <span class="keyword">null</span>) {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                <span class="keywordflow">if</span> (previousEvent.isTimeParsed()) {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                    eventData.setTimeAsLong(previousEvent.getTimeAsLong());</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                    eventData.setTime(previousEvent.getTime());</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                    eventData.setTimeParsed(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                    eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                }</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <span class="comment">/*</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">             * If the time is given as epoch seconds with a decimal (example:</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">             * 1433188255.253), the decimal point must be removed and time is assigned to</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">             * HttpEventData object as a long value. convertTimeToEpochMillis() will check</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">             * that correct time format is used.</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeObject.isDouble()) {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            eventData.setTimeAsLong(<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">removeDecimal</a>(timeObject.asDouble()));</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            eventData.setTime(String.valueOf(eventData.getTimeAsLong()));</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            eventData.setTimeParsed(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            eventData = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(eventData);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            <span class="comment">/*</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">             * If the time is given in a numeral value, it is assigned to HttpEventData</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">             * object as a long value. convertTimeToEpochMillis() will check that correct</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">             * time format is used.</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeObject.canConvertToLong()) {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            eventData.setTimeAsLong(timeObject.asLong());</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            eventData.setTime(jsonObject.get(<span class="stringliteral">&quot;time&quot;</span>).asText());</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            eventData.setTimeParsed(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            eventData = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(eventData);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        }</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        }</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="keywordflow">return</span> eventData;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">return</span> responseToReturn;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
 </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">     * The time stamp of the event can be given as epoch time in the request.</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">  198</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">handleTime</a>(HttpEventData eventData, JsonNode jsonObject, HttpEventData previousEvent) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        JsonNode timeObject = jsonObject.get(<span class="stringliteral">&quot;time&quot;</span>);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="comment">/*</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         * If the time is given as a string rather than as a numeral value, the time is</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * handled in a same way as it is handled when time is not given in a request.</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">if</span> (timeObject == <span class="keyword">null</span> || timeObject.isTextual()) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">if</span> (previousEvent != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                <span class="keywordflow">if</span> (previousEvent.isTimeParsed()) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                    eventData.setTimeAsLong(previousEvent.getTimeAsLong());</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                    eventData.setTime(previousEvent.getTime());</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                    eventData.setTimeParsed(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                    eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            <span class="comment">/*</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">             * If the time is given as epoch seconds with a decimal (example:</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">             * 1433188255.253), the decimal point must be removed and time is assigned to</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment">             * HttpEventData object as a long value. convertTimeToEpochMillis() will check</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">             * that correct time format is used.</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeObject.isDouble()) {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            eventData.setTimeAsLong(<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">removeDecimal</a>(timeObject.asDouble()));</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            eventData.setTime(String.valueOf(eventData.getTimeAsLong()));</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            eventData.setTimeParsed(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            eventData = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(eventData);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="comment">/*</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">             * If the time is given in a numeral value, it is assigned to HttpEventData</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">             * object as a long value. convertTimeToEpochMillis() will check that correct</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">             * time format is used.</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeObject.canConvertToLong()) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            eventData.setTimeAsLong(timeObject.asLong());</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            eventData.setTime(jsonObject.get(<span class="stringliteral">&quot;time&quot;</span>).asText());</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            eventData.setTimeParsed(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            eventData.setTimeSource(<span class="stringliteral">&quot;reported&quot;</span>);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            eventData = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(eventData);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        }</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">     * Takes a double value as a parameter, removes the decimal point from that</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">     * value and returns the number as a long value.</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">  251</a></span>    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">removeDecimal</a>(<span class="keywordtype">double</span> doubleValue) {</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        String stringValue = doubleValueWithDecimal.toString();</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        String stringValueWithoutDecimal = stringValue.replace(<span class="stringliteral">&quot;.&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordtype">long</span> longValue = Long.parseLong(stringValueWithoutDecimal);</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">return</span> longValue;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordflow">return</span> eventData;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    }</div>
 </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">     * Takes a double value as a parameter, removes the decimal point from that</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment">     * value and returns the number as a long value.</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00254" data-start="{" data-end="}">
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">  254</a></span>    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">removeDecimal</a>(<span class="keywordtype">double</span> doubleValue) {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        String stringValue = doubleValueWithDecimal.toString();</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        String stringValueWithoutDecimal = stringValue.replace(<span class="stringliteral">&quot;.&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordtype">long</span> longValue = Long.parseLong(stringValueWithoutDecimal);</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">     * Converts the given time stamp into epoch milliseconds. Takes a HttpEventData</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">     * object as a parameter. Gets the time from the variable set in the</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">     * HttpEventData object. If the time value in the object has 13 digits, it means</span></div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">     * that time has been already given in epoch milliseconds.</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">  266</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(HttpEventData eventData) {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        String timeString = eventData.getTime();</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">if</span> (timeString.length() == 13) {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordflow">return</span> eventData;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        }</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeString.length() &gt;= 10 &amp;&amp; timeString.length() &lt; 13) {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            eventData.setTimeAsLong(eventData.getTimeAsLong() * (<span class="keywordtype">long</span>) Math.pow(10, ((13 - timeString.length()))));</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">return</span> longValue;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
+</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">     * Converts the given time stamp into epoch milliseconds. Takes a HttpEventData</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">     * object as a parameter. Gets the time from the variable set in the</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment">     * HttpEventData object. If the time value in the object has 13 digits, it means</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment">     * that time has been already given in epoch milliseconds.</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00269" data-start="{" data-end="}">
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">  269</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">convertTimeToEpochMillis</a>(HttpEventData eventData) {</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        String timeString = eventData.getTime();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keywordflow">if</span> (timeString.length() == 13) {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordflow">return</span> eventData;</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        }</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        }</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">return</span> eventData;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    }</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeString.length() &gt;= 10 &amp;&amp; timeString.length() &lt; 13) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            eventData.setTimeAsLong(eventData.getTimeAsLong() * (<span class="keywordtype">long</span>) Math.pow(10, ((13 - timeString.length()))));</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            eventData.setTimeParsed(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            eventData.setTimeSource(<span class="stringliteral">&quot;generated&quot;</span>);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <span class="keywordflow">return</span> eventData;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    }</div>
 </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment">     * Assigns the metadata (authentication token and channel name) to the</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">     * HttpEventData object.</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">  285</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">assignMetaData</a>(HttpEventData eventData, String authToken, String channel) {</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        eventData.setAuthenticationToken(authToken);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        eventData.setChannel(channel);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">     * Assigns the metadata (authentication token and channel name) to the</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">     * HttpEventData object.</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00288" data-start="{" data-end="}">
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">  288</a></span>    <span class="keyword">private</span> HttpEventData <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">assignMetaData</a>(HttpEventData eventData, String authToken, String channel) {</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">return</span> eventData;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        eventData.setAuthenticationToken(authToken);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        eventData.setChannel(channel);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">return</span> eventData;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    }</div>
 </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>}</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>}</div>
 </div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html">com.teragrep.cfe_16.Acknowledgements</a></div><div class="ttdef"><b>Definition</b> <a href="Acknowledgements_8java_source.html#l00073">Acknowledgements.java:73</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1Converter_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html">com.teragrep.cfe_16.Converter</a></div><div class="ttdef"><b>Definition</b> <a href="Converter_8java_source.html#l00064">Converter.java:64</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1Converter_html_a602a68046d2d394249793b6d74b62050"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#a602a68046d2d394249793b6d74b62050">com.teragrep.cfe_16.Converter.httpToSyslog</a></div><div class="ttdeci">SyslogMessage httpToSyslog(HttpEventData httpEventData)</div><div class="ttdef"><b>Definition</b> <a href="Converter_8java_source.html#l00079">Converter.java:79</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html">com.teragrep.cfe_16.EventManager</a></div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00084">EventManager.java:84</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a159ac4f3aa69ac663e34efa51c9147d6"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">com.teragrep.cfe_16.EventManager.removeDecimal</a></div><div class="ttdeci">long removeDecimal(double doubleValue)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00251">EventManager.java:251</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a159ac4f3aa69ac663e34efa51c9147d6"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a159ac4f3aa69ac663e34efa51c9147d6">com.teragrep.cfe_16.EventManager.removeDecimal</a></div><div class="ttdeci">long removeDecimal(double doubleValue)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00254">EventManager.java:254</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a17b6da0f3c56c56d16c58fde6f3660bf"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a17b6da0f3c56c56d16c58fde6f3660bf">com.teragrep.cfe_16.EventManager.connection</a></div><div class="ttdeci">AbstractConnection connection</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00091">EventManager.java:91</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a217af1926ed9adc97b9720f30e9a6807"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a217af1926ed9adc97b9720f30e9a6807">com.teragrep.cfe_16.EventManager.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00086">EventManager.java:86</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a369bd230857b54e0bb2212ec606f8d00"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a369bd230857b54e0bb2212ec606f8d00">com.teragrep.cfe_16.EventManager.EventManager</a></div><div class="ttdeci">EventManager()</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00093">EventManager.java:93</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a499862d588b74185c5a5cafcdc0c407e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">com.teragrep.cfe_16.EventManager.handleTime</a></div><div class="ttdeci">HttpEventData handleTime(HttpEventData eventData, JsonNode jsonObject, HttpEventData previousEvent)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00195">EventManager.java:195</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a499862d588b74185c5a5cafcdc0c407e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a499862d588b74185c5a5cafcdc0c407e">com.teragrep.cfe_16.EventManager.handleTime</a></div><div class="ttdeci">HttpEventData handleTime(HttpEventData eventData, JsonNode jsonObject, HttpEventData previousEvent)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00198">EventManager.java:198</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a5e0b1763d7681b274858358dbc769716"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a5e0b1763d7681b274858358dbc769716">com.teragrep.cfe_16.EventManager.configuration</a></div><div class="ttdeci">Configuration configuration</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00089">EventManager.java:89</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a654c0f56e860158dd8902512b77c263e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a654c0f56e860158dd8902512b77c263e">com.teragrep.cfe_16.EventManager.setupSender</a></div><div class="ttdeci">void setupSender()</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00097">EventManager.java:97</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a74cf4d32251dd8b36aee7d8b3578f62b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">com.teragrep.cfe_16.EventManager.convertTimeToEpochMillis</a></div><div class="ttdeci">HttpEventData convertTimeToEpochMillis(HttpEventData eventData)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00266">EventManager.java:266</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a952ab8d08a4ca2207f87d1aa04abce7a"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">com.teragrep.cfe_16.EventManager.assignMetaData</a></div><div class="ttdeci">HttpEventData assignMetaData(HttpEventData eventData, String authToken, String channel)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00285">EventManager.java:285</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a74cf4d32251dd8b36aee7d8b3578f62b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a74cf4d32251dd8b36aee7d8b3578f62b">com.teragrep.cfe_16.EventManager.convertTimeToEpochMillis</a></div><div class="ttdeci">HttpEventData convertTimeToEpochMillis(HttpEventData eventData)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00269">EventManager.java:269</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_a952ab8d08a4ca2207f87d1aa04abce7a"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a952ab8d08a4ca2207f87d1aa04abce7a">com.teragrep.cfe_16.EventManager.assignMetaData</a></div><div class="ttdeci">HttpEventData assignMetaData(HttpEventData eventData, String authToken, String channel)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00288">EventManager.java:288</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1EventManager_html_aa8573fed5af5faf4deeffe7dd8369851"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#aa8573fed5af5faf4deeffe7dd8369851">com.teragrep.cfe_16.EventManager.convertData</a></div><div class="ttdeci">Response convertData(final String authToken, final String channel, final String allEventsInJson, final HeaderInfo headerInfo, final Acknowledgements acknowledgements)</div><div class="ttdef"><b>Definition</b> <a href="EventManager_8java_source.html#l00118">EventManager.java:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
