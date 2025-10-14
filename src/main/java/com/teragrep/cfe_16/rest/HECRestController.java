@@ -106,7 +106,8 @@ public class HECRestController {
     @RequestMapping(
             value = "services/collector",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<JsonNode> sendEvents(
             HttpServletRequest request,
