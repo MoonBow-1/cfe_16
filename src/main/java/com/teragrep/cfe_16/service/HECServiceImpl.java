@@ -181,9 +181,11 @@ public class HECServiceImpl implements HECService {
             session.addChannel(channel);
         }
 
+        Response response;
         // TODO: find a nice way of not passing Acknowledgements
         try {
-            return this.eventManager.convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+            response = this.eventManager
+                    .convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
         }
         catch (final JsonProcessingException | JsonSyntaxException | EventFieldException e) {
             final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
@@ -194,8 +196,10 @@ public class HECServiceImpl implements HECService {
             );
             final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
             event.logException();
-            return new ExceptionJsonResponse(event);
+            response = new ExceptionJsonResponse(event);
         }
+
+        return response;
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)
