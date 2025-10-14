@@ -47,6 +47,7 @@ package com.teragrep.cfe_16.response;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.Objects;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +62,7 @@ public final class ExceptionJsonResponse implements Response {
 
     public ResponseEntity<JsonNode> asJsonNodeResponseEntity() {
         final ObjectMapper jsonObjectBuilder = new ObjectMapper();
-        final var jsonNode = jsonObjectBuilder
+        final ObjectNode jsonNode = jsonObjectBuilder
                 .createObjectNode()
                 .put(
                         "message",
