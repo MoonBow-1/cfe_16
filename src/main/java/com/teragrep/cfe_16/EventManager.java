@@ -181,12 +181,15 @@ public class EventManager {
             }
         }
 
+        final Response responseToReturn;
         if (shouldAck) {
-            return new AcknowledgedJsonResponse("Success", ackId);
+            responseToReturn = new AcknowledgedJsonResponse("Success", ackId);
         }
         else {
-            return new JsonResponse("Success");
+            responseToReturn = new JsonResponse("Success");
         }
+
+        return responseToReturn;
     }
 
     /*
