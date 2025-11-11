@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ackid_0',['ackID',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HttpEventData.html#aff87f8f59d94b38ca87245c3cecd0f71',1,'com::teragrep::cfe_16::bo::HttpEventData']]],
+  ['ackid_0',['ackid',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1AcknowledgedJsonResponse.html#a1faab15888279c9fd1f6a7fce5e8b1a7',1,'com.teragrep.cfe_16.response.AcknowledgedJsonResponse.ackID'],['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HttpEventData.html#aff87f8f59d94b38ca87245c3cecd0f71',1,'com.teragrep.cfe_16.bo.HttpEventData.ackID']]],
   ['ackmap_1',['ackMap',['../classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#a5f8c99da7ebf08418b558fed5712d880',1,'com::teragrep::cfe_16::Acknowledgements::State']]],
   ['acknowledged_2',['acknowledged',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Ack.html#abd42d37caa43cd9200a70fc2b3961c2b',1,'com::teragrep::cfe_16::bo::Ack']]],
   ['acknowledgements_3',['acknowledgements',['../classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a985ee306dd65f0eb1a77ed6f110fec3d',1,'com.teragrep.cfe_16.service.HECServiceImpl.acknowledgements'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#aee401e4d361a8deae654c7a6bb53c514',1,'com.teragrep.cfe_16.it.AcknowledgementsIT.acknowledgements'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a90efbc392ae04889101ab836c7871b52',1,'com.teragrep.cfe_16.it.ServiceAndEventManagerIT.acknowledgements']]],

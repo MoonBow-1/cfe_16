@@ -93,6 +93,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab3fa314935c77656287fae50ab802ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75b003348c0432bd23b5d10615237da1" id="r_a75b003348c0432bd23b5d10615237da1"><td class="memItemLeft" align="right" valign="top">SDElement&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a75b003348c0432bd23b5d10615237da1">asSDElement</a> ()</td></tr>
 <tr class="separator:a75b003348c0432bd23b5d10615237da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af09ca63e3cb19fe892c63b2dab32c619" id="r_af09ca63e3cb19fe892c63b2dab32c619"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af09ca63e3cb19fe892c63b2dab32c619">toString</a> ()</td></tr>
+<tr class="separator:af09ca63e3cb19fe892c63b2dab32c619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10d09a88b6057cffbd946cd075bfa2c0" id="r_a10d09a88b6057cffbd946cd075bfa2c0"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a10d09a88b6057cffbd946cd075bfa2c0">equals</a> (Object o)</td></tr>
 <tr class="separator:a10d09a88b6057cffbd946cd075bfa2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bdbee979ddc97918019f9ac4780c7d2" id="r_a0bdbee979ddc97918019f9ac4780c7d2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a0bdbee979ddc97918019f9ac4780c7d2">hashCode</a> ()</td></tr>
@@ -225,16 +227,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HeaderInfo_8java_source.html#l00091">91</a> of file <a class="el" href="HeaderInfo_8java_source.html">HeaderInfo.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   91</span>                                    {</div>
-<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) {</div>
-<div class="line"><span class="lineno">   93</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   94</span>        }</div>
-<div class="line"><span class="lineno">   95</span> </div>
-<div class="line"><span class="lineno">   96</span>        <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ab3fa314935c77656287fae50ab802ac8">HeaderInfo</a> that = (<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ab3fa314935c77656287fae50ab802ac8">HeaderInfo</a>) o;</div>
-<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">return</span> Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af46ec4b9013f4d272a3f3f6fdfb316d0">xForwardedFor</a>, that.xForwardedFor) &amp;&amp; Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#aeabb7dd8d44099f078387667fa5d87dc">xForwardedHost</a>, that.xForwardedHost)</div>
-<div class="line"><span class="lineno">   98</span>                &amp;&amp; Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a9593afd0e628d32ff5819d6d9087643d">xForwardedProto</a>, that.xForwardedProto);</div>
-<div class="line"><span class="lineno">   99</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HeaderInfo_8java_source.html#l00097">97</a> of file <a class="el" href="HeaderInfo_8java_source.html">HeaderInfo.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>                                    {</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) {</div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  100</span>        }</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>        <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ab3fa314935c77656287fae50ab802ac8">HeaderInfo</a> that = (<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ab3fa314935c77656287fae50ab802ac8">HeaderInfo</a>) o;</div>
+<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">return</span> Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af46ec4b9013f4d272a3f3f6fdfb316d0">xForwardedFor</a>, that.xForwardedFor) &amp;&amp; Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#aeabb7dd8d44099f078387667fa5d87dc">xForwardedHost</a>, that.xForwardedHost)</div>
+<div class="line"><span class="lineno">  104</span>                &amp;&amp; Objects.equals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a9593afd0e628d32ff5819d6d9087643d">xForwardedProto</a>, that.xForwardedProto);</div>
+<div class="line"><span class="lineno">  105</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo_html_ab3fa314935c77656287fae50ab802ac8"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ab3fa314935c77656287fae50ab802ac8">com.teragrep.cfe_16.bo.HeaderInfo.HeaderInfo</a></div><div class="ttdeci">HeaderInfo(final XForwardedFor xForwardedFor, final XForwardedHost xForwardedHost, final XForwardedProto xForwardedProto)</div><div class="ttdef"><b>Definition</b> <a href="HeaderInfo_8java_source.html#l00060">HeaderInfo.java:60</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -264,10 +266,33 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HeaderInfo_8java_source.html#l00102">102</a> of file <a class="el" href="HeaderInfo_8java_source.html">HeaderInfo.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                          {</div>
-<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">return</span> Objects.hash(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af46ec4b9013f4d272a3f3f6fdfb316d0">xForwardedFor</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#aeabb7dd8d44099f078387667fa5d87dc">xForwardedHost</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a9593afd0e628d32ff5819d6d9087643d">xForwardedProto</a>);</div>
-<div class="line"><span class="lineno">  104</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HeaderInfo_8java_source.html#l00108">108</a> of file <a class="el" href="HeaderInfo_8java_source.html">HeaderInfo.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                          {</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">return</span> Objects.hash(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af46ec4b9013f4d272a3f3f6fdfb316d0">xForwardedFor</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#aeabb7dd8d44099f078387667fa5d87dc">xForwardedHost</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a9593afd0e628d32ff5819d6d9087643d">xForwardedProto</a>);</div>
+<div class="line"><span class="lineno">  110</span>    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af09ca63e3cb19fe892c63b2dab32c619" name="af09ca63e3cb19fe892c63b2dab32c619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af09ca63e3cb19fe892c63b2dab32c619">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String com.teragrep.cfe_16.bo.HeaderInfo.toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HeaderInfo_8java_source.html#l00091">91</a> of file <a class="el" href="HeaderInfo_8java_source.html">HeaderInfo.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                             {</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;HeaderInfo{&quot;</span> + <span class="stringliteral">&quot;xForwardedFor=&quot;</span> + <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#af46ec4b9013f4d272a3f3f6fdfb316d0">xForwardedFor</a> + <span class="stringliteral">&quot;, xForwardedHost=&quot;</span> + <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#aeabb7dd8d44099f078387667fa5d87dc">xForwardedHost</a></div>
+<div class="line"><span class="lineno">   93</span>                + <span class="stringliteral">&quot;, xForwardedProto=&quot;</span> + <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a9593afd0e628d32ff5819d6d9087643d">xForwardedProto</a> + <span class="charliteral">&#39;}&#39;</span>;</div>
+<div class="line"><span class="lineno">   94</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>

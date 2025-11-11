@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['objectmapper_0',['objectmapper',['../classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#aad24b29aa2082e20e637c85ce5fe9ee5',1,'com.teragrep.cfe_16.Acknowledgements.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a9c45f595146e1778f4355ecb11ccc7d4',1,'com.teragrep.cfe_16.EventManager.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7c705159cd7187534063062599f3958b',1,'com.teragrep.cfe_16.rest.HECRestController.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2199658f29a3ef56b0cc5b42b67ea8dc',1,'com.teragrep.cfe_16.service.HECServiceImpl.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#ac87ed022d40f09cbf0db6422bd08a37c',1,'com.teragrep.cfe_16.it.ServiceAndEventManagerIT.objectMapper']]]
+  ['n_0',['n',['../classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a1a594b6aa0654ac0563a3d7df7094946',1,'com::teragrep::cfe_16::TestClient']]],
+  ['numberofrequestsmade_1',['numberOfRequestsMade',['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45',1,'com::teragrep::cfe_16::it::SendEventsIT']]]
 ];

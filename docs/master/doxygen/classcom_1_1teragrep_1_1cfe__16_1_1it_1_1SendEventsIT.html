@@ -100,7 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54f5b8457d3c43ca87ae06610080d472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57e3e1d33cbb1519f43311fc0b571bc7" id="r_a57e3e1d33cbb1519f43311fc0b571bc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a57e3e1d33cbb1519f43311fc0b571bc7">run</a> ()</td></tr>
 <tr class="separator:a57e3e1d33cbb1519f43311fc0b571bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0743f85da744776e9231c37d1a4191d4" id="r_a0743f85da744776e9231c37d1a4191d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0743f85da744776e9231c37d1a4191d4">sendEventsTest</a> ()  throws IOException, InterruptedException, ExecutionException </td></tr>
+<tr class="memitem:a0743f85da744776e9231c37d1a4191d4" id="r_a0743f85da744776e9231c37d1a4191d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0743f85da744776e9231c37d1a4191d4">sendEventsTest</a> ()  throws InterruptedException, ExecutionException </td></tr>
 <tr class="separator:a0743f85da744776e9231c37d1a4191d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a766087786ad9960c11aa27be18ef9aa5" id="r_a766087786ad9960c11aa27be18ef9aa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a766087786ad9960c11aa27be18ef9aa5">send1EventTest</a> ()  throws IOException, InterruptedException </td></tr>
 <tr class="separator:a766087786ad9960c11aa27be18ef9aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,7 +133,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00080">80</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00082">82</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad7b3da2bc0e0a784a6037c3d0a774620" name="ad7b3da2bc0e0a784a6037c3d0a774620"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7b3da2bc0e0a784a6037c3d0a774620">&#9670;&#160;</a></span>init()</h2>
@@ -150,23 +150,23 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00097">97</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   97</span>                                          {</div>
-<div class="line"><span class="lineno">   98</span>        this.thread = <span class="keyword">new</span> Thread(<span class="keyword">this</span>);</div>
-<div class="line"><span class="lineno">   99</span>        this.numberOfRequestsMade = <span class="keyword">new</span> AtomicInteger(0);</div>
-<div class="line"><span class="lineno">  100</span>        this.serverSocket = <span class="keyword">new</span> ServerSocket(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">SERVER_PORT</a>);</div>
-<div class="line"><span class="lineno">  101</span>        this.selector = Selector.open();</div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>        this.request1 = <span class="keyword">new</span> MockHttpServletRequest();</div>
-<div class="line"><span class="lineno">  104</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>);</div>
-<div class="line"><span class="lineno">  105</span>        this.channel1 = <span class="stringliteral">&quot;CHANNEL_11111&quot;</span>;</div>
-<div class="line"><span class="lineno">  106</span>        this.eventInJson = <span class="stringliteral">&quot;{\&quot;sourcetype\&quot;:\&quot;access\&quot;, \&quot;source\&quot;:\&quot;/var/log/access.log\&quot;, \&quot;event\&quot;: {\&quot;message\&quot;:\&quot;Access log test message 1\&quot;}} {\&quot;sourcetype\&quot;:\&quot;access\&quot;, \&quot;source\&quot;:\&quot;/var/log/access.log\&quot;, \&quot;event\&quot;: {\&quot;message\&quot;:\&quot;Access log test message 2\&quot;}}&quot;</span>;</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">thread</a>.start();</div>
-<div class="line"><span class="lineno">  109</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a07b595d8f4ea7eeb909b5775c0f272b5"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">com.teragrep.cfe_16.it.SendEventsIT.SERVER_PORT</a></div><div class="ttdeci">static final int SERVER_PORT</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00093">SendEventsIT.java:93</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a0c04fbfe744dac64268b3dc4923dd172"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">com.teragrep.cfe_16.it.SendEventsIT.request1</a></div><div class="ttdeci">MockHttpServletRequest request1</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00089">SendEventsIT.java:89</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6409a87da2bdb26e02afb19ae3ab1c16"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">com.teragrep.cfe_16.it.SendEventsIT.thread</a></div><div class="ttdeci">Thread thread</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00086">SendEventsIT.java:86</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00099">99</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   99</span>                                          {</div>
+<div class="line"><span class="lineno">  100</span>        this.thread = <span class="keyword">new</span> Thread(<span class="keyword">this</span>);</div>
+<div class="line"><span class="lineno">  101</span>        this.numberOfRequestsMade = <span class="keyword">new</span> AtomicInteger(0);</div>
+<div class="line"><span class="lineno">  102</span>        this.serverSocket = <span class="keyword">new</span> ServerSocket(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">SERVER_PORT</a>);</div>
+<div class="line"><span class="lineno">  103</span>        this.selector = Selector.open();</div>
+<div class="line"><span class="lineno">  104</span> </div>
+<div class="line"><span class="lineno">  105</span>        this.request1 = <span class="keyword">new</span> MockHttpServletRequest();</div>
+<div class="line"><span class="lineno">  106</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>);</div>
+<div class="line"><span class="lineno">  107</span>        this.channel1 = <span class="stringliteral">&quot;CHANNEL_11111&quot;</span>;</div>
+<div class="line"><span class="lineno">  108</span>        this.eventInJson = <span class="stringliteral">&quot;{\&quot;sourcetype\&quot;:\&quot;access\&quot;, \&quot;source\&quot;:\&quot;/var/log/access.log\&quot;, \&quot;event\&quot;: {\&quot;message\&quot;:\&quot;Access log test message 1\&quot;}} {\&quot;sourcetype\&quot;:\&quot;access\&quot;, \&quot;source\&quot;:\&quot;/var/log/access.log\&quot;, \&quot;event\&quot;: {\&quot;message\&quot;:\&quot;Access log test message 2\&quot;}}&quot;</span>;</div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">thread</a>.start();</div>
+<div class="line"><span class="lineno">  111</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a07b595d8f4ea7eeb909b5775c0f272b5"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">com.teragrep.cfe_16.it.SendEventsIT.SERVER_PORT</a></div><div class="ttdeci">static final int SERVER_PORT</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00095">SendEventsIT.java:95</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a0c04fbfe744dac64268b3dc4923dd172"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">com.teragrep.cfe_16.it.SendEventsIT.request1</a></div><div class="ttdeci">MockHttpServletRequest request1</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00091">SendEventsIT.java:91</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6409a87da2bdb26e02afb19ae3ab1c16"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">com.teragrep.cfe_16.it.SendEventsIT.thread</a></div><div class="ttdeci">Thread thread</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00088">SendEventsIT.java:88</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -185,35 +185,35 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00116">116</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>                      {</div>
-<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><span class="lineno">  118</span>            <span class="keywordflow">try</span> {</div>
-<div class="line"><span class="lineno">  119</span>                Socket socket = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">serverSocket</a>.accept();</div>
-<div class="line"><span class="lineno">  120</span>                BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</div>
-<div class="line"><span class="lineno">  121</span>                String line;</div>
-<div class="line"><span class="lineno">  122</span>                <span class="keywordflow">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  123</span>                    this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>.getAndIncrement();</div>
-<div class="line"><span class="lineno">  124</span>                    <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.countDown();</div>
-<div class="line"><span class="lineno">  125</span>                }</div>
-<div class="line"><span class="lineno">  126</span>                bufferedReader.close();</div>
-<div class="line"><span class="lineno">  127</span>                socket.close();</div>
-<div class="line"><span class="lineno">  128</span>                <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>.get() % 5 == 0) {</div>
-<div class="line"><span class="lineno">  129</span>                    this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">serverSocket</a>.close();</div>
-<div class="line"><span class="lineno">  130</span>                    this.serverSocket = <span class="keyword">new</span> ServerSocket(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">SERVER_PORT</a>);</div>
-<div class="line"><span class="lineno">  131</span>                }</div>
-<div class="line"><span class="lineno">  132</span>            }</div>
-<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">catch</span> (InterruptedIOException e) {</div>
-<div class="line"><span class="lineno">  134</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  135</span>            }</div>
-<div class="line"><span class="lineno">  136</span>            <span class="keywordflow">catch</span> (IOException e) {</div>
-<div class="line"><span class="lineno">  137</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> RuntimeException(e);</div>
-<div class="line"><span class="lineno">  138</span>            }</div>
-<div class="line"><span class="lineno">  139</span>        }</div>
-<div class="line"><span class="lineno">  140</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a4b629f7dfd6d9e50e1a59837c5fb7c45"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">com.teragrep.cfe_16.it.SendEventsIT.numberOfRequestsMade</a></div><div class="ttdeci">AtomicInteger numberOfRequestsMade</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00087">SendEventsIT.java:87</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6545f653f9dfbd0363e830dffd9efd76"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">com.teragrep.cfe_16.it.SendEventsIT.countDownLatch</a></div><div class="ttdeci">CountDownLatch countDownLatch</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00094">SendEventsIT.java:94</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_afe3ae5fa5087606a005343b7b37fe782"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">com.teragrep.cfe_16.it.SendEventsIT.serverSocket</a></div><div class="ttdeci">ServerSocket serverSocket</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00085">SendEventsIT.java:85</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00118">118</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>                      {</div>
+<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><span class="lineno">  120</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  121</span>                Socket socket = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">serverSocket</a>.accept();</div>
+<div class="line"><span class="lineno">  122</span>                BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</div>
+<div class="line"><span class="lineno">  123</span>                String line;</div>
+<div class="line"><span class="lineno">  124</span>                <span class="keywordflow">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) {</div>
+<div class="line"><span class="lineno">  125</span>                    this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>.getAndIncrement();</div>
+<div class="line"><span class="lineno">  126</span>                    <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.countDown();</div>
+<div class="line"><span class="lineno">  127</span>                }</div>
+<div class="line"><span class="lineno">  128</span>                bufferedReader.close();</div>
+<div class="line"><span class="lineno">  129</span>                socket.close();</div>
+<div class="line"><span class="lineno">  130</span>                <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>.get() % 5 == 0) {</div>
+<div class="line"><span class="lineno">  131</span>                    this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">serverSocket</a>.close();</div>
+<div class="line"><span class="lineno">  132</span>                    this.serverSocket = <span class="keyword">new</span> ServerSocket(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a07b595d8f4ea7eeb909b5775c0f272b5">SERVER_PORT</a>);</div>
+<div class="line"><span class="lineno">  133</span>                }</div>
+<div class="line"><span class="lineno">  134</span>            }</div>
+<div class="line"><span class="lineno">  135</span>            <span class="keywordflow">catch</span> (InterruptedIOException e) {</div>
+<div class="line"><span class="lineno">  136</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  137</span>            }</div>
+<div class="line"><span class="lineno">  138</span>            <span class="keywordflow">catch</span> (IOException e) {</div>
+<div class="line"><span class="lineno">  139</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> RuntimeException(e);</div>
+<div class="line"><span class="lineno">  140</span>            }</div>
+<div class="line"><span class="lineno">  141</span>        }</div>
+<div class="line"><span class="lineno">  142</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a4b629f7dfd6d9e50e1a59837c5fb7c45"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">com.teragrep.cfe_16.it.SendEventsIT.numberOfRequestsMade</a></div><div class="ttdeci">AtomicInteger numberOfRequestsMade</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00089">SendEventsIT.java:89</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6545f653f9dfbd0363e830dffd9efd76"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">com.teragrep.cfe_16.it.SendEventsIT.countDownLatch</a></div><div class="ttdeci">CountDownLatch countDownLatch</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00096">SendEventsIT.java:96</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_afe3ae5fa5087606a005343b7b37fe782"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#afe3ae5fa5087606a005343b7b37fe782">com.teragrep.cfe_16.it.SendEventsIT.serverSocket</a></div><div class="ttdeci">ServerSocket serverSocket</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00087">SendEventsIT.java:87</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -232,22 +232,22 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00177">177</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  177</span>                                                                          {</div>
-<div class="line"><span class="lineno">  178</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a> = <span class="keyword">new</span> CountDownLatch(1);</div>
-<div class="line"><span class="lineno">  179</span>        String supposedResponse = <span class="stringliteral">&quot;{\&quot;text\&quot;:\&quot;Success\&quot;,\&quot;code\&quot;:0,\&quot;ackID\&quot;:&quot;</span> + 0 + <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><span class="lineno">  180</span>        Assertions</div>
-<div class="line"><span class="lineno">  181</span>                .assertEquals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">service</a>.sendEvents(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">channel1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">eventInJson</a>).toString(), supposedResponse, <span class="stringliteral">&quot;Service should return JSON object with fields &#39;text&#39;, &#39;code&#39; and &#39;ackID&#39; (ackID should be &quot;</span> + 0 + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.await(5, TimeUnit.SECONDS);</div>
-<div class="line"><span class="lineno">  184</span>        Assertions</div>
-<div class="line"><span class="lineno">  185</span>                .assertEquals(</div>
-<div class="line"><span class="lineno">  186</span>                        2, this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>, <span class="stringliteral">&quot;Number of events received should match the number of sent ones&quot;</span></div>
-<div class="line"><span class="lineno">  187</span>                );</div>
-<div class="line"><span class="lineno">  188</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a360e937adea985b78333b9a898516d2c"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">com.teragrep.cfe_16.it.SendEventsIT.eventInJson</a></div><div class="ttdeci">String eventInJson</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00090">SendEventsIT.java:90</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a66829711d87436b22641881319f47dcd"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">com.teragrep.cfe_16.it.SendEventsIT.channel1</a></div><div class="ttdeci">String channel1</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00091">SendEventsIT.java:91</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6e75fdda3ed54499dc1c44274a1dc986"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">com.teragrep.cfe_16.it.SendEventsIT.service</a></div><div class="ttdeci">HECService service</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00083">SendEventsIT.java:83</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00179">179</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  179</span>                                                                          {</div>
+<div class="line"><span class="lineno">  180</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a> = <span class="keyword">new</span> CountDownLatch(1);</div>
+<div class="line"><span class="lineno">  181</span>        String supposedResponse = <span class="stringliteral">&quot;{\&quot;text\&quot;:\&quot;Success\&quot;,\&quot;code\&quot;:0,\&quot;ackID\&quot;:&quot;</span> + 0 + <span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><span class="lineno">  182</span>        Assertions</div>
+<div class="line"><span class="lineno">  183</span>                .assertEquals(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">service</a>.sendEvents(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">channel1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">eventInJson</a>).toString(), supposedResponse, <span class="stringliteral">&quot;Service should return JSON object with fields &#39;text&#39;, &#39;code&#39; and &#39;ackID&#39; (ackID should be &quot;</span> + 0 + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  184</span> </div>
+<div class="line"><span class="lineno">  185</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.await(5, TimeUnit.SECONDS);</div>
+<div class="line"><span class="lineno">  186</span>        Assertions</div>
+<div class="line"><span class="lineno">  187</span>                .assertEquals(</div>
+<div class="line"><span class="lineno">  188</span>                        2, this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a4b629f7dfd6d9e50e1a59837c5fb7c45">numberOfRequestsMade</a>, <span class="stringliteral">&quot;Number of events received should match the number of sent ones&quot;</span></div>
+<div class="line"><span class="lineno">  189</span>                );</div>
+<div class="line"><span class="lineno">  190</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a360e937adea985b78333b9a898516d2c"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">com.teragrep.cfe_16.it.SendEventsIT.eventInJson</a></div><div class="ttdeci">String eventInJson</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00092">SendEventsIT.java:92</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a66829711d87436b22641881319f47dcd"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">com.teragrep.cfe_16.it.SendEventsIT.channel1</a></div><div class="ttdeci">String channel1</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00093">SendEventsIT.java:93</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT_html_a6e75fdda3ed54499dc1c44274a1dc986"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">com.teragrep.cfe_16.it.SendEventsIT.service</a></div><div class="ttdeci">HECService service</div><div class="ttdef"><b>Definition</b> <a href="SendEventsIT_8java_source.html#l00085">SendEventsIT.java:85</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -261,43 +261,43 @@ Static Private Attributes</h2></td></tr>
           <td class="memname">void com.teragrep.cfe_16.it.SendEventsIT.sendEventsTest </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> throws IOException, InterruptedException, ExecutionException</td>
+          <td> throws InterruptedException, ExecutionException</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00143">143</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  143</span>                                                                                              {</div>
-<div class="line"><span class="lineno">  144</span>        <span class="keywordtype">int</span> NUMBER_OF_EVENTS_TO_BE_SENT = 100;</div>
-<div class="line"><span class="lineno">  145</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a> = <span class="keyword">new</span> CountDownLatch(NUMBER_OF_EVENTS_TO_BE_SENT);</div>
-<div class="line"><span class="lineno">  146</span>        ExecutorService es = Executors.newFixedThreadPool(8);</div>
-<div class="line"><span class="lineno">  147</span>        List&lt;CompletableFuture&lt;String&gt;&gt; futures = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
-<div class="line"><span class="lineno">  148</span> </div>
-<div class="line"><span class="lineno">  149</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_EVENTS_TO_BE_SENT; i++) {</div>
-<div class="line"><span class="lineno">  150</span>            CompletableFuture&lt;String&gt; f = CompletableFuture</div>
-<div class="line"><span class="lineno">  151</span>                    .supplyAsync(() -&gt; <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">service</a>.sendEvents(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">channel1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">eventInJson</a>).toString());</div>
-<div class="line"><span class="lineno">  152</span>            futures.add(f);</div>
-<div class="line"><span class="lineno">  153</span>        }</div>
-<div class="line"><span class="lineno">  154</span>        List&lt;String&gt; supposedResponses = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div>
-<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_EVENTS_TO_BE_SENT; i++) {</div>
-<div class="line"><span class="lineno">  156</span>            <span class="keyword">final</span> String supposedResponse = <span class="stringliteral">&quot;{\&quot;text\&quot;:\&quot;Success\&quot;,\&quot;code\&quot;:0,\&quot;ackID\&quot;:&quot;</span> + i + <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><span class="lineno">  157</span>            supposedResponses.add(supposedResponse);</div>
-<div class="line"><span class="lineno">  158</span>        }</div>
-<div class="line"><span class="lineno">  159</span>        <span class="keywordtype">int</span> countFuture = 0;</div>
-<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">for</span> (Future&lt;String&gt; f : futures) {</div>
-<div class="line"><span class="lineno">  161</span>            <span class="keyword">final</span> String actualResponse = f.get();</div>
-<div class="line"><span class="lineno">  162</span>            Assertions</div>
-<div class="line"><span class="lineno">  163</span>                    .assertTrue(supposedResponses.contains(actualResponse), <span class="stringliteral">&quot;Service should return JSON object with fields &#39;text&#39;, &#39;code&#39; and &#39;ackID&#39; (ackID should be &quot;</span> + countFuture + <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><span class="lineno">  164</span>            countFuture++;</div>
-<div class="line"><span class="lineno">  165</span>        }</div>
-<div class="line"><span class="lineno">  166</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.await(1, TimeUnit.SECONDS);</div>
-<div class="line"><span class="lineno">  167</span>        Assertions.assertTimeoutPreemptively(Duration.ofSeconds(5), () -&gt; {</div>
-<div class="line"><span class="lineno">  168</span>            while (NUMBER_OF_EVENTS_TO_BE_SENT * 2 != this.numberOfRequestsMade.get()) {</div>
-<div class="line"><span class="lineno">  169</span>                Thread.sleep(500);</div>
-<div class="line"><span class="lineno">  170</span>            }</div>
-<div class="line"><span class="lineno">  171</span>        });</div>
-<div class="line"><span class="lineno">  172</span>        es.shutdownNow();</div>
-<div class="line"><span class="lineno">  173</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00145">145</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  146</span>        <span class="keyword">final</span> <span class="keywordtype">int</span> NUMBER_OF_EVENTS_TO_BE_SENT = 100;</div>
+<div class="line"><span class="lineno">  147</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a> = <span class="keyword">new</span> CountDownLatch(NUMBER_OF_EVENTS_TO_BE_SENT);</div>
+<div class="line"><span class="lineno">  148</span>        ExecutorService es = Executors.newFixedThreadPool(8);</div>
+<div class="line"><span class="lineno">  149</span>        <span class="keyword">final</span> List&lt;CompletableFuture&lt;Response&gt;&gt; futures = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_EVENTS_TO_BE_SENT; i++) {</div>
+<div class="line"><span class="lineno">  152</span>            <span class="keyword">final</span> CompletableFuture&lt;Response&gt; future = CompletableFuture</div>
+<div class="line"><span class="lineno">  153</span>                    .supplyAsync(() -&gt; <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6e75fdda3ed54499dc1c44274a1dc986">service</a>.sendEvents(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a0c04fbfe744dac64268b3dc4923dd172">request1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a66829711d87436b22641881319f47dcd">channel1</a>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c">eventInJson</a>));</div>
+<div class="line"><span class="lineno">  154</span>            futures.add(future);</div>
+<div class="line"><span class="lineno">  155</span>        }</div>
+<div class="line"><span class="lineno">  156</span>        <span class="keyword">final</span> List&lt;Response&gt; supposedResponses = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><span class="lineno">  157</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_EVENTS_TO_BE_SENT; i++) {</div>
+<div class="line"><span class="lineno">  158</span>            <span class="keyword">final</span> Response supposedResponse = <span class="keyword">new</span> AcknowledgedJsonResponse(<span class="stringliteral">&quot;Success&quot;</span>, i);</div>
+<div class="line"><span class="lineno">  159</span>            supposedResponses.add(supposedResponse);</div>
+<div class="line"><span class="lineno">  160</span>        }</div>
+<div class="line"><span class="lineno">  161</span>        <span class="keywordtype">int</span> countFuture = 0;</div>
+<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">for</span> (<span class="keyword">final</span> Future&lt;Response&gt; future : futures) {</div>
+<div class="line"><span class="lineno">  163</span>            <span class="keyword">final</span> Response actualResponse = future.get();</div>
+<div class="line"><span class="lineno">  164</span>            Assertions</div>
+<div class="line"><span class="lineno">  165</span>                    .assertTrue(supposedResponses.contains(actualResponse), <span class="stringliteral">&quot;Service should return JSON object with fields &#39;text&#39;, &#39;code&#39; and &#39;ackID&#39; (ackID should be &quot;</span> + countFuture + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><span class="lineno">  166</span>            countFuture++;</div>
+<div class="line"><span class="lineno">  167</span>        }</div>
+<div class="line"><span class="lineno">  168</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6545f653f9dfbd0363e830dffd9efd76">countDownLatch</a>.await(1, TimeUnit.SECONDS);</div>
+<div class="line"><span class="lineno">  169</span>        Assertions.assertTimeoutPreemptively(Duration.ofSeconds(5), () -&gt; {</div>
+<div class="line"><span class="lineno">  170</span>            while (NUMBER_OF_EVENTS_TO_BE_SENT * 2 != this.numberOfRequestsMade.get()) {</div>
+<div class="line"><span class="lineno">  171</span>                Thread.sleep(500);</div>
+<div class="line"><span class="lineno">  172</span>            }</div>
+<div class="line"><span class="lineno">  173</span>        });</div>
+<div class="line"><span class="lineno">  174</span>        es.shutdownNow();</div>
+<div class="line"><span class="lineno">  175</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -316,10 +316,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00112">112</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  112</span>                           {</div>
-<div class="line"><span class="lineno">  113</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">thread</a>.interrupt();</div>
-<div class="line"><span class="lineno">  114</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00114">114</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  114</span>                           {</div>
+<div class="line"><span class="lineno">  115</span>        this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a6409a87da2bdb26e02afb19ae3ab1c16">thread</a>.interrupt();</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -344,7 +344,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00091">91</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00093">93</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -368,7 +368,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00094">94</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00096">96</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -392,7 +392,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00090">90</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00092">92</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -416,7 +416,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00087">87</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00089">89</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -440,7 +440,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00089">89</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00091">91</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -464,7 +464,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00092">92</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00094">94</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -488,7 +488,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00093">93</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00095">95</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00085">85</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00087">87</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -536,7 +536,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00083">83</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00085">85</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>
@@ -560,7 +560,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00086">86</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SendEventsIT_8java_source.html#l00088">88</a> of file <a class="el" href="SendEventsIT_8java_source.html">SendEventsIT.java</a>.</p>
 
 </div>
 </div>

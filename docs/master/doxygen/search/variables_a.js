@@ -1,4 +1,13 @@
 var searchData=
 [
-  ['objectmapper_0',['objectmapper',['../classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#aad24b29aa2082e20e637c85ce5fe9ee5',1,'com.teragrep.cfe_16.Acknowledgements.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#a9c45f595146e1778f4355ecb11ccc7d4',1,'com.teragrep.cfe_16.EventManager.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7c705159cd7187534063062599f3958b',1,'com.teragrep.cfe_16.rest.HECRestController.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2199658f29a3ef56b0cc5b42b67ea8dc',1,'com.teragrep.cfe_16.service.HECServiceImpl.objectMapper'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#ac87ed022d40f09cbf0db6422bd08a37c',1,'com.teragrep.cfe_16.it.ServiceAndEventManagerIT.objectMapper']]]
+  ['maxackage_0',['maxAckAge',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html#abb453114ddd1972f88deabe95bdd4f04',1,'com::teragrep::cfe_16::config::Configuration']]],
+  ['maxackvalue_1',['maxAckValue',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html#a26c7115ca29ce5eb308954f95a521606',1,'com::teragrep::cfe_16::config::Configuration']]],
+  ['maxchannels_2',['maxChannels',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html#a3aef1ab9f160f41d4e013eb4e1a9c17b',1,'com::teragrep::cfe_16::config::Configuration']]],
+  ['maxretrycount_3',['maxRetryCount',['../classcom_1_1teragrep_1_1cfe__16_1_1ThirdParty_1_1SyslogMessageSender_1_1SyslogMessageSender.html#a75d927c425183537f9d2e9d46cf659c2',1,'com::teragrep::cfe_16::ThirdParty::SyslogMessageSender::SyslogMessageSender']]],
+  ['maxsessionage_4',['maxSessionAge',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html#a1bd93668d36a0e21317678abca6aaaaf',1,'com::teragrep::cfe_16::config::Configuration']]],
+  ['message_5',['message',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1JsonResponse.html#aa2216fbd669c59b0856aacdf31573a9d',1,'com::teragrep::cfe_16::response::JsonResponse']]],
+  ['metadatasde_6',['metadataSDE',['../classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#af5a2c51c843fee4725bc9b33dfdcc471',1,'com::teragrep::cfe_16::Converter']]],
+  ['metadatasde1_7',['metadataSDE1',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#acf4546997c0976a545042c163459774a',1,'com::teragrep::cfe_16::ConverterTests']]],
+  ['metadatasde2_8',['metadataSDE2',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a4fc6f09f0aeab060223892f4b4ae7935',1,'com::teragrep::cfe_16::ConverterTests']]],
+  ['metadatasde3_9',['metadataSDE3',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a7e3186a27069e9dd1474fad1f818bf4b',1,'com::teragrep::cfe_16::ConverterTests']]]
 ];

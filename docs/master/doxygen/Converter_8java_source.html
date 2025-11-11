@@ -185,7 +185,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    .withFacility(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#a2256e6358a9fb819f9a1b09b8559d9fa">facility</a>)</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    .withSDElement(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#af5a2c51c843fee4725bc9b33dfdcc471">metadataSDE</a>)</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    .withSDElement(this.headerInfo.asSDElement())</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    .withMsg(httpEventData.getEvent());</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    .withMsg(httpEventData.getEvent().asString());</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        }</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">else</span> {</div>
@@ -201,7 +201,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    .withFacility(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#a2256e6358a9fb819f9a1b09b8559d9fa">facility</a>)</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    .withSDElement(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#af5a2c51c843fee4725bc9b33dfdcc471">metadataSDE</a>)</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                    .withSDElement(this.headerInfo.asSDElement())</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    .withMsg(httpEventData.getEvent());</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    .withMsg(httpEventData.getEvent().asString());</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">return</span> syslogMessage;</div>
