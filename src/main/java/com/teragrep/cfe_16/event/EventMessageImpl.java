@@ -43,30 +43,40 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.event;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import java.util.Objects;
 
-    @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+public final class EventMessageImpl implements EventMessage {
+
+    private final String eventAsString;
+
+    public EventMessageImpl(final String eventAsString) {
+        this.eventAsString = eventAsString;
     }
 
     @Override
-    public int hashCode() {
-        return 231987;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
+    public String asString() {
+        return this.eventAsString;
     }
 
     @Override
     public boolean isStub() {
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final EventMessageImpl that = (EventMessageImpl) o;
+        return Objects.equals(eventAsString, that.eventAsString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(eventAsString);
     }
 }

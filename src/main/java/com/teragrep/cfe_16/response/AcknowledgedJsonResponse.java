@@ -43,30 +43,42 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.response;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Objects;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+public final class AcknowledgedJsonResponse implements Response {
+
+    private final String body;
+    private final int ackID;
+
+    public AcknowledgedJsonResponse(final String body, final int ackID) {
+        this.body = body;
+        this.ackID = ackID;
+    }
+
+    public ResponseEntity<JsonNode> asJsonNodeResponseEntity() {
+        final ObjectNode jsonNode = new ObjectMapper().createObjectNode().put("message", body).put("ackID", ackID);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(jsonNode);
+    }
 
     @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final AcknowledgedJsonResponse that = (AcknowledgedJsonResponse) o;
+        return ackID == that.ackID && Objects.equals(body, that.body);
     }
 
     @Override
     public int hashCode() {
-        return 231987;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
-
-    @Override
-    public boolean isStub() {
-        return true;
+        return Objects.hash(body, ackID);
     }
 }

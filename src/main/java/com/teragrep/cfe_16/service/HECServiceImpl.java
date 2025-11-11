@@ -45,9 +45,11 @@
  */
 package com.teragrep.cfe_16.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonSyntaxException;
 import com.teragrep.cfe_16.*;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.Session;
@@ -63,8 +65,14 @@ import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.AuthenticationTokenMissingException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
+import com.teragrep.cfe_16.response.ExceptionEvent;
+import com.teragrep.cfe_16.response.ExceptionEventContext;
+import com.teragrep.cfe_16.response.ExceptionJsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +113,7 @@ public class HECServiceImpl implements HECService {
 
     @Override
     // @LogAnnotation(type = LogType.METRIC_COUNTER)
-    public ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson) {
+    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson) {
         LOGGER.debug("Sending events to channel <{}>", channel);
         if (this.tokenManager.tokenIsMissing(request)) {
             throw new AuthenticationTokenMissingException("Authentication token must be provided");
@@ -173,11 +181,25 @@ public class HECServiceImpl implements HECService {
             session.addChannel(channel);
         }
 
+        Response response;
         // TODO: find a nice way of not passing Acknowledgements
-        ObjectNode ackNode = this.eventManager
-                .convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        try {
+            response = this.eventManager
+                    .convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        }
+        catch (final JsonProcessingException | JsonSyntaxException | EventFieldException e) {
+            final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
+                    headerInfo,
+                    request.getHeader("user-agent"),
+                    request.getRequestURI(),
+                    request.getRemoteHost()
+            );
+            final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
+            event.logException();
+            response = new ExceptionJsonResponse(event);
+        }
 
-        return ackNode;
+        return response;
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)

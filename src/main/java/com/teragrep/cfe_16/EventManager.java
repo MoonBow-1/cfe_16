@@ -46,20 +46,25 @@
 package com.teragrep.cfe_16;
 
 import com.cloudbees.syslog.SyslogMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.JsonStreamParser;
+import com.google.gson.JsonSyntaxException;
 import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
-import com.teragrep.cfe_16.exceptionhandling.EventFieldBlankException;
-import com.teragrep.cfe_16.exceptionhandling.EventFieldMissingException;
+import com.teragrep.cfe_16.event.JsonEvent;
+import com.teragrep.cfe_16.event.JsonEventImpl;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.connection.AbstractConnection;
 import com.teragrep.cfe_16.connection.ConnectionFactory;
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.JsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +84,6 @@ import java.util.List;
 public class EventManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventManager.class);
-    private final ObjectMapper objectMapper;
 
     @Autowired
     private Configuration configuration;
@@ -87,7 +91,6 @@ public class EventManager {
     private AbstractConnection connection;
 
     public EventManager() {
-        this.objectMapper = new ObjectMapper();
     }
 
     @PostConstruct
@@ -112,14 +115,14 @@ public class EventManager {
      * the channel name as string parameters. Returns a JSON node with ack id if
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
-    public ObjectNode convertData(
-            String authToken,
-            String channel,
-            String allEventsInJson,
-            HeaderInfo headerInfo,
-            Acknowledgements acknowledgements
-    ) {
-        HttpEventData previousEvent = null;
+    public Response convertData(
+            final String authToken,
+            final String channel,
+            final String allEventsInJson,
+            final HeaderInfo headerInfo,
+            final Acknowledgements acknowledgements
+    ) throws JsonProcessingException, JsonSyntaxException, EventFieldException {
+        HttpEventData previousEvent;
 
         acknowledgements.initializeContext(authToken, channel);
         int ackId = acknowledgements.getCurrentAckValue(authToken, channel);
@@ -142,30 +145,23 @@ public class EventManager {
          * After the event is handled, it is assigned as a value to previousEvent
          * variable.
          */
-        HttpEventData eventData = null;
-        Converter converter = new Converter(headerInfo);
-        List<SyslogMessage> syslogMessages = new ArrayList<SyslogMessage>();
+        HttpEventData eventData = new HttpEventData();
+        final Converter converter = new Converter(headerInfo);
+        final List<SyslogMessage> syslogMessages = new ArrayList<>();
+
         while (parser.hasNext()) {
             previousEvent = eventData;
-            String jsonObjectStr = parser.next().toString();
-            eventData = verifyJsonData(jsonObjectStr, previousEvent);
+            final String eventAsString = parser.next().toString();
+            final JsonNode jsonNode = new ObjectMapper().readTree(eventAsString);
+            final JsonEvent jsonEvent = new JsonEventImpl(jsonNode);
+
+            eventData.setEvent(jsonEvent.asEventMessage());
+            eventData = handleTime(eventData, jsonNode, previousEvent);
             eventData = assignMetaData(eventData, authToken, channel);
-            SyslogMessage syslogMessage = converter.httpToSyslog(eventData);
+
+            final SyslogMessage syslogMessage = converter.httpToSyslog(eventData);
             syslogMessages.add(syslogMessage);
         }
-
-        /*
-         * SyslogMessage syslogMessage =
-         * converter.getHeaderInfoSyslogMessage(headerInfo);
-         * requestInfo.getConvertedData().add(syslogMessage);
-         */
-        /*
-         * After all the events are sent, previousEvent object is set to null, the
-         * events are sent with the Acknowledgements and ack id and JSON node with an ack id
-         * will be returned informing that the sending of the events has been
-         * successful.
-         */
-        previousEvent = null;
 
         // create a new object to avoid blocking of threads because
         // the SyslogMessageSender.sendMessage() is synchronized
@@ -185,58 +181,15 @@ public class EventManager {
             }
         }
 
-        ObjectNode responseNode = this.objectMapper.createObjectNode();
-
-        responseNode.put("text", "Success");
-        responseNode.put("code", 0);
+        final Response responseToReturn;
         if (shouldAck) {
-            responseNode.put("ackID", ackId);
+            responseToReturn = new AcknowledgedJsonResponse("Success", ackId);
+        }
+        else {
+            responseToReturn = new JsonResponse("Success");
         }
 
-        return responseNode;
-    }
-
-    /*
-     * Pre-handles the event and assigns it's information into HttpEventData object
-     * and returns it. Information from the string is read with ObjectMapper into a
-     * JsonNode. After that the supposed fields are checked from the JsonNode and if
-     * the field is found, information from it will be saved in HttpEventData
-     * object. Finally handleTime() is called to assign correct time information to
-     * the object. When multiple events are sent in one request, the value of the
-     * fields are saved for the following events. The values can be overriden. If
-     * the value is overridden, it will stay as so for the following events if it is
-     * not overridden.
-     */
-    private HttpEventData verifyJsonData(String eventInJson, HttpEventData previousEvent) {
-
-        HttpEventData eventData = new HttpEventData();
-
-        /*
-         * Event field cannot be missing or blank. Throws an exception if this is the
-         * case.
-         */
-        JsonNode jsonObject;
-        try {
-            jsonObject = this.objectMapper.readTree(eventInJson);
-        }
-        catch (IOException e) {
-            jsonObject = null;
-        }
-
-        if (jsonObject != null) {
-            JsonNode event = jsonObject.get("event");
-            if (event != null) {
-                eventData.setEvent(event.toString());
-            }
-            else {
-                throw new EventFieldMissingException();
-            }
-            if (eventData.getEvent().matches("\"\"") || eventData.getEvent() == null) {
-                throw new EventFieldBlankException();
-            }
-            eventData = handleTime(eventData, jsonObject, previousEvent);
-        }
-        return eventData;
+        return responseToReturn;
     }
 
     /*

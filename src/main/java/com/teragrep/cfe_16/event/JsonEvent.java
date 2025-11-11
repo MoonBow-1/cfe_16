@@ -43,30 +43,16 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.event;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import com.fasterxml.jackson.databind.JsonNode;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 
-    @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
-    }
+public interface JsonEvent {
 
-    @Override
-    public int hashCode() {
-        return 231987;
-    }
+    EventMessage asEventMessage() throws EventFieldException;
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
+    JsonNode asPayloadJsonNode();
 
-    @Override
-    public boolean isStub() {
-        return true;
-    }
+    JsonNode asTimeJsonNode() throws EventFieldException;
 }

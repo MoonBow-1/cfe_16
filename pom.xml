@@ -214,11 +214,26 @@
       <version>${junit.platform.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>nl.jqno.equalsverifier</groupId>
+      <artifactId>equalsverifier</artifactId>
+      <version>4.0.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <directory>${project.basedir}/target</directory>
     <finalName>cfe_16</finalName>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>

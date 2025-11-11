@@ -46,7 +46,7 @@
 package com.teragrep.cfe_16.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.teragrep.cfe_16.response.Response;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 
@@ -63,7 +63,7 @@ public interface HECService {
      * @param eventInJson
      * @return
      */
-    public ObjectNode sendEvents(HttpServletRequest request, String channel, String eventInJson);
+    public Response sendEvents(HttpServletRequest request, String channel, String eventInJson);
 
     /**
      * @param request

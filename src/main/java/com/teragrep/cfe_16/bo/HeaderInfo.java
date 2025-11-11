@@ -88,6 +88,12 @@ public final class HeaderInfo {
     }
 
     @Override
+    public String toString() {
+        return "HeaderInfo{" + "xForwardedFor=" + xForwardedFor + ", xForwardedHost=" + xForwardedHost
+                + ", xForwardedProto=" + xForwardedProto + '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;

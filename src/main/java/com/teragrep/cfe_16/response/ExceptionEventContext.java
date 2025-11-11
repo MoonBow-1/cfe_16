@@ -43,30 +43,49 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.response;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import com.teragrep.cfe_16.bo.HeaderInfo;
+import java.util.Objects;
+
+public final class ExceptionEventContext {
+
+    private final HeaderInfo headerInfo;
+    private final String userAgent;
+    private final String uriPath;
+    private final String host;
+
+    public ExceptionEventContext(
+            final HeaderInfo headerInfo,
+            final String userAgent,
+            final String uriPath,
+            final String host
+    ) {
+        this.headerInfo = headerInfo;
+        this.userAgent = userAgent;
+        this.uriPath = uriPath;
+        this.host = host;
+    }
 
     @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+    public String toString() {
+        return "ExceptionEventContext{" + "headerInfo=" + headerInfo + ", userAgent='" + userAgent + '\''
+                + ", uriPath='" + uriPath + '\'' + ", host='" + host + '\'' + '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final ExceptionEventContext that = (ExceptionEventContext) o;
+        return Objects.equals(headerInfo, that.headerInfo) && Objects.equals(userAgent, that.userAgent)
+                && Objects.equals(uriPath, that.uriPath) && Objects.equals(host, that.host);
     }
 
     @Override
     public int hashCode() {
-        return 231987;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
-
-    @Override
-    public boolean isStub() {
-        return true;
+        return Objects.hash(headerInfo, userAgent, uriPath, host);
     }
 }

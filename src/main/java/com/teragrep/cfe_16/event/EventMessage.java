@@ -43,30 +43,14 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.event;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import com.teragrep.cfe_16.Stubable;
 
-    @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
-    }
+/**
+ * Interface for objects that work with the Event (message)
+ */
+public interface EventMessage extends Stubable {
 
-    @Override
-    public int hashCode() {
-        return 231987;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
-
-    @Override
-    public boolean isStub() {
-        return true;
-    }
+    String asString();
 }

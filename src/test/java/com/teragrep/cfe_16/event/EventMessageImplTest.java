@@ -43,30 +43,34 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.event;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-    @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+class EventMessageImplTest {
+
+    @Test
+    @DisplayName("isStub() returns false")
+    void isStubReturnsFalse() {
+        final EventMessageImpl event = new EventMessageImpl("event");
+
+        Assertions.assertFalse(event::isStub);
     }
 
-    @Override
-    public int hashCode() {
-        return 231987;
+    @Test
+    @DisplayName("asString() returns the eventAsString field")
+    void asStringReturnsTheEventAsStringField() {
+        final EventMessageImpl event = new EventMessageImpl("event");
+
+        Assertions.assertEquals("event", event.asString());
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
-
-    @Override
-    public boolean isStub() {
-        return true;
+    @Test
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(EventMessageImpl.class).verify();
     }
 }

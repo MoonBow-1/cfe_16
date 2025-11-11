@@ -49,6 +49,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.RequestBodyCleaner;
 import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.service.HECService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -79,47 +80,49 @@ public class HECRestController {
     @RequestMapping(
             value = "services/collector",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public JsonNode sendEvents(
+    public ResponseEntity<JsonNode> sendEvents(
             HttpServletRequest request,
             @RequestBody MultiValueMap body,
             @RequestParam(required = false) String channel
     ) {
         // TODO: Try to think an alternative way to implement getting the body of the
         // call
-        String eventInJson = requestBodyCleaner.cleanAckRequestBody(body.toString(), channel);
+        final String eventInJson = requestBodyCleaner.cleanAckRequestBody(body.toString(), channel);
 
         long t1 = System.nanoTime();
-        JsonNode response = service.sendEvents(request, channel, eventInJson);
+        final Response response = service.sendEvents(request, channel, eventInJson);
         long t2 = System.nanoTime();
         long dt = t2 - t1;
         double us = (double) dt / 1000.0;
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response;
+        return response.asJsonNodeResponseEntity();
     }
 
     @RequestMapping(
             value = "services/collector",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public JsonNode sendEvents(
+    public ResponseEntity<JsonNode> sendEvents(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
     ) {
         long t1 = System.nanoTime();
-        JsonNode response = service.sendEvents(request, channel, eventInJson);
+        final Response response = service.sendEvents(request, channel, eventInJson);
         long t2 = System.nanoTime();
         long dt = t2 - t1;
         double us = (double) dt / 1000.0;
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response;
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
@@ -191,7 +194,7 @@ public class HECRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
-    public JsonNode sendEventsWithFormatOption(
+    public ResponseEntity<JsonNode> sendEventsWithFormatOption(
             HttpServletRequest request,
             @RequestBody MultiValueMap body,
             @RequestParam(required = false) String channel
@@ -202,14 +205,14 @@ public class HECRestController {
         String eventInJson = requestBodyCleaner.cleanAckRequestBody(body.toString(), channel);
 
         long t1 = System.nanoTime();
-        JsonNode response = service.sendEvents(request, channel, eventInJson);
+        final Response response = service.sendEvents(request, channel, eventInJson);
         long t2 = System.nanoTime();
         long dt = t2 - t1;
         double us = (double) dt / 1000.0;
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response;
+        return response.asJsonNodeResponseEntity();
     }
 
     @RequestMapping(
@@ -217,7 +220,7 @@ public class HECRestController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public JsonNode sendEventsWithFormatOption(
+    public ResponseEntity<JsonNode> sendEventsWithFormatOption(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
@@ -226,19 +229,19 @@ public class HECRestController {
         // This endpoint works identically to services/collector but introduces a format
         // option for future scalability.
         long t1 = System.nanoTime();
-        JsonNode response = service.sendEvents(request, channel, eventInJson);
+        final Response response = service.sendEvents(request, channel, eventInJson);
         long t2 = System.nanoTime();
         long dt = t2 - t1;
         double us = (double) dt / 1000.0;
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}> nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response;
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)
     @PostMapping("services/collector/event/1.0")
-    public JsonNode sendEventsWithProtocolVersion(
+    public ResponseEntity<JsonNode> sendEventsWithProtocolVersion(
             HttpServletRequest request,
             @RequestBody String eventInJson,
             @RequestParam(required = false) String channel
@@ -247,14 +250,14 @@ public class HECRestController {
         // This endpoint works identically to services/collector/event but introduces a
         // protocol version for future scalability
         long t1 = System.nanoTime();
-        JsonNode response = service.sendEvents(request, channel, eventInJson);
+        final Response response = service.sendEvents(request, channel, eventInJson);
         long t2 = System.nanoTime();
         long dt = t2 - t1;
         double us = (double) dt / 1000.0;
         if (this.configuration.getPrintTimes()) {
             LOGGER.info("sendEvents took <{}¦ nanoseconds, that is <{}> microseconds", dt, us);
         }
-        return response;
+        return response.asJsonNodeResponseEntity();
     }
 
     // @LogAnnotation(type = LogType.METRIC_DURATION)

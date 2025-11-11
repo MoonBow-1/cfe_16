@@ -45,11 +45,24 @@
  */
 package com.teragrep.cfe_16.bo;
 
-public class XForwardedForStub implements XForwardedFor {
+public final class XForwardedForStub implements XForwardedFor {
 
     @Override
     public String value() {
         throw new UnsupportedOperationException("XForwardedForStub does not support this method");
+    }
+
+    @Override
+    public int hashCode() {
+        return 987354;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return obj.getClass().equals(XForwardedForStub.class);
     }
 
     @Override

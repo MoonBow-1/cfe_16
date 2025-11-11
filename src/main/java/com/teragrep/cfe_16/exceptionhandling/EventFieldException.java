@@ -43,13 +43,26 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16;
+package com.teragrep.cfe_16.exceptionhandling;
 
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
 
-public class Cfe16ApplicationTests {
+public class EventFieldException extends IOException {
 
-    @Test
-    public void contextLoads() {
+    public EventFieldException() {
+        super();
     }
+
+    public EventFieldException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public EventFieldException(final String message) {
+        super(message);
+    }
+
+    public EventFieldException(final Throwable cause) {
+        super(cause);
+    }
+
 }

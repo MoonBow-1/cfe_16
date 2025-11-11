@@ -43,34 +43,42 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.exceptionhandling;
+package com.teragrep.cfe_16.response;
 
-@SuppressWarnings("serial")
-public class EventFieldBlankException extends RuntimeException {
+import com.teragrep.cfe_16.bo.HeaderInfo;
+import com.teragrep.cfe_16.bo.XForwardedForStub;
+import com.teragrep.cfe_16.bo.XForwardedHostStub;
+import com.teragrep.cfe_16.bo.XForwardedProtoStub;
+import java.util.UUID;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
-    public EventFieldBlankException() {
-        super();
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class ExceptionEventTest {
+
+    @Test
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(ExceptionEvent.class).verify();
     }
 
-    public EventFieldBlankException(
-            String message,
-            Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace
-    ) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+    @Test
+    @DisplayName("uuid() returns the UUID")
+    void uuidReturnsTheUuid() {
+        final UUID uuid = UUID.randomUUID();
+        final ExceptionEvent exceptionEvent = new ExceptionEvent(
+                new ExceptionEventContext(
+                        new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub()),
+                        "user-agent",
+                        "uriPath",
+                        "host"
+                ),
+                uuid,
+                new Throwable()
+        );
 
-    public EventFieldBlankException(String message, Throwable cause) {
-        super(message, cause);
+        Assertions.assertEquals(uuid, exceptionEvent.uuid());
     }
-
-    public EventFieldBlankException(String message) {
-        super(message);
-    }
-
-    public EventFieldBlankException(Throwable cause) {
-        super(cause);
-    }
-
 }

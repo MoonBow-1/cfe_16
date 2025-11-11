@@ -43,30 +43,55 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.response;
 
-public final class XForwardedProtoStub implements XForwardedProto {
+import java.util.Objects;
+import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public final class ExceptionEvent {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionEvent.class);
+    private final ExceptionEventContext exceptionEventContext;
+    private final UUID uuid;
+    private final Throwable throwable;
+
+    public ExceptionEvent(
+            final ExceptionEventContext exceptionEventContext,
+            final UUID uuid,
+            final Throwable throwable
+    ) {
+        this.exceptionEventContext = exceptionEventContext;
+        this.uuid = uuid;
+        this.throwable = throwable;
+    }
+
+    public void logException() {
+        LOGGER
+                .error(
+                        "Technical error while processing request <[{}]> correlation id <{}>", exceptionEventContext,
+                        uuid, throwable
+                );
+    }
+
+    public UUID uuid() {
+        return uuid;
+    }
 
     @Override
-    public String value() {
-        throw new UnsupportedOperationException("XForwardedProtoStub does not support this method");
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final ExceptionEvent event = (ExceptionEvent) o;
+        return Objects.equals(exceptionEventContext, event.exceptionEventContext) && Objects.equals(uuid, event.uuid)
+                && Objects.equals(throwable, event.throwable);
     }
 
     @Override
     public int hashCode() {
-        return 231987;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass().equals(XForwardedProtoStub.class);
-    }
-
-    @Override
-    public boolean isStub() {
-        return true;
+        return Objects.hash(exceptionEventContext, uuid, throwable);
     }
 }

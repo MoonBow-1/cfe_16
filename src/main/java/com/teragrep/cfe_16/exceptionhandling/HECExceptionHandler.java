@@ -90,15 +90,7 @@ public class HECExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<HECErrorResponse> handleException(EventFieldMissingException exc) {
-
-        HECErrorResponse error = new HECErrorResponse("Event field is required", 12, 0);
-
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<HECErrorResponse> handleException(EventFieldBlankException exc) {
+    public ResponseEntity<HECErrorResponse> handleException(EventFieldException exc) {
 
         HECErrorResponse error = new HECErrorResponse("Event field cannot be blank", 13, 0); // TODO: when support for
                                                                                              // multiple events with one

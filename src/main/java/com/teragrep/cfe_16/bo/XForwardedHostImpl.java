@@ -61,6 +61,11 @@ public final class XForwardedHostImpl implements XForwardedHost {
     }
 
     @Override
+    public String toString() {
+        return "XForwardedHostImpl{" + "headerValue='" + headerValue + '\'' + '}';
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;

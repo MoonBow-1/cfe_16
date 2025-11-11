@@ -43,37 +43,55 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.bo;
+package com.teragrep.cfe_16.response;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import java.util.List;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
-class XForwardedProtoStubTest {
+class JsonResponseTest {
 
     @Test
     @DisplayName("equalsVerifier")
     void equalsVerifier() {
-        EqualsVerifier.forClass(XForwardedProtoStub.class).verify();
+        EqualsVerifier.forClass(JsonResponse.class).verify();
     }
 
     @Test
-    @DisplayName("value() throws UnsupportedOperationException if called")
-    void valueThrowsUnsupportedOperationExceptionIfCalled() {
-        final XForwardedProto xForwardedProto = new XForwardedProtoStub();
+    @DisplayName("asJsonNodeResponseEntity() returns the correct message")
+    void asJsonNodeResponseEntityReturnsTheCorrectMessage() {
+        final Response response = new JsonResponse("Body");
 
-        final Exception exception = Assertions
-                .assertThrowsExactly(UnsupportedOperationException.class, xForwardedProto::value);
-
-        Assertions.assertEquals("XForwardedProtoStub does not support this method", exception.getMessage());
+        final String expectedString = "{\"message\":\"Body\"}";
+        final JsonNode actualJsonNode = response.asJsonNodeResponseEntity().getBody();
+        Assertions.assertNotNull(actualJsonNode);
+        Assertions.assertEquals(expectedString, actualJsonNode.toString());
     }
 
     @Test
-    @DisplayName("isStub returns true")
-    void isStubReturnsTrue() {
-        final XForwardedProto xForwardedProto = new XForwardedProtoStub();
+    @DisplayName("asJsonNodeResponseEntity() returns the correct status")
+    void asJsonNodeResponseEntityReturnsTheCorrectStatus() {
+        final Response response = new JsonResponse("Body");
 
-        Assertions.assertTrue(xForwardedProto::isStub);
+        final HttpStatus expectedStatusCode = HttpStatus.OK;
+        final HttpStatusCode actualHttpStatus = response.asJsonNodeResponseEntity().getStatusCode();
+        Assertions.assertEquals(expectedStatusCode, actualHttpStatus);
+    }
+
+    @Test
+    @DisplayName("contentType() returns the content type")
+    void contentTypeReturnsTheContentType() {
+        final Response response = new JsonResponse("Body");
+
+        final ResponseEntity<JsonNode> responseEntity = response.asJsonNodeResponseEntity();
+        final List<String> actualContentTypeHeader = responseEntity.getHeaders().get("Content-Type");
+        Assertions.assertNotNull(actualContentTypeHeader);
+        Assertions.assertEquals("application/json", actualContentTypeHeader.get(0));
     }
 }

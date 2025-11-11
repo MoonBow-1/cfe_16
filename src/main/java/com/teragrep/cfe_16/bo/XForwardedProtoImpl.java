@@ -61,6 +61,11 @@ public final class XForwardedProtoImpl implements XForwardedProto {
     }
 
     @Override
+    public String toString() {
+        return "XForwardedProtoImpl{" + "headerValue='" + headerValue + '\'' + '}';
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;

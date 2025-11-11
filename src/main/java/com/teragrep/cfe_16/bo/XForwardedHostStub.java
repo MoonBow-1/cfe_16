@@ -53,6 +53,19 @@ public final class XForwardedHostStub implements XForwardedHost {
     }
 
     @Override
+    public int hashCode() {
+        return 243980;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return obj.getClass().equals(XForwardedHostStub.class);
+    }
+
+    @Override
     public boolean isStub() {
         return true;
     }

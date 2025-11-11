@@ -43,34 +43,48 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.exceptionhandling;
+package com.teragrep.cfe_16.response;
 
-@SuppressWarnings("serial")
-public class EventFieldMissingException extends RuntimeException {
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Objects;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
-    public EventFieldMissingException() {
-        super();
+public final class ExceptionJsonResponse implements Response {
+
+    private final ExceptionEvent exceptionEvent;
+
+    public ExceptionJsonResponse(final ExceptionEvent exceptionEvent) {
+        this.exceptionEvent = exceptionEvent;
     }
 
-    public EventFieldMissingException(
-            String message,
-            Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace
-    ) {
-        super(message, cause, enableSuppression, writableStackTrace);
+    public ResponseEntity<JsonNode> asJsonNodeResponseEntity() {
+        final ObjectMapper jsonObjectBuilder = new ObjectMapper();
+        final ObjectNode jsonNode = jsonObjectBuilder
+                .createObjectNode()
+                .put(
+                        "message",
+                        "An error occurred while processing your Request. See event id in the technical log for details."
+                )
+                .put("id", exceptionEvent.uuid().toString());
+
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(jsonNode);
     }
 
-    public EventFieldMissingException(String message, Throwable cause) {
-        super(message, cause);
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final ExceptionJsonResponse that = (ExceptionJsonResponse) o;
+        return Objects.equals(exceptionEvent, that.exceptionEvent);
     }
 
-    public EventFieldMissingException(String message) {
-        super(message);
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(exceptionEvent);
     }
-
-    public EventFieldMissingException(Throwable cause) {
-        super(cause);
-    }
-
 }

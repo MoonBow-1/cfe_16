@@ -45,6 +45,8 @@
  */
 package com.teragrep.cfe_16.it;
 
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.service.HECService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,25 +142,25 @@ public class SendEventsIT implements Runnable {
     }
 
     @Test
-    public void sendEventsTest() throws IOException, InterruptedException, ExecutionException {
-        int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
+    public void sendEventsTest() throws InterruptedException, ExecutionException {
+        final int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
         countDownLatch = new CountDownLatch(NUMBER_OF_EVENTS_TO_BE_SENT);
         ExecutorService es = Executors.newFixedThreadPool(8);
-        List<CompletableFuture<String>> futures = new ArrayList<>();
+        final List<CompletableFuture<Response>> futures = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
-            CompletableFuture<String> f = CompletableFuture
-                    .supplyAsync(() -> service.sendEvents(request1, channel1, eventInJson).toString());
-            futures.add(f);
+            final CompletableFuture<Response> future = CompletableFuture
+                    .supplyAsync(() -> service.sendEvents(request1, channel1, eventInJson));
+            futures.add(future);
         }
-        List<String> supposedResponses = new ArrayList<String>();
+        final List<Response> supposedResponses = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
-            final String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":" + i + "}";
+            final Response supposedResponse = new AcknowledgedJsonResponse("Success", i);
             supposedResponses.add(supposedResponse);
         }
         int countFuture = 0;
-        for (Future<String> f : futures) {
-            final String actualResponse = f.get();
+        for (final Future<Response> future : futures) {
+            final Response actualResponse = future.get();
             Assertions
                     .assertTrue(supposedResponses.contains(actualResponse), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be " + countFuture + ")");
             countFuture++;

@@ -45,12 +45,14 @@
  */
 package com.teragrep.cfe_16.bo;
 
+import com.teragrep.cfe_16.event.EventMessage;
+
 /**
  */
-public class HttpEventData {
+public final class HttpEventData {
 
     private String channel;
-    private String event;
+    private EventMessage event;
     private String authenticationToken;
     private String timeSource;
     private String time;
@@ -58,11 +60,11 @@ public class HttpEventData {
     private boolean timeParsed;
     private Integer ackID;
 
-    public String getEvent() {
+    public EventMessage getEvent() {
         return event;
     }
 
-    public void setEvent(String event) {
+    public void setEvent(final EventMessage event) {
         this.event = event;
     }
 

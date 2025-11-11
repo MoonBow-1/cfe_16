@@ -61,6 +61,11 @@ public final class XForwardedForImpl implements XForwardedFor {
     }
 
     @Override
+    public String toString() {
+        return "XForwardedForImpl{" + "headerValue='" + headerValue + '\'' + '}';
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;
