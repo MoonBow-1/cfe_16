@@ -47,23 +47,23 @@ package com.teragrep.cfe_16.event.time;
 
 import java.util.Objects;
 
-public final class HECTimeImplWithFallback implements HECTime {
+public final class JsonHECTimeImplWithFallback implements JsonHECTime {
 
-    private final HECTime currentTime;
-    private final HECTime fallbackTime;
+    private final JsonHECTime currentTime;
+    private final JsonHECTime fallbackTime;
 
-    public HECTimeImplWithFallback(final HECTime currentTime, final HECTime fallbackTime) {
+    public JsonHECTimeImplWithFallback(final JsonHECTime currentTime, final JsonHECTime fallbackTime) {
         this.currentTime = currentTime;
         this.fallbackTime = fallbackTime;
     }
 
     @Override
-    public long instant(final long defaultValue) {
-        final long currentTime = this.currentTime.instant(defaultValue);
+    public long asInstant(final long defaultValue) {
+        final long currentTime = this.currentTime.asInstant(defaultValue);
         final long instant;
         // Check if the currentTime relied on the defaultValue
         if (currentTime == defaultValue && !this.fallbackTime.isStub()) {
-            instant = this.fallbackTime.instant(defaultValue);
+            instant = this.fallbackTime.asInstant(defaultValue);
         }
         else {
             instant = currentTime;
@@ -110,7 +110,7 @@ public final class HECTimeImplWithFallback implements HECTime {
             return false;
         }
 
-        final HECTimeImplWithFallback that = (HECTimeImplWithFallback) o;
+        final JsonHECTimeImplWithFallback that = (JsonHECTimeImplWithFallback) o;
         return Objects.equals(currentTime, that.currentTime) && Objects.equals(fallbackTime, that.fallbackTime);
     }
 

@@ -54,7 +54,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class HECTimeImplTest {
+class JsonHECTimeImplTest {
 
     private ObjectMapper objectMapper;
 
@@ -72,21 +72,21 @@ class HECTimeImplTest {
 
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "generated", HECTime.source(),
+                                        "generated", JsonHECTime.source(),
                                         "Time source should be 'generated' when it's not specified in a request"
                                 ),
                         () -> Assertions
                                 .assertFalse(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be false when time is not specified in a request"
                                 ),
-                        () -> Assertions.assertEquals(currentEpoch, HECTime.instant(currentEpoch), "Time as long should be the defaultValue provided when time is not specified in a request")
+                        () -> Assertions.assertEquals(currentEpoch, JsonHECTime.asInstant(currentEpoch), "Time as long should be the defaultValue provided when time is not specified in a request")
                 );
     }
 
@@ -98,21 +98,21 @@ class HECTimeImplTest {
         final JsonNode jsonNode = objectMapper.readTree(content);
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "reported", HECTime.source(),
+                                        "reported", JsonHECTime.source(),
                                         "Time source should be 'reported' when the time is specified in a request"
                                 ),
                         () -> Assertions
                                 .assertTrue(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be true when time is specified in a request"
                                 ),
-                        () -> Assertions.assertEquals(1433188255253L, HECTime.instant(currentEpoch), "Time should be converted to epoch milliseconds when it's provided in a request in " + "epoch seconds with decimals")
+                        () -> Assertions.assertEquals(1433188255253L, JsonHECTime.asInstant(currentEpoch), "Time should be converted to epoch milliseconds when it's provided in a request in " + "epoch seconds with decimals")
                 );
     }
 
@@ -124,21 +124,21 @@ class HECTimeImplTest {
         final JsonNode jsonNode = objectMapper.readTree(content);
 
         final long currentEpoch = Instant.now().toEpochMilli();
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "reported", HECTime.source(),
+                                        "reported", JsonHECTime.source(),
                                         "Time source should be 'reported' when the time is specified in a request"
                                 ),
                         () -> Assertions
                                 .assertTrue(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be true when time is specified in a request"
                                 ),
-                        () -> Assertions.assertEquals(1433188255253L, HECTime.instant(currentEpoch), "Time should be converted to epoch milliseconds when it's provided in a request in " + "epoch seconds with decimals")
+                        () -> Assertions.assertEquals(1433188255253L, JsonHECTime.asInstant(currentEpoch), "Time should be converted to epoch milliseconds when it's provided in a request in " + "epoch seconds with decimals")
                 );
     }
 
@@ -151,21 +151,21 @@ class HECTimeImplTest {
 
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "reported", HECTime.source(),
+                                        "reported", JsonHECTime.source(),
                                         "Time source should be 'generated' when time is given as a string in a request"
                                 ),
                         () -> Assertions
                                 .assertTrue(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be false when time is given as a string in a request"
                                 ),
-                        () -> Assertions.assertEquals(1433188255253L, HECTime.instant(currentEpoch), "Time should be converted to long when time is given as a string in a request")
+                        () -> Assertions.assertEquals(1433188255253L, JsonHECTime.asInstant(currentEpoch), "Time should be converted to long when time is given as a string in a request")
                 );
     }
 
@@ -178,23 +178,23 @@ class HECTimeImplTest {
 
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "reported", HECTime.source(),
+                                        "reported", JsonHECTime.source(),
                                         "Time source should be 'reported' when time is given as an integer with less "
                                                 + "than 10" + " digits"
                                 ),
                         () -> Assertions
                                 .assertTrue(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be false when time is given as an integer with less than 10 "
                                                 + "digits"
                                 ),
-                        () -> Assertions.assertEquals(143318L, HECTime.instant(currentEpoch), "Time as long should be as provided in the request")
+                        () -> Assertions.assertEquals(143318L, JsonHECTime.asInstant(currentEpoch), "Time as long should be as provided in the request")
                 );
     }
 
@@ -206,23 +206,23 @@ class HECTimeImplTest {
         final JsonNode jsonNode = objectMapper.readTree(content);
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime = new JsonHECTimeImpl(jsonNode);
 
         Assertions
                 .assertAll(
                         () -> Assertions
                                 .assertEquals(
-                                        "reported", HECTime.source(),
+                                        "reported", JsonHECTime.source(),
                                         "Time source should be 'reported' when time is given as an integer with more "
                                                 + "than 13 digits"
                                 ),
                         () -> Assertions
                                 .assertTrue(
-                                        HECTime.parsed(),
+                                        JsonHECTime.parsed(),
                                         "timeParsed should be false when time is given as an integer with more than 13 "
                                                 + "digits"
                                 ),
-                        () -> Assertions.assertEquals(14331882552523L, HECTime.instant(currentEpoch), "Time should be as it's provided in a request.")
+                        () -> Assertions.assertEquals(14331882552523L, JsonHECTime.asInstant(currentEpoch), "Time should be as it's provided in a request.")
                 );
     }
 
@@ -233,10 +233,10 @@ class HECTimeImplTest {
 
         final JsonNode jsonNode = objectMapper.readTree(content);
 
-        final HECTime HECTime1 = new HECTimeImpl(jsonNode);
-        final HECTime HECTime2 = new HECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime1 = new JsonHECTimeImpl(jsonNode);
+        final JsonHECTime JsonHECTime2 = new JsonHECTimeImpl(jsonNode);
 
-        Assertions.assertEquals(HECTime1, HECTime2);
+        Assertions.assertEquals(JsonHECTime1, JsonHECTime2);
     }
 
     @Test
@@ -245,9 +245,9 @@ class HECTimeImplTest {
         String content1 = "1433188255252321";
         String content2 = "14331882552";
 
-        final HECTime HECTime1 = new HECTimeImpl(objectMapper.readTree(content1));
-        final HECTime HECTime2 = new HECTimeImpl(objectMapper.readTree(content2));
+        final JsonHECTime JsonHECTime1 = new JsonHECTimeImpl(objectMapper.readTree(content1));
+        final JsonHECTime JsonHECTime2 = new JsonHECTimeImpl(objectMapper.readTree(content2));
 
-        Assertions.assertNotEquals(HECTime1, HECTime2);
+        Assertions.assertNotEquals(JsonHECTime1, JsonHECTime2);
     }
 }

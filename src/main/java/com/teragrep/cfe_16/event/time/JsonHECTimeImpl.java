@@ -49,16 +49,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public final class HECTimeImpl implements HECTime {
+public final class JsonHECTimeImpl implements JsonHECTime {
 
     private final JsonNode timeNode;
 
-    public HECTimeImpl(final JsonNode timeNode) {
+    public JsonHECTimeImpl(final JsonNode timeNode) {
         this.timeNode = timeNode;
     }
 
     @Override
-    public long instant(final long defaultValue) {
+    public long asInstant(final long defaultValue) {
         final long instant;
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
@@ -182,7 +182,7 @@ public final class HECTimeImpl implements HECTime {
             return false;
         }
 
-        final HECTimeImpl hecTime = (HECTimeImpl) o;
+        final JsonHECTimeImpl hecTime = (JsonHECTimeImpl) o;
         return Objects.equals(timeNode, hecTime.timeNode);
     }
 

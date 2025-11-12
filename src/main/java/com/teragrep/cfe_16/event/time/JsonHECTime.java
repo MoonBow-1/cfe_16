@@ -47,9 +47,9 @@ package com.teragrep.cfe_16.event.time;
 
 import com.teragrep.cfe_16.Stubable;
 
-public interface HECTime extends Stubable {
+public interface JsonHECTime extends Stubable {
 
-    long instant(final long defaultValue);
+    long asInstant(final long defaultValue);
 
     boolean parsed();
 
