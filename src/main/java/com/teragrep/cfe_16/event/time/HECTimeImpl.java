@@ -59,39 +59,40 @@ public final class HECTimeImpl implements HECTime {
 
     @Override
     public long instant(final long defaultValue) {
+        final long instant;
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             // Use default value
-            return defaultValue;
+            instant = defaultValue;
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return this.removeDecimal(timeNode.asDouble());
-
+            instant = this.removeDecimal(timeNode.asDouble());
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return timeNode.asLong();
-
+            instant = timeNode.asLong();
         }
         // Time is a String
         else if (timeNode.isTextual()) {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
             if (tryAsLong != 0L) {
-                return tryAsLong;
+                instant = tryAsLong;
             }
             // No time found in current or previous event
             else {
                 // Use default value
-                return defaultValue;
+                instant = defaultValue;
             }
         }
         // Unknown format
         else {
             // Use default value
-            return defaultValue;
+            instant = defaultValue;
         }
+
+        return instant;
     }
 
     /**
@@ -108,66 +109,71 @@ public final class HECTimeImpl implements HECTime {
 
     @Override
     public boolean parsed() {
+        final boolean parsed;
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
-            return false;
+            parsed = false;
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return true;
+            parsed = true;
 
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return true;
+            parsed = true;
 
         }
         // Time is a String
         else if (timeNode.isTextual()) {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
-            return tryAsLong != 0L;
+            parsed = tryAsLong != 0L;
         }
         // Unknown format
         else {
-            return false;
+            parsed = false;
         }
+
+        return parsed;
     }
 
     @Override
     public String source() {
+        final String source;
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             // Use default value
-            return "generated";
+            source = "generated";
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return "reported";
-
+            source = "reported";
         }
         // Time is a String
         else if (timeNode.isTextual()) {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
             if (tryAsLong != 0L) {
-                return "reported";
+                source = "reported";
             }
             // No time found in current or previous event
             else {
                 // Use default value
-                return "generated";
+                source = "generated";
             }
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return "reported";
+            source = "reported";
         }
         // Unknown format
         else {
             // Use default value
-            return "generated";
+            source = "generated";
         }
+
+        return source;
     }
 
     @Override

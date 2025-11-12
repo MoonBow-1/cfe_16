@@ -60,40 +60,48 @@ public final class HECTimeImplWithFallback implements HECTime {
     @Override
     public long instant(final long defaultValue) {
         final long currentTime = this.currentTime.instant(defaultValue);
-
+        final long instant;
         // Check if the currentTime relied on the defaultValue
         if (currentTime == defaultValue && !this.fallbackTime.isStub()) {
-            return this.fallbackTime.instant(defaultValue);
+            instant = this.fallbackTime.instant(defaultValue);
         }
         else {
-            return currentTime;
+            instant = currentTime;
         }
+
+        return instant;
     }
 
     @Override
     public boolean parsed() {
+        final boolean parsed;
         if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return false;
+            parsed = false;
         }
         else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.parsed();
+            parsed = this.currentTime.parsed();
         }
         else {
-            return this.fallbackTime.parsed();
+            parsed = this.fallbackTime.parsed();
         }
+
+        return parsed;
     }
 
     @Override
     public String source() {
+        final String source;
         if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return "generated";
+            source = "generated";
         }
         else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.source();
+            source = this.currentTime.source();
         }
         else {
-            return this.fallbackTime.source();
+            source = this.fallbackTime.source();
         }
+
+        return source;
     }
 
     @Override
