@@ -71,20 +71,17 @@ public final class HECBatch {
     private final String authToken;
     private final String channel;
     private final String allEventInJSON;
-    private final Integer currentAckID;
     private final HeaderInfo headerInfo;
 
     public HECBatch(
             final String authToken,
             final String channel,
             final String allEventInJSON,
-            final Integer currentAckID,
             final HeaderInfo headerInfo
     ) {
         this.authToken = authToken;
         this.channel = channel;
         this.allEventInJSON = allEventInJSON;
-        this.currentAckID = currentAckID;
         this.headerInfo = headerInfo;
     }
 
@@ -122,7 +119,6 @@ public final class HECBatch {
                         this.channel,
                         jsonEvent.asEventMessage(),
                         this.authToken,
-                        currentAckID,
                         new JsonHECTimeImplWithFallback(new JsonHECTimeImpl(jsonEvent.asTimeJsonNode()), previousEvent.time()), this.headerInfo
                 );
                 // Set the previous event if the current event was parsed without an exception

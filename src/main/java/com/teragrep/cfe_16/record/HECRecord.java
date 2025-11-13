@@ -52,18 +52,16 @@ import com.teragrep.cfe_16.event.time.JsonHECTime;
 
 public interface HECRecord extends Stubable {
 
-    EventMessage event();
+    public abstract EventMessage event();
 
-    String channel();
+    public abstract String channel();
 
-    String authenticationToken();
+    public abstract String authenticationToken();
 
-    Integer ackID();
+    public abstract JsonHECTime time();
 
-    JsonHECTime time();
+    public abstract SyslogMessage toSyslogMessage();
 
-    SyslogMessage toSyslogMessage();
-
-    SyslogMessage toSyslogMessage(final long defaultValue);
+    public abstract SyslogMessage toSyslogMessage(final long defaultValue);
 
 }

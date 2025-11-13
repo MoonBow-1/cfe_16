@@ -63,7 +63,6 @@ public final class HECRecordImpl implements HECRecord {
     private final String channel;
     private final EventMessage eventMessage;
     private final String authenticationToken;
-    private final Integer ackID;
     private final JsonHECTime JsonHECTime;
     private final String hostName;
     private final Severity severity;
@@ -74,7 +73,6 @@ public final class HECRecordImpl implements HECRecord {
             final String channel,
             final EventMessage eventMessage,
             final String authenticationToken,
-            final Integer ackID,
             final JsonHECTime JsonHECTime,
             final String hostName,
             final Severity severity,
@@ -84,7 +82,6 @@ public final class HECRecordImpl implements HECRecord {
         this.channel = channel;
         this.eventMessage = eventMessage;
         this.authenticationToken = authenticationToken;
-        this.ackID = ackID;
         this.JsonHECTime = JsonHECTime;
         this.hostName = hostName;
         this.severity = severity;
@@ -96,7 +93,6 @@ public final class HECRecordImpl implements HECRecord {
             final String channel,
             final EventMessage eventMessage,
             final String authenticationToken,
-            final Integer ackID,
             final JsonHECTime JsonHECTime,
             final HeaderInfo headerInfo
     ) {
@@ -104,7 +100,6 @@ public final class HECRecordImpl implements HECRecord {
                 channel,
                 eventMessage,
                 authenticationToken,
-                ackID,
                 JsonHECTime,
                 "cfe-16",
                 Severity.INFORMATIONAL,
@@ -217,11 +212,6 @@ public final class HECRecordImpl implements HECRecord {
     }
 
     @Override
-    public Integer ackID() {
-        return this.ackID;
-    }
-
-    @Override
     public boolean isStub() {
         return false;
     }
@@ -242,11 +232,6 @@ public final class HECRecordImpl implements HECRecord {
         if (this.channel() != null) {
             LOGGER.debug("Setting channel");
             metadataSDE.addSDParam("channel", this.channel());
-        }
-
-        if (this.ackID() != null) {
-            LOGGER.debug("Setting ack id");
-            metadataSDE.addSDParam("ack_id", String.valueOf(this.ackID()));
         }
 
         if (this.time().source() != null) {
@@ -277,12 +262,11 @@ public final class HECRecordImpl implements HECRecord {
 
         final HECRecordImpl that = (HECRecordImpl) o;
         return Objects.equals(channel, that.channel) && Objects.equals(eventMessage, that.eventMessage) && Objects
-                .equals(authenticationToken, that.authenticationToken) && Objects.equals(ackID, that.ackID)
-                && Objects.equals(JsonHECTime, that.JsonHECTime);
+                .equals(authenticationToken, that.authenticationToken) && Objects.equals(JsonHECTime, that.JsonHECTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, eventMessage, authenticationToken, ackID, JsonHECTime);
+        return Objects.hash(channel, eventMessage, authenticationToken, JsonHECTime);
     }
 }

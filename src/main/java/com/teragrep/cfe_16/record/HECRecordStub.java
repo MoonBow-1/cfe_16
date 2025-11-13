@@ -68,11 +68,6 @@ public final class HECRecordStub implements HECRecord {
     }
 
     @Override
-    public Integer ackID() {
-        throw new UnsupportedOperationException("HECRecordStub does not support this");
-    }
-
-    @Override
     public JsonHECTime time() {
         return new JsonHECTimeStub();
     }

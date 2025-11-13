@@ -74,7 +74,6 @@ class HECBatchTest {
                 channel1,
                 new EventMessageImpl("Hello, world!"),
                 authToken1,
-                0,
                 new JsonHECTimeImplWithFallback(
                         new JsonHECTimeImpl(new ObjectMapper().createObjectNode().numberNode(123456)),
                         new JsonHECTimeStub()
@@ -86,7 +85,6 @@ class HECBatchTest {
                 authToken1,
                 channel1,
                 allEventsInJson,
-                0,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         final List<HECRecord> response = HECBatch.toHECRecordList();
@@ -113,7 +111,6 @@ class HECBatchTest {
                 authToken1,
                 channel1,
                 allEventsInJson,
-                0,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -131,7 +128,6 @@ class HECBatchTest {
                 authToken1,
                 channel1,
                 allEventsInJson,
-                0,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         final Exception exception = Assertions
@@ -149,7 +145,6 @@ class HECBatchTest {
                 authToken1,
                 channel1,
                 allEventsInJson,
-                0,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -163,7 +158,6 @@ class HECBatchTest {
                 authToken1,
                 channel1,
                 allEventsInJson,
-                0,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 

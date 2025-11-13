@@ -66,7 +66,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().nullNode()),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -81,7 +80,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("123456")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -96,7 +94,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("12345678901234")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -111,7 +108,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -126,7 +122,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -135,7 +130,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -149,7 +143,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -158,7 +151,6 @@ final class HECRecordImplTest {
                 "channel is not the same",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -173,7 +165,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -190,7 +181,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -207,7 +197,6 @@ final class HECRecordImplTest {
                 "channel",
                 new EventMessageImpl("event"),
                 "authToken",
-                1,
                 new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
@@ -215,37 +204,5 @@ final class HECRecordImplTest {
         final String expectedResult = "authToken";
 
         Assertions.assertEquals(expectedResult, hecRecord.authenticationToken());
-    }
-
-    @Test
-    @DisplayName("AckID returns ackID if not null")
-    void ackIdReturnsAckIdIfNotNull() {
-        final HECRecordImpl hecRecord = new HECRecordImpl(
-                "channel",
-                new EventMessageImpl("event"),
-                "authToken",
-                123,
-                new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-
-        final Integer expectedResult = 123;
-
-        Assertions.assertEquals(expectedResult, hecRecord.ackID());
-    }
-
-    @Test
-    @DisplayName("AckID returns null if ackID is null")
-    void ackIdReturnsNullIfAckIdIsNull() {
-        final HECRecordImpl hecRecord = new HECRecordImpl(
-                "channel",
-                new EventMessageImpl("event"),
-                "authToken",
-                null,
-                new JsonHECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-
-        Assertions.assertNull(hecRecord.ackID());
     }
 }

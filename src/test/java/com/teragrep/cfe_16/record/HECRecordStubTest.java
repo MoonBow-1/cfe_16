@@ -98,21 +98,6 @@ final class HECRecordStubTest {
     }
 
     @Test
-    @DisplayName("ackID() throws UnsupportedOperationException if called")
-    void ackIDThrowsUnsupportedOperationExceptionIfCalled() {
-        final HECRecordStub stub = new HECRecordStub();
-
-        final UnsupportedOperationException unsupportedOperationException = Assertions
-                .assertThrowsExactly(UnsupportedOperationException.class, stub::ackID);
-
-        Assertions
-                .assertEquals(
-                        "HECRecordStub does not support this", unsupportedOperationException.getMessage(),
-                        "Exception message was not what was expected"
-                );
-    }
-
-    @Test
     @DisplayName("time() returns a HECTimeStub if called")
     void timeReturnsAHecTimeStubIfCalled() {
         final HECRecordStub stub = new HECRecordStub();
