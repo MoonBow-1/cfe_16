@@ -49,9 +49,9 @@ import com.teragrep.cfe_16.Stubable;
 
 public interface JsonHECTime extends Stubable {
 
-    long asInstant(final long defaultValue);
+    public abstract long asInstant(final long defaultValue);
 
-    boolean parsed();
+    public abstract boolean parsed();
 
-    String source();
+    public abstract String source();
 }
