@@ -1,0 +1,13 @@
+<map id="com.teragrep.cfe_16.bo.HeaderInfo" name="com.teragrep.cfe_16.bo.HeaderInfo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="721,55,973,80"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedFor.html" title=" " alt="" coords="277,5,554,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="542,30,698,47,738,52,737,57,697,53,542,35"/>
+<area shape="rect" id="Node000003" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html" title=" " alt="" coords="5,55,223,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="205,50,336,28,337,33,206,55"/>
+<area shape="rect" id="Node000004" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedHost.html" title=" " alt="" coords="272,55,559,80"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="236,65,272,65,272,70,236,70"/>
+<area shape="rect" id="Node000005" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedProto.html" title=" " alt="" coords="287,105,544,145"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="195,80,310,102,309,107,194,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="573,65,721,65,721,70,573,70"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="557,103,697,85,751,77,752,83,698,90,558,109"/>
+</map>

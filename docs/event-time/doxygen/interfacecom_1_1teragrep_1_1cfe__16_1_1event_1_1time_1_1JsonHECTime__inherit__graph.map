@@ -1,0 +1,11 @@
+<map id="com.teragrep.cfe_16.event.time.JsonHECTime" name="com.teragrep.cfe_16.event.time.JsonHECTime">
+<area shape="rect" id="Node000001" title=" " alt="" coords="271,69,505,109"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1JsonHECTimeImpl.html" title=" " alt="" coords="553,5,788,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="490,64,581,43,582,48,491,69"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1JsonHECTimeImplWithFallback.html" title=" " alt="" coords="553,69,788,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="519,87,553,87,553,92,519,92"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1JsonHECTimeStub.html" title=" " alt="" coords="553,133,788,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="491,110,582,131,581,136,490,115"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html" title=" " alt="" coords="5,77,223,102"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,87,270,87,270,92,237,92"/>
+</map>

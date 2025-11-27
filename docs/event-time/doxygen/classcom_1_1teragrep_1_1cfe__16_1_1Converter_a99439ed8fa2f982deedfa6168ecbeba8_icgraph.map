@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.Converter.setEventSeverity" name="com.teragrep.cfe_16.Converter.setEventSeverity">
+<area shape="rect" id="Node000001" title=" " alt="" coords="579,37,825,77"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Converter.html#a602a68046d2d394249793b6d74b62050" title=" " alt="" coords="277,37,531,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="565,60,531,60,531,55,565,55"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html#aa8573fed5af5faf4deeffe7dd8369851" title=" " alt="" coords="19,5,216,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="263,44,216,39,216,34,264,39"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a2918b5432a3d000c39a805847ba1c5de" title=" " alt="" coords="5,69,229,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="264,76,230,79,229,74,264,70"/>
+</map>

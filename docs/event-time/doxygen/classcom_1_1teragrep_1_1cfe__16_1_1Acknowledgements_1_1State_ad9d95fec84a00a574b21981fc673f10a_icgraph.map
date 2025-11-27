@@ -1,0 +1,22 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.State.getAckMap" name="com.teragrep.cfe_16.Acknowledgements.State.getAckMap">
+<area shape="rect" id="Node000001" title=" " alt="" coords="839,234,1131,274"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a8c6f0dff735fde04e0bc670136eb57d2" title=" " alt="" coords="412,5,791,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="962,223,933,181,894,132,846,84,789,46,759,33,761,28,792,41,849,80,898,128,938,178,966,220"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a7a9570efce9732f5f674e9ea85017439" title=" " alt="" coords="440,55,763,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="950,227,880,170,836,141,790,116,735,98,737,93,792,112,839,136,883,165,953,222"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5307dc12a64ca957ae24430d09b372e1" title=" " alt="" coords="5,85,364,125"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="939,229,871,192,831,175,790,161,712,146,604,133,364,116,364,110,605,128,713,140,791,155,833,170,873,187,942,224"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a225a9f18c21826dc1bbc4ce0a82550ed" title=" " alt="" coords="435,170,768,210"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="850,234,721,213,722,207,851,229"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a524b6158e1c70b00480d167b944f14ad" title="Returns the unmodifiable set of Acks for a channel." alt="" coords="445,234,758,274"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="825,257,758,257,758,251,825,251"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5287a2c95003a939f0314bc423d401cf" title="Returns the size of the Ack set of given channel." alt="" coords="445,298,758,338"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="851,279,722,301,721,295,850,274"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a991efdd07c7cbf8d24b5da93e342b55c" title="Returns the Ack statuses of requested Ack id:s as a JSON node." alt="" coords="445,362,758,402"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="940,283,872,320,792,353,748,364,746,359,790,347,869,315,938,279"/>
+<area shape="rect" id="Node000009" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a9544ac800392336cc3fa19b72234d014" title="Checks if the Ack with a given id is acknowledged." alt="" coords="450,426,753,466"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="959,286,888,353,842,388,792,416,754,430,752,425,790,412,839,384,885,349,955,282"/>
+<area shape="rect" id="Node000010" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a2d2acb3e9942fdb720439eaad8fa1f5c" title=" " alt="" coords="445,491,758,516"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="969,287,941,332,901,386,851,438,823,461,792,480,759,494,757,489,789,476,819,457,847,434,897,382,936,329,964,284"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="427,90,364,95,364,89,426,85"/>
+</map>
