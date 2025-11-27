@@ -84,7 +84,7 @@ import static org.junit.Assert.*;
         "poll.time=30000",
         "server.print.times=true"
 })
-public class AcknowledgementsIT {
+final class AcknowledgementsIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AcknowledgementsIT.class);
     private String authToken1;
@@ -120,7 +120,7 @@ public class AcknowledgementsIT {
      * getCurrentAckValue() in channel2 yet, so it should be 0.
      */
     @Test
-    public void getCurrentAckValueTest() {
+    void getCurrentAckValueTest() {
         int currentAckValue;
         currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
         acknowledgements.incrementAckValue(this.authToken1, this.channel1);
@@ -150,7 +150,7 @@ public class AcknowledgementsIT {
      * Ack id is not used at all, isAckAcknowledged should return false.
      */
     @Test
-    public void acknowledgeTest() {
+    void acknowledgeTest() {
         acknowledgements.initializeContext(this.authToken1, this.channel1);
         acknowledgements.addAck(this.authToken1, this.channel1, new Ack(0, false));
         acknowledgements.acknowledge(this.authToken1, this.channel1, 0);
@@ -182,7 +182,7 @@ public class AcknowledgementsIT {
      * and the response is compared to the supposed responses.
      */
     @Test
-    public void getRequestedAckStatusesTest() {
+    void getRequestedAckStatusesTest() {
         String requestAsString = "{\"acks\": [1,3,4]}";
         String notIntRequestAsString = "{\"acks\": [\"a\",\"b\",\"c\"]}";
         String faultyRequestAsString = "{\"test\": [1,3,4]}";
@@ -253,7 +253,7 @@ public class AcknowledgementsIT {
         }
     }
 
-    public void getCurrentAckValueAndIncrementTest() {
+    void getCurrentAckValueAndIncrementTest() {
         Acknowledgements acknowledgements1 = new Acknowledgements();
         Acknowledgements acknowledgements2 = new Acknowledgements();
 
@@ -287,7 +287,7 @@ public class AcknowledgementsIT {
      * compared to each other.
      */
     @Test
-    public void deleteAckTest() {
+    void deleteAckTest() {
         Acknowledgements acknowledgements1 = new Acknowledgements();
         Acknowledgements acknowledgements2 = new Acknowledgements();
 
@@ -322,7 +322,7 @@ public class AcknowledgementsIT {
      * here, so ServerIsBusyException is expected to happen.
      */
     @Test
-    public void maxAckValueTest() {
+    void maxAckValueTest() {
         Assertions.assertThrows(ServerIsBusyException.class, () -> {
             this.configuration.setMaxAckValue(2);
             int ackId;

@@ -355,7 +355,7 @@
           </JSONPathAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Failed Soap request" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Failed Soap request">
           <stringProp name="TestPlan.comments">Should trigger a JsonSyntaxException</stringProp>
           <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
@@ -453,7 +453,7 @@
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
@@ -478,7 +478,7 @@
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response is a failure">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response is a failure" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="51508">400</stringProp>
             </collectionProp>
@@ -488,7 +488,7 @@
             <intProp name="Assertion.test_type">8</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion - message field">
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion - message field" enabled="true">
             <stringProp name="JSON_PATH">$.message</stringProp>
             <stringProp name="EXPECTED_VALUE">An error occurred while processing your Request. See event id in the technical log for details.</stringProp>
             <boolProp name="JSONVALIDATION">true</boolProp>
@@ -497,7 +497,7 @@
             <boolProp name="ISREGEX">false</boolProp>
           </JSONPathAssertion>
           <hashTree/>
-          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion - id field is found">
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion - id field is found" enabled="true">
             <stringProp name="JSON_PATH">$.id</stringProp>
             <stringProp name="EXPECTED_VALUE"></stringProp>
             <boolProp name="JSONVALIDATION">false</boolProp>
