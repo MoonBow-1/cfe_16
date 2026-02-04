@@ -47,7 +47,6 @@ package com.teragrep.cfe_16;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonStreamParser;
 import com.teragrep.cfe_16.bo.HECRecord;
 import com.teragrep.cfe_16.bo.HECRecordImpl;
@@ -57,7 +56,7 @@ import com.teragrep.cfe_16.event.JsonEvent;
 import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImplWithFallback;
-import java.util.NoSuchElementException;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +84,7 @@ public final class HECBatch {
      * the channel name as string parameters. Returns a JSON node with ack id if
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
-    public List<HECRecord> toHECRecordList() {
+    public List<HECRecord> toHECRecordList() throws EventFieldException, JsonProcessingException {
         HECRecord previousEvent = new HECRecordStub();
 
         JsonStreamParser parser = new JsonStreamParser(this.allEventInJSON);
@@ -103,28 +102,24 @@ public final class HECBatch {
         HECRecord eventData = new HECRecordStub();
         List<HECRecord> syslogMessages = new ArrayList<>();
         while (parser.hasNext()) {
-            try {
-                String jsonObjectStr = parser.next().toString();
-                /*
-                 * Event field cannot be missing or blank. Throws an exception if this is the
-                 * case.
-                 */
-                final JsonEvent jsonEvent = new JsonEventImpl(new ObjectMapper().readTree(jsonObjectStr));
 
-                eventData = new HECRecordImpl(
-                        this.channel,
-                        jsonEvent.asEvent(),
-                        this.authToken,
-                        0,
-                        new HECTimeImplWithFallback(new HECTimeImpl(jsonEvent.asTimeNode()), previousEvent.time()),
-                        this.headerInfo
-                );
-                // Set the previous event if the "current" event was parsed without an exception
-                previousEvent = eventData;
-            }
-            catch (JsonProcessingException | JsonParseException | NoSuchElementException e) {
-                LOGGER.error("Problem processing allEventsInJson <{}>", this.allEventInJSON);
-            }
+            String jsonObjectStr = parser.next().toString();
+            /*
+             * Event field cannot be missing or blank. Throws an exception if this is the
+             * case.
+             */
+            final JsonEvent jsonEvent = new JsonEventImpl(new ObjectMapper().readTree(jsonObjectStr));
+
+            eventData = new HECRecordImpl(
+                    this.channel,
+                    jsonEvent.asEventMessage(),
+                    this.authToken,
+                    0,
+                    new HECTimeImplWithFallback(new HECTimeImpl(jsonEvent), previousEvent.time()),
+                    this.headerInfo
+            );
+            // Set the previous event if the "current" event was parsed without an exception
+            previousEvent = eventData;
 
             syslogMessages.add(eventData);
         }

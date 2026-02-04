@@ -48,6 +48,9 @@ package com.teragrep.cfe_16.it;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.exceptionhandling.*;
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.JsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.server.TestServer;
 import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
@@ -185,36 +188,46 @@ public class ServiceAndHECBatchIT {
      */
     @Test
     public void sendEventsAndGetAcksTest() {
-        String supposedResponse;
+        final Response supposedResponse1 = new AcknowledgedJsonResponse("Success", 0);
+        final Response returnedResponse1 = service.sendEvents(request1, channel3, eventInJson);
+        Assertions
+                .assertEquals(
+                        supposedResponse1, returnedResponse1,
+                        "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)"
+                );
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString()
-        );
+        final Response supposedResponse2 = new AcknowledgedJsonResponse("Success", 1);
+        final Response returnedResponse2 = service.sendEvents(request1, channel3, eventInJson);
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":1}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)",
-                supposedResponse, service.sendEvents(request1, channel3, eventInJson).toString()
-        );
+        Assertions
+                .assertEquals(
+                        supposedResponse2, returnedResponse2,
+                        "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 1)"
+                );
 
-        supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request1, channel2, eventInJson).toString()
-        );
+        final Response supposedResponse3 = new AcknowledgedJsonResponse("Success", 0);
+        final Response returnedResponse3 = service.sendEvents(request1, channel2, eventInJson);
 
-        assertEquals(
-                "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)",
-                supposedResponse, service.sendEvents(request3, channel3, eventInJson).toString()
-        );
+        Assertions
+                .assertEquals(
+                        supposedResponse3, returnedResponse3,
+                        "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)"
+                );
 
-        supposedResponse = "{\"acks\":{\"1\":true,\"3\":false,\"4\":false}}";
-        assertEquals(
-                "JSON object should be returned with ack statuses.", supposedResponse,
-                service.getAcks(request1, channel3, ackRequestNode).toString()
-        );
+        final Response supposedResponse4 = new AcknowledgedJsonResponse("Success", 0);
+        final Response returnedResponse4 = service.sendEvents(request3, channel3, eventInJson);
+
+        Assertions
+                .assertEquals(
+                        supposedResponse4, returnedResponse4,
+                        "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be 0)"
+                );
+
+        final String supposedResponse5 = "{\"acks\":{\"1\":true,\"3\":false,\"4\":false}}";
+        final String returnedResponse5 = service.getAcks(request1, channel3, ackRequestNode).toString();
+
+        Assertions
+                .assertEquals(supposedResponse5, returnedResponse5, "JSON object should be returned with ack statuses.");
     }
 
     /*
@@ -234,8 +247,8 @@ public class ServiceAndHECBatchIT {
      */
     @Test
     public void sendEventsWithoutChannelTest() {
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
-        String response = service.sendEvents(request1, null, eventInJson).toString();
+        final Response supposedResponse = new JsonResponse("Success");
+        final Response response = service.sendEvents(request1, null, eventInJson);
         assertEquals("Service should return JSON object with fields 'text' and 'code'", supposedResponse, response);
     }
 
@@ -292,10 +305,10 @@ public class ServiceAndHECBatchIT {
     @Test
     public void sendingMultipleEventsTest() {
         String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
+        final Response supposedResponse = new AcknowledgedJsonResponse("Success", 0);
         assertEquals(
                 "Should get a JSON with fields text, code and ackID", supposedResponse,
-                service.sendEvents(request1, channel1, allEventsInJson).toString()
+                service.sendEvents(request1, channel1, allEventsInJson)
         );
 
     }
@@ -307,10 +320,10 @@ public class ServiceAndHECBatchIT {
     @Test
     public void sendingMultipleEventsWithDefaultChannelTest() {
         String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0}";
+        final Response supposedResponse = new JsonResponse("Success");
         assertEquals(
                 "Should get a JSON with fields text, code and ackID", supposedResponse,
-                service.sendEvents(request1, null, allEventsInJson).toString()
+                service.sendEvents(request1, null, allEventsInJson)
         );
     }
 }

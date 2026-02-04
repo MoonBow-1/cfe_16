@@ -55,4 +55,6 @@ public interface JsonEvent {
     JsonNode asPayloadJsonNode();
 
     JsonNode asTimeJsonNode() throws EventFieldException;
+
+    boolean hasTime();
 }

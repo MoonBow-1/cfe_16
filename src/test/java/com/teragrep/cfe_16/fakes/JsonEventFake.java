@@ -43,80 +43,33 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.event.time;
+package com.teragrep.cfe_16.fakes;
 
-import java.util.Objects;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teragrep.cfe_16.event.EventMessage;
+import com.teragrep.cfe_16.event.EventMessageStub;
+import com.teragrep.cfe_16.event.JsonEvent;
 
-public final class HECTimeImplWithFallback implements HECTime {
+public final class JsonEventFake implements JsonEvent {
 
-    private final HECTime currentTime;
-    private final HECTime fallbackTime;
-
-    public HECTimeImplWithFallback(final HECTime currentTime, final HECTime fallbackTime) {
-        this.currentTime = currentTime;
-        this.fallbackTime = fallbackTime;
+    @Override
+    public EventMessage asEventMessage() {
+        return new EventMessageStub();
     }
 
     @Override
-    public long instant(final long defaultValue) {
-        final long returnedInstant;
-
-        final long currentTime = this.currentTime.instant(defaultValue);
-
-        // Check if the currentTime relied on the defaultValue
-        if (currentTime == defaultValue && !this.fallbackTime.isStub()) {
-            returnedInstant = this.fallbackTime.instant(defaultValue);
-        }
-        else {
-            returnedInstant = currentTime;
-        }
-
-        return returnedInstant;
+    public JsonNode asPayloadJsonNode() {
+        return new ObjectMapper().createObjectNode().nullNode();
     }
 
     @Override
-    public boolean parsed() {
-        if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return false;
-        }
-        else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.parsed();
-        }
-        else {
-            return this.fallbackTime.parsed();
-        }
+    public JsonNode asTimeJsonNode() {
+        return new ObjectMapper().createObjectNode().nullNode();
     }
 
     @Override
-    public String source() {
-        if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return "generated";
-        }
-        else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.source();
-        }
-        else {
-            return this.fallbackTime.source();
-        }
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        final HECTimeImplWithFallback that = (HECTimeImplWithFallback) o;
-        return Objects.equals(currentTime, that.currentTime) && Objects.equals(fallbackTime, that.fallbackTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(currentTime, fallbackTime);
-    }
-
-    @Override
-    public boolean isStub() {
+    public boolean hasTime() {
         return false;
     }
 }

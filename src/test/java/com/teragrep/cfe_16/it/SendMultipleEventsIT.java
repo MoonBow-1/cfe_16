@@ -47,6 +47,8 @@ package com.teragrep.cfe_16.it;
 
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.Response;
+import com.teragrep.cfe_16.server.TestServer;
+import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.*;
@@ -55,7 +57,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -123,8 +124,6 @@ public class SendMultipleEventsIT {
     @Test
     public void sendEventsTest() throws InterruptedException, ExecutionException {
         final int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
-        countDownLatch = new CountDownLatch(NUMBER_OF_EVENTS_TO_BE_SENT);
-        ExecutorService es = Executors.newFixedThreadPool(8);
         final List<CompletableFuture<Response>> futures = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {

@@ -45,6 +45,8 @@
  */
 package com.teragrep.cfe_16.it;
 
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
+import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.server.TestServer;
 import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
@@ -119,7 +121,6 @@ public class SendSingleEventIT {
 
     @BeforeEach
     public void initEach() {
-
         this.request1 = new MockHttpServletRequest();
         this.request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         this.channel1 = "CHANNEL_11111";
@@ -127,14 +128,13 @@ public class SendSingleEventIT {
                 + "\"event\": {\"message\":\"Access log test message 1\"}} "
                 + "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": "
                 + "{\"message\":\"Access log test message 2\"}}";
-
     }
 
     @Test
     public void send1EventTest() {
-        String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":" + 0 + "}";
+        final Response supposedResponse = new AcknowledgedJsonResponse("Success", 0);
         Assertions
-                .assertEquals(supposedResponse, service.sendEvents(request1, channel1, eventInJson).toString(), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID " + "should be " + 0 + ")");
+                .assertEquals(supposedResponse, service.sendEvents(request1, channel1, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID " + "should be " + 0 + ")");
 
         Assertions
                 .assertEquals(2, messageList.size(), "Number of events received should match the number of sent ones");

@@ -45,7 +45,6 @@
  */
 package com.teragrep.cfe_16.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -69,17 +68,18 @@ import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.exceptionhandling.AuthenticationTokenMissingException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotFoundException;
 import com.teragrep.cfe_16.exceptionhandling.ChannelNotProvidedException;
-import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
 import com.teragrep.cfe_16.exceptionhandling.SessionNotFoundException;
+import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.ExceptionEvent;
 import com.teragrep.cfe_16.response.ExceptionEventContext;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
+import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.UUID;
 import java.io.IOException;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,13 +174,40 @@ public class HECServiceImpl implements HECService {
             session.addChannel(channel);
         }
 
-        Response response;
-        // TODO: find a nice way of not passing Acknowledgements
-        try {
-            response = this.eventManager
-                    .convertData(authToken, channel, eventInJson, headerInfo, this.acknowledgements);
+        acknowledgements.initializeContext(authToken, channel);
+        final int ackId = acknowledgements.getCurrentAckValue(authToken, channel);
+        final boolean incremented = acknowledgements.incrementAckValue(authToken, channel);
+        if (!incremented) {
+            throw new InternalServerErrorException("Ack value couldn't be incremented.");
         }
-        catch (final JsonProcessingException | JsonSyntaxException | EventFieldException e) {
+        final Ack ack = new Ack(ackId, false);
+        final boolean addedAck = acknowledgements.addAck(authToken, channel, ack);
+        if (!addedAck) {
+            throw new InternalServerErrorException("Ack ID " + ackId + " couldn't be added to the Ack set.");
+        }
+
+        Response responseToReturn;
+
+        try {
+            this.connection
+                    .sendMessages(new SyslogBatch(new HECBatch(authToken, channel, eventInJson, headerInfo).toHECRecordList()).asSyslogMessages());
+
+            final boolean shouldAck = !channel.equals(Session.DEFAULT_CHANNEL);
+
+            if (shouldAck) {
+                final boolean acked = acknowledgements.acknowledge(authToken, channel, ackId);
+                if (!acked) {
+                    throw new InternalServerErrorException("Ack ID " + ackId + " not Acked.");
+                }
+                else {
+                    responseToReturn = new AcknowledgedJsonResponse("Success", ackId);
+                }
+            }
+            else {
+                responseToReturn = new JsonResponse("Success");
+            }
+        }
+        catch (final JsonSyntaxException | IOException e) {
             final ExceptionEventContext exceptionEventContext = new ExceptionEventContext(
                     headerInfo,
                     request.getHeader("user-agent"),
@@ -189,10 +216,10 @@ public class HECServiceImpl implements HECService {
             );
             final ExceptionEvent event = new ExceptionEvent(exceptionEventContext, UUID.randomUUID(), e);
             event.logException();
-            response = new ExceptionJsonResponse(event);
+            responseToReturn = new ExceptionJsonResponse(event);
         }
 
-        return response;
+        return responseToReturn;
     }
 
     // @LogAnnotation(type = LogType.RESPONSE)

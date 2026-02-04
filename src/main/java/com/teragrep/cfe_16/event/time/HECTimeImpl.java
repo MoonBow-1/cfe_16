@@ -46,32 +46,50 @@
 package com.teragrep.cfe_16.event.time;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.teragrep.cfe_16.event.JsonEvent;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public final class HECTimeImpl implements HECTime {
 
-    private final JsonNode timeNode;
+    private final JsonEvent timeNode1;
 
-    public HECTimeImpl(JsonNode timeNode) {
-        this.timeNode = timeNode;
+    public HECTimeImpl(final JsonEvent timeNode) {
+        this.timeNode1 = timeNode;
     }
 
     @Override
     public long instant(final long defaultValue) {
+        final long returnedTime;
+        JsonNode timeNode;
+
+        try {
+            if (timeNode1.hasTime()) {
+                timeNode = timeNode1.asTimeJsonNode();
+            }
+            else {
+                timeNode = new TextNode("");
+            }
+        }
+        catch (final EventFieldException e) {
+            timeNode = new TextNode("");
+        }
+
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             // Use default value
-            return defaultValue;
+            returnedTime = defaultValue;
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return this.removeDecimal(timeNode.asDouble());
+            returnedTime = this.removeDecimal(timeNode.asDouble());
 
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return timeNode.asLong();
+            returnedTime = timeNode.asLong();
 
         }
         // Time is a String
@@ -79,35 +97,50 @@ public final class HECTimeImpl implements HECTime {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
             if (tryAsLong != 0L) {
-                return tryAsLong;
+                returnedTime = tryAsLong;
             }
             // No time found in current or previous event
             else {
                 // Use default value
-                return defaultValue;
+                returnedTime = defaultValue;
             }
         }
         // Unknown format
         else {
             // Use default value
-            return defaultValue;
+            returnedTime = defaultValue;
         }
+
+        return returnedTime;
     }
 
     /**
      * Takes a double value as a parameter, removes the decimal point from that value and returns the number as a long
      * value.
      */
-    private long removeDecimal(double doubleValue) {
-        BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);
-        String stringValue = doubleValueWithDecimal.toString();
-        String stringValueWithoutDecimal = stringValue.replace(".", "");
+    private long removeDecimal(final double doubleValue) {
+        final BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);
+        final String stringValue = doubleValueWithDecimal.toString();
+        final String stringValueWithoutDecimal = stringValue.replace(".", "");
 
         return Long.parseLong(stringValueWithoutDecimal);
     }
 
     @Override
     public boolean parsed() {
+        JsonNode timeNode;
+
+        try {
+            if (timeNode1.hasTime()) {
+                timeNode = timeNode1.asTimeJsonNode();
+            }
+            else {
+                timeNode = new TextNode("");
+            }
+        }
+        catch (final EventFieldException e) {
+            timeNode = new TextNode("");
+        }
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             return false;
@@ -136,6 +169,20 @@ public final class HECTimeImpl implements HECTime {
 
     @Override
     public String source() {
+        JsonNode timeNode;
+
+        try {
+            if (timeNode1.hasTime()) {
+                timeNode = timeNode1.asTimeJsonNode();
+            }
+            else {
+                timeNode = new TextNode("");
+            }
+        }
+        catch (final EventFieldException e) {
+            timeNode = new TextNode("");
+        }
+
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             // Use default value
@@ -171,18 +218,18 @@ public final class HECTimeImpl implements HECTime {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        HECTimeImpl hecTime = (HECTimeImpl) o;
-        return Objects.equals(timeNode, hecTime.timeNode);
+        final HECTimeImpl hecTime = (HECTimeImpl) o;
+        return Objects.equals(timeNode1, hecTime.timeNode1);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(timeNode);
+        return Objects.hashCode(timeNode1);
     }
 
     @Override

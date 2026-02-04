@@ -45,60 +45,51 @@
  */
 package com.teragrep.cfe_16.event.time;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teragrep.cfe_16.event.JsonEventImpl;
 import java.time.Instant;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class HECTimeImplTest {
 
-    private ObjectMapper objectMapper;
-
-    @BeforeEach
-    public void initialize() {
-        objectMapper = new ObjectMapper();
-    }
-
     @Test
     @DisplayName("Time is generated, not parsed and uses the defaultValue when time is missing from the event")
-    void timeIsGeneratedNotParsedAndUsesTheDefaultValueWhenTimeIsMissingFromTheEvent() throws JsonProcessingException {
-        String content = "{}";
-
-        final JsonNode jsonNode = objectMapper.readTree(content);
-
+    void timeIsGeneratedNotParsedAndUsesTheDefaultValueWhenTimeIsMissingFromTheEvent() {
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "{}"))
+        );
 
         Assertions
-                .assertAll(
-                        () -> Assertions
-                                .assertEquals(
-                                        "generated", HECTime.source(),
-                                        "Time source should be 'generated' when it's not specified in a request"
-                                ),
-                        () -> Assertions
-                                .assertFalse(
-                                        HECTime.parsed(),
-                                        "timeParsed should be false when time is not specified in a request"
-                                ),
-                        () -> Assertions.assertEquals(currentEpoch, HECTime.instant(currentEpoch), "Time as long should be the defaultValue provided when time is not specified in a request")
+                .assertEquals(
+                        "generated", HECTime.source(),
+                        "Time source should be 'generated' when it's not specified in a request"
                 );
+        Assertions.assertFalse(HECTime.parsed(), "timeParsed should be false when time is not specified in a request");
+        Assertions
+                .assertEquals(currentEpoch, HECTime.instant(currentEpoch), "Time as long should be the defaultValue provided when time is not specified in a request");
+
     }
 
     @Test
     @DisplayName("Time is reported and parsed when time is a double")
-    void timeIsReportedAndParsedWhenTimeIsADouble() throws JsonProcessingException {
-        String content = "1433188255.253";
+    void timeIsReportedAndParsedWhenTimeIsADouble() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ;
 
-        final JsonNode jsonNode = objectMapper.readTree(content);
+        final String content = "1433188255.253";
+
+        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         Assertions
                 .assertAll(
@@ -118,13 +109,18 @@ class HECTimeImplTest {
 
     @Test
     @DisplayName("Time is reported and parsed when time is exactly 13 digits")
-    void timeIsReportedAndParsedWhenTimeIsExactly13Digits() throws JsonProcessingException {
-        String content = "1433188255253";
+    void timeIsReportedAndParsedWhenTimeIsExactly13Digits() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ;
 
-        final JsonNode jsonNode = objectMapper.readTree(content);
+        final String content = "1433188255253";
+
+        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
 
         final long currentEpoch = Instant.now().toEpochMilli();
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         Assertions
                 .assertAll(
@@ -144,14 +140,19 @@ class HECTimeImplTest {
 
     @Test
     @DisplayName("Time is reported and parsed when time is a string with numbers")
-    void timeIsReportedAndParsedWhenTimeIsAStringWithNumbers() throws JsonProcessingException {
-        String content = "\"1433188255253\"";
+    void timeIsReportedAndParsedWhenTimeIsAStringWithNumbers() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ;
 
-        final JsonNode jsonNode = objectMapper.readTree(content);
+        final String content = "\"1433188255253\"";
+
+        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
 
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         Assertions
                 .assertAll(
@@ -171,14 +172,19 @@ class HECTimeImplTest {
 
     @Test
     @DisplayName("Time is reported and parsed with less than 13 digits")
-    void timeIsReportedAndParsedWithLessThan13Digits() throws JsonProcessingException {
-        String content = "143318";
+    void timeIsReportedAndParsedWithLessThan13Digits() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ;
 
-        final JsonNode jsonNode = objectMapper.readTree(content);
+        final String content = "143318";
+
+        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
 
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         Assertions
                 .assertAll(
@@ -200,13 +206,18 @@ class HECTimeImplTest {
 
     @Test
     @DisplayName("Time is reported and parsed when time is longer than 13 digits")
-    void timeIsReportedAndParsedWhenTimeIsLongerThan13Digits() throws JsonProcessingException {
-        String content = "14331882552523";
+    void timeIsReportedAndParsedWhenTimeIsLongerThan13Digits() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ;
 
-        final JsonNode jsonNode = objectMapper.readTree(content);
+        final String content = "14331882552523";
+
+        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> objectMapper.readTree(content));
         final long currentEpoch = Instant.now().toEpochMilli();
 
-        final HECTime HECTime = new HECTimeImpl(jsonNode);
+        final HECTime HECTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         Assertions
                 .assertAll(
@@ -227,27 +238,8 @@ class HECTimeImplTest {
     }
 
     @Test
-    @DisplayName("Happy equals test")
-    void happyEqualsTest() throws JsonProcessingException {
-        String content = "1433188255252321";
-
-        final JsonNode jsonNode = objectMapper.readTree(content);
-
-        final HECTime HECTime1 = new HECTimeImpl(jsonNode);
-        final HECTime HECTime2 = new HECTimeImpl(jsonNode);
-
-        Assertions.assertEquals(HECTime1, HECTime2);
-    }
-
-    @Test
-    @DisplayName("Unhappy equals test")
-    void unhappyEqualsTest() throws JsonProcessingException {
-        String content1 = "1433188255252321";
-        String content2 = "14331882552";
-
-        final HECTime HECTime1 = new HECTimeImpl(objectMapper.readTree(content1));
-        final HECTime HECTime2 = new HECTimeImpl(objectMapper.readTree(content2));
-
-        Assertions.assertNotEquals(HECTime1, HECTime2);
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(HECTimeImpl.class).verify();
     }
 }

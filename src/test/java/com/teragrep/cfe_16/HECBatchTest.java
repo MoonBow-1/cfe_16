@@ -54,9 +54,11 @@ import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.event.EventMessageImpl;
+import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImplWithFallback;
 import com.teragrep.cfe_16.event.time.HECTimeStub;
+import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -68,13 +70,17 @@ class HECBatchTest {
 
     @Test
     public void toHECRecordListTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\", \"time\": 123456}";
-        HECRecord supposedResponse = new HECRecordImpl(
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\", \"time\": 123456}";
+        final HECRecord supposedResponse = new HECRecordImpl(
                 channel1,
                 new EventMessageImpl("Hello, world!"),
                 authToken1,
                 0,
-                new HECTimeImplWithFallback(new HECTimeImpl(new ObjectMapper().createObjectNode().numberNode(123456)), new HECTimeStub()), new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
+                new HECTimeImplWithFallback(
+                        new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", 123456))),
+                        new HECTimeStub()
+                ),
+                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
         final HECBatch HECBatch = new HECBatch(
@@ -83,7 +89,7 @@ class HECBatchTest {
                 allEventsInJson,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
-        List<HECRecord> response = HECBatch.toHECRecordList();
+        final List<HECRecord> response = Assertions.assertDoesNotThrow(HECBatch::toHECRecordList);
 
         // Test the individual methods, since HECTimeImplWithFallback will have a stub, which does not implement equals or hashcode
         Assertions.assertEquals(1, response.size());
@@ -102,7 +108,7 @@ class HECBatchTest {
      */
     @Test
     public void toHECRecordListUsesAStubIfParsingFailsWithMalformedJSONTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {{{{}}}}";
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {{{{}}}}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
                 channel1,
@@ -118,16 +124,16 @@ class HECBatchTest {
      */
     @Test
     public void toHECRecordListUsesAStubIfParsingFailsWithEmptyJSONTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": null}";
-        String supposedResponse = "EventStub does not support this";
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": null}";
+        final String supposedResponse = "Event field was not textual";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
                 channel1,
                 allEventsInJson,
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
-        Exception exception = Assertions
-                .assertThrowsExactly(UnsupportedOperationException.class, () -> HECBatch.toHECRecordList().toString());
+        final Exception exception = Assertions
+                .assertThrowsExactly(EventFieldException.class, () -> HECBatch.toHECRecordList().toString());
         Assertions
                 .assertEquals(
                         supposedResponse, exception.getMessage(), "Exception message was not what it was supposed to be"
@@ -136,7 +142,7 @@ class HECBatchTest {
 
     @Test
     public void noEventFieldInRequestTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
                 channel1,
@@ -144,12 +150,12 @@ class HECBatchTest {
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> HECBatch.toHECRecordList().toString());
+        Assertions.assertThrows(EventFieldException.class, () -> HECBatch.toHECRecordList().toString());
     }
 
     @Test
     public void eventFieldBlankInRequestTest() {
-        String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
+        final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
                 channel1,
@@ -157,6 +163,6 @@ class HECBatchTest {
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> HECBatch.toHECRecordList().toString());
+        Assertions.assertThrows(EventFieldException.class, () -> HECBatch.toHECRecordList().toString());
     }
 }

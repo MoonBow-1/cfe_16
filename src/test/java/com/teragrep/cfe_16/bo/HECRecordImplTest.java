@@ -48,7 +48,10 @@ package com.teragrep.cfe_16.bo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.event.EventMessage;
 import com.teragrep.cfe_16.event.EventMessageImpl;
+import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImpl;
+import com.teragrep.cfe_16.fakes.JsonEventFake;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,7 +66,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().nullNode()),
+                new HECTimeImpl(new JsonEventFake()),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -78,7 +81,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("123456")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "123456"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -93,7 +96,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("12345678901234")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "12345678901234"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -108,7 +111,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -116,50 +119,9 @@ class HECRecordImplTest {
     }
 
     @Test
-    @DisplayName("Happy equals test")
-    void happyEqualsTest() {
-        final HECRecordImpl hecRecord1 = new HECRecordImpl(
-                "channel",
-                new EventMessageImpl("event"),
-                "authToken",
-                1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-
-        final HECRecordImpl hecRecord2 = new HECRecordImpl(
-                "channel",
-                new EventMessageImpl("event"),
-                "authToken",
-                1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-        Assertions.assertEquals(hecRecord1, hecRecord2);
-    }
-
-    @Test
-    @DisplayName("Unhappy equals test")
-    void unhappyEqualsTest() {
-        final HECRecordImpl hecRecord1 = new HECRecordImpl(
-                "channel",
-                new EventMessageImpl("event"),
-                "authToken",
-                1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-
-        final HECRecordImpl hecRecord2 = new HECRecordImpl(
-                "channel is not the same",
-                new EventMessageImpl("event"),
-                "authToken",
-                1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
-                new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
-        );
-
-        Assertions.assertNotEquals(hecRecord1, hecRecord2);
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(HECRecordImpl.class).verify();
     }
 
     @Test
@@ -170,7 +132,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -187,7 +149,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -204,7 +166,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 1,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -221,7 +183,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 123,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -238,7 +200,7 @@ class HECRecordImplTest {
                 new EventMessageImpl("event"),
                 "authToken",
                 null,
-                new HECTimeImpl(new ObjectMapper().createObjectNode().textNode("1234567890123")),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1234567890123"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 

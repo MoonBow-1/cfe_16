@@ -47,7 +47,10 @@ package com.teragrep.cfe_16.event.time;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teragrep.cfe_16.event.JsonEvent;
+import com.teragrep.cfe_16.event.JsonEventImpl;
 import java.time.Instant;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,16 +62,18 @@ class HECTimeImplWithFallbackTest {
     void instantReturnsTheDefaultValueIfCurrentTimeUsesTheDefaultValueAndFallbackTimeIsAStub() {
         final String content = "{}";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
+        final JsonEvent jsonEvent = new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode));
 
-        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(jsonNode);
+        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(jsonEvent);
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 currentTimeWithTrueParsedValue,
                 new HECTimeStub()
         );
         final long currentEpoch = Instant.now().toEpochMilli();
+        final long returnedInstant = Assertions.assertDoesNotThrow(() -> hecTimeImplWithFallback.instant(currentEpoch));
 
-        Assertions.assertEquals(currentEpoch, hecTimeImplWithFallback.instant(currentEpoch));
+        Assertions.assertEquals(currentEpoch, returnedInstant);
     }
 
     @Test
@@ -77,7 +82,9 @@ class HECTimeImplWithFallbackTest {
         final String content = "1433188255.253";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
 
-        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(jsonNode);
+        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 currentTimeWithTrueParsedValue,
@@ -86,7 +93,9 @@ class HECTimeImplWithFallbackTest {
 
         final long currentEpoch = Instant.now().toEpochMilli();
         final long expectedTime = 1433188255253L;
-        Assertions.assertEquals(expectedTime, hecTimeImplWithFallback.instant(currentEpoch));
+        final long returnedInstant = Assertions.assertDoesNotThrow(() -> hecTimeImplWithFallback.instant(currentEpoch));
+
+        Assertions.assertEquals(expectedTime, returnedInstant);
     }
 
     @Test
@@ -101,14 +110,20 @@ class HECTimeImplWithFallbackTest {
                 .assertDoesNotThrow(() -> new ObjectMapper().readTree(jsonThatWillBeDefaultTime));
         final JsonNode jsonNode2 = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(usableJsonTime));
 
-        final HECTime currentTime = new HECTimeImpl(jsonNode1);
-        final HECTime fallbackTime = new HECTimeImpl(jsonNode2);
+        final HECTime currentTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode1))
+        );
+        final HECTime fallbackTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode2))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(currentTime, fallbackTime);
 
         final long currentEpoch = Instant.now().toEpochMilli();
         final long expectedTime = 1433188255253L;
-        Assertions.assertEquals(expectedTime, hecTimeImplWithFallback.instant(currentEpoch));
+        final long returnedInstant = Assertions.assertDoesNotThrow(() -> hecTimeImplWithFallback.instant(currentEpoch));
+
+        Assertions.assertEquals(expectedTime, returnedInstant);
     }
 
     @Test
@@ -119,7 +134,8 @@ class HECTimeImplWithFallbackTest {
                 new HECTimeStub()
         );
 
-        Assertions.assertFalse(hecTimeImplWithFallback.parsed());
+        final boolean returnedParsed = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::parsed);
+        Assertions.assertFalse(returnedParsed);
     }
 
     @Test
@@ -128,14 +144,16 @@ class HECTimeImplWithFallbackTest {
         final String content = "1433188255.253";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
 
-        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(jsonNode);
+        final HECTime currentTimeWithTrueParsedValue = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 currentTimeWithTrueParsedValue,
                 new HECTimeStub()
         );
-
-        Assertions.assertTrue(hecTimeImplWithFallback.parsed());
+        final boolean returnedParsed = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::parsed);
+        Assertions.assertTrue(returnedParsed);
     }
 
     @Test
@@ -144,14 +162,16 @@ class HECTimeImplWithFallbackTest {
         final String content = "1433188255.253";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
 
-        final HECTime fallbackTimeWithTrueParsedValue = new HECTimeImpl(jsonNode);
+        final HECTime fallbackTimeWithTrueParsedValue = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 new HECTimeStub(),
                 fallbackTimeWithTrueParsedValue
         );
-
-        Assertions.assertTrue(hecTimeImplWithFallback.parsed());
+        final boolean returnedParsed = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::parsed);
+        Assertions.assertTrue(returnedParsed);
     }
 
     @Test
@@ -162,7 +182,8 @@ class HECTimeImplWithFallbackTest {
                 new HECTimeStub()
         );
 
-        Assertions.assertEquals("generated", hecTimeImplWithFallback.source());
+        final String returnedSource = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::source);
+        Assertions.assertEquals("generated", returnedSource);
     }
 
     @Test
@@ -173,14 +194,18 @@ class HECTimeImplWithFallbackTest {
         final String content = "1433188255.253";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
 
-        final HECTime currentTime = new HECTimeImpl(jsonNode);
+        final HECTime currentTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 currentTime,
                 new HECTimeStub()
         );
 
-        Assertions.assertEquals("reported", hecTimeImplWithFallback.source());
+        final String returnedSource = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::source);
+
+        Assertions.assertEquals("reported", returnedSource);
     }
 
     @Test
@@ -189,45 +214,23 @@ class HECTimeImplWithFallbackTest {
         final String content = "1433188255.253";
         final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
 
-        final HECTime fallbackTime = new HECTimeImpl(jsonNode);
+        final HECTime fallbackTime = new HECTimeImpl(
+                new JsonEventImpl(new ObjectMapper().createObjectNode().set("time", jsonNode))
+        );
 
         final HECTimeImplWithFallback hecTimeImplWithFallback = new HECTimeImplWithFallback(
                 new HECTimeStub(),
                 fallbackTime
         );
 
-        Assertions.assertEquals("reported", hecTimeImplWithFallback.source());
+        final String returnedSource = Assertions.assertDoesNotThrow(hecTimeImplWithFallback::source);
+
+        Assertions.assertEquals("reported", returnedSource);
     }
 
     @Test
-    @DisplayName("happy equals test")
-    void happyEqualsTest() {
-        final String content = "1433188255.253";
-        final JsonNode jsonNode = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content));
-
-        final HECTime currentTime = new HECTimeImpl(jsonNode);
-        final HECTime fallbackTime = new HECTimeImpl(jsonNode);
-
-        final HECTimeImplWithFallback hecTimeImplWithFallback1 = new HECTimeImplWithFallback(currentTime, fallbackTime);
-        final HECTimeImplWithFallback hecTimeImplWithFallback2 = new HECTimeImplWithFallback(currentTime, fallbackTime);
-
-        Assertions.assertEquals(hecTimeImplWithFallback1, hecTimeImplWithFallback2);
-    }
-
-    @Test
-    @DisplayName("unhappy equals test")
-    void unhappyEqualsTest() {
-        final String content1 = "1433188255.253";
-        final String content2 = "1433188255";
-        final JsonNode jsonNode1 = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content1));
-        final JsonNode jsonNode2 = Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree(content2));
-
-        final HECTime time1 = new HECTimeImpl(jsonNode1);
-        final HECTime time2 = new HECTimeImpl(jsonNode2);
-
-        final HECTimeImplWithFallback hecTimeImplWithFallback1 = new HECTimeImplWithFallback(time1, time1);
-        final HECTimeImplWithFallback hecTimeImplWithFallback2 = new HECTimeImplWithFallback(time1, time2);
-
-        Assertions.assertNotEquals(hecTimeImplWithFallback1, hecTimeImplWithFallback2);
+    @DisplayName("equalsVerifier")
+    void equalsVerifier() {
+        EqualsVerifier.forClass(HECTimeImplWithFallback.class).verify();
     }
 }

@@ -269,19 +269,22 @@ public final class HECRecordImpl implements HECRecord {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        HECRecordImpl that = (HECRecordImpl) o;
-        return Objects.equals(channel, that.channel) && Objects.equals(eventMessage, that.eventMessage) && Objects
-                .equals(authenticationToken, that.authenticationToken) && Objects.equals(ackID, that.ackID)
-                && Objects.equals(hecTime, that.hecTime);
+        final HECRecordImpl hecRecord = (HECRecordImpl) o;
+        return Objects.equals(channel, hecRecord.channel) && Objects.equals(eventMessage, hecRecord.eventMessage)
+                && Objects.equals(authenticationToken, hecRecord.authenticationToken) && Objects.equals(ackID, hecRecord.ackID) && Objects.equals(hecTime, hecRecord.hecTime) && Objects.equals(hostName, hecRecord.hostName) && severity == hecRecord.severity && facility == hecRecord.facility && Objects.equals(headerInfo, hecRecord.headerInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, eventMessage, authenticationToken, ackID, hecTime);
+        return Objects
+                .hash(
+                        channel, eventMessage, authenticationToken, ackID, hecTime, hostName, severity, facility,
+                        headerInfo
+                );
     }
 }

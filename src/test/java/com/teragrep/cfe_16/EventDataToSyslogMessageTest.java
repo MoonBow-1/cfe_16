@@ -53,6 +53,7 @@ import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
 import com.teragrep.cfe_16.bo.HECRecordImpl;
 import com.teragrep.cfe_16.event.EventMessageImpl;
+import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImpl;
 import java.time.Instant;
 import org.junit.jupiter.api.Assertions;
@@ -81,7 +82,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 1"),
                 "AUTH_TOKEN_11111",
                 0,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("1433188255253"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1433188255253"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -148,7 +149,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 1"),
                 "AUTH_TOKEN_11111",
                 0,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("1433188255253"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "1433188255253"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
 
@@ -219,7 +220,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 2"),
                 "AUTH_TOKEN_22222",
                 1,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("null"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "null"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         expectedMetadataSDE2.addSDParam("authentication_token", hecRecord2.authenticationToken());
@@ -283,7 +284,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 2"),
                 "AUTH_TOKEN_22222",
                 1,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("null"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "null"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         expectedMetadataSDE2.addSDParam("authentication_token", hecRecord2.authenticationToken());
@@ -346,7 +347,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 3"),
                 "AUTH_TOKEN_33333",
                 null,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("null"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "null"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         expectedMetadataSDE3.addSDParam("authentication_token", hecRecord3.authenticationToken());
@@ -406,7 +407,7 @@ public class EventDataToSyslogMessageTest {
                 new EventMessageImpl("Event 3"),
                 "AUTH_TOKEN_33333",
                 null,
-                new HECTimeImpl(Assertions.assertDoesNotThrow(() -> new ObjectMapper().readTree("null"))),
+                new HECTimeImpl(new JsonEventImpl(new ObjectMapper().createObjectNode().put("time", "null"))),
                 new HeaderInfo(new XForwardedForStub(), new XForwardedHostStub(), new XForwardedProtoStub())
         );
         SDElement expectedMetadataSDE3 = new SDElement("cfe_16-metadata@48577");

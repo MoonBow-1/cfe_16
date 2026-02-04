@@ -102,10 +102,27 @@ public final class JsonEventImpl implements JsonEvent {
 
     @Override
     public JsonNode asTimeJsonNode() throws EventFieldException {
-        if (!this.jsonNode.has("time")) {
+        final JsonNode timeNode;
+        if (hasTime()) {
+            timeNode = this.jsonNode.get("time");
+        }
+        else {
             throw new EventFieldException("Time field is missing");
         }
-        return this.jsonNode.get("time");
+        return timeNode;
+    }
+
+    @Override
+    public boolean hasTime() {
+        final boolean hasTime;
+
+        if (this.jsonNode.has("time")) {
+            hasTime = true;
+        }
+        else {
+            hasTime = false;
+        }
+        return hasTime;
     }
 
     @Override

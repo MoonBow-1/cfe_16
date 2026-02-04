@@ -61,7 +61,7 @@
   <properties>
     <aspectj.version>1.9.21.1</aspectj.version>
     <changelist>-SNAPSHOT</changelist>
-    <jackson.version>2.16.2</jackson.version>
+    <jackson.version>3.0.4</jackson.version>
     <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
     <java.version>17</java.version>
     <junit.platform.version>1.12.0</junit.platform.version>
@@ -165,13 +165,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
+      <groupId>tools.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
       <version>${jackson.version}</version>
     </dependency>
     <dependency>
