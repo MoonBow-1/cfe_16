@@ -49,7 +49,7 @@ public final class EventMessageStub implements EventMessage {
 
     @Override
     public String asString() {
-        throw new UnsupportedOperationException("EventStub does not support this");
+        throw new UnsupportedOperationException("EventMessageStub does not support this");
     }
 
     @Override
@@ -59,11 +59,11 @@ public final class EventMessageStub implements EventMessage {
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("EventStub does not support this");
+        throw new UnsupportedOperationException("EventMessageStub does not support this");
     }
 
     @Override
-    public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("EventStub does not support this");
+    public boolean equals(final Object obj) {
+        throw new UnsupportedOperationException("EventMessageStub does not support this");
     }
 }

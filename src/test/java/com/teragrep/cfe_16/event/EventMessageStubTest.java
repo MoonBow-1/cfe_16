@@ -67,7 +67,7 @@ class EventMessageStubTest {
         final Exception exception = Assertions
                 .assertThrowsExactly(UnsupportedOperationException.class, eventStub::asString);
 
-        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
+        Assertions.assertEquals("EventMessageStub does not support this", exception.getMessage());
     }
 
     @Test
@@ -78,7 +78,7 @@ class EventMessageStubTest {
         final Exception exception = Assertions
                 .assertThrowsExactly(UnsupportedOperationException.class, eventStub::hashCode);
 
-        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
+        Assertions.assertEquals("EventMessageStub does not support this", exception.getMessage());
     }
 
     @Test
@@ -89,6 +89,6 @@ class EventMessageStubTest {
         final Exception exception = Assertions
                 .assertThrowsExactly(UnsupportedOperationException.class, () -> eventStub.equals(new Object()));
 
-        Assertions.assertEquals("EventStub does not support this", exception.getMessage());
+        Assertions.assertEquals("EventMessageStub does not support this", exception.getMessage());
     }
 }
