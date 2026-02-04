@@ -353,6 +353,7 @@
             <exclude>*.sh</exclude>
             <exclude>src/main/resources/application.properties</exclude>
             <exclude>src/test/resources/application.properties</exclude>
+            <exclude>src/main/java/com/teragrep/cfe_16/ThirdParty/SyslogMessageSender/SyslogMessageSender.java</exclude>
             <!-- Other plugin settings -->
             <exclude>eclipse-java-formatter.xml</exclude>
             <!-- Doxyfile -->
