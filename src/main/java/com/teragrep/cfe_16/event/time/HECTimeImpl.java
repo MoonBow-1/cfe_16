@@ -128,6 +128,7 @@ public final class HECTimeImpl implements HECTime {
 
     @Override
     public boolean parsed() {
+        final boolean returnedParsed;
         JsonNode timeNode;
 
         try {
@@ -143,32 +144,35 @@ public final class HECTimeImpl implements HECTime {
         }
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
-            return false;
+            returnedParsed = false;
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return true;
+            returnedParsed = true;
 
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return true;
+            returnedParsed = true;
 
         }
         // Time is a String
         else if (timeNode.isTextual()) {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
-            return tryAsLong != 0L;
+            returnedParsed = tryAsLong != 0L;
         }
         // Unknown format
         else {
-            return false;
+            returnedParsed = false;
         }
+
+        return returnedParsed;
     }
 
     @Override
     public String source() {
+        final String returnedSource;
         JsonNode timeNode;
 
         try {
@@ -186,11 +190,11 @@ public final class HECTimeImpl implements HECTime {
         // No time provided in the event
         if (timeNode == null || timeNode.asText().isEmpty()) {
             // Use default value
-            return "generated";
+            returnedSource = "generated";
         }
         // Check if time is a double and convert to long
         else if (timeNode.isDouble()) {
-            return "reported";
+            returnedSource = "reported";
 
         }
         // Time is a String
@@ -198,23 +202,25 @@ public final class HECTimeImpl implements HECTime {
             // Try to convert the String to a long (if not convertable, default to 0L)
             final long tryAsLong = timeNode.asLong(0L);
             if (tryAsLong != 0L) {
-                return "reported";
+                returnedSource = "reported";
             }
             // No time found in current or previous event
             else {
                 // Use default value
-                return "generated";
+                returnedSource = "generated";
             }
         }
         // Time is a number, no calculations required
         else if (timeNode.canConvertToLong()) {
-            return "reported";
+            returnedSource = "reported";
         }
         // Unknown format
         else {
             // Use default value
-            return "generated";
+            returnedSource = "generated";
         }
+
+        return returnedSource;
     }
 
     @Override

@@ -48,7 +48,7 @@ package com.teragrep.cfe_16.event.time;
 public final class HECTimeStub implements HECTime {
 
     @Override
-    public long instant(long defaultValue) {
+    public long instant(final long defaultValue) {
         throw new UnsupportedOperationException("HECTimeStub does not support this");
     }
 

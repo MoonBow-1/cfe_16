@@ -76,28 +76,35 @@ public final class HECTimeImplWithFallback implements HECTime {
 
     @Override
     public boolean parsed() {
+        final boolean returnedParsed;
+
         if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return false;
+            returnedParsed = false;
         }
         else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.parsed();
+            returnedParsed = this.currentTime.parsed();
         }
         else {
-            return this.fallbackTime.parsed();
+            returnedParsed = this.fallbackTime.parsed();
         }
+
+        return returnedParsed;
     }
 
     @Override
     public String source() {
+        final String returnedSource;
         if (this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return "generated";
+            returnedSource = "generated";
         }
         else if (!this.currentTime.isStub() && this.fallbackTime.isStub()) {
-            return this.currentTime.source();
+            returnedSource = this.currentTime.source();
         }
         else {
-            return this.fallbackTime.source();
+            returnedSource = this.fallbackTime.source();
         }
+
+        return returnedSource;
     }
 
     @Override
