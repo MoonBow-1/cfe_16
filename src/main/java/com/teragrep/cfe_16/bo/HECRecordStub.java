@@ -83,7 +83,7 @@ public final class HECRecordStub implements HECRecord {
     }
 
     @Override
-    public SyslogMessage toSyslogMessage(long defaultValue) {
+    public SyslogMessage toSyslogMessage(final long defaultValue) {
         throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 
@@ -98,7 +98,7 @@ public final class HECRecordStub implements HECRecord {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         throw new UnsupportedOperationException("HECRecordStub does not support this");
     }
 }

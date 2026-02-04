@@ -70,15 +70,15 @@ public final class HECRecordImpl implements HECRecord {
     private final HeaderInfo headerInfo;
 
     public HECRecordImpl(
-            String channel,
-            EventMessage eventMessage,
-            String authenticationToken,
-            Integer ackID,
-            HECTime hecTime,
-            String hostName,
-            Severity severity,
-            Facility facility,
-            HeaderInfo headerInfo
+            final String channel,
+            final EventMessage eventMessage,
+            final String authenticationToken,
+            final Integer ackID,
+            final HECTime hecTime,
+            final String hostName,
+            final Severity severity,
+            final Facility facility,
+            final HeaderInfo headerInfo
     ) {
         this.channel = channel;
         this.eventMessage = eventMessage;
@@ -92,12 +92,12 @@ public final class HECRecordImpl implements HECRecord {
     }
 
     public HECRecordImpl(
-            String channel,
-            EventMessage eventMessage,
-            String authenticationToken,
-            Integer ackID,
-            HECTime hecTime,
-            HeaderInfo headerInfo
+            final String channel,
+            final EventMessage eventMessage,
+            final String authenticationToken,
+            final Integer ackID,
+            final HECTime hecTime,
+            final HeaderInfo headerInfo
     ) {
         this(
                 channel,
@@ -137,7 +137,7 @@ public final class HECRecordImpl implements HECRecord {
         final long currentEpochMillis = Instant.now().toEpochMilli();
         final SDElement structuredMetadata = structuredDataParams(currentEpochMillis);
 
-        SyslogMessage syslogMessage;
+        final SyslogMessage syslogMessage;
         if (this.time().parsed()) {
 
             /*
@@ -175,10 +175,10 @@ public final class HECRecordImpl implements HECRecord {
     }
 
     @Override
-    public SyslogMessage toSyslogMessage(long defaultValue) {
+    public SyslogMessage toSyslogMessage(final long defaultValue) {
         final SDElement structuredMetadata = structuredDataParams(defaultValue);
 
-        SyslogMessage syslogMessage;
+        final SyslogMessage syslogMessage;
         if (this.time().parsed()) {
 
             /*
