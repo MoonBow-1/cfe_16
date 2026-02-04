@@ -45,5 +45,5 @@ var searchData=
   ['state_42',['State',['../classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#aec21a23ade83f66a4b07d2532f2c9bde',1,'com::teragrep::cfe_16::Acknowledgements::State']]],
   ['stop_43',['stop',['../classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#ae5ec13e32cf0f69589352180a9eda2a6',1,'com.teragrep.cfe_16.Acknowledgements.stop()'],['../interfacecom_1_1teragrep_1_1cfe__16_1_1LifeCycle.html#a8fa5be42b1a2499e3a6eacac2dd4ef4a',1,'com.teragrep.cfe_16.LifeCycle.stop()'],['../classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#af26a46e7d1916bb73bae86c2b6c0ac44',1,'com.teragrep.cfe_16.SessionManager.stop()']]],
   ['structureddataparams_44',['structuredDataParams',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a3b14a495b0bfbe1c588cfcdf7f26c351',1,'com::teragrep::cfe_16::bo::HECRecordImpl']]],
-  ['syslogbatch_45',['SyslogBatch',['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html#a6262e536ba59249350036180e27d6236',1,'com::teragrep::cfe_16::SyslogBatch']]]
+  ['syslogbatch_45',['SyslogBatch',['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html#a3cb7b859de3ba9febb04a6d475ce77a7',1,'com::teragrep::cfe_16::SyslogBatch']]]
 ];

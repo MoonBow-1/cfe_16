@@ -72,7 +72,7 @@ var searchData=
   ['structureddataparams_69',['structuredDataParams',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a3b14a495b0bfbe1c588cfcdf7f26c351',1,'com::teragrep::cfe_16::bo::HECRecordImpl']]],
   ['stubable_70',['Stubable',['../interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html',1,'com::teragrep::cfe_16']]],
   ['stubable_2ejava_71',['Stubable.java',['../Stubable_8java.html',1,'']]],
-  ['syslogbatch_72',['syslogbatch',['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html',1,'com.teragrep.cfe_16.SyslogBatch'],['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html#a6262e536ba59249350036180e27d6236',1,'com.teragrep.cfe_16.SyslogBatch.SyslogBatch()']]],
+  ['syslogbatch_72',['syslogbatch',['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html',1,'com.teragrep.cfe_16.SyslogBatch'],['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html#a3cb7b859de3ba9febb04a6d475ce77a7',1,'com.teragrep.cfe_16.SyslogBatch.SyslogBatch()']]],
   ['syslogbatch_2ejava_73',['SyslogBatch.java',['../SyslogBatch_8java.html',1,'']]],
   ['sysloghost_74',['sysLogHost',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html#a42ebadbd9278119c5619203851f71ccf',1,'com::teragrep::cfe_16::config::Configuration']]],
   ['syslogmessagesender_75',['SyslogMessageSender',['../classcom_1_1teragrep_1_1cfe__16_1_1ThirdParty_1_1SyslogMessageSender_1_1SyslogMessageSender.html',1,'com::teragrep::cfe_16::ThirdParty::SyslogMessageSender']]],
