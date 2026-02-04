@@ -57,21 +57,23 @@ import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImpl;
 import com.teragrep.cfe_16.event.time.HECTimeImplWithFallback;
 import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class HECBatch {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HECBatch.class);
     private final String authToken;
     private final String channel;
     private final String allEventInJSON;
     private final HeaderInfo headerInfo;
 
-    public HECBatch(String authToken, String channel, String allEventInJSON, HeaderInfo headerInfo) {
+    public HECBatch(
+            final String authToken,
+            final String channel,
+            final String allEventInJSON,
+            final HeaderInfo headerInfo
+    ) {
         this.authToken = authToken;
         this.channel = channel;
         this.allEventInJSON = allEventInJSON;
@@ -85,25 +87,24 @@ public final class HECBatch {
      * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
      */
     public List<HECRecord> toHECRecordList() throws EventFieldException, JsonProcessingException {
+        // Init the HECRecord as a Stub
         HECRecord previousEvent = new HECRecordStub();
 
-        JsonStreamParser parser = new JsonStreamParser(this.allEventInJSON);
+        final JsonStreamParser parser = new JsonStreamParser(this.allEventInJSON);
 
         /*
          * There can be multiple events in one request. Here they are handled one by
          * one. The event is saved in a string variable and is converted into
-         * HECRecord object. Metadata is assigned to the object. HECRecord is
-         * converted into SyslogMessage and saved in a list in a RequestInfo object.
+         * HECRecord object. Metadata is assigned to the object.
          * After the event is handled, it is assigned as a value to previousEvent
          * variable.
          */
 
-        // Init the HECRecord as a Stub incase fails
-        HECRecord eventData = new HECRecordStub();
-        List<HECRecord> syslogMessages = new ArrayList<>();
+        HECRecord eventData;
+        final List<HECRecord> syslogMessages = new ArrayList<>();
         while (parser.hasNext()) {
 
-            String jsonObjectStr = parser.next().toString();
+            final String jsonObjectStr = parser.next().toString();
             /*
              * Event field cannot be missing or blank. Throws an exception if this is the
              * case.

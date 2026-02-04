@@ -54,7 +54,7 @@ public final class SyslogBatch {
 
     private final List<HECRecord> eventData;
 
-    public SyslogBatch(List<HECRecord> eventData) {
+    public SyslogBatch(final List<HECRecord> eventData) {
         this.eventData = eventData;
     }
 
