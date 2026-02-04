@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.event.time.HECTimeImpl.instant" name="com.teragrep.cfe_16.event.time.HECTimeImpl.instant">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,240,109"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702" title=" " alt="" coords="305,5,506,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,67,303,46,304,51,212,72"/>
+<area shape="rect" id="Node000003" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d" title=" " alt="" coords="305,69,506,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,87,291,87,291,92,240,92"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee" title="Takes a double value as a parameter, removes the decimal point from that value and returns the number..." alt="" coords="288,133,523,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="212,107,304,128,303,133,211,112"/>
+</map>
