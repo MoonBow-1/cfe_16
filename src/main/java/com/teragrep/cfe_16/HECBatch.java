@@ -80,11 +80,8 @@ public final class HECBatch {
         this.headerInfo = headerInfo;
     }
 
-    /*
-     * Method used when converting data and the channel is specified in the request.
-     * Takes authentication token, all events sent in a request (in JSON format) and
-     * the channel name as string parameters. Returns a JSON node with ack id if
-     * everything is successful. Example: {"text":"Success","code":0,"ackID":0}
+    /**
+     * Method used when converting data and the channel is specified in the request
      */
     public List<HECRecord> toHECRecordList() throws EventFieldException, JsonProcessingException {
         // Init the HECRecord as a Stub
