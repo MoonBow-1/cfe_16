@@ -20,7 +20,7 @@ mvn clean verify package
 
 Default properties location is at config/application.properties
 
-Supported protocols are RELP, TCP, UDP.
+The only supported protocol is RELP.
 
 [source, properties]
 ----
@@ -35,8 +35,6 @@ poll.time=300000
 config.poll.time=5000
 server.print.times=true
 ----
-
-NOTE: It is advised to use RELP and rsyslog for reception for data durability.
 
 === Execution
 

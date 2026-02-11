@@ -48,19 +48,22 @@ package com.teragrep.cfe_16.it;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.service.HECService;
+import com.teragrep.rlp_03.Server;
+import com.teragrep.rlp_03.ServerFactory;
+import com.teragrep.rlp_03.config.Config;
+import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
+import com.teragrep.rlp_03.delegate.FrameDelegate;
+import java.util.function.Supplier;
 import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.channels.Selector;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +73,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @TestPropertySource(properties = {
         "syslog.server.host=127.0.0.1",
         "syslog.server.port=1236",
-        "syslog.server.protocol=TCP",
+        "syslog.server.protocol=RELP",
         "max.channels=1000000",
         "max.ack.value=1000000",
         "max.ack.age=20000",
@@ -79,66 +82,52 @@ import java.util.concurrent.atomic.AtomicInteger;
         "server.print.times=true"
 })
 @SpringBootTest
-public class SendEventsIT implements Runnable {
+public class SendEventsIT {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SendEventsIT.class);
     @Autowired
     private HECService service;
-
-    private ServerSocket serverSocket;
-    private Thread thread;
-    private AtomicInteger numberOfRequestsMade;
-
+    private static AtomicInteger numberOfRequestsMade;
+    private static Server server;
     private MockHttpServletRequest request1;
     private String eventInJson;
     private String channel1;
-    private Selector selector;
-    private final static int SERVER_PORT = 1236;
     private CountDownLatch countDownLatch = new CountDownLatch(0);
 
+    /**
+     * Initialize a server where the EventManager can connect to in its postConstruct
+     */
+    @BeforeAll
+    static void initServer() {
+        final int SERVER_PORT = 1236;
+
+        final Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate((frame) -> {
+            LOGGER.debug(frame.relpFrame().payload().toString());
+            numberOfRequestsMade.incrementAndGet();
+        });
+        final Config config = new Config(SERVER_PORT, 1);
+        final ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
+
+        server = Assertions.assertDoesNotThrow(serverFactory::create);
+        final Thread serverThread = new Thread(server);
+        serverThread.start();
+        Assertions.assertDoesNotThrow(server.startup::waitForCompletion);
+    }
+
     @BeforeEach
-    public void init() throws IOException {
-        this.thread = new Thread(this);
-        this.numberOfRequestsMade = new AtomicInteger(0);
-        this.serverSocket = new ServerSocket(SERVER_PORT);
-        this.selector = Selector.open();
+    void init() {
+        numberOfRequestsMade = new AtomicInteger(0);
 
         this.request1 = new MockHttpServletRequest();
         this.request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         this.channel1 = "CHANNEL_11111";
         this.eventInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 1\"}} {\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 2\"}}";
 
-        this.thread.start();
     }
 
-    @AfterEach
-    public void shutdown() {
-        this.thread.interrupt();
-    }
-
-    public void run() {
-        while (true) {
-            try {
-                Socket socket = this.serverSocket.accept();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    this.numberOfRequestsMade.getAndIncrement();
-                    countDownLatch.countDown();
-                }
-                bufferedReader.close();
-                socket.close();
-                if (this.numberOfRequestsMade.get() % 5 == 0) {
-                    this.serverSocket.close();
-                    this.serverSocket = new ServerSocket(SERVER_PORT);
-                }
-            }
-            catch (InterruptedIOException e) {
-                break;
-            }
-            catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    @AfterAll
+    static void stop() {
+        Assertions.assertDoesNotThrow(server::stop);
     }
 
     @Test
@@ -167,7 +156,7 @@ public class SendEventsIT implements Runnable {
         }
         countDownLatch.await(1, TimeUnit.SECONDS);
         Assertions.assertTimeoutPreemptively(Duration.ofSeconds(5), () -> {
-            while (NUMBER_OF_EVENTS_TO_BE_SENT * 2 != this.numberOfRequestsMade.get()) {
+            while (NUMBER_OF_EVENTS_TO_BE_SENT * 2 != numberOfRequestsMade.get()) {
                 Thread.sleep(500);
             }
         });
@@ -184,8 +173,6 @@ public class SendEventsIT implements Runnable {
 
         countDownLatch.await(5, TimeUnit.SECONDS);
         Assertions
-                .assertEquals(
-                        2, this.numberOfRequestsMade, "Number of events received should match the number of sent ones"
-                );
+                .assertEquals(2, numberOfRequestsMade, "Number of events received should match the number of sent ones");
     }
 }

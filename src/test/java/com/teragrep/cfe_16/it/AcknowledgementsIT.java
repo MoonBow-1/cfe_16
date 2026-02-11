@@ -52,7 +52,14 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.ServerIsBusyException;
+import com.teragrep.rlp_03.Server;
+import com.teragrep.rlp_03.ServerFactory;
+import com.teragrep.rlp_03.config.Config;
+import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
+import com.teragrep.rlp_03.delegate.FrameDelegate;
+import java.util.function.Supplier;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -76,7 +83,7 @@ import static org.junit.Assert.*;
 @TestPropertySource(properties = {
         "syslog.server.host=127.0.0.1",
         "syslog.server.port=1234",
-        "syslog.server.protocol=TCP",
+        "syslog.server.protocol=RELP",
         "max.channels=1000000",
         "max.ack.value=1000000",
         "max.ack.age=20000",
@@ -97,6 +104,24 @@ public class AcknowledgementsIT {
     private Configuration configuration;
     @Autowired
     private Acknowledgements acknowledgements;
+
+    /**
+     * Initialize a server where the EventManager can connect to in its postConstruct
+     */
+    @BeforeAll
+    public static void init() {
+        final int port = 1234;
+        final Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
+                (frame) -> LOGGER.debug(frame.relpFrame().payload().toString())
+        );
+        final Config config = new Config(port, 1);
+        final ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
+
+        final Server server = Assertions.assertDoesNotThrow(serverFactory::create);
+        final Thread serverThread = new Thread(server);
+        serverThread.start();
+        Assertions.assertDoesNotThrow(server.startup::waitForCompletion);
+    }
 
     /*
      * Initializes 2 channels. getCurrentAckValue in channel 1 is called 3 times
