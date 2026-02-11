@@ -1,0 +1,13 @@
+<map id="com.teragrep.cfe_16.connection.RelpConnection.tearDown" name="com.teragrep.cfe_16.connection.RelpConnection.tearDown">
+<area shape="rect" id="Node000001" title=" " alt="" coords="571,37,805,77"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html#a9964b8392570200f0623d0caeb338c80" title=" " alt="" coords="288,5,523,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="557,45,523,41,523,36,557,40"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html#acd59610739f567d2c0a2d02f118d931f" title=" " alt="" coords="288,69,523,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="557,75,523,79,523,73,557,69"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html#a2d87cd445fdc9456c83ed5dc938b4ce1" title=" " alt="" coords="5,5,240,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="274,28,240,28,240,23,274,23"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html#ae696335cf9ac0460dd40d45b549657d8" title=" " alt="" coords="5,69,240,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="274,92,240,92,240,87,274,87"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html#a415962d080953863a7949fc8346e02fa" title="Sends a batch of syslog messages." alt="" coords="5,133,240,173"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="304,115,212,136,211,131,302,110"/>
+</map>

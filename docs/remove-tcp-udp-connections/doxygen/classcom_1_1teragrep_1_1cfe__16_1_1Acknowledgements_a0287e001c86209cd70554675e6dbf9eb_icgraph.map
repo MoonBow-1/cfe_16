@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.getOrCreateState" name="com.teragrep.cfe_16.Acknowledgements.getOrCreateState">
+<area shape="rect" id="Node000001" title="A private Accessor for the State object indexed by the given auth token and channel." alt="" coords="716,37,1029,77"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a0a81fc7b69c7638df2b4e6fff3744514" title="Returns the current Ack value for given token and channel." alt="" coords="355,37,668,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="702,60,668,60,668,55,702,55"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a28a8273d6b136df113665a5032aa8ca3" title=" " alt="" coords="5,5,307,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="340,45,307,42,307,36,341,39"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#afc4e73cfb46d7fbc19edc8d2c177e6bf" title=" " alt="" coords="5,69,307,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="341,75,307,78,307,73,340,70"/>
+</map>
