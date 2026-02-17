@@ -77,7 +77,7 @@
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html" target="_top" xlink:title=" ">
+<g id="a_Node000005"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html" target="_top" xlink:title="Manager that handles the event sent in a request.">
 <polygon fill="white" stroke="#666666" points="382,-107 234,-107 234,-77 382,-77 382,-107"/>
 <text text-anchor="start" x="242" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.Event</text>
 <text text-anchor="middle" x="308" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">Manager</text>

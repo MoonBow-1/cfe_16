@@ -6,7 +6,6 @@ var searchData=
   ['cleanrequestbodytests_3',['CleanRequestBodyTests',['../classcom_1_1teragrep_1_1cfe__16_1_1CleanRequestBodyTests.html',1,'com::teragrep::cfe_16']]],
   ['configuration_4',['Configuration',['../classcom_1_1teragrep_1_1cfe__16_1_1config_1_1Configuration.html',1,'com::teragrep::cfe_16::config']]],
   ['configurationit_5',['ConfigurationIT',['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ConfigurationIT.html',1,'com::teragrep::cfe_16::it']]],
-  ['connectionfactory_6',['ConnectionFactory',['../classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1ConnectionFactory.html',1,'com::teragrep::cfe_16::connection']]],
-  ['converter_7',['Converter',['../classcom_1_1teragrep_1_1cfe__16_1_1Converter.html',1,'com::teragrep::cfe_16']]],
-  ['convertertests_8',['ConverterTests',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html',1,'com::teragrep::cfe_16']]]
+  ['converter_6',['Converter',['../classcom_1_1teragrep_1_1cfe__16_1_1Converter.html',1,'com::teragrep::cfe_16']]],
+  ['convertertests_7',['ConverterTests',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html',1,'com::teragrep::cfe_16']]]
 ];

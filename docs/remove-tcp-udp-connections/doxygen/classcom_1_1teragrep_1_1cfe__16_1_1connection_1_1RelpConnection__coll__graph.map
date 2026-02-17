@@ -1,11 +1,9 @@
 <map id="com.teragrep.cfe_16.connection.RelpConnection" name="com.teragrep.cfe_16.connection.RelpConnection">
-<area shape="rect" id="Node000001" title=" " alt="" coords="920,13,1155,53"/>
-<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html" title="An abstract connection class for sending batch messages." alt="" coords="277,13,512,53"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="526,11,561,7,679,3,796,7,920,17,919,22,796,13,679,8,562,13,526,16"/>
-<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html" title=" " alt="" coords="561,61,796,101"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="526,52,562,58,561,64,525,57"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,20,228,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="241,30,277,30,277,35,241,35"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="809,61,919,46,920,51,810,66"/>
-<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="652,45,662,37,679,34,694,36,703,42,708,51,706,61,701,60,702,52,699,46,692,41,679,39,664,42,656,49"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,240,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="6,5,229,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,44,125,183,119,183,115,45"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html" title=" " alt="" coords="139,80,373,120"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="151,35,225,78,222,82,148,40"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,130,149,185,146,180,219,126"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="388,92,400,100,392,107,374,110,373,104,390,102,395,100,386,97"/>
 </map>

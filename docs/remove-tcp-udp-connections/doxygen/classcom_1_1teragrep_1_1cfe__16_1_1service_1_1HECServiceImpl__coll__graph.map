@@ -14,6 +14,6 @@
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,101,683,124,707,127,706,133,682,129,501,106"/>
 <area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html" title=" " alt="" coords="284,184,481,224"/>
 <area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="495,188,682,164,706,161,707,166,683,169,495,194"/>
-<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html" title=" " alt="" coords="284,248,481,288"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1EventManager.html" title="Manager that handles the event sent in a request." alt="" coords="284,248,481,288"/>
 <area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="494,247,587,228,682,201,771,164,773,169,684,207,588,233,496,253"/>
 </map>
