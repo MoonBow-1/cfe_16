@@ -43,95 +43,42 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.config;
+package com.teragrep.cfe_16.server;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import com.teragrep.net_01.eventloop.EventLoop;
+import com.teragrep.net_01.server.Server;
 
-/**
- * A Spring-utilizing class for getting configuration data.
- */
+import java.util.concurrent.ExecutorService;
 
-@org.springframework.context.annotation.Configuration
-public class Configuration {
+public final class TestServer implements Runnable, AutoCloseable {
 
-    @Value("${syslog.server.host}")
-    private String syslogHost;
+    private final EventLoop eventLoop;
+    private final Thread eventLoopThread;
+    private final ExecutorService executorService;
+    private final Server server;
 
-    @Value("${syslog.server.port}")
-    private int syslogPort;
-
-    @Value("${max.ack.value}")
-    private int maxAckValue;
-
-    @Value("${max.ack.age}")
-    private int maxAckAge;
-
-    @Value("${max.session.age}")
-    private int maxSessionAge;
-
-    @Value("${max.channels}")
-    private int maxChannels;
-
-    @Value("${max.ack.value}")
-    private long pollTime;
-
-    @Value("${server.print.times}")
-    private boolean printTimes;
-
-    public Configuration() {
-
-    }
-
-    @Bean
-    public String syslogHost() {
-        return this.syslogHost;
-    }
-
-    @Bean
-    public int syslogPort() {
-        return this.syslogPort;
-    }
-
-    @Bean
-    public int maxAckValue() {
-        return this.maxAckValue;
-    }
-
-    public void setMaxAckValue(int maxAckValue) {
-        this.maxAckValue = maxAckValue;
-    }
-
-    @Bean
-    public int maxAckAge() {
-        return this.maxAckAge;
-    }
-
-    @Bean
-    public int maxChannels() {
-        return this.maxChannels;
-    }
-
-    @Bean
-    public long pollTime() {
-        return this.pollTime;
-    }
-
-    @Bean
-    public boolean printTimes() {
-        return this.printTimes;
-    }
-
-    @Bean
-    public int maxSessionAge() {
-        return this.maxSessionAge;
+    public TestServer(
+            final EventLoop eventLoop,
+            final Thread eventLoopThread,
+            final ExecutorService executorService,
+            final Server server
+    ) {
+        this.eventLoop = eventLoop;
+        this.eventLoopThread = eventLoopThread;
+        this.executorService = executorService;
+        this.server = server;
     }
 
     @Override
-    public String toString() {
-        return "Configuration{" + "syslogHost=" + syslogHost + ", syslogPort=" + syslogPort + ", maxAckValue="
-                + maxAckValue + ", maxAckAge=" + maxAckAge + ", maxSessionAge=" + maxSessionAge + ", maxChannels="
-                + maxChannels + ", pollTime=" + pollTime + ", printTimes=" + printTimes + '}';
+    public void close() throws Exception {
+        eventLoop.stop();
+        executorService.shutdown();
+        eventLoopThread.join();
+        server.close(); // closes port
     }
 
+    @Override
+    public void run() {
+        eventLoopThread.start();
+    }
 }

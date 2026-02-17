@@ -55,58 +55,35 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HttpEventData;
 import com.teragrep.cfe_16.bo.Session;
-import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.connection.RelpConnection;
 import com.teragrep.cfe_16.event.JsonEvent;
 import com.teragrep.cfe_16.event.JsonEventImpl;
 import com.teragrep.cfe_16.exceptionhandling.EventFieldException;
 import com.teragrep.cfe_16.exceptionhandling.InternalServerErrorException;
-import com.teragrep.cfe_16.connection.AbstractConnection;
-import com.teragrep.cfe_16.connection.ConnectionFactory;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
  * Manager that handles the event sent in a request.
- *
  */
 @Component
-public class EventManager {
+public final class EventManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EventManager.class);
+    private final RelpConnection connection;
 
-    @Autowired
-    private Configuration configuration;
-
-    private AbstractConnection connection;
-
-    public EventManager() {
+    public EventManager(final RelpConnection relpConnection) {
+        this.connection = relpConnection;
     }
 
-    @PostConstruct
-    public void setupSender() {
-        LOGGER.debug("Setting up connection");
-        try {
-            this.connection = ConnectionFactory
-                    .createSender(
-                            this.configuration.getSysLogProtocol(), this.configuration.getSyslogHost(),
-                            this.configuration.getSyslogPort()
-                    );
-        }
-        catch (IOException e) {
-            LOGGER.error("Error creating connection", e);
-            throw new InternalServerErrorException();
-        }
+    public RelpConnection connection() {
+        return connection;
     }
 
     /*

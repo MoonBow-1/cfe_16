@@ -129,23 +129,24 @@ public final class Acknowledgements implements Runnable, LifeCycle {
     /**
      * The background thread for cleaning up ACKs.
      */
-    private Thread cleanerThread;
+    private final Thread cleanerThread;
 
-    @Autowired
-    private Configuration configuration;
+    private final Configuration configuration;
 
     /**
      * An empty constructor for Spring @Autowired annotation.
      */
-    public Acknowledgements() {
+    @Autowired
+    public Acknowledgements(final Configuration configuration) {
+        this.configuration = configuration;
         this.objectMapper = new ObjectMapper();
-        this.ackStates = Collections.synchronizedMap(new HashMap<String, State>());
+        this.ackStates = Collections.synchronizedMap(new HashMap<>());
+        this.cleanerThread = new Thread(this);
     }
 
     @Override
     @PostConstruct
     public void start() {
-        this.cleanerThread = new Thread(this);
         this.cleanerThread.start();
     }
 
@@ -222,14 +223,14 @@ public final class Acknowledgements implements Runnable, LifeCycle {
                 currentAckValue++;
                 ackToCompare = state.getAckToCompare();
                 ackToCompare.setId(currentAckValue);
-                if (currentAckValue > this.configuration.getMaxAckValue()) {
+                if (currentAckValue > this.configuration.maxAckValue()) {
                     currentAckValue = 0;
                 }
                 state.setAckToCompare(ackToCompare);
             }
 
             currentAckValue++;
-            if (currentAckValue > this.configuration.getMaxAckValue()) {
+            if (currentAckValue > this.configuration.maxAckValue()) {
                 currentAckValue = 0;
             }
             state.setCurrentAckValue(currentAckValue);
@@ -359,7 +360,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
     private boolean acksAvailable(State state) {
         Map<Integer, Ack> ackMap = state.getAckMap();
         int ackMapSize = ackMap.size();
-        int maxAckValue = this.configuration.getMaxAckValue();
+        int maxAckValue = this.configuration.maxAckValue();
         if (ackMapSize > maxAckValue) {
             return false;
         }
@@ -389,8 +390,8 @@ public final class Acknowledgements implements Runnable, LifeCycle {
 
         while (true) {
             try {
-                LOGGER.debug("Sleeping for <{}> while waiting for polls", this.configuration.getPollTime());
-                Thread.sleep(this.configuration.getPollTime());
+                LOGGER.debug("Sleeping for <{}> while waiting for polls", this.configuration.pollTime());
+                Thread.sleep(this.configuration.pollTime());
             }
             catch (InterruptedException e) {
                 break;
@@ -404,7 +405,7 @@ public final class Acknowledgements implements Runnable, LifeCycle {
                     Iterator<Ack> iterator = ackMap.values().iterator();
                     while (iterator.hasNext()) {
                         Ack ack = iterator.next();
-                        long thresholdInLong = ack.getLastUsedTimestamp() + this.configuration.getMaxAckAge();
+                        long thresholdInLong = ack.getLastUsedTimestamp() + this.configuration.maxAckAge();
 
                         /**
                          * If the Ack object is too old we'll remove it from the Ack set.

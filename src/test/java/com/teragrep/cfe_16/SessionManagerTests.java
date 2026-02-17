@@ -46,6 +46,7 @@
 package com.teragrep.cfe_16;
 
 import com.teragrep.cfe_16.bo.Session;
+import com.teragrep.cfe_16.config.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +64,7 @@ public class SessionManagerTests {
      */
     @BeforeEach
     public void initialize() {
-        sessionManager = new SessionManager();
+        sessionManager = new SessionManager(new Configuration());
     }
 
     /*

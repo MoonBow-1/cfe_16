@@ -76,14 +76,12 @@ public class SessionManager implements Runnable, LifeCycle {
      */
     private Thread cleanerThread;
 
-    @Autowired
-    private Configuration configuration;
+    private final Configuration configuration;
 
-    /**
-     * 
-     */
-    public SessionManager() {
-        this.sessions = new HashMap<String, Session>();
+    @Autowired
+    public SessionManager(final Configuration configuration) {
+        this.configuration = configuration;
+        this.sessions = new HashMap<>();
     }
 
     @Override
@@ -102,8 +100,8 @@ public class SessionManager implements Runnable, LifeCycle {
     public void run() {
         while (true) {
             try {
-                LOGGER.debug("Sleeping for <{}>  while waiting for poll", this.configuration.getPollTime());
-                Thread.sleep(this.configuration.getPollTime());
+                LOGGER.debug("Sleeping for <{}>  while waiting for poll", this.configuration.pollTime());
+                Thread.sleep(this.configuration.pollTime());
             }
             catch (InterruptedException e) {
                 break;
@@ -114,7 +112,7 @@ public class SessionManager implements Runnable, LifeCycle {
                     Map.Entry<String, Session> entry = iterator.next();
                     long now = System.currentTimeMillis();
                     long thresholdInLong = entry.getValue().getLastTouchedTimestamp()
-                            + this.configuration.getMaxSessionAge();
+                            + this.configuration.maxSessionAge();
                     if (now >= thresholdInLong) {
                         iterator.remove();
                     }

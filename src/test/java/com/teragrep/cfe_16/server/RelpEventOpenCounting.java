@@ -43,42 +43,27 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.server;
 
-import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.AbstractSyslogMessageSender;
+import com.teragrep.rlp_03.frame.delegate.FrameContext;
+import com.teragrep.rlp_03.frame.delegate.event.RelpEvent;
+import com.teragrep.rlp_03.frame.delegate.event.RelpEventOpen;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * An abstract connection class for sending batch messages.
- */
-public abstract class AbstractConnection extends AbstractSyslogMessageSender {
+public final class RelpEventOpenCounting extends RelpEvent {
 
-    protected String hostname;
-    protected int port;
+    private final AtomicLong openCount;
+    private final RelpEventOpen eventOpen;
 
-    protected AbstractConnection(String hostname, int port) {
-        super();
-        this.hostname = hostname;
-        this.port = port;
-    }
-
-    /**
-     * Sends a batch of syslog messages.
-     * 
-     * @param syslogMessages
-     */
-    public abstract void sendMessages(List<SyslogMessage> syslogMessages) throws IOException;
-
-    @Override
-    public void setSyslogServerHostname(String syslogServerHostname) {
-        this.hostname = syslogServerHostname;
+    RelpEventOpenCounting(final AtomicLong openCount) {
+        this.openCount = openCount;
+        this.eventOpen = new RelpEventOpen();
     }
 
     @Override
-    public void setSyslogServerPort(int syslogServerPort) {
-        this.port = syslogServerPort;
+    public void accept(final FrameContext frameContext) {
+        eventOpen.accept(frameContext);
+        openCount.incrementAndGet();
     }
 }

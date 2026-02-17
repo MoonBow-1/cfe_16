@@ -43,26 +43,27 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-package com.teragrep.cfe_16.connection;
+package com.teragrep.cfe_16.server;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.teragrep.rlp_03.frame.delegate.FrameContext;
+import com.teragrep.rlp_03.frame.delegate.event.RelpEvent;
+import com.teragrep.rlp_03.frame.delegate.event.RelpEventClose;
 
-import java.io.IOException;
+import java.util.concurrent.atomic.AtomicLong;
 
-public final class ConnectionFactory {
+public final class RelpEventCloseCounting extends RelpEvent {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionFactory.class);
+    private final AtomicLong closeCount;
+    private final RelpEventClose relpEventClose;
 
-    public static AbstractConnection createSender(final String type, final String hostname, final int port)
-            throws IOException {
-        LOGGER.debug("Creating connection for type <[{}]> to <[{}]>:<[{}]>", type, hostname, port);
+    RelpEventCloseCounting(final AtomicLong closeCount) {
+        this.closeCount = closeCount;
+        this.relpEventClose = new RelpEventClose();
+    }
 
-        if (type.equalsIgnoreCase("RELP")) {
-            return new RelpConnection(hostname, port);
-        }
-        else {
-            throw new IOException("Invalid connection type: " + type);
-        }
+    @Override
+    public void accept(final FrameContext frameContext) {
+        relpEventClose.accept(frameContext);
+        closeCount.incrementAndGet();
     }
 }

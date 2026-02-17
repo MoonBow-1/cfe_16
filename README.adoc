@@ -26,7 +26,6 @@ The only supported protocol is RELP.
 ----
 syslog.server.host=127.0.0.1
 syslog.server.port=601
-syslog.server.protocol=RELP
 max.channels=1000000
 max.ack.value=1000000
 max.ack.age=20000

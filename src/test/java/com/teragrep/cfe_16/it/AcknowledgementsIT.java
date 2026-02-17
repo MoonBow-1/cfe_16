@@ -52,12 +52,11 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.ServerIsBusyException;
-import com.teragrep.rlp_03.Server;
-import com.teragrep.rlp_03.ServerFactory;
-import com.teragrep.rlp_03.config.Config;
-import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
-import com.teragrep.rlp_03.delegate.FrameDelegate;
-import java.util.function.Supplier;
+import com.teragrep.cfe_16.server.TestServer;
+import com.teragrep.cfe_16.server.TestServerFactory;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,7 +82,6 @@ import static org.junit.Assert.*;
 @TestPropertySource(properties = {
         "syslog.server.host=127.0.0.1",
         "syslog.server.port=1234",
-        "syslog.server.protocol=RELP",
         "max.channels=1000000",
         "max.ack.value=1000000",
         "max.ack.age=20000",
@@ -101,26 +99,26 @@ public class AcknowledgementsIT {
     private String channel2;
 
     @Autowired
-    private Configuration configuration;
-    @Autowired
     private Acknowledgements acknowledgements;
+    private static final int SERVER_PORT = 1234;
+    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+    private static final AtomicLong openCount = new AtomicLong();
+    private static final AtomicLong closeCount = new AtomicLong();
+    private static TestServer server;
 
-    /**
-     * Initialize a server where the EventManager can connect to in its postConstruct
-     */
     @BeforeAll
     public static void init() {
-        final int port = 1234;
-        final Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
-                (frame) -> LOGGER.debug(frame.relpFrame().payload().toString())
-        );
-        final Config config = new Config(port, 1);
-        final ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
+        final TestServerFactory serverFactory = new TestServerFactory();
 
-        final Server server = Assertions.assertDoesNotThrow(serverFactory::create);
-        final Thread serverThread = new Thread(server);
-        serverThread.start();
-        Assertions.assertDoesNotThrow(server.startup::waitForCompletion);
+        server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(SERVER_PORT, messageList, openCount, closeCount));
+
+        server.run();
+    }
+
+    @AfterAll
+    public static void close() {
+        Assertions.assertDoesNotThrow(() -> server.close());
     }
 
     /*
@@ -279,8 +277,8 @@ public class AcknowledgementsIT {
     }
 
     public void getCurrentAckValueAndIncrementTest() {
-        Acknowledgements acknowledgements1 = new Acknowledgements();
-        Acknowledgements acknowledgements2 = new Acknowledgements();
+        Acknowledgements acknowledgements1 = new Acknowledgements(new Configuration());
+        Acknowledgements acknowledgements2 = new Acknowledgements(new Configuration());
 
         assertEquals(
                 "Acknowledgements 1 should return 0", 0,
@@ -313,8 +311,8 @@ public class AcknowledgementsIT {
      */
     @Test
     public void deleteAckTest() {
-        Acknowledgements acknowledgements1 = new Acknowledgements();
-        Acknowledgements acknowledgements2 = new Acknowledgements();
+        Acknowledgements acknowledgements1 = new Acknowledgements(new Configuration());
+        Acknowledgements acknowledgements2 = new Acknowledgements(new Configuration());
 
         acknowledgements1.initializeContext(this.authToken1, this.channel1);
         assertTrue(acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(0, false)));
@@ -348,25 +346,32 @@ public class AcknowledgementsIT {
      */
     @Test
     public void maxAckValueTest() {
-        Assertions.assertThrows(ServerIsBusyException.class, () -> {
-            this.configuration.setMaxAckValue(2);
-            int ackId;
+        final Configuration configuration1 = new Configuration();
+        configuration1.setMaxAckValue(2);
+        final Acknowledgements acknowledgements1 = new Acknowledgements(configuration1);
 
-            ackId = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-            acknowledgements.incrementAckValue(this.authToken1, this.channel1);
-            acknowledgements.addAck(this.authToken1, this.channel1, new Ack(ackId, false));
+        final int ackId1 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        Assertions.assertEquals(0, ackId1);
+        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
+        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId1, false));
 
-            ackId = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-            acknowledgements.incrementAckValue(this.authToken1, this.channel1);
-            acknowledgements.addAck(this.authToken1, this.channel1, new Ack(ackId, false));
+        final int ackId2 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        Assertions.assertEquals(1, ackId2);
+        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
+        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId2, false));
 
-            ackId = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-            acknowledgements.incrementAckValue(this.authToken1, this.channel1);
-            acknowledgements.addAck(this.authToken1, this.channel1, new Ack(ackId, false));
+        final int ackId3 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        Assertions.assertEquals(2, ackId3);
+        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
+        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId3, false));
 
-            ackId = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-            acknowledgements.incrementAckValue(this.authToken1, this.channel1);
-            acknowledgements.addAck(this.authToken1, this.channel1, new Ack(ackId, false));
-        });
+        final int ackId4 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        Assertions.assertEquals(0, ackId4);
+
+        Assertions
+                .assertThrows(
+                        ServerIsBusyException.class,
+                        () -> acknowledgements1.incrementAckValue(this.authToken1, this.channel1)
+                );
     }
 }

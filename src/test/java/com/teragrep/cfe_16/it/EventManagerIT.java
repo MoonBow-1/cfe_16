@@ -45,7 +45,8 @@
  */
 package com.teragrep.cfe_16.it;
 
-import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.EventManager;
+import com.teragrep.cfe_16.connection.RelpConnection;
 import com.teragrep.cfe_16.server.TestServer;
 import com.teragrep.cfe_16.server.TestServerFactory;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -53,30 +54,37 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-public class ConfigurationIT {
+@TestPropertySource(properties = {
+        "syslog.server.host=127.0.0.1",
+        "syslog.server.port=11636",
+        "max.channels=1000000",
+        "max.ack.value=1000000",
+        "max.ack.age=20000",
+        "max.session.age=30000",
+        "poll.time=30000",
+        "server.print.times=true"
+})
+public final class EventManagerIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationIT.class);
-    @Autowired
-    private Configuration configuration;
-
-    private static final int SERVER_PORT = 1235;
+    private static final int SERVER_PORT = 11636;
     private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
     private static final AtomicLong openCount = new AtomicLong();
     private static final AtomicLong closeCount = new AtomicLong();
     private static TestServer server;
+
+    @Autowired
+    private EventManager eventManager;
 
     @BeforeAll
     public static void init() {
@@ -94,10 +102,13 @@ public class ConfigurationIT {
     }
 
     @Test
-    public void instantiateConfigurationTest() {
-        final String expected = "Configuration{syslogHost=127.0.0.1, syslogPort=1235, maxAckValue=1000000, maxAckAge=20000, maxSessionAge=30000, maxChannels=1000000, pollTime=1000000, printTimes=true}";
-        LOGGER.debug(configuration.toString());
+    @DisplayName("Test that the autowired Connection is a RelpConnection")
+    void testThatTheAutowiredConnectionIsARelpConnection() {
+        final Class<RelpConnection> relpConnectionClass = RelpConnection.class;
 
-        assertEquals(expected, configuration.toString());
+        final Class<? extends RelpConnection> returnedClass = Assertions
+                .assertDoesNotThrow(() -> this.eventManager.connection().getClass());
+
+        Assertions.assertEquals(relpConnectionClass, returnedClass);
     }
 }

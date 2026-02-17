@@ -55,6 +55,7 @@ import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.bo.XForwardedForStub;
 import com.teragrep.cfe_16.bo.XForwardedHostStub;
 import com.teragrep.cfe_16.bo.XForwardedProtoStub;
+import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.*;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.ExceptionEvent;
@@ -62,13 +63,12 @@ import com.teragrep.cfe_16.response.ExceptionEventContext;
 import com.teragrep.cfe_16.response.ExceptionJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.response.Response;
+import com.teragrep.cfe_16.server.TestServer;
+import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
-import com.teragrep.rlp_03.Server;
-import com.teragrep.rlp_03.ServerFactory;
-import com.teragrep.rlp_03.config.Config;
-import com.teragrep.rlp_03.delegate.DefaultFrameDelegate;
-import com.teragrep.rlp_03.delegate.FrameDelegate;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.*;
 import org.powermock.reflect.Whitebox;
 import org.slf4j.Logger;
@@ -76,11 +76,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.util.function.Supplier;
 
 import static org.junit.Assert.*;
 
@@ -89,10 +89,10 @@ import static org.junit.Assert.*;
  */
 
 @SpringBootTest
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @TestPropertySource(properties = {
         "syslog.server.host=127.0.0.1",
         "syslog.server.port=1610",
-        "syslog.server.protocol=RELP",
         "max.channels=1000000",
         "max.ack.value=1000000",
         "max.ack.age=20000",
@@ -103,34 +103,32 @@ import static org.junit.Assert.*;
 public class ServiceAndEventManagerIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceAndEventManagerIT.class);
-    private static Server server;
-    private static final String hostname = "localhost";
-    private static Integer port = 1610;
+
+    private static final int SERVER_PORT = 1610;
+    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+    private static final AtomicLong openCount = new AtomicLong();
+    private static final AtomicLong closeCount = new AtomicLong();
+    private static TestServer server;
 
     @BeforeAll
-    public static void init_x() throws IOException, InterruptedException {
-        Supplier<FrameDelegate> frameDelegateSupplier = () -> new DefaultFrameDelegate(
-                (frame) -> LOGGER.debug(frame.relpFrame().payload().toString())
-        );
-        Config config = new Config(port, 1);
-        ServerFactory serverFactory = new ServerFactory(config, frameDelegateSupplier);
+    public static void init() {
+        final TestServerFactory serverFactory = new TestServerFactory();
 
-        server = serverFactory.create();
-        Thread serverThread = new Thread(server);
-        serverThread.start();
-        server.startup.waitForCompletion();
+        server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(SERVER_PORT, messageList, openCount, closeCount));
+
+        server.run();
     }
 
     @AfterAll
-    public static void cleanup() throws InterruptedException {
-        server.stop();
+    public static void close() {
+        Assertions.assertDoesNotThrow(() -> server.close());
     }
 
     @Autowired
     private HECService service;
     @Autowired
     private Acknowledgements acknowledgements;
-    private static final ServerSocket serverSocket = getSocket();
 
     private MockHttpServletRequest request1;
     private MockHttpServletRequest request2;
@@ -160,28 +158,6 @@ public class ServiceAndEventManagerIT {
             new XForwardedHostStub(),
             new XForwardedProtoStub()
     );
-
-    private static ServerSocket getSocket() {
-        ServerSocket socket = null;
-        try {
-            socket = new ServerSocket(1234);
-        }
-        catch (IOException e) {
-            LOGGER.warn("Could not get a server socket: ", e);
-            throw new RuntimeException(e);
-        }
-        return socket;
-    }
-
-    @AfterAll
-    public static void closeServerSocket() {
-        try {
-            serverSocket.close();
-        }
-        catch (IOException e) {
-            LOGGER.warn("Could not close server socket: ", e);
-        }
-    }
 
     /*
      * Opens a ServerSocket so that the sending an event won't produce an error. 4
@@ -572,7 +548,7 @@ public class ServiceAndEventManagerIT {
      * at once.
      */
     public void sendingMultipleEventsTest() {
-        Acknowledgements acknowledgements = new Acknowledgements();
+        Acknowledgements acknowledgements = new Acknowledgements(new Configuration());
         String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
         assertEquals(
@@ -592,7 +568,7 @@ public class ServiceAndEventManagerIT {
      * sending multiple events at once.
      */
     public void sendingMultipleEventsWithDefaultChannelTest() {
-        Acknowledgements acknowledgements = new Acknowledgements();
+        Acknowledgements acknowledgements = new Acknowledgements(new Configuration());
         String allEventsInJson = "{\"event\": \"Pony 1 has left the barn\", \"sourcetype\": \"mysourcetype\", \"time\": 1426279439}{\"event\": \"Pony 2 has left the barn\"}{\"event\": \"Pony 3 has left the barn\", \"sourcetype\": \"newsourcetype\"}{\"event\": \"Pony 4 has left the barn\"}";
         String supposedResponse = "{\"text\":\"Success\",\"code\":0,\"ackID\":0}";
         assertEquals(
