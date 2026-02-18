@@ -23,8 +23,8 @@
 <g id="Node000002" class="node">
 <title>Node2</title>
 <g id="a_Node000002"><a xlink:title=" ">
-<polygon fill="#e0e0e0" stroke="#999999" points="158.5,-19 33.5,-19 33.5,0 158.5,0 158.5,-19"/>
-<text text-anchor="middle" x="96" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">com.cloudbees.syslog</text>
+<polygon fill="#e0e0e0" stroke="#999999" points="177,-19 15,-19 15,0 177,0 177,-19"/>
+<text text-anchor="middle" x="96" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">com.cloudbees.syslog.Facility</text>
 </a>
 </g>
 </g>
