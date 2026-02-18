@@ -13,7 +13,7 @@ var searchData=
   ['testsendeventwithblankeventfield_10',['testSendEventWithBlankEventField',['../classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a243cd15a09a303384ac53f15266c45e7',1,'com::teragrep::cfe_16::TestClient']]],
   ['testsendeventwithoutauthorization_11',['testSendEventWithoutAuthorization',['../classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ab21f9e0639df4e95228404e94a6981a8',1,'com::teragrep::cfe_16::TestClient']]],
   ['testsendeventwithouteventfield_12',['testSendEventWithoutEventField',['../classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ac04d2efab8deede690e209bd346c4aa3',1,'com::teragrep::cfe_16::TestClient']]],
-  ['testserver_13',['testserver',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#acddcdc6d161d15a40633ea6442873302',1,'com.teragrep.cfe_16.server.TestServer.TestServer()'],['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html',1,'com.teragrep.cfe_16.server.TestServer']]],
+  ['testserver_13',['testserver',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a051b131a849f156b449d96f54826f98c',1,'com.teragrep.cfe_16.server.TestServer.TestServer()'],['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html',1,'com.teragrep.cfe_16.server.TestServer']]],
   ['testserver_2ejava_14',['TestServer.java',['../TestServer_8java.html',1,'']]],
   ['testserverfactory_15',['TestServerFactory',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServerFactory.html',1,'com::teragrep::cfe_16::server']]],
   ['testserverfactory_2ejava_16',['TestServerFactory.java',['../TestServerFactory_8java.html',1,'']]],
