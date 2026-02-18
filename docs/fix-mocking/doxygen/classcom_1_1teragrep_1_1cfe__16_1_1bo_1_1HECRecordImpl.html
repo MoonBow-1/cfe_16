@@ -556,9 +556,9 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  254</span>        }</div>
 <div class="line"><span class="lineno">  255</span> </div>
 <div class="line"><span class="lineno">  256</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a1349f9dcff6ba08213f39ec8bae754b7">LOGGER</a>.debug(<span class="stringliteral">&quot;Setting time_parsed and time&quot;</span>);</div>
-<div class="line"><span class="lineno">  257</span>        metadataSDE.addSDParam(<span class="stringliteral">&quot;time_parsed&quot;</span>, String.valueOf(<span class="keyword">this</span>.time().parsed()));</div>
+<div class="line"><span class="lineno">  257</span>        metadataSDE.addSDParam(<span class="stringliteral">&quot;time_parsed&quot;</span>, String.valueOf(<span class="keyword">this</span>.time().isParsed()));</div>
 <div class="line"><span class="lineno">  258</span>        metadataSDE.addSDParam(<span class="stringliteral">&quot;time&quot;</span>, String.valueOf(<span class="keyword">this</span>.time().instant(fallbackEpoch)));</div>
-<div class="line"><span class="lineno">  259</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().parsed()) {</div>
+<div class="line"><span class="lineno">  259</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().isParsed()) {</div>
 <div class="line"><span class="lineno">  260</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a1349f9dcff6ba08213f39ec8bae754b7">LOGGER</a>.debug(<span class="stringliteral">&quot;TimeParsed was true&quot;</span>);</div>
 <div class="line"><span class="lineno">  261</span>            metadataSDE.addSDParam(<span class="stringliteral">&quot;generated&quot;</span>, <span class="stringliteral">&quot;false&quot;</span>);</div>
 <div class="line"><span class="lineno">  262</span>        }</div>
@@ -636,7 +636,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  138</span>        <span class="keyword">final</span> SDElement structuredMetadata = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a3b14a495b0bfbe1c588cfcdf7f26c351">structuredDataParams</a>(currentEpochMillis);</div>
 <div class="line"><span class="lineno">  139</span> </div>
 <div class="line"><span class="lineno">  140</span>        <span class="keyword">final</span> SyslogMessage syslogMessage;</div>
-<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().parsed()) {</div>
+<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().isParsed()) {</div>
 <div class="line"><span class="lineno">  142</span> </div>
 <div class="line"><span class="lineno">  143</span>            <span class="comment">/*</span></div>
 <div class="line"><span class="lineno">  144</span><span class="comment">             * Creates a Syslogmessage with a time stamp</span></div>
@@ -705,7 +705,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  179</span>        <span class="keyword">final</span> SDElement structuredMetadata = <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a3b14a495b0bfbe1c588cfcdf7f26c351">structuredDataParams</a>(defaultValue);</div>
 <div class="line"><span class="lineno">  180</span> </div>
 <div class="line"><span class="lineno">  181</span>        <span class="keyword">final</span> SyslogMessage syslogMessage;</div>
-<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().parsed()) {</div>
+<div class="line"><span class="lineno">  182</span>        <span class="keywordflow">if</span> (this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a0d836324399398560ad89b2125f38014">time</a>().isParsed()) {</div>
 <div class="line"><span class="lineno">  183</span> </div>
 <div class="line"><span class="lineno">  184</span>            <span class="comment">/*</span></div>
 <div class="line"><span class="lineno">  185</span><span class="comment">             * Creates a Syslogmessage with a time stamp</span></div>

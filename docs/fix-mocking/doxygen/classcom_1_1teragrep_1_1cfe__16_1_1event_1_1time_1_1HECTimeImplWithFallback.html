@@ -97,8 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5bfed75228aeb223c35f0bc14d2d7d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76ec7a4bc12c56f721599c59c4af4eb0" id="r_a76ec7a4bc12c56f721599c59c4af4eb0"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#a76ec7a4bc12c56f721599c59c4af4eb0">instant</a> (final long defaultValue)</td></tr>
 <tr class="separator:a76ec7a4bc12c56f721599c59c4af4eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2938615fa0ff314727aa837e0164e48" id="r_ae2938615fa0ff314727aa837e0164e48"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ae2938615fa0ff314727aa837e0164e48">parsed</a> ()</td></tr>
-<tr class="separator:ae2938615fa0ff314727aa837e0164e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa844500a1266b852374f60ce4ea389db" id="r_aa844500a1266b852374f60ce4ea389db"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#aa844500a1266b852374f60ce4ea389db">isParsed</a> ()</td></tr>
+<tr class="separator:aa844500a1266b852374f60ce4ea389db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03762cdc90d1fb05f74825b0c65cd358" id="r_a03762cdc90d1fb05f74825b0c65cd358"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#a03762cdc90d1fb05f74825b0c65cd358">source</a> ()</td></tr>
 <tr class="separator:a03762cdc90d1fb05f74825b0c65cd358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac77a511178cb1f357d2c4537958e563d" id="r_ac77a511178cb1f357d2c4537958e563d"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ac77a511178cb1f357d2c4537958e563d">equals</a> (final Object o)</td></tr>
@@ -261,6 +261,48 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="aa844500a1266b852374f60ce4ea389db" name="aa844500a1266b852374f60ce4ea389db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa844500a1266b852374f60ce4ea389db">&#9670;&#160;</a></span>isParsed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean com.teragrep.cfe_16.event.time.HECTimeImplWithFallback.isParsed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a985d8867343a32c6732932ce02f37e94">com.teragrep.cfe_16.event.time.HECTime</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="HECTimeImplWithFallback_8java_source.html#l00078">78</a> of file <a class="el" href="HECTimeImplWithFallback_8java_source.html">HECTimeImplWithFallback.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                              {</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keyword">final</span> <span class="keywordtype">boolean</span> returnedParsed;</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html#a8e854db1814eeb807cd9049776c33923">isStub</a>() &amp;&amp; <span class="keyword">this</span>.fallbackTime.isStub()) {</div>
+<div class="line"><span class="lineno">   82</span>            returnedParsed = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   83</span>        }</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html#a8e854db1814eeb807cd9049776c33923">isStub</a>() &amp;&amp; <span class="keyword">this</span>.fallbackTime.isStub()) {</div>
+<div class="line"><span class="lineno">   85</span>            returnedParsed = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a985d8867343a32c6732932ce02f37e94">isParsed</a>();</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
+<div class="line"><span class="lineno">   87</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   88</span>            returnedParsed = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#aece1494f4209fd4336e76f2477921e7c">fallbackTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a985d8867343a32c6732932ce02f37e94">isParsed</a>();</div>
+<div class="line"><span class="lineno">   89</span>        }</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> returnedParsed;</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
+<div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime_html_a985d8867343a32c6732932ce02f37e94"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a985d8867343a32c6732932ce02f37e94">com.teragrep.cfe_16.event.time.HECTime.isParsed</a></div><div class="ttdeci">boolean isParsed()</div></div>
+</div><!-- fragment --><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback_aa844500a1266b852374f60ce4ea389db_cgraph.svg" width="572" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a4cc6226d3fee56682afb5cb68800f72a" name="a4cc6226d3fee56682afb5cb68800f72a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cc6226d3fee56682afb5cb68800f72a">&#9670;&#160;</a></span>isStub()</h2>
 
@@ -283,48 +325,6 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="lineno">  127</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  128</span>    }</div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="ae2938615fa0ff314727aa837e0164e48" name="ae2938615fa0ff314727aa837e0164e48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2938615fa0ff314727aa837e0164e48">&#9670;&#160;</a></span>parsed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">boolean com.teragrep.cfe_16.event.time.HECTimeImplWithFallback.parsed </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a0995e6b950e6e6fe49e1b874ed001a70">com.teragrep.cfe_16.event.time.HECTime</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="HECTimeImplWithFallback_8java_source.html#l00078">78</a> of file <a class="el" href="HECTimeImplWithFallback_8java_source.html">HECTimeImplWithFallback.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>                            {</div>
-<div class="line"><span class="lineno">   79</span>        <span class="keyword">final</span> <span class="keywordtype">boolean</span> returnedParsed;</div>
-<div class="line"><span class="lineno">   80</span> </div>
-<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html#a8e854db1814eeb807cd9049776c33923">isStub</a>() &amp;&amp; <span class="keyword">this</span>.fallbackTime.isStub()) {</div>
-<div class="line"><span class="lineno">   82</span>            returnedParsed = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   83</span>        }</div>
-<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html#a8e854db1814eeb807cd9049776c33923">isStub</a>() &amp;&amp; <span class="keyword">this</span>.fallbackTime.isStub()) {</div>
-<div class="line"><span class="lineno">   85</span>            returnedParsed = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#ab2fd8e3d461ea66d5283fc950e736482">currentTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a0995e6b950e6e6fe49e1b874ed001a70">parsed</a>();</div>
-<div class="line"><span class="lineno">   86</span>        }</div>
-<div class="line"><span class="lineno">   87</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   88</span>            returnedParsed = this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback.html#aece1494f4209fd4336e76f2477921e7c">fallbackTime</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a0995e6b950e6e6fe49e1b874ed001a70">parsed</a>();</div>
-<div class="line"><span class="lineno">   89</span>        }</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> returnedParsed;</div>
-<div class="line"><span class="lineno">   92</span>    }</div>
-<div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime_html_a0995e6b950e6e6fe49e1b874ed001a70"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html#a0995e6b950e6e6fe49e1b874ed001a70">com.teragrep.cfe_16.event.time.HECTime.parsed</a></div><div class="ttdeci">boolean parsed()</div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImplWithFallback_ae2938615fa0ff314727aa837e0164e48_cgraph.svg" width="563" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
 </div>
 </div>
 <a id="a03762cdc90d1fb05f74825b0c65cd358" name="a03762cdc90d1fb05f74825b0c65cd358"></a>

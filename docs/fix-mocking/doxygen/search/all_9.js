@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jsonevent_0',['JsonEvent',['../interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html',1,'com::teragrep::cfe_16::event']]],
+  ['jsonevent_0',['jsonevent',['../interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html',1,'com.teragrep.cfe_16.event.JsonEvent'],['../classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2',1,'com.teragrep.cfe_16.event.time.HECTimeImpl.jsonEvent']]],
   ['jsonevent_2ejava_1',['JsonEvent.java',['../JsonEvent_8java.html',1,'']]],
   ['jsoneventfake_2',['JsonEventFake',['../classcom_1_1teragrep_1_1cfe__16_1_1fakes_1_1JsonEventFake.html',1,'com::teragrep::cfe_16::fakes']]],
   ['jsoneventfake_2ejava_3',['JsonEventFake.java',['../JsonEventFake_8java.html',1,'']]],

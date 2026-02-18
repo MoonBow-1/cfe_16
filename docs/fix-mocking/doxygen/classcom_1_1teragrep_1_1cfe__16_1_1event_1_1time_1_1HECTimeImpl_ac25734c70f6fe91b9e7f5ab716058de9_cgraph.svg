@@ -21,10 +21,10 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="375.5,-126 224.5,-126 224.5,-96 375.5,-96 375.5,-126"/>
-<text text-anchor="start" x="232.5" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.event.</text>
-<text text-anchor="middle" x="300" y="-103" font-family="Helvetica,sans-Serif" font-size="10.00">JsonEvent.asTimeJsonNode</text>
+<g id="a_Node000002"><a xlink:href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#acf161cc997bfe5c6426c51ebbcaa1e2d" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="381.5,-126 218.5,-126 218.5,-96 381.5,-96 381.5,-126"/>
+<text text-anchor="start" x="226.5" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.event.</text>
+<text text-anchor="middle" x="300" y="-103" font-family="Helvetica,sans-Serif" font-size="10.00">JsonEvent.asPayloadJsonNode</text>
 </a>
 </g>
 </g>
@@ -40,10 +40,10 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="375.5,-78 224.5,-78 224.5,-48 375.5,-48 375.5,-78"/>
 <text text-anchor="start" x="232.5" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.event.</text>
-<text text-anchor="middle" x="300" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">JsonEvent.hasTime</text>
+<text text-anchor="middle" x="300" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">JsonEvent.asTimeJsonNode</text>
 </a>
 </g>
 </g>

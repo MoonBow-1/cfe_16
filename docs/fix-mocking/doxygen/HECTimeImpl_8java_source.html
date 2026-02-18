@@ -134,225 +134,195 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">import</span> com.teragrep.cfe_16.exceptionhandling.EventFieldException;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">import</span> java.math.BigDecimal;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">import</span> java.util.Objects;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="foldopen" id="foldopen00055" data-start="{" data-end="};">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">   55</a></span><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class </span><a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a> <span class="keyword">implements</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html">HECTime</a> {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">import</span> org.slf4j.Logger;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">import</span> org.slf4j.LoggerFactory;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">   57</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html">JsonEvent</a> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>;</div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">   57</a></span><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class </span><a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a> <span class="keyword">implements</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html">HECTime</a> {</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3483fef87d28a2b835f9c69d9747a03b">   59</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3483fef87d28a2b835f9c69d9747a03b">HECTimeImpl</a>(<span class="keyword">final</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html">JsonEvent</a> timeNode) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        this.timeNode1 = timeNode;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a32341c54411723feb0622574c125a9ee">   59</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a32341c54411723feb0622574c125a9ee">LOGGER</a> = LoggerFactory.getLogger(<a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a>.class);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">   60</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html">JsonEvent</a> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a05ca6e756adb6346a2800787976b83c6">   62</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a05ca6e756adb6346a2800787976b83c6">HECTimeImpl</a>(<span class="keyword">final</span> <a class="code hl_interface" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html">JsonEvent</a> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        this.jsonEvent = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    @Override</div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">   64</a></span>    <span class="keyword">public</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">instant</a>(<span class="keyword">final</span> <span class="keywordtype">long</span> defaultValue) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">final</span> <span class="keywordtype">long</span> returnedTime;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        JsonNode timeNode;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d">hasTime</a>()) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                timeNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">asTimeJsonNode</a>();</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> EventFieldException e) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="comment">// No time provided in the event</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">if</span> (timeNode == <span class="keyword">null</span> || timeNode.asText().isEmpty()) {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            returnedTime = defaultValue;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="comment">// Check if time is a double and convert to long</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isDouble()) {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            returnedTime = this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">removeDecimal</a>(timeNode.asDouble());</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="comment">// Time is a number, no calculations required</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.canConvertToLong()) {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            returnedTime = timeNode.asLong();</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="comment">// Time is a String</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isTextual()) {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="comment">// Try to convert the String to a long (if not convertable, default to 0L)</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keyword">final</span> <span class="keywordtype">long</span> tryAsLong = timeNode.asLong(0L);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">if</span> (tryAsLong != 0L) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                returnedTime = tryAsLong;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="comment">// No time found in current or previous event</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                returnedTime = defaultValue;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="comment">// Unknown format</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            returnedTime = defaultValue;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span> returnedTime;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    @Override</div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">   67</a></span>    <span class="keyword">public</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">instant</a>(<span class="keyword">final</span> <span class="keywordtype">long</span> defaultValue) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keyword">final</span> <span class="keywordtype">long</span> returnedTime;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        JsonNode timeNode;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            timeNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">asTimeJsonNode</a>();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> EventFieldException e) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a32341c54411723feb0622574c125a9ee">LOGGER</a></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                    .info(</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                            <span class="stringliteral">&quot;Could not parse time from JsonEvent &lt;[{}]&gt;, so using defaultValue provided &lt;[{}]&gt;&quot;</span>,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#acf161cc997bfe5c6426c51ebbcaa1e2d">asPayloadJsonNode</a>(), defaultValue</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    );</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="comment">// No time provided in the event</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">if</span> (timeNode == <span class="keyword">null</span> || timeNode.asText().isEmpty()) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="comment">// Use default value</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            returnedTime = defaultValue;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="comment">// Check if time is a double and convert to long</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isDouble()) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            returnedTime = this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">removeDecimal</a>(timeNode.asDouble());</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="comment">// Time is a number, no calculations required</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.canConvertToLong()) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            returnedTime = timeNode.asLong();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="comment">// Time is a String</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isTextual()) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="comment">// Try to convert the String to a long (if not convertable, default to 0L)</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keyword">final</span> <span class="keywordtype">long</span> tryAsLong = timeNode.asLong(0L);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">if</span> (tryAsLong != 0L) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                returnedTime = tryAsLong;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="comment">// No time found in current or previous event</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="comment">// Use default value</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                returnedTime = defaultValue;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="comment">// Unknown format</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment">// Use default value</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            returnedTime = defaultValue;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">return</span> returnedTime;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
 </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">  121</a></span>    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">removeDecimal</a>(<span class="keyword">final</span> <span class="keywordtype">double</span> doubleValue) {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keyword">final</span> BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keyword">final</span> String stringValue = doubleValueWithDecimal.toString();</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keyword">final</span> String stringValueWithoutDecimal = stringValue.replace(<span class="stringliteral">&quot;.&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">return</span> Long.parseLong(stringValueWithoutDecimal);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">  123</a></span>    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">removeDecimal</a>(<span class="keyword">final</span> <span class="keywordtype">double</span> doubleValue) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keyword">final</span> BigDecimal doubleValueWithDecimal = BigDecimal.valueOf(doubleValue);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keyword">final</span> String stringValue = doubleValueWithDecimal.toString();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">final</span> String stringValueWithoutDecimal = stringValue.replace(<span class="stringliteral">&quot;.&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">return</span> Long.parseLong(stringValueWithoutDecimal);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    }</div>
 </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    @Override</div>
-<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aa2791ad3017b42dd0cebd4eb1f3ab84b">  130</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aa2791ad3017b42dd0cebd4eb1f3ab84b">parsed</a>() {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">final</span> <span class="keywordtype">boolean</span> returnedParsed;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        JsonNode timeNode;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d">hasTime</a>()) {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                timeNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">asTimeJsonNode</a>();</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            }</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            }</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> EventFieldException e) {</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        }</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="comment">// No time provided in the event</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">if</span> (timeNode == <span class="keyword">null</span> || timeNode.asText().isEmpty()) {</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            returnedParsed = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="comment">// Check if time is a double and convert to long</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isDouble()) {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            returnedParsed = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="comment">// Time is a number, no calculations required</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.canConvertToLong()) {</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            returnedParsed = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        }</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="comment">// Time is a String</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isTextual()) {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="comment">// Try to convert the String to a long (if not convertable, default to 0L)</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keyword">final</span> <span class="keywordtype">long</span> tryAsLong = timeNode.asLong(0L);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            returnedParsed = tryAsLong != 0L;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        }</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="comment">// Unknown format</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            returnedParsed = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">return</span> returnedParsed;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    @Override</div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3d48939f8db40d14b305657faccb87b8">  132</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3d48939f8db40d14b305657faccb87b8">isParsed</a>() {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keyword">final</span> <span class="keywordtype">boolean</span> returnedParsed;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        JsonNode timeNode;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d">hasTime</a>()) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                timeNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">asTimeJsonNode</a>();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> EventFieldException e) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="comment">// No time provided in the event</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">if</span> (timeNode == <span class="keyword">null</span> || timeNode.asText().isEmpty()) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            returnedParsed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="comment">// Check if time is a double and convert to long</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isDouble()) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            returnedParsed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="comment">// Time is a String</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isTextual()) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="comment">// Try to convert the String to a long (if not convertable, default to 0L)</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keyword">final</span> <span class="keywordtype">long</span> tryAsLong = timeNode.asLong(0L);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            <span class="keywordflow">if</span> (tryAsLong != 0L) {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                returnedParsed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                returnedParsed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="comment">// Time is a number, no calculations required</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.canConvertToLong()) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            returnedParsed = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="comment">// Unknown format</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            returnedParsed = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> returnedParsed;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
 </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    @Override</div>
-<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">  174</a></span>    <span class="keyword">public</span> String <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">source</a>() {</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keyword">final</span> String returnedSource;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        JsonNode timeNode;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">try</span> {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d">hasTime</a>()) {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                timeNode = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>.<a class="code hl_function" href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">asTimeJsonNode</a>();</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            }</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            }</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">catch</span> (<span class="keyword">final</span> EventFieldException e) {</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            timeNode = <span class="keyword">new</span> TextNode(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="comment">// No time provided in the event</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">if</span> (timeNode == <span class="keyword">null</span> || timeNode.asText().isEmpty()) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            returnedSource = <span class="stringliteral">&quot;generated&quot;</span>;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="comment">// Check if time is a double and convert to long</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isDouble()) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            returnedSource = <span class="stringliteral">&quot;reported&quot;</span>;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="comment">// Time is a String</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.isTextual()) {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="comment">// Try to convert the String to a long (if not convertable, default to 0L)</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="keyword">final</span> <span class="keywordtype">long</span> tryAsLong = timeNode.asLong(0L);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            <span class="keywordflow">if</span> (tryAsLong != 0L) {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                returnedSource = <span class="stringliteral">&quot;reported&quot;</span>;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            }</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="comment">// No time found in current or previous event</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                returnedSource = <span class="stringliteral">&quot;generated&quot;</span>;</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            }</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        }</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="comment">// Time is a number, no calculations required</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (timeNode.canConvertToLong()) {</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            returnedSource = <span class="stringliteral">&quot;reported&quot;</span>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        }</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="comment">// Unknown format</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="comment">// Use default value</span></div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            returnedSource = <span class="stringliteral">&quot;generated&quot;</span>;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">return</span> returnedSource;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    @Override</div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">  180</a></span>    <span class="keyword">public</span> String <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">source</a>() {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keyword">final</span> String returnedSource;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keyword">final</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3d48939f8db40d14b305657faccb87b8">isParsed</a> = this.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3d48939f8db40d14b305657faccb87b8">isParsed</a>();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (isParsed) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            returnedSource = <span class="stringliteral">&quot;reported&quot;</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;generated&quot;</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> returnedSource;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
 </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    @Override</div>
-<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">  227</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">equals</a>(<span class="keyword">final</span> Object o) {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) {</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keyword">final</span> <a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a> hecTime = (<a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a>) o;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">return</span> Objects.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">equals</a>(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>, hecTime.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    @Override</div>
+<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">  195</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">equals</a>(<span class="keyword">final</span> Object o) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keyword">final</span> <a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a> hecTime = (<a class="code hl_class" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">HECTimeImpl</a>) o;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">return</span> Objects.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">equals</a>(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>, hecTime.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
 </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    @Override</div>
-<div class="foldopen" id="foldopen00237" data-start="{" data-end="}">
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">  237</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">hashCode</a>() {</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordflow">return</span> Objects.hashCode(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">timeNode1</a>);</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    @Override</div>
+<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">  205</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">hashCode</a>() {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">return</span> Objects.hashCode(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">jsonEvent</a>);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
 </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    @Override</div>
-<div class="foldopen" id="foldopen00242" data-start="{" data-end="}">
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">  242</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">isStub</a>() {</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    @Override</div>
+<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">  210</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">isStub</a>() {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
 </div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>}</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
 </div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">com.teragrep.cfe_16.event.time.HECTimeImpl</a></div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00055">HECTimeImpl.java:55</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a2e23cccc4a7817db6a7030eebb2dbe3b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">com.teragrep.cfe_16.event.time.HECTimeImpl.isStub</a></div><div class="ttdeci">boolean isStub()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00242">HECTimeImpl.java:242</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a2e5c40a67e6d91c7013bd52efcd90f4f"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e5c40a67e6d91c7013bd52efcd90f4f">com.teragrep.cfe_16.event.time.HECTimeImpl.timeNode1</a></div><div class="ttdeci">final JsonEvent timeNode1</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00057">HECTimeImpl.java:57</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a3483fef87d28a2b835f9c69d9747a03b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3483fef87d28a2b835f9c69d9747a03b">com.teragrep.cfe_16.event.time.HECTimeImpl.HECTimeImpl</a></div><div class="ttdeci">HECTimeImpl(final JsonEvent timeNode)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00059">HECTimeImpl.java:59</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a5ba2797828b904ff00901d33fb7ee70c"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">com.teragrep.cfe_16.event.time.HECTimeImpl.hashCode</a></div><div class="ttdeci">int hashCode()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00237">HECTimeImpl.java:237</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a636aea0f2bb786e57dfe75caea838125"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">com.teragrep.cfe_16.event.time.HECTimeImpl.equals</a></div><div class="ttdeci">boolean equals(final Object o)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00227">HECTimeImpl.java:227</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_aa2791ad3017b42dd0cebd4eb1f3ab84b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aa2791ad3017b42dd0cebd4eb1f3ab84b">com.teragrep.cfe_16.event.time.HECTimeImpl.parsed</a></div><div class="ttdeci">boolean parsed()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00130">HECTimeImpl.java:130</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_aac5ec97ff31aa1d37496e1a21683b616"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">com.teragrep.cfe_16.event.time.HECTimeImpl.source</a></div><div class="ttdeci">String source()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00174">HECTimeImpl.java:174</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_ac25734c70f6fe91b9e7f5ab716058de9"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">com.teragrep.cfe_16.event.time.HECTimeImpl.instant</a></div><div class="ttdeci">long instant(final long defaultValue)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00064">HECTimeImpl.java:64</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_afcddb1910a847eece8154b0acba3c7ee"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">com.teragrep.cfe_16.event.time.HECTimeImpl.removeDecimal</a></div><div class="ttdeci">long removeDecimal(final double doubleValue)</div><div class="ttdoc">Takes a double value as a parameter, removes the decimal point from that value and returns the number...</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00121">HECTimeImpl.java:121</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html">com.teragrep.cfe_16.event.time.HECTimeImpl</a></div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00057">HECTimeImpl.java:57</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a00c1c632069111bc3fa575dfca9743c2"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a00c1c632069111bc3fa575dfca9743c2">com.teragrep.cfe_16.event.time.HECTimeImpl.jsonEvent</a></div><div class="ttdeci">final JsonEvent jsonEvent</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00060">HECTimeImpl.java:60</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a05ca6e756adb6346a2800787976b83c6"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a05ca6e756adb6346a2800787976b83c6">com.teragrep.cfe_16.event.time.HECTimeImpl.HECTimeImpl</a></div><div class="ttdeci">HECTimeImpl(final JsonEvent jsonEvent)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00062">HECTimeImpl.java:62</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a2e23cccc4a7817db6a7030eebb2dbe3b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a2e23cccc4a7817db6a7030eebb2dbe3b">com.teragrep.cfe_16.event.time.HECTimeImpl.isStub</a></div><div class="ttdeci">boolean isStub()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00210">HECTimeImpl.java:210</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a32341c54411723feb0622574c125a9ee"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a32341c54411723feb0622574c125a9ee">com.teragrep.cfe_16.event.time.HECTimeImpl.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00059">HECTimeImpl.java:59</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a3d48939f8db40d14b305657faccb87b8"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a3d48939f8db40d14b305657faccb87b8">com.teragrep.cfe_16.event.time.HECTimeImpl.isParsed</a></div><div class="ttdeci">boolean isParsed()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00132">HECTimeImpl.java:132</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a5ba2797828b904ff00901d33fb7ee70c"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a5ba2797828b904ff00901d33fb7ee70c">com.teragrep.cfe_16.event.time.HECTimeImpl.hashCode</a></div><div class="ttdeci">int hashCode()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00205">HECTimeImpl.java:205</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_a636aea0f2bb786e57dfe75caea838125"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#a636aea0f2bb786e57dfe75caea838125">com.teragrep.cfe_16.event.time.HECTimeImpl.equals</a></div><div class="ttdeci">boolean equals(final Object o)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00195">HECTimeImpl.java:195</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_aac5ec97ff31aa1d37496e1a21683b616"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#aac5ec97ff31aa1d37496e1a21683b616">com.teragrep.cfe_16.event.time.HECTimeImpl.source</a></div><div class="ttdeci">String source()</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00180">HECTimeImpl.java:180</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_ac25734c70f6fe91b9e7f5ab716058de9"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#ac25734c70f6fe91b9e7f5ab716058de9">com.teragrep.cfe_16.event.time.HECTimeImpl.instant</a></div><div class="ttdeci">long instant(final long defaultValue)</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00067">HECTimeImpl.java:67</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl_html_afcddb1910a847eece8154b0acba3c7ee"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTimeImpl.html#afcddb1910a847eece8154b0acba3c7ee">com.teragrep.cfe_16.event.time.HECTimeImpl.removeDecimal</a></div><div class="ttdeci">long removeDecimal(final double doubleValue)</div><div class="ttdoc">Takes a double value as a parameter, removes the decimal point from that value and returns the number...</div><div class="ttdef"><b>Definition</b> <a href="HECTimeImpl_8java_source.html#l00123">HECTimeImpl.java:123</a></div></div>
 <div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent_html"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html">com.teragrep.cfe_16.event.JsonEvent</a></div><div class="ttdef"><b>Definition</b> <a href="JsonEvent_8java_source.html#l00051">JsonEvent.java:51</a></div></div>
 <div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent_html_a288d2f741c18567688e748e97d63e702"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a288d2f741c18567688e748e97d63e702">com.teragrep.cfe_16.event.JsonEvent.asTimeJsonNode</a></div><div class="ttdeci">JsonNode asTimeJsonNode()</div></div>
 <div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent_html_a439225059ec04496519dc5820e11428d"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#a439225059ec04496519dc5820e11428d">com.teragrep.cfe_16.event.JsonEvent.hasTime</a></div><div class="ttdeci">boolean hasTime()</div></div>
+<div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent_html_acf161cc997bfe5c6426c51ebbcaa1e2d"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1JsonEvent.html#acf161cc997bfe5c6426c51ebbcaa1e2d">com.teragrep.cfe_16.event.JsonEvent.asPayloadJsonNode</a></div><div class="ttdeci">JsonNode asPayloadJsonNode()</div></div>
 <div class="ttc" id="ainterfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime_html"><div class="ttname"><a href="interfacecom_1_1teragrep_1_1cfe__16_1_1event_1_1time_1_1HECTime.html">com.teragrep.cfe_16.event.time.HECTime</a></div><div class="ttdef"><b>Definition</b> <a href="HECTime_8java_source.html#l00050">HECTime.java:50</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
