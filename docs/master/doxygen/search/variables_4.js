@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['event_0',['event',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HttpEventData.html#a778abcc09b9b409403d702eefb2aa69f',1,'com::teragrep::cfe_16::bo::HttpEventData']]],
-  ['eventasstring_1',['eventAsString',['../classcom_1_1teragrep_1_1cfe__16_1_1event_1_1EventMessageImpl.html#aee0d029d9fbb12ba9f2ab29fec536712',1,'com::teragrep::cfe_16::event::EventMessageImpl']]],
-  ['eventdata1_2',['eventData1',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a23ae86fe3354daf54a2095a83ebf9808',1,'com::teragrep::cfe_16::ConverterTests']]],
-  ['eventdata2_3',['eventData2',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#a0fb3c5673032582167335b478a93bc5f',1,'com::teragrep::cfe_16::ConverterTests']]],
-  ['eventdata3_4',['eventData3',['../classcom_1_1teragrep_1_1cfe__16_1_1ConverterTests.html#aa0c58a2cc88ebb032c1670d71ea471ae',1,'com::teragrep::cfe_16::ConverterTests']]],
-  ['eventinjson_5',['eventinjson',['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendEventsIT.html#a360e937adea985b78333b9a898516d2c',1,'com.teragrep.cfe_16.it.SendEventsIT.eventInJson'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a41a296b28ef216e3da30994ab25c5f70',1,'com.teragrep.cfe_16.it.ServiceAndEventManagerIT.eventInJson']]],
-  ['eventmanager_6',['eventmanager',['../classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a2efb9b093e75788ceea32be8ea6de59d',1,'com.teragrep.cfe_16.service.HECServiceImpl.eventManager'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndEventManagerIT.html#a4086bd8ddf9aab520a92ea1a66378276',1,'com.teragrep.cfe_16.it.ServiceAndEventManagerIT.eventManager']]],
-  ['exceptionevent_7',['exceptionEvent',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionJsonResponse.html#adcdb4c697aa3e6898123ebbcfee9143a',1,'com::teragrep::cfe_16::response::ExceptionJsonResponse']]],
-  ['exceptioneventcontext_8',['exceptionEventContext',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionEvent.html#a52a486cb1358532d0880671a8da320d4',1,'com::teragrep::cfe_16::response::ExceptionEvent']]]
+  ['eventasstring_0',['eventAsString',['../classcom_1_1teragrep_1_1cfe__16_1_1event_1_1EventMessageImpl.html#aee0d029d9fbb12ba9f2ab29fec536712',1,'com::teragrep::cfe_16::event::EventMessageImpl']]],
+  ['eventdata_1',['eventData',['../classcom_1_1teragrep_1_1cfe__16_1_1SyslogBatch.html#a00175fbf6002ae8557e4da3535482eb3',1,'com::teragrep::cfe_16::SyslogBatch']]],
+  ['eventinjson_2',['eventinjson',['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendMultipleEventsIT.html#af8d5663888b61d0a1c4ae20cf094d3d8',1,'com.teragrep.cfe_16.it.SendMultipleEventsIT.eventInJson'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1SendSingleEventIT.html#aba57d3bad25040df84769c68f2bb2375',1,'com.teragrep.cfe_16.it.SendSingleEventIT.eventInJson'],['../classcom_1_1teragrep_1_1cfe__16_1_1it_1_1ServiceAndHECBatchIT.html#a94784f6345c43af1f3ad2b848ec4bd3d',1,'com.teragrep.cfe_16.it.ServiceAndHECBatchIT.eventInJson']]],
+  ['eventloop_3',['eventLoop',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a9fdec0099fedc5d184700e1f3ab09f3d',1,'com::teragrep::cfe_16::server::TestServer']]],
+  ['eventloopthread_4',['eventLoopThread',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a424a1fc8408ab9c22752849ef1a099ea',1,'com::teragrep::cfe_16::server::TestServer']]],
+  ['eventmessage_5',['eventMessage',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a9ec20342a305cc2bfda804d09a86d7ef',1,'com::teragrep::cfe_16::bo::HECRecordImpl']]],
+  ['exceptionevent_6',['exceptionEvent',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionJsonResponse.html#adcdb4c697aa3e6898123ebbcfee9143a',1,'com::teragrep::cfe_16::response::ExceptionJsonResponse']]],
+  ['exceptioneventcontext_7',['exceptionEventContext',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionEvent.html#a52a486cb1358532d0880671a8da320d4',1,'com::teragrep::cfe_16::response::ExceptionEvent']]],
+  ['executorservice_8',['executorService',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a2ce24f84a5425db9f5ff0c4464adfb43',1,'com::teragrep::cfe_16::server::TestServer']]]
 ];

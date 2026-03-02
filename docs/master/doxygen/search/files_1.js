@@ -6,7 +6,5 @@ var searchData=
   ['cleanrequestbodytests_2ejava_3',['CleanRequestBodyTests.java',['../CleanRequestBodyTests_8java.html',1,'']]],
   ['configuration_2ejava_4',['Configuration.java',['../Configuration_8java.html',1,'']]],
   ['configurationit_2ejava_5',['ConfigurationIT.java',['../ConfigurationIT_8java.html',1,'']]],
-  ['connectionfactory_2ejava_6',['ConnectionFactory.java',['../ConnectionFactory_8java.html',1,'']]],
-  ['converter_2ejava_7',['Converter.java',['../Converter_8java.html',1,'']]],
-  ['convertertests_2ejava_8',['ConverterTests.java',['../ConverterTests_8java.html',1,'']]]
+  ['connectionfactory_2ejava_6',['ConnectionFactory.java',['../ConnectionFactory_8java.html',1,'']]]
 ];

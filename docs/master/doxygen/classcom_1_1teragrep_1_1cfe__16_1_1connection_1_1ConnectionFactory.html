@@ -83,8 +83,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa85eacf389a5308b3f039585ffe714be" id="r_aa85eacf389a5308b3f039585ffe714be"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html">AbstractConnection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1ConnectionFactory.html#aa85eacf389a5308b3f039585ffe714be">createSender</a> (String type, String hostname, int port)  throws IOException </td></tr>
-<tr class="separator:aa85eacf389a5308b3f039585ffe714be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd7b0765e554ed9e2c89a22c70a18ea4" id="r_abd7b0765e554ed9e2c89a22c70a18ea4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html">AbstractConnection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1ConnectionFactory.html#abd7b0765e554ed9e2c89a22c70a18ea4">createConnection</a> (String type, String hostname, int port)  throws IOException </td></tr>
+<tr class="separator:abd7b0765e554ed9e2c89a22c70a18ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -95,8 +95,8 @@ Static Private Attributes</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="ConnectionFactory_8java_source.html#l00053">53</a> of file <a class="el" href="ConnectionFactory_8java_source.html">ConnectionFactory.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa85eacf389a5308b3f039585ffe714be" name="aa85eacf389a5308b3f039585ffe714be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa85eacf389a5308b3f039585ffe714be">&#9670;&#160;</a></span>createSender()</h2>
+<a id="abd7b0765e554ed9e2c89a22c70a18ea4" name="abd7b0765e554ed9e2c89a22c70a18ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd7b0765e554ed9e2c89a22c70a18ea4">&#9670;&#160;</a></span>createConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -105,7 +105,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html">AbstractConnection</a> com.teragrep.cfe_16.connection.ConnectionFactory.createSender </td>
+          <td class="memname">static <a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1AbstractConnection.html">AbstractConnection</a> com.teragrep.cfe_16.connection.ConnectionFactory.createConnection </td>
           <td>(</td>
           <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>type</em>, </td>
@@ -136,7 +136,7 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ConnectionFactory_8java_source.html#l00057">57</a> of file <a class="el" href="ConnectionFactory_8java_source.html">ConnectionFactory.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   57</span>                                                                                                             {</div>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>                                                                                                                 {</div>
 <div class="line"><span class="lineno">   58</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1ConnectionFactory.html#a38ccd25f54eb03daaf9ad7ec73e3bb02">LOGGER</a>.debug(<span class="stringliteral">&quot;Creating connection for type &lt;[{}]&gt; to &lt;[{}]&gt;:&lt;[{}]&gt;&quot;</span>, type, hostname, port);</div>
 <div class="line"><span class="lineno">   59</span>        <span class="keywordflow">if</span> (type.equalsIgnoreCase(<span class="stringliteral">&quot;UDP&quot;</span>)) {</div>
 <div class="line"><span class="lineno">   60</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> UdpConnection(hostname, port);</div>
