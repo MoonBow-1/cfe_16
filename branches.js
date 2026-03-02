@@ -1,1 +1,1 @@
-var branches = ["add-event-message", "event-time", "master", "fix-mocking", "remove-tcp-udp-connections", "doxygen_documentation"]
+var branches = ["add-event-message", "doxygen_documentation", "event-time", "master", "remove-tcp-udp-connections", "fix-mocking"]
