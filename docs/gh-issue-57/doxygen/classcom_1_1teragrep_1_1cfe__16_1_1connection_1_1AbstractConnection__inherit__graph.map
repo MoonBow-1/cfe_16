@@ -1,0 +1,11 @@
+<map id="com.teragrep.cfe_16.connection.AbstractConnection" name="com.teragrep.cfe_16.connection.AbstractConnection">
+<area shape="rect" id="Node000001" title="An abstract connection class for sending batch messages." alt="" coords="276,69,511,109"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1RelpConnection.html" title=" " alt="" coords="559,5,793,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="495,64,587,43,588,48,496,69"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1TcpConnection.html" title=" " alt="" coords="559,69,793,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="525,87,558,87,558,92,525,92"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1connection_1_1UdpConnection.html" title=" " alt="" coords="559,133,793,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="496,110,588,131,587,136,495,115"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,77,228,102"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,87,276,87,276,92,242,92"/>
+</map>
