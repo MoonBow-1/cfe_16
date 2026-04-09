@@ -1,0 +1,18 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.State.getCurrentAckValue" name="com.teragrep.cfe_16.Acknowledgements.State.getCurrentAckValue">
+<area shape="rect" id="Node000001" title=" " alt="" coords="761,101,1053,141"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a0a81fc7b69c7638df2b4e6fff3744514" title="Returns the current Ack value for given token and channel." alt="" coords="377,69,691,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="747,110,691,105,691,100,748,105"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5307dc12a64ca957ae24430d09b372e1" title=" " alt="" coords="355,133,713,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="748,138,714,141,713,135,747,132"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#a28a8273d6b136df113665a5032aa8ca3" title=" " alt="" coords="5,5,307,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="401,70,274,48,275,43,402,64"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#afc4e73cfb46d7fbc19edc8d2c177e6bf" title=" " alt="" coords="5,69,307,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="364,92,307,92,307,87,364,87"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a9ed9a0d5772181625f00edce5a2c611d" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="51,133,261,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="402,114,262,138,261,133,401,109"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="364,130,353,123,336,108,328,91,320,74,305,59,283,48,285,43,308,55,325,71,333,88,341,105,356,119,367,125"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="401,134,274,112,275,107,402,128"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="341,156,262,156,262,151,341,151"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1it_1_1AcknowledgementsIT.html#ad7d230669d75e6c83a2d4364e6ce1a10" title=" " alt="" coords="5,197,307,237"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="402,178,275,200,274,195,401,173"/>
+</map>
