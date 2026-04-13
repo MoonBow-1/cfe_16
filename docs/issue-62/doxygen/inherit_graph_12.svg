@@ -11,10 +11,10 @@
 <!-- Node0 -->
 <g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_Node000000"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1exceptionhandling_1_1HECErrorResponse.html" target="_top" xlink:title=" ">
+<g id="a_Node000000"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1exceptionhandling_1_1HECExceptionHandler.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="213,-30 0,-30 0,0 213,0 213,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.exceptionhandling.</text>
-<text text-anchor="middle" x="106.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">HECErrorResponse</text>
+<text text-anchor="middle" x="106.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">HECExceptionHandler</text>
 </a>
 </g>
 </g>
