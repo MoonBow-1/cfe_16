@@ -206,12 +206,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                + <span class="stringliteral">&quot;{\&quot;sourcetype\&quot;:\&quot;access\&quot;, \&quot;source\&quot;:\&quot;/var/log/access.log\&quot;, \&quot;event\&quot;: &quot;</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                + <span class="stringliteral">&quot;{\&quot;message\&quot;:\&quot;Access log test message 2\&quot;}}&quot;</span>;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; variable = Assertions</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; responseEntity = Assertions</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                .assertDoesNotThrow(() -&gt; this.hecRestController.sendEvents(request1, eventInJson, channel1));</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">final</span> AcknowledgedJsonResponse expectedResponse = <span class="keyword">new</span> AcknowledgedJsonResponse(<span class="stringliteral">&quot;Success&quot;</span>, 0);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; jsonNodeResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        Assertions.assertEquals(jsonNodeResponseEntity, variable);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        Assertions.assertEquals(expectedResponseEntity, responseEntity);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    @Test</div>
@@ -247,12 +247,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        multiValueMap.add(<span class="stringliteral">&quot;channel&quot;</span>, channel1);</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        multiValueMap.add(eventInJson, <span class="keyword">null</span>);</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; variable = Assertions</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; responseEntity = Assertions</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                .assertDoesNotThrow(() -&gt; this.hecRestController.sendEvents(request1, multiValueMap, channel1));</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keyword">final</span> AcknowledgedJsonResponse expectedResponse = <span class="keyword">new</span> AcknowledgedJsonResponse(<span class="stringliteral">&quot;Success&quot;</span>, 0);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; jsonNodeResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        Assertions.assertEquals(jsonNodeResponseEntity, variable);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        Assertions.assertEquals(expectedResponseEntity, responseEntity);</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    @Test</div>
@@ -268,12 +268,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keyword">final</span> MultiValueMap&lt;String, String&gt; multiValueMap = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        multiValueMap.add(eventInJson, <span class="keyword">null</span>);</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; variable = Assertions</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; responseEntity = Assertions</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                .assertDoesNotThrow(() -&gt; this.hecRestController.sendEvents(request1, multiValueMap, <span class="keyword">null</span>));</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keyword">final</span> JsonResponse expectedResponse = <span class="keyword">new</span> JsonResponse(<span class="stringliteral">&quot;Success&quot;</span>);</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; jsonNodeResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keyword">final</span> ResponseEntity&lt;JsonNode&gt; expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        Assertions.assertEquals(jsonNodeResponseEntity, variable);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        Assertions.assertEquals(expectedResponseEntity, responseEntity);</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    }</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
 </div><!-- fragment --></div><!-- contents -->
