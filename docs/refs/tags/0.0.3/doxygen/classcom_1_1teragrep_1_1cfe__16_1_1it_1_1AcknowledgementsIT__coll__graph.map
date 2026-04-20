@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.it.AcknowledgementsIT" name="com.teragrep.cfe_16.it.AcknowledgementsIT">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,319,208"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html" title=" " alt="" coords="18,95,306,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,134,165,182,159,182,159,134"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="42,13,125,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,46,153,93,149,97,102,49"/>
+<area shape="rect" id="Node000004" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1LifeCycle.html" title="An interface that own resources like threads for doing graceful shutdown." alt="" coords="149,5,333,45"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="214,57,175,96,172,93,210,53"/>
+</map>
