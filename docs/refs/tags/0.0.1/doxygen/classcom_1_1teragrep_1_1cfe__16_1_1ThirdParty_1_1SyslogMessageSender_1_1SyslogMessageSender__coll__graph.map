@@ -1,0 +1,7 @@
+<map id="com.teragrep.cfe_16.ThirdParty.SyslogMessageSender.SyslogMessageSender" name="com.teragrep.cfe_16.ThirdParty.SyslogMessageSender.SyslogMessageSender">
+<area shape="rect" id="Node000001" title="See RFC 6587 &#45; Transmission of Syslog Messages over TCP" alt="" coords="81,79,331,133"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,228,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,38,181,77,177,81,137,42"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="252,5,339,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="275,42,235,81,231,77,272,38"/>
+</map>
