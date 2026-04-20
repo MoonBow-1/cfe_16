@@ -43,5 +43,5 @@ jobs:
 
       - name: 'Build Image'
         run: |
-            docker buildx build --output type=docker --tag ghcr.io/${{ env.REPO_LC }}:${{ github.event.workflow_run.head_branch }} --tag ghcr.io/${{ env.REPO_LC }}:latest . -f ./Dockerfile
+            docker buildx build --output type=docker --tag ghcr.io/${{ env.REPO_LC }}/app:${{ github.event.workflow_run.head_branch }} --tag ghcr.io/${{ env.REPO_LC }}:latest . -f ./Dockerfile
             docker push ghcr.io/${{ env.REPO_LC }}/app --all-tags
