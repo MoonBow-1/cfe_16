@@ -1,0 +1,46 @@
+<map id="com.teragrep.cfe_16.TestClient.run" name="com.teragrep.cfe_16.TestClient.run">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,277,192,317"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ab44ab6c8d2bd008181c5e31a2a8dfaa3" title=" " alt="" coords="1125,101,1312,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,275,120,233,148,180,187,127,211,105,239,86,297,59,359,38,422,22,486,11,551,5,617,3,746,9,868,25,979,47,1074,71,1149,94,1147,99,1073,76,978,52,867,30,745,14,617,8,552,10,487,17,423,27,360,43,299,64,241,91,215,109,191,131,152,183,125,235,109,277"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a9c2d967534908ef205ef5d27459ffb2a" title=" " alt="" coords="279,165,497,220"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,274,239,230,265,221,267,226,241,235,141,279"/>
+<area shape="rect" id="Node000013" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a69a3a4168d422752fdaaadd5c5cd790f" title=" " alt="" coords="265,245,511,285"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="192,284,250,277,251,283,193,289"/>
+<area shape="rect" id="Node000014" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ad130088aff54cc3f8c81520b483c5e0b" title=" " alt="" coords="295,309,481,349"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="193,304,281,314,281,320,192,310"/>
+<area shape="rect" id="Node000015" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a28b7521af8099aa24e934d2d7f219305" title=" " alt="" coords="275,373,501,413"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="139,314,187,337,241,358,269,367,268,372,239,363,185,342,137,319"/>
+<area shape="rect" id="Node000016" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a243cd15a09a303384ac53f15266c45e7" title=" " alt="" coords="275,437,501,492"/>
+<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="118,315,170,369,204,398,241,422,264,433,262,438,239,427,201,402,166,373,114,319"/>
+<area shape="rect" id="Node000017" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ab21f9e0639df4e95228404e94a6981a8" title=" " alt="" coords="240,517,536,557"/>
+<area shape="poly" id="edge23_Node000001_Node000017" title=" " alt="" coords="110,316,128,356,156,407,194,459,216,483,242,502,251,508,248,513,238,507,213,486,190,463,151,410,123,359,105,318"/>
+<area shape="rect" id="Node000018" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ac04d2efab8deede690e209bd346c4aa3" title=" " alt="" coords="249,101,527,141"/>
+<area shape="poly" id="edge25_Node000001_Node000018" title=" " alt="" coords="112,275,162,212,198,179,239,150,253,143,255,148,241,155,201,183,166,216,116,278"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a9e085118b18a5952fb6c4e702b0bbc8b" title=" " alt="" coords="584,309,816,349"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="498,216,537,230,603,264,660,299,657,303,601,268,535,235,496,221"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#af1e0ff46d1a0eb1865bc80ea89247cc8" title="Verifies that the HTTP reply status code was what it was supposed to me." alt="" coords="869,229,1073,269"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="768,306,888,270,890,275,769,311"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a23f3e7e41dc4fd7b2f8a35dd386e5a6e" title=" " alt="" coords="1125,353,1312,393"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="733,346,792,379,828,395,865,406,923,417,970,419,1077,406,1140,394,1141,399,1078,411,970,424,923,422,863,411,826,400,790,384,730,351"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#afa2ceaba677411954a4210a8e6d5cd49" title="Checks that the TCP connection is open, otherwis a new connection is created and returned." alt="" coords="869,101,1072,141"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="712,307,771,231,814,188,863,150,874,144,876,149,865,155,817,192,775,235,717,310"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a50b2f87f7fce871bb32c52de3a19dd55" title=" " alt="" coords="877,357,1064,397"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="814,346,865,355,864,360,813,351"/>
+<area shape="rect" id="Node000009" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a0d90aaf874c60e700371e09e00828eaa" title="Advances buffered reader through HTTP headers." alt="" coords="877,293,1064,333"/>
+<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="816,319,863,316,864,322,816,324"/>
+<area shape="rect" id="Node000010" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a4bd78c601bcc5d6c6bafc899f8ffe1e6" title="Reads the reply line from the servere." alt="" coords="876,471,1065,511"/>
+<area shape="poly" id="edge12_Node000004_Node000010" title=" " alt="" coords="725,347,786,398,825,425,865,450,894,464,891,469,863,455,822,430,783,402,722,351"/>
+<area shape="rect" id="Node000011" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#af26faca7da3952332135d35bb9827e34" title="Does a HTTP request and keeps connection open." alt="" coords="877,535,1064,575"/>
+<area shape="poly" id="edge13_Node000004_Node000011" title=" " alt="" coords="715,348,738,385,772,432,815,480,866,521,875,527,873,532,862,526,812,484,768,435,734,388,711,351"/>
+<area shape="rect" id="Node000012" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#a98be0c11009e1193c90cbf91576cc66a" title="Validates the response body line against the given regural expression." alt="" coords="864,165,1077,205"/>
+<area shape="poly" id="edge14_Node000004_Node000012" title=" " alt="" coords="724,306,785,261,863,214,879,207,881,212,865,219,788,265,727,310"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="1072,118,1112,118,1112,123,1072,123"/>
+<area shape="poly" id="edge11_Node000009_Node000002" title=" " alt="" coords="1053,290,1076,278,1113,250,1146,216,1195,151,1200,154,1150,219,1116,254,1079,283,1056,295"/>
+<area shape="poly" id="edge10_Node000009_Node000006" title=" " alt="" coords="1055,330,1123,347,1122,352,1053,335"/>
+<area shape="poly" id="edge16_Node000013_Node000004" title=" " alt="" coords="487,282,589,303,588,309,486,287"/>
+<area shape="poly" id="edge18_Node000014_Node000004" title=" " alt="" coords="482,326,570,326,570,331,482,331"/>
+<area shape="poly" id="edge20_Node000015_Node000004" title=" " alt="" coords="486,370,588,349,589,354,487,375"/>
+<area shape="poly" id="edge22_Node000016_Node000004" title=" " alt="" coords="500,435,535,422,601,389,657,354,660,359,603,394,537,427,502,440"/>
+<area shape="poly" id="edge24_Node000017_Node000004" title=" " alt="" coords="509,514,535,502,579,471,619,432,652,393,676,359,681,362,656,396,623,436,583,475,537,507,512,519"/>
+<area shape="poly" id="edge26_Node000018_Node000004" title=" " alt="" coords="512,138,537,150,583,183,623,222,656,261,681,296,676,299,652,264,619,225,579,187,535,155,509,143"/>
+</map>
