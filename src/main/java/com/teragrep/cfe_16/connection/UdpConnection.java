@@ -45,39 +45,26 @@
  */
 package com.teragrep.cfe_16.connection;
 
-import com.cloudbees.syslog.sender.UdpSyslogMessageSender;
 import com.teragrep.rlo_14.SyslogMessage;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class UdpConnection extends AbstractConnection {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UdpConnection.class);
-    private final UdpSyslogMessageSender sender;
-
     public UdpConnection(String hostname, int port) {
         super(hostname, port);
-        this.sender = new UdpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
     }
 
     @Override
     public void sendMessages(List<SyslogMessage> syslogMessages) {
-
     }
 
     @Override
     public void sendMessage(SyslogMessage syslogMessage) {
-
     }
 
     @Override
     public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
     }
 }

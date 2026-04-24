@@ -45,24 +45,15 @@
  */
 package com.teragrep.cfe_16.connection;
 
-import com.cloudbees.syslog.sender.TcpSyslogMessageSender;
 import com.teragrep.rlo_14.SyslogMessage;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class TcpConnection extends AbstractConnection {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TcpConnection.class);
-    private final TcpSyslogMessageSender sender;
-
     public TcpConnection(String hostname, int port) {
         super(hostname, port);
-        this.sender = new TcpSyslogMessageSender();
-        this.sender.setSyslogServerHostname(this.hostname);
-        this.sender.setSyslogServerPort(this.port);
     }
 
     @Override
@@ -75,12 +66,8 @@ public class TcpConnection extends AbstractConnection {
 
     @Override
     public void close() throws IOException {
-        LOGGER.debug("Closing sender");
-        this.sender.close();
     }
 
     public void setSsl(boolean ssl) {
-        LOGGER.debug("Set Ssl to <{}>", ssl);
-        this.sender.setSsl(ssl);
     }
 }
