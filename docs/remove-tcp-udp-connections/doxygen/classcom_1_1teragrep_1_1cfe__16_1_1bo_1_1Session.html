@@ -136,7 +136,7 @@ Static Private Attributes</h2></td></tr>
 <div class="textblock"><p>A Session keeps track of channels that are contained inside one Session. </p>
 <p>This class is not thread-safe. </p>
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00058">58</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00057">57</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a99c3d3c74fd4bfd7831d652da45f3957" name="a99c3d3c74fd4bfd7831d652da45f3957"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99c3d3c74fd4bfd7831d652da45f3957">&#9670;&#160;</a></span>Session() <span class="overload">[1/2]</span></h2>
@@ -164,20 +164,20 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00075">75</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   75</span>                                                               {</div>
-<div class="line"><span class="lineno">   76</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">LOGGER</a>.info(<span class="stringliteral">&quot;Creating new session with channel &lt;{}&gt;&quot;</span>, channel);</div>
-<div class="line"><span class="lineno">   77</span>        this.channels = Collections.synchronizedSet(<span class="keyword">new</span> HashSet&lt;String&gt;());</div>
-<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">if</span> (channel != <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">   79</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">LOGGER</a>.info(<span class="stringliteral">&quot;Adding channel &lt;[{}]&gt;&quot;</span>, channel);</div>
-<div class="line"><span class="lineno">   80</span>            this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.add(channel);</div>
-<div class="line"><span class="lineno">   81</span>        }</div>
-<div class="line"><span class="lineno">   82</span>        this.authenticationToken = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>;</div>
-<div class="line"><span class="lineno">   83</span>        this.lastTouchedTimestamp = System.currentTimeMillis();</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a3c770e37b40df3d20540e581cd1f838b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">com.teragrep.cfe_16.bo.Session.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00061">Session.java:61</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aa511e3d772c94adc80edf434dac0d26e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">com.teragrep.cfe_16.bo.Session.channels</a></div><div class="ttdeci">Set&lt; String &gt; channels</div><div class="ttdoc">Channels of this Session object.</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00065">Session.java:65</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aa5f1b35c35b8d76a7703c2d7878a6f97"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">com.teragrep.cfe_16.bo.Session.authenticationToken</a></div><div class="ttdeci">String authenticationToken</div><div class="ttdoc">Authentication key of this Session.</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00070">Session.java:70</a></div></div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00074">74</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                                               {</div>
+<div class="line"><span class="lineno">   75</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">LOGGER</a>.info(<span class="stringliteral">&quot;Creating new session with channel &lt;{}&gt;&quot;</span>, channel);</div>
+<div class="line"><span class="lineno">   76</span>        this.channels = Collections.synchronizedSet(<span class="keyword">new</span> HashSet&lt;String&gt;());</div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">if</span> (channel != <span class="keyword">null</span>) {</div>
+<div class="line"><span class="lineno">   78</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">LOGGER</a>.info(<span class="stringliteral">&quot;Adding channel &lt;[{}]&gt;&quot;</span>, channel);</div>
+<div class="line"><span class="lineno">   79</span>            this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.add(channel);</div>
+<div class="line"><span class="lineno">   80</span>        }</div>
+<div class="line"><span class="lineno">   81</span>        this.authenticationToken = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>;</div>
+<div class="line"><span class="lineno">   82</span>        this.lastTouchedTimestamp = System.currentTimeMillis();</div>
+<div class="line"><span class="lineno">   83</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a3c770e37b40df3d20540e581cd1f838b"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a3c770e37b40df3d20540e581cd1f838b">com.teragrep.cfe_16.bo.Session.LOGGER</a></div><div class="ttdeci">static final Logger LOGGER</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00060">Session.java:60</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aa511e3d772c94adc80edf434dac0d26e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">com.teragrep.cfe_16.bo.Session.channels</a></div><div class="ttdeci">Set&lt; String &gt; channels</div><div class="ttdoc">Channels of this Session object.</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00064">Session.java:64</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aa5f1b35c35b8d76a7703c2d7878a6f97"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">com.teragrep.cfe_16.bo.Session.authenticationToken</a></div><div class="ttdeci">String authenticationToken</div><div class="ttdoc">Authentication key of this Session.</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00069">Session.java:69</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -197,10 +197,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00086">86</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   86</span>                                               {</div>
-<div class="line"><span class="lineno">   87</span>        <span class="keyword">this</span>(<span class="keyword">null</span>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>);</div>
-<div class="line"><span class="lineno">   88</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00085">85</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   85</span>                                               {</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keyword">this</span>(<span class="keyword">null</span>, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>);</div>
+<div class="line"><span class="lineno">   87</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -221,10 +221,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00094">94</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>                                              {</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.add(channel);</div>
-<div class="line"><span class="lineno">   96</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00093">93</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>                                              {</div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.add(channel);</div>
+<div class="line"><span class="lineno">   95</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -244,10 +244,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00098">98</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   98</span>                                                    {</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.contains(channel);</div>
-<div class="line"><span class="lineno">  100</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00097">97</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   97</span>                                                    {</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.contains(channel);</div>
+<div class="line"><span class="lineno">   99</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -267,24 +267,24 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00115">115</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  115</span>                                      {</div>
-<div class="line"><span class="lineno">  116</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> == obj)</div>
-<div class="line"><span class="lineno">  117</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">if</span> (obj == <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  119</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  120</span>        <span class="keywordflow">if</span> (getClass() != obj.getClass())</div>
-<div class="line"><span class="lineno">  121</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  122</span>        <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">Session</a> other = (<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">Session</a>) obj;</div>
-<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a> == <span class="keyword">null</span>) {</div>
-<div class="line"><span class="lineno">  124</span>            <span class="keywordflow">if</span> (other.authenticationToken != <span class="keyword">null</span>)</div>
-<div class="line"><span class="lineno">  125</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  126</span>        }</div>
-<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>.equals(other.authenticationToken))</div>
-<div class="line"><span class="lineno">  128</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  129</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  130</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a99c3d3c74fd4bfd7831d652da45f3957"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">com.teragrep.cfe_16.bo.Session.Session</a></div><div class="ttdeci">Session(String channel, String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00075">Session.java:75</a></div></div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00114">114</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  114</span>                                      {</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> == obj)</div>
+<div class="line"><span class="lineno">  116</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">if</span> (obj == <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  118</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">if</span> (getClass() != obj.getClass())</div>
+<div class="line"><span class="lineno">  120</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  121</span>        <a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">Session</a> other = (<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">Session</a>) obj;</div>
+<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a> == <span class="keyword">null</span>) {</div>
+<div class="line"><span class="lineno">  123</span>            <span class="keywordflow">if</span> (other.authenticationToken != <span class="keyword">null</span>)</div>
+<div class="line"><span class="lineno">  124</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  125</span>        }</div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>.equals(other.authenticationToken))</div>
+<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  129</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a99c3d3c74fd4bfd7831d652da45f3957"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a99c3d3c74fd4bfd7831d652da45f3957">com.teragrep.cfe_16.bo.Session.Session</a></div><div class="ttdeci">Session(String channel, String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00074">Session.java:74</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -303,10 +303,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00090">90</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                           {</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>;</div>
-<div class="line"><span class="lineno">   92</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00089">89</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>                                           {</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>;</div>
+<div class="line"><span class="lineno">   91</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -325,11 +325,11 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00141">141</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  141</span>                                          {</div>
-<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a74cf4b49f34735c151e8f83b2f4d2464">lastTouchedTimestamp</a>;</div>
-<div class="line"><span class="lineno">  143</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a74cf4b49f34735c151e8f83b2f4d2464"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a74cf4b49f34735c151e8f83b2f4d2464">com.teragrep.cfe_16.bo.Session.lastTouchedTimestamp</a></div><div class="ttdeci">long lastTouchedTimestamp</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00072">Session.java:72</a></div></div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00140">140</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  140</span>                                          {</div>
+<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a74cf4b49f34735c151e8f83b2f4d2464">lastTouchedTimestamp</a>;</div>
+<div class="line"><span class="lineno">  142</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_a74cf4b49f34735c151e8f83b2f4d2464"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#a74cf4b49f34735c151e8f83b2f4d2464">com.teragrep.cfe_16.bo.Session.lastTouchedTimestamp</a></div><div class="ttdeci">long lastTouchedTimestamp</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00071">Session.java:71</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -348,14 +348,14 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00107">107</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  107</span>                          {</div>
-<div class="line"><span class="lineno">  108</span>        <span class="keyword">final</span> <span class="keywordtype">int</span> prime = 31;</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordtype">int</span> result = 1;</div>
-<div class="line"><span class="lineno">  110</span>        result = prime * result + ((this.authenticationToken == <span class="keyword">null</span>) ? 0 : this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aaf36c3b5a81de0e034b9479d6f51c52e">hashCode</a>());</div>
-<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  112</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aaf36c3b5a81de0e034b9479d6f51c52e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aaf36c3b5a81de0e034b9479d6f51c52e">com.teragrep.cfe_16.bo.Session.hashCode</a></div><div class="ttdeci">int hashCode()</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00107">Session.java:107</a></div></div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00106">106</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>                          {</div>
+<div class="line"><span class="lineno">  107</span>        <span class="keyword">final</span> <span class="keywordtype">int</span> prime = 31;</div>
+<div class="line"><span class="lineno">  108</span>        <span class="keywordtype">int</span> result = 1;</div>
+<div class="line"><span class="lineno">  109</span>        result = prime * result + ((this.authenticationToken == <span class="keyword">null</span>) ? 0 : this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa5f1b35c35b8d76a7703c2d7878a6f97">authenticationToken</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aaf36c3b5a81de0e034b9479d6f51c52e">hashCode</a>());</div>
+<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  111</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session_html_aaf36c3b5a81de0e034b9479d6f51c52e"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aaf36c3b5a81de0e034b9479d6f51c52e">com.teragrep.cfe_16.bo.Session.hashCode</a></div><div class="ttdeci">int hashCode()</div><div class="ttdef"><b>Definition</b> <a href="Session_8java_source.html#l00106">Session.java:106</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -375,10 +375,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00102">102</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                 {</div>
-<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.remove(channel);</div>
-<div class="line"><span class="lineno">  104</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00101">101</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  101</span>                                                 {</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">return</span> this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1Session.html#aa511e3d772c94adc80edf434dac0d26e">channels</a>.remove(channel);</div>
+<div class="line"><span class="lineno">  103</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,10 +397,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00133">133</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  133</span>                             {</div>
-<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;channels=&quot;</span> + this.channels + <span class="stringliteral">&quot;, authenticationToken=&quot;</span> + this.authenticationToken + <span class="stringliteral">&quot;]&quot;</span>;</div>
-<div class="line"><span class="lineno">  135</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00132">132</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                             {</div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;channels=&quot;</span> + this.channels + <span class="stringliteral">&quot;, authenticationToken=&quot;</span> + this.authenticationToken + <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><span class="lineno">  134</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -419,10 +419,10 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00137">137</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  137</span>                        {</div>
-<div class="line"><span class="lineno">  138</span>        this.lastTouchedTimestamp = System.currentTimeMillis();</div>
-<div class="line"><span class="lineno">  139</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00136">136</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  136</span>                        {</div>
+<div class="line"><span class="lineno">  137</span>        this.lastTouchedTimestamp = System.currentTimeMillis();</div>
+<div class="line"><span class="lineno">  138</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -449,7 +449,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Authentication key of this Session. </p>
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00070">70</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00069">69</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 
 </div>
 </div>
@@ -475,7 +475,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Channels of this Session object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00065">65</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00064">64</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00060">60</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00059">59</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 
 </div>
 </div>
@@ -523,7 +523,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00072">72</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00071">71</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 
 </div>
 </div>
@@ -547,7 +547,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00061">61</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8java_source.html#l00060">60</a> of file <a class="el" href="Session_8java_source.html">Session.java</a>.</p>
 
 </div>
 </div>

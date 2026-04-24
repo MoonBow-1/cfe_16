@@ -1,11 +1,38 @@
 <map id="com.teragrep.cfe_16.service.HECServiceImpl.sendEvents" name="com.teragrep.cfe_16.service.HECServiceImpl.sendEvents">
-<area shape="rect" id="Node000001" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="5,101,216,141"/>
-<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a10eb9f8a23f0280db1b6662352fb5022" title="Returns an existing Session object based on authentication token." alt="" coords="264,5,475,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,99,263,55,286,47,287,52,265,60,158,104"/>
-<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31" title=" " alt="" coords="265,69,473,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="216,106,252,101,252,106,216,111"/>
-<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279" title=" " alt="" coords="271,133,468,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="216,132,257,137,257,142,216,137"/>
-<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8" title=" " alt="" coords="271,197,468,237"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="158,139,265,183,287,191,286,196,263,188,156,144"/>
+<area shape="rect" id="Node000001" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="5,259,216,299"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a8c6f0dff735fde04e0bc670136eb57d2" title=" " alt="" coords="671,31,1049,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,258,136,216,166,162,208,109,234,85,263,66,330,37,401,18,474,7,547,3,618,4,683,10,790,25,790,31,682,15,617,10,547,8,475,12,402,23,332,42,265,71,237,90,212,112,171,165,141,218,122,260"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a954c7b6f37e4bcd616879315307d85bb" title="Adds a new Ack object for given channel." alt="" coords="273,81,613,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="122,258,145,226,177,187,217,148,263,117,281,109,283,114,265,122,220,152,181,190,149,229,127,261"/>
+<area shape="rect" id="Node000005" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a0a81fc7b69c7638df2b4e6fff3744514" title="Returns the current Ack value for given token and channel." alt="" coords="287,131,600,171"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="136,257,192,218,227,198,263,181,287,173,289,178,265,186,229,202,195,222,139,261"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a10eb9f8a23f0280db1b6662352fb5022" title="Returns an existing Session object based on authentication token." alt="" coords="338,195,549,235"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="205,257,263,245,324,233,325,239,265,250,206,262"/>
+<area shape="rect" id="Node000009" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31" title=" " alt="" coords="339,259,547,299"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="216,277,325,277,325,282,216,282"/>
+<area shape="rect" id="Node000010" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5307dc12a64ca957ae24430d09b372e1" title=" " alt="" coords="264,323,623,363"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="206,297,265,309,315,318,314,324,263,314,205,302"/>
+<area shape="rect" id="Node000015" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a06622ee4fcccb291cf0c97cb55189d83" title="This method has to be called first before calling any other Ack related methods." alt="" coords="269,387,617,427"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="139,298,195,337,229,356,265,373,289,381,287,386,263,378,227,361,192,341,136,302"/>
+<area shape="rect" id="Node000016" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279" title=" " alt="" coords="345,451,542,491"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="127,298,149,330,181,368,220,406,265,437,297,451,332,460,330,465,296,456,263,442,217,410,177,371,145,333,123,301"/>
+<area shape="rect" id="Node000017" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8" title=" " alt="" coords="345,515,542,555"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="122,298,141,342,171,398,213,455,238,480,265,501,297,517,331,527,330,532,295,522,263,506,234,484,209,458,166,401,136,344,117,301"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#ad9d95fec84a00a574b21981fc673f10a" title=" " alt="" coords="1097,202,1389,242"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1012,54,1050,66,1100,93,1146,126,1216,190,1213,194,1143,130,1097,97,1048,71,1011,59"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#aa1809213ec400ce2fccaff6cab3e244b" title=" " alt="" coords="714,145,1006,185"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="600,154,700,157,700,162,600,159"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a0287e001c86209cd70554675e6dbf9eb" title="A private Accessor for the State object indexed by the given auth token and channel." alt="" coords="703,81,1017,121"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="600,130,689,119,690,124,600,135"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="598,321,621,309,636,294,644,278,652,260,669,245,702,233,744,224,849,213,968,210,1084,212,1083,217,968,215,849,218,744,229,703,238,672,250,656,263,649,280,641,297,624,314,601,326"/>
+<area shape="poly" id="edge14_Node000010_Node000006" title=" " alt="" coords="603,321,621,309,633,297,639,285,644,257,649,229,656,215,669,201,700,183,703,187,672,206,661,218,654,230,649,258,644,286,637,300,624,313,606,325"/>
+<area shape="rect" id="Node000011" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a7a9570efce9732f5f674e9ea85017439" title=" " alt="" coords="699,259,1021,299"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="574,321,715,299,716,304,575,326"/>
+<area shape="rect" id="Node000012" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#a7d72966efb4505634712c4c64c96440c" title=" " alt="" coords="714,323,1006,363"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="623,341,700,341,700,346,623,346"/>
+<area shape="rect" id="Node000013" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#ab460c6226ddd97252506f01f11cf9f3d" title=" " alt="" coords="714,387,1006,427"/>
+<area shape="poly" id="edge15_Node000010_Node000013" title=" " alt="" coords="575,361,716,383,715,388,574,366"/>
+<area shape="rect" id="Node000014" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements_1_1State.html#a2ce209b2faca53446cccd40bc4de2726" title=" " alt="" coords="714,451,1006,491"/>
+<area shape="poly" id="edge16_Node000010_Node000014" title=" " alt="" coords="601,361,624,373,641,389,649,406,657,423,672,437,702,452,700,457,669,442,652,426,644,409,637,392,621,378,598,366"/>
+<area shape="poly" id="edge11_Node000011_Node000003" title=" " alt="" coords="994,257,1095,242,1096,247,995,262"/>
 </map>

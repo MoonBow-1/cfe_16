@@ -3,6 +3,7 @@ com.teragrep.cfe_16.bo
 com.teragrep.cfe_16.config
 com.teragrep.cfe_16.connection
 com.teragrep.cfe_16.event
+com.teragrep.cfe_16.event.time
 com.teragrep.cfe_16.exceptionhandling
 com.teragrep.cfe_16.response
 com.teragrep.cfe_16.rest
