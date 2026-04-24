@@ -45,7 +45,7 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import com.cloudbees.syslog.SDElement;
+import com.teragrep.rlo_14.SDElement;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

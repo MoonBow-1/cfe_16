@@ -45,7 +45,7 @@
  */
 package com.teragrep.cfe_16;
 
-import com.cloudbees.syslog.SyslogMessage;
+import com.teragrep.rlo_14.SyslogMessage;
 import com.teragrep.cfe_16.bo.HECRecord;
 import java.util.ArrayList;
 import java.util.List;

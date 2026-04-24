@@ -45,11 +45,11 @@
  */
 package com.teragrep.cfe_16;
 
-import com.cloudbees.syslog.Facility;
-import com.cloudbees.syslog.SDElement;
-import com.cloudbees.syslog.SDParam;
-import com.cloudbees.syslog.Severity;
-import com.cloudbees.syslog.SyslogMessage;
+import com.teragrep.rlo_14.Facility;
+import com.teragrep.rlo_14.SDElement;
+import com.teragrep.rlo_14.SDParam;
+import com.teragrep.rlo_14.Severity;
+import com.teragrep.rlo_14.SyslogMessage;
 import tools.jackson.databind.ObjectMapper;
 import com.teragrep.cfe_16.bo.HeaderInfo;
 import com.teragrep.cfe_16.bo.HECRecordImpl;
@@ -215,7 +215,8 @@ public class EventDataToSyslogMessageTest {
                         expectedSyslogMessage2.getFacility(), returnedMessage2.getFacility(), "Facility should be USER"
                 );
 
-        Assertions.assertNull(expectedSyslogMessage2.getTimestamp(), "Timestamp should be null");
+        Assertions
+                .assertEquals(SyslogMessage.NILVALUE, expectedSyslogMessage2.getTimestamp(), "Timestamp should be null");
         Assertions
                 .assertEquals(
                         expectedSyslogMessage2.getMsg().toString(), returnedMessage2.getMsg().toString(),
@@ -308,7 +309,8 @@ public class EventDataToSyslogMessageTest {
                         expectedSyslogMessage3.getSeverity(), returnedMessage3.getSeverity(),
                         "Severity should be INFORMATIONAL"
                 );
-        Assertions.assertNull(expectedSyslogMessage3.getTimestamp(), "Timestamp should be null");
+        Assertions
+                .assertEquals(SyslogMessage.NILVALUE, expectedSyslogMessage3.getTimestamp(), "Timestamp should be null");
         Assertions
                 .assertEquals(
                         expectedSyslogMessage3.getMsg().toString(), returnedMessage3.getMsg().toString(),

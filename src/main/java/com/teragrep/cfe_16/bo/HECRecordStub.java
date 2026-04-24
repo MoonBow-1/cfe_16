@@ -45,10 +45,10 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import com.cloudbees.syslog.SyslogMessage;
 import com.teragrep.cfe_16.event.EventMessage;
 import com.teragrep.cfe_16.event.time.HECTime;
 import com.teragrep.cfe_16.event.time.HECTimeStub;
+import com.teragrep.rlo_14.SyslogMessage;
 import java.util.Objects;
 
 public final class HECRecordStub implements HECRecord {

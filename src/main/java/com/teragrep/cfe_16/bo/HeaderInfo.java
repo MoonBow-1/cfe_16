@@ -45,7 +45,7 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import com.cloudbees.syslog.SDElement;
+import com.teragrep.rlo_14.SDElement;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
 import org.slf4j.Logger;

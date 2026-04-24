@@ -45,7 +45,7 @@
  */
 package com.teragrep.cfe_16.connection;
 
-import com.cloudbees.syslog.SyslogMessage;
+import com.teragrep.rlo_14.SyslogMessage;
 import com.teragrep.rlp_01.RelpBatch;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class RelpConnection extends AbstractConnection {
+public final class RelpConnection extends AbstractConnection {
 
     private final com.teragrep.rlp_01.RelpConnection connection;
     private static final Logger LOGGER = LoggerFactory.getLogger(RelpConnection.class);

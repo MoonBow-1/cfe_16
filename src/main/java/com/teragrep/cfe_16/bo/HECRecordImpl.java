@@ -45,12 +45,12 @@
  */
 package com.teragrep.cfe_16.bo;
 
-import com.cloudbees.syslog.Facility;
-import com.cloudbees.syslog.SDElement;
-import com.cloudbees.syslog.Severity;
-import com.cloudbees.syslog.SyslogMessage;
 import com.teragrep.cfe_16.event.EventMessage;
 import com.teragrep.cfe_16.event.time.HECTime;
+import com.teragrep.rlo_14.Facility;
+import com.teragrep.rlo_14.SDElement;
+import com.teragrep.rlo_14.Severity;
+import com.teragrep.rlo_14.SyslogMessage;
 import java.time.Instant;
 import java.util.Objects;
 import org.slf4j.Logger;

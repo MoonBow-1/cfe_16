@@ -45,16 +45,16 @@
  */
 package com.teragrep.cfe_16.connection;
 
-import com.cloudbees.syslog.SyslogMessage;
-import com.cloudbees.syslog.sender.AbstractSyslogMessageSender;
+import com.teragrep.rlo_14.SyslogMessage;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
 /**
  * An abstract connection class for sending batch messages.
  */
-public abstract class AbstractConnection extends AbstractSyslogMessageSender {
+public abstract class AbstractConnection implements Closeable {
 
     protected String hostname;
     protected int port;
@@ -72,13 +72,13 @@ public abstract class AbstractConnection extends AbstractSyslogMessageSender {
      */
     public abstract void sendMessages(List<SyslogMessage> syslogMessages) throws IOException;
 
-    @Override
     public void setSyslogServerHostname(String syslogServerHostname) {
         this.hostname = syslogServerHostname;
     }
 
-    @Override
     public void setSyslogServerPort(int syslogServerPort) {
         this.port = syslogServerPort;
     }
+
+    public abstract void sendMessage(SyslogMessage syslogMessage);
 }
