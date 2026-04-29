@@ -82,15 +82,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afd8f9ebaad7734fbbebd7b48bbefa94e" id="r_afd8f9ebaad7734fbbebd7b48bbefa94e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html">TestServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServerFactory.html#afd8f9ebaad7734fbbebd7b48bbefa94e">create</a> (int port, ConcurrentLinkedDeque&lt; byte[]&gt; messageList, AtomicLong connectionOpenCount, AtomicLong connectionCleanCloseCount)  throws IOException </td></tr>
-<tr class="separator:afd8f9ebaad7734fbbebd7b48bbefa94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a629c4478e94c4cc83267051cae2b94ce" id="r_a629c4478e94c4cc83267051cae2b94ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html">TestServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServerFactory.html#a629c4478e94c4cc83267051cae2b94ce">create</a> (final int port, final ConcurrentLinkedDeque&lt; byte[]&gt; messageList, final AtomicLong connectionOpenCount, final AtomicLong connectionCleanCloseCount)  throws IOException </td></tr>
+<tr class="separator:a629c4478e94c4cc83267051cae2b94ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="TestServerFactory_8java_source.html#l00068">68</a> of file <a class="el" href="TestServerFactory_8java_source.html">TestServerFactory.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="afd8f9ebaad7734fbbebd7b48bbefa94e" name="afd8f9ebaad7734fbbebd7b48bbefa94e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd8f9ebaad7734fbbebd7b48bbefa94e">&#9670;&#160;</a></span>create()</h2>
+<a id="a629c4478e94c4cc83267051cae2b94ce" name="a629c4478e94c4cc83267051cae2b94ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a629c4478e94c4cc83267051cae2b94ce">&#9670;&#160;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -98,25 +98,25 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html">TestServer</a> com.teragrep.cfe_16.server.TestServerFactory.create </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">final int&#160;</td>
           <td class="paramname"><em>port</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ConcurrentLinkedDeque&lt; byte[]&gt;&#160;</td>
+          <td class="paramtype">final ConcurrentLinkedDeque&lt; byte[]&gt;&#160;</td>
           <td class="paramname"><em>messageList</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">AtomicLong&#160;</td>
+          <td class="paramtype">final AtomicLong&#160;</td>
           <td class="paramname"><em>connectionOpenCount</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">AtomicLong&#160;</td>
+          <td class="paramtype">final AtomicLong&#160;</td>
           <td class="paramname"><em>connectionCleanCloseCount</em>&#160;</td>
         </tr>
         <tr>
@@ -129,14 +129,14 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="TestServerFactory_8java_source.html#l00070">70</a> of file <a class="el" href="TestServerFactory_8java_source.html">TestServerFactory.java</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   75</span>                         {</div>
-<div class="line"><span class="lineno">   76</span>        EventLoopFactory eventLoopFactory = <span class="keyword">new</span> EventLoopFactory();</div>
+<div class="line"><span class="lineno">   76</span>        <span class="keyword">final</span> EventLoopFactory eventLoopFactory = <span class="keyword">new</span> EventLoopFactory();</div>
 <div class="line"><span class="lineno">   77</span> </div>
-<div class="line"><span class="lineno">   78</span>        EventLoop eventLoop = eventLoopFactory.create();</div>
-<div class="line"><span class="lineno">   79</span>        Thread eventLoopThread = <span class="keyword">new</span> Thread(eventLoop);</div>
-<div class="line"><span class="lineno">   80</span>        ExecutorService executorService = Executors.newSingleThreadExecutor();</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keyword">final</span> EventLoop eventLoop = eventLoopFactory.create();</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keyword">final</span> Thread eventLoopThread = <span class="keyword">new</span> Thread(eventLoop);</div>
+<div class="line"><span class="lineno">   80</span>        <span class="keyword">final</span> ExecutorService executorService = Executors.newSingleThreadExecutor();</div>
 <div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>        Supplier&lt;FrameDelegate&gt; frameDelegateSupplier = () -&gt; {</div>
-<div class="line"><span class="lineno">   83</span>            Map&lt;String, RelpEvent&gt; relpCommandConsumerMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keyword">final</span> Supplier&lt;FrameDelegate&gt; frameDelegateSupplier = () -&gt; {</div>
+<div class="line"><span class="lineno">   83</span>            <span class="keyword">final</span> Map&lt;String, RelpEvent&gt; relpCommandConsumerMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div>
 <div class="line"><span class="lineno">   84</span> </div>
 <div class="line"><span class="lineno">   85</span>            relpCommandConsumerMap.put(<span class="stringliteral">&quot;close&quot;</span>, <span class="keyword">new</span> RelpEventCloseCounting(connectionCleanCloseCount));</div>
 <div class="line"><span class="lineno">   86</span> </div>
@@ -148,13 +148,13 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   92</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> EventDelegate(relpCommandConsumerMap);</div>
 <div class="line"><span class="lineno">   93</span>        };</div>
 <div class="line"><span class="lineno">   94</span> </div>
-<div class="line"><span class="lineno">   95</span>        ServerFactory serverFactory = <span class="keyword">new</span> ServerFactory(</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keyword">final</span> ServerFactory serverFactory = <span class="keyword">new</span> ServerFactory(</div>
 <div class="line"><span class="lineno">   96</span>                eventLoop,</div>
 <div class="line"><span class="lineno">   97</span>                executorService,</div>
 <div class="line"><span class="lineno">   98</span>                <span class="keyword">new</span> PlainFactory(),</div>
 <div class="line"><span class="lineno">   99</span>                <span class="keyword">new</span> FrameDelegationClockFactory(frameDelegateSupplier)</div>
 <div class="line"><span class="lineno">  100</span>        );</div>
-<div class="line"><span class="lineno">  101</span>        Server server = serverFactory.create(port);</div>
+<div class="line"><span class="lineno">  101</span>        <span class="keyword">final</span> Server server = serverFactory.create(port);</div>
 <div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> TestServer(eventLoop, eventLoopThread, executorService, server);</div>
 <div class="line"><span class="lineno">  104</span>    }</div>
