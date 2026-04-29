@@ -6,7 +6,8 @@ var searchData=
   ['eventloop_3',['eventLoop',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a9fdec0099fedc5d184700e1f3ab09f3d',1,'com::teragrep::cfe_16::server::TestServer']]],
   ['eventloopthread_4',['eventLoopThread',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a424a1fc8408ab9c22752849ef1a099ea',1,'com::teragrep::cfe_16::server::TestServer']]],
   ['eventmessage_5',['eventMessage',['../classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html#a9ec20342a305cc2bfda804d09a86d7ef',1,'com::teragrep::cfe_16::bo::HECRecordImpl']]],
-  ['exceptionevent_6',['exceptionEvent',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionJsonResponse.html#adcdb4c697aa3e6898123ebbcfee9143a',1,'com::teragrep::cfe_16::response::ExceptionJsonResponse']]],
-  ['exceptioneventcontext_7',['exceptionEventContext',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionEvent.html#a52a486cb1358532d0880671a8da320d4',1,'com::teragrep::cfe_16::response::ExceptionEvent']]],
-  ['executorservice_8',['executorService',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a2ce24f84a5425db9f5ff0c4464adfb43',1,'com::teragrep::cfe_16::server::TestServer']]]
+  ['eventopen_6',['eventOpen',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1RelpEventOpenCounting.html#aedee1f73fce2da7a949382d1ac3a61ae',1,'com::teragrep::cfe_16::server::RelpEventOpenCounting']]],
+  ['exceptionevent_7',['exceptionEvent',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionJsonResponse.html#adcdb4c697aa3e6898123ebbcfee9143a',1,'com::teragrep::cfe_16::response::ExceptionJsonResponse']]],
+  ['exceptioneventcontext_8',['exceptionEventContext',['../classcom_1_1teragrep_1_1cfe__16_1_1response_1_1ExceptionEvent.html#a52a486cb1358532d0880671a8da320d4',1,'com::teragrep::cfe_16::response::ExceptionEvent']]],
+  ['executorservice_9',['executorService',['../classcom_1_1teragrep_1_1cfe__16_1_1server_1_1TestServer.html#a2ce24f84a5425db9f5ff0c4464adfb43',1,'com::teragrep::cfe_16::server::TestServer']]]
 ];

@@ -102,7 +102,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00056">56</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00057">57</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aadb2d153115ff33cc20758d903bc845b" name="aadb2d153115ff33cc20758d903bc845b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aadb2d153115ff33cc20758d903bc845b">&#9670;&#160;</a></span>createSessionAndGetItWithAuthTokenTest()</h2>
@@ -119,29 +119,29 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00073">73</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>                                                         {</div>
-<div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>        String authToken1 = <span class="stringliteral">&quot;AUTH_TOKEN_12345&quot;</span>;</div>
-<div class="line"><span class="lineno">   76</span>        String authToken2 = <span class="stringliteral">&quot;AUTH_TOKEN_54321&quot;</span>;</div>
-<div class="line"><span class="lineno">   77</span>        String authToken3 = <span class="stringliteral">&quot;AUTH_TOKEN_99999&quot;</span>;</div>
-<div class="line"><span class="lineno">   78</span> </div>
-<div class="line"><span class="lineno">   79</span>        Session session1 = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(authToken1);</div>
-<div class="line"><span class="lineno">   80</span>        Session session2 = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(authToken2);</div>
-<div class="line"><span class="lineno">   81</span>        Assertions</div>
-<div class="line"><span class="lineno">   82</span>                .assertSame(session1, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken1), <span class="stringliteral">&quot;Same session should be returned with the same authentication token&quot;</span>);</div>
-<div class="line"><span class="lineno">   83</span>        Assertions</div>
-<div class="line"><span class="lineno">   84</span>                .assertSame(session2, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken2), <span class="stringliteral">&quot;Same session should be returned with the same authentication token&quot;</span>);</div>
-<div class="line"><span class="lineno">   85</span>        Assertions</div>
-<div class="line"><span class="lineno">   86</span>                .assertNotSame(session1, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken2), <span class="stringliteral">&quot;Different session should be returned with a different authentication token&quot;</span>);</div>
-<div class="line"><span class="lineno">   87</span>        Assertions</div>
-<div class="line"><span class="lineno">   88</span>                .assertNotSame(session2, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken1), <span class="stringliteral">&quot;Different session should be returned with a different authentication token&quot;</span>);</div>
-<div class="line"><span class="lineno">   89</span>        Assertions</div>
-<div class="line"><span class="lineno">   90</span>                .assertNull(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken3), <span class="stringliteral">&quot;Getting a session with an unused authentication token should return null&quot;</span>);</div>
-<div class="line"><span class="lineno">   91</span>    }</div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests_html_a95e64415fa25eeb9b931c323109d1efe"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">com.teragrep.cfe_16.SessionManagerTests.sessionManager</a></div><div class="ttdeci">SessionManager sessionManager</div><div class="ttdef"><b>Definition</b> <a href="SessionManagerTests_8java_source.html#l00058">SessionManagerTests.java:58</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_a0018f26ecfa7a7c748e7a93522990422"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">com.teragrep.cfe_16.SessionManager.getSession</a></div><div class="ttdeci">Session getSession(String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00130">SessionManager.java:130</a></div></div>
-<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_aff9c055d9f24965718ca66391189e21d"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">com.teragrep.cfe_16.SessionManager.createSession</a></div><div class="ttdeci">Session createSession(String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00167">SessionManager.java:167</a></div></div>
+<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00074">74</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                                         {</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>        String authToken1 = <span class="stringliteral">&quot;AUTH_TOKEN_12345&quot;</span>;</div>
+<div class="line"><span class="lineno">   77</span>        String authToken2 = <span class="stringliteral">&quot;AUTH_TOKEN_54321&quot;</span>;</div>
+<div class="line"><span class="lineno">   78</span>        String authToken3 = <span class="stringliteral">&quot;AUTH_TOKEN_99999&quot;</span>;</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>        Session session1 = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(authToken1);</div>
+<div class="line"><span class="lineno">   81</span>        Session session2 = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(authToken2);</div>
+<div class="line"><span class="lineno">   82</span>        Assertions</div>
+<div class="line"><span class="lineno">   83</span>                .assertSame(session1, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken1), <span class="stringliteral">&quot;Same session should be returned with the same authentication token&quot;</span>);</div>
+<div class="line"><span class="lineno">   84</span>        Assertions</div>
+<div class="line"><span class="lineno">   85</span>                .assertSame(session2, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken2), <span class="stringliteral">&quot;Same session should be returned with the same authentication token&quot;</span>);</div>
+<div class="line"><span class="lineno">   86</span>        Assertions</div>
+<div class="line"><span class="lineno">   87</span>                .assertNotSame(session1, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken2), <span class="stringliteral">&quot;Different session should be returned with a different authentication token&quot;</span>);</div>
+<div class="line"><span class="lineno">   88</span>        Assertions</div>
+<div class="line"><span class="lineno">   89</span>                .assertNotSame(session2, <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken1), <span class="stringliteral">&quot;Different session should be returned with a different authentication token&quot;</span>);</div>
+<div class="line"><span class="lineno">   90</span>        Assertions</div>
+<div class="line"><span class="lineno">   91</span>                .assertNull(<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">getSession</a>(authToken3), <span class="stringliteral">&quot;Getting a session with an unused authentication token should return null&quot;</span>);</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests_html_a95e64415fa25eeb9b931c323109d1efe"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">com.teragrep.cfe_16.SessionManagerTests.sessionManager</a></div><div class="ttdeci">SessionManager sessionManager</div><div class="ttdef"><b>Definition</b> <a href="SessionManagerTests_8java_source.html#l00059">SessionManagerTests.java:59</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_a0018f26ecfa7a7c748e7a93522990422"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#a0018f26ecfa7a7c748e7a93522990422">com.teragrep.cfe_16.SessionManager.getSession</a></div><div class="ttdeci">Session getSession(String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00128">SessionManager.java:128</a></div></div>
+<div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1SessionManager_html_aff9c055d9f24965718ca66391189e21d"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">com.teragrep.cfe_16.SessionManager.createSession</a></div><div class="ttdeci">Session createSession(String authenticationToken)</div><div class="ttdef"><b>Definition</b> <a href="SessionManager_8java_source.html#l00165">SessionManager.java:165</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -165,10 +165,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00064">64</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>                             {</div>
-<div class="line"><span class="lineno">   65</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a> = <span class="keyword">new</span> SessionManager();</div>
-<div class="line"><span class="lineno">   66</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00065">65</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>                             {</div>
+<div class="line"><span class="lineno">   66</span>        <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a> = <span class="keyword">new</span> SessionManager(<span class="keyword">new</span> Configuration());</div>
+<div class="line"><span class="lineno">   67</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -187,15 +187,15 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00094">94</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>                                                  {</div>
-<div class="line"><span class="lineno">   95</span>        Session session = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(<span class="stringliteral">&quot;AUTH&quot;</span>);</div>
-<div class="line"><span class="lineno">   96</span>        Assertions.assertTrue(session.addChannel(Session.DEFAULT_CHANNEL));</div>
-<div class="line"><span class="lineno">   97</span>        Assertions.assertFalse(session.addChannel(Session.DEFAULT_CHANNEL));</div>
-<div class="line"><span class="lineno">   98</span>        Assertions.assertTrue(session.doesChannelExist(Session.DEFAULT_CHANNEL));</div>
-<div class="line"><span class="lineno">   99</span>        Assertions.assertTrue(session.removeChannel(Session.DEFAULT_CHANNEL));</div>
-<div class="line"><span class="lineno">  100</span>        Assertions.assertFalse(session.doesChannelExist(Session.DEFAULT_CHANNEL));</div>
-<div class="line"><span class="lineno">  101</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00095">95</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>                                                  {</div>
+<div class="line"><span class="lineno">   96</span>        Session session = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a95e64415fa25eeb9b931c323109d1efe">sessionManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html#aff9c055d9f24965718ca66391189e21d">createSession</a>(<span class="stringliteral">&quot;AUTH&quot;</span>);</div>
+<div class="line"><span class="lineno">   97</span>        Assertions.assertTrue(session.addChannel(Session.DEFAULT_CHANNEL));</div>
+<div class="line"><span class="lineno">   98</span>        Assertions.assertFalse(session.addChannel(Session.DEFAULT_CHANNEL));</div>
+<div class="line"><span class="lineno">   99</span>        Assertions.assertTrue(session.doesChannelExist(Session.DEFAULT_CHANNEL));</div>
+<div class="line"><span class="lineno">  100</span>        Assertions.assertTrue(session.removeChannel(Session.DEFAULT_CHANNEL));</div>
+<div class="line"><span class="lineno">  101</span>        Assertions.assertFalse(session.doesChannelExist(Session.DEFAULT_CHANNEL));</div>
+<div class="line"><span class="lineno">  102</span>    }</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -225,7 +225,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00058">58</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SessionManagerTests_8java_source.html#l00059">59</a> of file <a class="el" href="SessionManagerTests_8java_source.html">SessionManagerTests.java</a>.</p>
 
 </div>
 </div>
