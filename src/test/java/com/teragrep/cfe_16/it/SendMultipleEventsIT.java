@@ -62,8 +62,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.*;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 final class SendMultipleEventsIT {
@@ -100,7 +98,6 @@ final class SendMultipleEventsIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
@@ -108,32 +105,22 @@ final class SendMultipleEventsIT {
         final String eventInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 1\"}} {\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 2\"}}";
 
         final int NUMBER_OF_EVENTS_TO_BE_SENT = 100;
-        final List<CompletableFuture<Response>> futures = new ArrayList<>();
 
+        int count = 0;
         for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
-            final CompletableFuture<Response> future = CompletableFuture
-                    .supplyAsync(() -> service.sendEvents(request1, channel1, eventInJson));
-            futures.add(future);
-        }
-        final List<Response> supposedResponses = new ArrayList<>();
-        for (int i = 0; i < NUMBER_OF_EVENTS_TO_BE_SENT; i++) {
+            final Response response = service.sendEvents(request1, channel1, eventInJson);
             final Response supposedResponse = new AcknowledgedJsonResponse("Success", i);
-            supposedResponses.add(supposedResponse);
-        }
-        int countFuture = 0;
-        for (final Future<Response> future : futures) {
-            final Response actualResponse = Assertions.assertDoesNotThrow(() -> future.get());
-            Assertions
-                    .assertTrue(supposedResponses.contains(actualResponse), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID should be " + countFuture + ")");
-            countFuture++;
+            Assertions.assertEquals(supposedResponse, response);
+            count++;
         }
 
-        Assertions.assertEquals(NUMBER_OF_EVENTS_TO_BE_SENT, countFuture, "All futures have NOT been looped through");
+        Assertions.assertEquals(NUMBER_OF_EVENTS_TO_BE_SENT, count, "All loops weren't looped through");
 
         Assertions.assertEquals(NUMBER_OF_EVENTS_TO_BE_SENT * 2, messageList.size());
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 }

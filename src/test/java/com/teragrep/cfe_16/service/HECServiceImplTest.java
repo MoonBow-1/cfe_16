@@ -90,7 +90,6 @@ final class HECServiceImplTest {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {{{{}}}}";
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
@@ -104,6 +103,7 @@ final class HECServiceImplTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -132,7 +132,6 @@ final class HECServiceImplTest {
                 relpConnection
         );
 
-        Assertions.assertEquals(1, openCount.intValue());
         final String allEventsInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 1\"}} {\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": {\"message\":\"Access log test message 2\"}}";
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
@@ -145,6 +144,7 @@ final class HECServiceImplTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 

@@ -95,7 +95,6 @@ final class HECRestControllerTest {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final HECRestController hecRestController = new HECRestController(service, configuration);
 
@@ -116,6 +115,7 @@ final class HECRestControllerTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -143,7 +143,6 @@ final class HECRestControllerTest {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final HECRestController hecRestController = new HECRestController(service, configuration);
 
@@ -163,6 +162,7 @@ final class HECRestControllerTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -190,7 +190,6 @@ final class HECRestControllerTest {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final HECRestController hecRestController = new HECRestController(service, configuration);
 
@@ -215,6 +214,7 @@ final class HECRestControllerTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -242,7 +242,6 @@ final class HECRestControllerTest {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final HECRestController hecRestController = new HECRestController(service, configuration);
 
@@ -265,6 +264,7 @@ final class HECRestControllerTest {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 

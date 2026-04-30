@@ -110,7 +110,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final String authToken1 = "AUTH_TOKEN_12223";
         final String authToken2 = "AUTH_TOKEN_16664";
@@ -177,6 +176,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -216,7 +216,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final MockHttpServletRequest request2 = new MockHttpServletRequest();
         final String eventInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
@@ -228,6 +227,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -267,7 +267,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
 
@@ -284,6 +283,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -323,7 +323,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final ObjectMapper objectMapper = new ObjectMapper();
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
@@ -338,6 +337,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -378,7 +378,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final ObjectMapper objectMapper = new ObjectMapper();
         final MockHttpServletRequest request2 = new MockHttpServletRequest();
@@ -392,6 +391,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -431,7 +431,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final ObjectMapper objectMapper = new ObjectMapper();
         final MockHttpServletRequest request4 = new MockHttpServletRequest();
@@ -447,6 +446,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -486,7 +486,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final ObjectMapper objectMapper = new ObjectMapper();
         final MockHttpServletRequest request5 = new MockHttpServletRequest();
@@ -505,6 +504,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -544,7 +544,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         final String channel1 = "CHANNEL_11111";
@@ -558,6 +557,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 
@@ -597,7 +597,6 @@ final class ServiceAndHECBatchIT {
                 new TokenManager(),
                 relpConnection
         );
-        Assertions.assertEquals(1, openCount.intValue());
 
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         final String authToken1 = "AUTH_TOKEN_12223";
@@ -610,6 +609,7 @@ final class ServiceAndHECBatchIT {
 
         Assertions.assertDoesNotThrow(relpConnection::close);
         Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
         Assertions.assertEquals(1, closeCount.intValue());
     }
 }
