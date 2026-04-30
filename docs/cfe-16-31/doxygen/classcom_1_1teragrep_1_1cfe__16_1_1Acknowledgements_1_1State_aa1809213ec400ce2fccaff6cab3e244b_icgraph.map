@@ -1,0 +1,10 @@
+<map id="com.teragrep.cfe_16.Acknowledgements.State.getCurrentAckValue" name="com.teragrep.cfe_16.Acknowledgements.State.getCurrentAckValue">
+<area shape="rect" id="Node000001" title=" " alt="" coords="671,37,963,77"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a0a81fc7b69c7638df2b4e6fff3744514" title="Returns the current Ack value for given token and channel." alt="" coords="287,5,600,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,46,600,41,601,36,657,41"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html#a5307dc12a64ca957ae24430d09b372e1" title=" " alt="" coords="264,69,623,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="657,74,623,77,623,71,657,68"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a9ed9a0d5772181625f00edce5a2c611d" title="Returns the JSON object as a response of given HTTP event request." alt="" coords="5,37,216,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="273,44,216,50,216,45,273,39"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="250,73,216,70,217,65,251,68"/>
+</map>
