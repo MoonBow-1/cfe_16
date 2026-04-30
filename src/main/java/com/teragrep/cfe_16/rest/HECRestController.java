@@ -73,11 +73,15 @@ public class HECRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HECRestController.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
-    @Autowired
-    private HECService service;
+
+    private final HECService service;
+    private final Configuration configuration;
 
     @Autowired
-    private Configuration configuration;
+    public HECRestController(final HECService service, final Configuration configuration) {
+        this.service = service;
+        this.configuration = configuration;
+    }
 
     @RequestMapping(
             value = "services/collector",

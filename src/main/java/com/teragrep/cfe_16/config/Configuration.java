@@ -83,6 +83,26 @@ public class Configuration {
 
     }
 
+    public Configuration(
+            final String syslogHost,
+            final int syslogPort,
+            final int maxAckValue,
+            final int maxAckAge,
+            final int maxSessionAge,
+            final int maxChannels,
+            final long pollTime,
+            final boolean printTimes
+    ) {
+        this.syslogHost = syslogHost;
+        this.syslogPort = syslogPort;
+        this.maxAckValue = maxAckValue;
+        this.maxAckAge = maxAckAge;
+        this.maxSessionAge = maxSessionAge;
+        this.maxChannels = maxChannels;
+        this.pollTime = pollTime;
+        this.printTimes = printTimes;
+    }
+
     @Bean
     public String syslogHost() {
         return this.syslogHost;

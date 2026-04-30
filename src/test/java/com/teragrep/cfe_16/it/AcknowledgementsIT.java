@@ -52,20 +52,8 @@ import com.teragrep.cfe_16.bo.Ack;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import com.teragrep.cfe_16.exceptionhandling.ServerIsBusyException;
-import com.teragrep.cfe_16.server.TestServer;
-import com.teragrep.cfe_16.server.TestServerFactory;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.atomic.AtomicLong;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.Map;
 import tools.jackson.databind.exc.InvalidFormatException;
@@ -73,138 +61,125 @@ import tools.jackson.databind.exc.InvalidFormatException;
 /*
  * Tests the functionality of Acknowledgements
  */
-@SpringBootTest
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-@TestPropertySource(properties = {
-        "syslog.server.host=127.0.0.1",
-        "syslog.server.port=1234",
-        "max.channels=1000000",
-        "max.ack.value=1000000",
-        "max.ack.age=20000",
-        "max.session.age=30000",
-        "poll.time=30000",
-        "server.print.times=true"
-})
-public class AcknowledgementsIT {
+final class AcknowledgementsIT {
 
-    private String authToken1;
-    private String authToken2;
-
-    private String channel1;
-    private String channel2;
-
-    @Autowired
-    private Acknowledgements acknowledgements;
-    private static final int SERVER_PORT = 1234;
-    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
-    private static final AtomicLong openCount = new AtomicLong();
-    private static final AtomicLong closeCount = new AtomicLong();
-    private static TestServer server;
-
-    @BeforeAll
-    public static void init() {
-        final TestServerFactory serverFactory = new TestServerFactory();
-
-        server = Assertions
-                .assertDoesNotThrow(() -> serverFactory.create(SERVER_PORT, messageList, openCount, closeCount));
-
-        server.run();
-    }
-
-    @AfterAll
-    public static void close() {
-        Assertions.assertDoesNotThrow(() -> server.close());
-    }
-
-    /*
-     * Initializes 2 channels. getCurrentAckValue in channel 1 is called 3 times
-     * which means that the next Ack id given to a sent event should be 3.
-     */
-    @BeforeEach
-    public void initialize() {
-
-        authToken1 = "AUTH_TOKEN_11111";
-        authToken2 = "AUTH_TOKEN_22222";
-
-        channel1 = "CHANNEL_11111";
-        channel2 = "CHANNEL_22222";
-
-    }
-
-    /*
-     * In initialize() we call channel 1's getCurrentAckValue 3 times, so the next
-     * time we call it, the currentAckValue() should return 3 and increase the ack
-     * value by 1, so the next time it will be 4. We have not called
-     * getCurrentAckValue() in channel2 yet, so it should be 0.
-     */
     @Test
-    public void getCurrentAckValueTest() {
+    void getCurrentAckValueTest() {
+        final Configuration configuration = new Configuration(
+                "localhost",
+                1234,
+                1000000,
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final Acknowledgements acknowledgements = new Acknowledgements(configuration);
+
+        final String authToken1 = "AUTH_TOKEN_11111";
+        final String authToken2 = "AUTH_TOKEN_22222";
+        final String channel1 = "CHANNEL_11111";
+        final String channel2 = "CHANNEL_22222";
+
         int currentAckValue;
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken1, channel1);
+        acknowledgements.incrementAckValue(authToken1, channel1);
 
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken1, channel1);
+        acknowledgements.incrementAckValue(authToken1, channel1);
 
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken1, channel1);
+        acknowledgements.incrementAckValue(authToken1, channel1);
 
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken1, channel1);
+        acknowledgements.incrementAckValue(authToken1, channel1);
 
         Assertions.assertEquals(3, currentAckValue, "channel1 current ack value should be 3");
 
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken1, this.channel1);
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken1, channel1);
+        acknowledgements.incrementAckValue(authToken1, channel1);
         Assertions.assertEquals(4, currentAckValue, "channel1 current ack value should be 4");
 
-        currentAckValue = acknowledgements.getCurrentAckValue(this.authToken2, this.channel2);
+        currentAckValue = acknowledgements.getCurrentAckValue(authToken2, channel2);
         Assertions.assertEquals(0, currentAckValue, "channel2 current ack value should be 0");
     }
 
-    /*
-     * First we acknowledge the Ack with an id of 0 in channel 1, then we test that
-     * it is indeed acknowledged. All the other Acks should not be acknowledged. If
-     * Ack id is not used at all, isAckAcknowledged should return false.
+    /**
+     * First we acknowledge the Ack with an id of 0 in channel 1, then we test that it is indeed acknowledged. All the
+     * other Acks should not be acknowledged. If Ack id is not used at all, isAckAcknowledged should return false.
      */
     @Test
-    public void acknowledgeTest() {
-        acknowledgements.initializeContext(this.authToken1, this.channel1);
-        acknowledgements.addAck(this.authToken1, this.channel1, new Ack(0, false));
-        acknowledgements.acknowledge(this.authToken1, this.channel1, 0);
+    void acknowledgeTest() {
+        final Configuration configuration = new Configuration(
+                "localhost",
+                1234,
+                1000000,
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final Acknowledgements acknowledgements = new Acknowledgements(configuration);
+
+        final String authToken1 = "AUTH_TOKEN_11111";
+        final String authToken2 = "AUTH_TOKEN_22222";
+        final String channel1 = "CHANNEL_11111";
+        final String channel2 = "CHANNEL_22222";
+
+        acknowledgements.initializeContext(authToken1, channel1);
+        acknowledgements.addAck(authToken1, channel1, new Ack(0, false));
+        acknowledgements.acknowledge(authToken1, channel1, 0);
         Assertions
                 .assertTrue(
 
-                        acknowledgements.isAckAcknowledged(this.authToken1, this.channel1, 0), "ackId 0 should be acknowledged for channel 1"
+                        acknowledgements.isAckAcknowledged(authToken1, channel1, 0), "ackId 0 should be acknowledged for channel 1"
                 );
         Assertions
                 .assertFalse(
 
-                        acknowledgements.isAckAcknowledged(this.authToken1, this.channel1, 1), "ackId 1 should not be acknowledged for channel 1"
+                        acknowledgements.isAckAcknowledged(authToken1, channel1, 1), "ackId 1 should not be acknowledged for channel 1"
                 );
         Assertions
                 .assertFalse(
 
-                        acknowledgements.isAckAcknowledged(this.authToken1, this.channel1, 10), "ackId 10 is not used yet for channel 1, so isAckAcknowledged should return false"
+                        acknowledgements.isAckAcknowledged(authToken1, channel1, 10), "ackId 10 is not used yet for channel 1, so isAckAcknowledged should return false"
                 );
-        acknowledgements.incrementAckValue(this.authToken1, this.channel1);
-        acknowledgements.initializeContext(this.authToken2, this.channel2);
+        acknowledgements.incrementAckValue(authToken1, channel1);
+        acknowledgements.initializeContext(authToken2, channel2);
         Assertions
                 .assertFalse(
 
-                        acknowledgements.isAckAcknowledged(this.authToken2, this.channel2, 0), "ackId 0 is not used yet for channel 2 so isAckAcknowledged should return false"
+                        acknowledgements.isAckAcknowledged(authToken2, channel2, 0), "ackId 0 is not used yet for channel 2 so isAckAcknowledged should return false"
                 );
     }
 
-    /*
-     * Tests getting the Ack statuses from Acknowledgements. First we create the request
-     * bodies and the supposed responses as strings. Then we create the nodes for
-     * the requests and read the strings into the node object. After that
-     * Acknowledgements' getRequestedAckStatuses() is called with the JsonNode requests
-     * and the response is compared to the supposed responses.
+    /**
+     * Tests getting the Ack statuses from Acknowledgements. First we create the request bodies and the supposed
+     * responses as strings. Then we create the nodes for the requests and read the strings into the node object. After
+     * that Acknowledgements' getRequestedAckStatuses() is called with the JsonNode requests and the response is
+     * compared to the supposed responses.
      */
     @Test
-    public void getRequestedAckStatusesTest() {
+    void getRequestedAckStatusesTest() {
+        final Configuration configuration = new Configuration(
+                "localhost",
+                1234,
+                1000000,
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final Acknowledgements acknowledgements = new Acknowledgements(configuration);
+
+        final String authToken1 = "AUTH_TOKEN_11111";
+        final String authToken2 = "AUTH_TOKEN_22222";
+        final String channel1 = "CHANNEL_11111";
+        final String channel2 = "CHANNEL_22222";
+
         final String requestAsString = "{\"acks\": [1,3,4]}";
         final String notIntRequestAsString = "{\"acks\": [\"a\",\"b\",\"c\"]}";
         final String faultyRequestAsString = "{\"test\": [1,3,4]}";
@@ -215,21 +190,21 @@ public class AcknowledgementsIT {
         final JsonNode queryNode;
         final JsonNode faultyNode;
         final JsonNode notIntNode;
-        acknowledgements.initializeContext(this.authToken1, this.channel1);
-        Assertions.assertTrue(acknowledgements.addAck(this.authToken1, this.channel1, new Ack(1, false)));
-        Assertions.assertTrue(acknowledgements.acknowledge(this.authToken1, this.channel1, 1));
+        acknowledgements.initializeContext(authToken1, channel1);
+        Assertions.assertTrue(acknowledgements.addAck(authToken1, channel1, new Ack(1, false)));
+        Assertions.assertTrue(acknowledgements.acknowledge(authToken1, channel1, 1));
 
         queryNode = Assertions.assertDoesNotThrow(() -> mapper.readTree(requestAsString));
         faultyNode = Assertions.assertDoesNotThrow(() -> mapper.readTree(faultyRequestAsString));
         notIntNode = Assertions.assertDoesNotThrow(() -> mapper.readTree(notIntRequestAsString));
 
         Assertions
-                .assertEquals(emptyJsonNode, acknowledgements.getRequestedAckStatuses(this.authToken1, "", null), "getRequestedAckStatuses should return null, when providing a null value as a parameter");
+                .assertEquals(emptyJsonNode, acknowledgements.getRequestedAckStatuses(authToken1, "", null), "getRequestedAckStatuses should return null, when providing a null value as a parameter");
 
         Assertions
                 .assertEquals(
                         supposedResponseAsStringOneTrue, acknowledgements
-                                .getRequestedAckStatuses(this.authToken1, this.channel1, queryNode)
+                                .getRequestedAckStatuses(authToken1, channel1, queryNode)
                                 .toString(),
                         "ackId 1 status should be true on channel1, others should be false."
                 );
@@ -238,90 +213,101 @@ public class AcknowledgementsIT {
                 .assertEquals(
 
                         supposedResponseAsStringAllFalse, acknowledgements
-                                .getRequestedAckStatuses(this.authToken1, this.channel1, queryNode)
+                                .getRequestedAckStatuses(authToken1, channel1, queryNode)
                                 .toString(),
                         "ackId 1 status should be false on channel1 after requesting it's status once. All others should be false as well"
                 );
 
-        acknowledgements.initializeContext(this.authToken2, this.channel2);
+        acknowledgements.initializeContext(authToken2, channel2);
         Assertions
                 .assertEquals(
                         supposedResponseAsStringAllFalse, acknowledgements
-                                .getRequestedAckStatuses(this.authToken2, this.channel2, queryNode)
+                                .getRequestedAckStatuses(authToken2, channel2, queryNode)
                                 .toString(),
                         "All ack statuses should be false for channel2"
                 );
 
         Assertions
                 .assertEquals(
-                        emptyJsonNode, acknowledgements
-                                .getRequestedAckStatuses(this.authToken1, this.channel1, emptyJsonNode),
-                        "An empty JsonNode should be returned when querying with an empty JsonNode"
+                        emptyJsonNode, acknowledgements.getRequestedAckStatuses(authToken1, channel1, emptyJsonNode), "An empty JsonNode should be returned when querying with an empty JsonNode"
                 );
 
         Assertions
                 .assertEquals(
 
-                        emptyJsonNode, acknowledgements
-                                .getRequestedAckStatuses(this.authToken1, this.channel1, faultyNode),
-                        "An empty JsonNode should be returned when querying with a JsonNode that has no \"acks\" field in it."
+                        emptyJsonNode, acknowledgements.getRequestedAckStatuses(authToken1, channel1, faultyNode), "An empty JsonNode should be returned when querying with a JsonNode that has no \"acks\" field in it."
                 );
 
         Assertions
                 .assertThrowsExactly(
                         InvalidFormatException.class,
-                        () -> acknowledgements.getRequestedAckStatuses(this.authToken1, this.channel1, notIntNode)
+                        () -> acknowledgements.getRequestedAckStatuses(authToken1, channel1, notIntNode)
                 );
     }
 
-    public void getCurrentAckValueAndIncrementTest() {
-        Acknowledgements acknowledgements1 = new Acknowledgements(new Configuration());
-        Acknowledgements acknowledgements2 = new Acknowledgements(new Configuration());
+    @Test
+    void getCurrentAckValueAndIncrementTest() {
+        final Configuration configuration = new Configuration(
+                "localhost",
+                1234,
+                1000000,
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final String authToken1 = "AUTH_TOKEN_11111";
+
+        final Acknowledgements acknowledgements1 = new Acknowledgements(configuration);
+        final Acknowledgements acknowledgements2 = new Acknowledgements(configuration);
 
         Assertions
-                .assertEquals(0, acknowledgements1.getCurrentAckValue(this.authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 1 should return 0");
-        acknowledgements1.incrementAckValue(this.authToken1, Session.DEFAULT_CHANNEL);
+                .assertEquals(0, acknowledgements1.getCurrentAckValue(authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 1 should return 0");
+        acknowledgements1.incrementAckValue(authToken1, Session.DEFAULT_CHANNEL);
         Assertions
-                .assertEquals(1, acknowledgements1.getCurrentAckValue(this.authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 1 should return 1");
+                .assertEquals(1, acknowledgements1.getCurrentAckValue(authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 1 should return 1");
 
         Assertions
-                .assertEquals(0, acknowledgements2.getCurrentAckValue(this.authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 2 should return 0");
-        acknowledgements2.incrementAckValue(this.authToken1, Session.DEFAULT_CHANNEL);
+                .assertEquals(0, acknowledgements2.getCurrentAckValue(authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 2 should return 0");
+        acknowledgements2.incrementAckValue(authToken1, Session.DEFAULT_CHANNEL);
         Assertions
-                .assertEquals(1, acknowledgements2.getCurrentAckValue(this.authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 2 should return 1");
-
+                .assertEquals(1, acknowledgements2.getCurrentAckValue(authToken1, Session.DEFAULT_CHANNEL), "Acknowledgements 2 should return 1");
     }
 
-    /*
-     * Tests deleting the Ack from Acknowledgements. First we get the list that is
-     * currently in the Acknowledgements and save it to list1 variable. After that we
-     * delete an Ack from the Acknowledgements's list, then we get the list from
-     * Acknowledgements again and save it to list2 variable. These 2 lists are then
-     * compared to each other.
+    /**
+     * Tests deleting the Ack from Acknowledgements. First we get the list that is currently in the Acknowledgements and
+     * save it to list1 variable. After that we delete an Ack from the Acknowledgements's list, then we get the list
+     * from Acknowledgements again and save it to list2 variable. These 2 lists are then compared to each other.
      */
     @Test
-    public void deleteAckTest() {
-        Acknowledgements acknowledgements1 = new Acknowledgements(new Configuration());
-        Acknowledgements acknowledgements2 = new Acknowledgements(new Configuration());
+    void deleteAckTest() {
+        final String authToken1 = "AUTH_TOKEN_11111";
+        final String authToken2 = "AUTH_TOKEN_22222";
+        final String channel1 = "CHANNEL_11111";
+        final String channel2 = "CHANNEL_22222";
 
-        acknowledgements1.initializeContext(this.authToken1, this.channel1);
-        Assertions.assertTrue(acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(0, false)));
-        Assertions.assertTrue(acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(1, false)));
+        final Acknowledgements acknowledgements1 = new Acknowledgements(new Configuration());
+        final Acknowledgements acknowledgements2 = new Acknowledgements(new Configuration());
 
-        Map<Integer, Ack> list1 = acknowledgements1.getAckList(this.authToken1, this.channel1);
-        int list1Size = acknowledgements1.getAckListSize(this.authToken1, this.channel1);
+        acknowledgements1.initializeContext(authToken1, channel1);
+        Assertions.assertTrue(acknowledgements1.addAck(authToken1, channel1, new Ack(0, false)));
+        Assertions.assertTrue(acknowledgements1.addAck(authToken1, channel1, new Ack(1, false)));
+
+        Map<Integer, Ack> list1 = acknowledgements1.getAckList(authToken1, channel1);
+        int list1Size = acknowledgements1.getAckListSize(authToken1, channel1);
         Assertions.assertEquals(2, list1Size, "Ack list 1 size should be 2.");
 
         Ack deletedAck = list1.values().iterator().next();
 
-        acknowledgements2.initializeContext(this.authToken2, this.channel2);
-        Assertions.assertTrue(acknowledgements2.addAck(this.authToken2, this.channel2, new Ack(0, false)));
+        acknowledgements2.initializeContext(authToken2, channel2);
+        Assertions.assertTrue(acknowledgements2.addAck(authToken2, channel2, new Ack(0, false)));
 
-        acknowledgements2.initializeContext(this.authToken2, this.channel2);
-        Assertions.assertTrue(acknowledgements2.addAck(this.authToken2, this.channel2, new Ack(1, false)));
+        acknowledgements2.initializeContext(authToken2, channel2);
+        Assertions.assertTrue(acknowledgements2.addAck(authToken2, channel2, new Ack(1, false)));
 
-        acknowledgements2.deleteAckFromList(this.authToken2, this.channel2, deletedAck);
-        Map<Integer, Ack> list2 = acknowledgements2.getAckList(this.authToken2, this.channel2);
+        acknowledgements2.deleteAckFromList(authToken2, channel2, deletedAck);
+        Map<Integer, Ack> list2 = acknowledgements2.getAckList(authToken2, channel2);
         int list2Size = list2.size();
 
         Assertions.assertNotSame(list1.toString(), list2.toString(), "Ack lists should not be same");
@@ -329,39 +315,48 @@ public class AcknowledgementsIT {
         Assertions.assertFalse(list2.containsKey(deletedAck.getId()), "list2 should not contain the deleted ack");
     }
 
-    /*
-     * Max Ack value is set to 2, so the Ack list should be full after
-     * getCurrentAckValue() is called 3 times. getCurrentAckValue is called 4 times
-     * here, so ServerIsBusyException is expected to happen.
+    /**
+     * Max Ack value is set to 2, so the Ack list should be full after getCurrentAckValue() is called 3 times.
+     * getCurrentAckValue is called 4 times here, so ServerIsBusyException is expected to happen.
      */
     @Test
-    public void maxAckValueTest() {
-        final Configuration configuration1 = new Configuration();
-        configuration1.setMaxAckValue(2);
-        final Acknowledgements acknowledgements1 = new Acknowledgements(configuration1);
+    void maxAckValueTest() {
+        final String authToken1 = "AUTH_TOKEN_11111";
+        final String channel1 = "CHANNEL_11111";
 
-        final int ackId1 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        final Configuration configuration = new Configuration(
+                "localhost",
+                1234,
+                2, // maxAckValue
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final Acknowledgements acknowledgements1 = new Acknowledgements(configuration);
+
+        final int ackId1 = acknowledgements1.getCurrentAckValue(authToken1, channel1);
         Assertions.assertEquals(0, ackId1);
-        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
-        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId1, false));
+        acknowledgements1.incrementAckValue(authToken1, channel1);
+        acknowledgements1.addAck(authToken1, channel1, new Ack(ackId1, false));
 
-        final int ackId2 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        final int ackId2 = acknowledgements1.getCurrentAckValue(authToken1, channel1);
         Assertions.assertEquals(1, ackId2);
-        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
-        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId2, false));
+        acknowledgements1.incrementAckValue(authToken1, channel1);
+        acknowledgements1.addAck(authToken1, channel1, new Ack(ackId2, false));
 
-        final int ackId3 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        final int ackId3 = acknowledgements1.getCurrentAckValue(authToken1, channel1);
         Assertions.assertEquals(2, ackId3);
-        acknowledgements1.incrementAckValue(this.authToken1, this.channel1);
-        acknowledgements1.addAck(this.authToken1, this.channel1, new Ack(ackId3, false));
+        acknowledgements1.incrementAckValue(authToken1, channel1);
+        acknowledgements1.addAck(authToken1, channel1, new Ack(ackId3, false));
 
-        final int ackId4 = acknowledgements1.getCurrentAckValue(this.authToken1, this.channel1);
+        final int ackId4 = acknowledgements1.getCurrentAckValue(authToken1, channel1);
         Assertions.assertEquals(0, ackId4);
 
         Assertions
                 .assertThrows(
-                        ServerIsBusyException.class,
-                        () -> acknowledgements1.incrementAckValue(this.authToken1, this.channel1)
+                        ServerIsBusyException.class, () -> acknowledgements1.incrementAckValue(authToken1, channel1)
                 );
     }
 }

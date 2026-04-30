@@ -45,88 +45,78 @@
  */
 package com.teragrep.cfe_16.it;
 
+import com.teragrep.cfe_16.Acknowledgements;
+import com.teragrep.cfe_16.SessionManager;
+import com.teragrep.cfe_16.TokenManager;
+import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.connection.RelpConnection;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.Response;
 import com.teragrep.cfe_16.server.TestServer;
 import com.teragrep.cfe_16.server.TestServerFactory;
 import com.teragrep.cfe_16.service.HECService;
+import com.teragrep.cfe_16.service.HECServiceImpl;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicLong;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.TestPropertySource;
 
-@TestPropertySource(properties = {
-        "syslog.server.host=127.0.0.1",
-        "syslog.server.port=1238",
-        "syslog.server.protocol=RELP",
-        "max.channels=1000000",
-        "max.ack.value=1000000",
-        "max.ack.age=20000",
-        "max.session.age=30000",
-        "poll.time=30000",
-        "spring.devtools.add-properties=false",
-        "server.print.times=true"
-})
-@SpringBootTest
-public class SendSingleEventIT {
+final class SendSingleEventIT {
 
-    private static final int SERVER_PORT = 1238;
-    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
-    private static final AtomicLong openCount = new AtomicLong();
-    private static final AtomicLong closeCount = new AtomicLong();
-    private static TestServer server;
-    @Autowired
-    private HECService service;
-    private MockHttpServletRequest request1;
-    private String eventInJson;
-    private String channel1;
-
-    @BeforeAll
-    public static void init() {
+    @Test
+    void send1EventTest() {
+        final int serverPort = 1238;
         final TestServerFactory serverFactory = new TestServerFactory();
-        server = Assertions
-                .assertDoesNotThrow(() -> serverFactory.create(SERVER_PORT, messageList, openCount, closeCount));
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
         server.run();
-    }
 
-    @AfterAll
-    public static void close() {
-        Assertions.assertDoesNotThrow(() -> server.close());
-    }
+        final Configuration configuration = new Configuration(
+                "localhost",
+                serverPort,
+                1000000,
+                20000,
+                30000,
+                1000000,
+                1000000,
+                true
+        );
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+        Assertions.assertEquals(1, openCount.intValue());
 
-    @AfterEach
-    public void clear() {
-        openCount.set(0);
-        closeCount.set(0);
-        messageList.clear();
-    }
-
-    @BeforeEach
-    public void initEach() {
-        this.request1 = new MockHttpServletRequest();
-        this.request1.addHeader("Authorization", "AUTH_TOKEN_11111");
-        this.channel1 = "CHANNEL_11111";
-        this.eventInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", "
+        final MockHttpServletRequest request1 = new MockHttpServletRequest();
+        request1.addHeader("Authorization", "AUTH_TOKEN_11111");
+        final String channel1 = "CHANNEL_11111";
+        final String eventInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", "
                 + "\"event\": {\"message\":\"Access log test message 1\"}} "
                 + "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", \"event\": "
                 + "{\"message\":\"Access log test message 2\"}}";
-    }
 
-    @Test
-    public void send1EventTest() {
         final Response supposedResponse = new AcknowledgedJsonResponse("Success", 0);
         Assertions
                 .assertEquals(supposedResponse, service.sendEvents(request1, channel1, eventInJson), "Service should return JSON object with fields 'text', 'code' and 'ackID' (ackID " + "should be " + 0 + ")");
 
         Assertions
                 .assertEquals(2, messageList.size(), "Number of events received should match the number of sent ones");
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 }

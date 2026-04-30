@@ -84,7 +84,7 @@ public final class RelpConnection implements Closeable {
         this.connect();
     }
 
-    synchronized private void connect() {
+    synchronized public void connect() {
         boolean notConnected = true;
         while (notConnected) {
             boolean connected = false;

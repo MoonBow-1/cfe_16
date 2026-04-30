@@ -69,7 +69,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /**
  * Tests the functionality of the eventData.toSyslogMessage method
  */
-public class EventDataToSyslogMessageTest {
+class EventDataToSyslogMessageTest {
 
     @Test
     @DisplayName("test fields when time is provided in HECRecord")

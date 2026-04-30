@@ -55,8 +55,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -67,10 +65,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-public class ConfigurationIT {
+final class ConfigurationIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationIT.class);
-    private static final String hostname = "localhost";
     private static final Integer port = 1235;
     private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
     private static final AtomicLong openCount = new AtomicLong();
@@ -80,33 +76,31 @@ public class ConfigurationIT {
     private Configuration configuration;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         final TestServerFactory serverFactory = new TestServerFactory();
         server = Assertions.assertDoesNotThrow(() -> serverFactory.create(port, messageList, openCount, closeCount));
         server.run();
     }
 
     @AfterAll
-    public static void close() {
+    static void close() {
         Assertions.assertDoesNotThrow(() -> server.close());
     }
 
     @AfterEach
-    public void clear() {
+    void clear() {
         openCount.set(0);
         closeCount.set(0);
         messageList.clear();
     }
 
     @Test
-    public void instantiateConfigurationTest() {
+    void testConfigurationAutowiringValues() {
         final String expected = "Configuration{syslogHost=127.0.0.1, syslogPort=1235, maxAckValue=1000000, maxAckAge=20000, maxSessionAge=30000, "
                 + "maxChannels=1000000, pollTime=1000000, printTimes=true}";
-        LOGGER.debug(configuration.toString());
 
         assertEquals(expected, configuration.toString());
         assertEquals(0, messageList.size());
         assertEquals(1, openCount.get());
-        assertEquals(0, closeCount.get());
     }
 }

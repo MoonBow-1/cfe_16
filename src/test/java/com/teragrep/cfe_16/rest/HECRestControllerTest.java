@@ -45,88 +45,60 @@
  */
 package com.teragrep.cfe_16.rest;
 
+import com.teragrep.cfe_16.Acknowledgements;
+import com.teragrep.cfe_16.SessionManager;
+import com.teragrep.cfe_16.TokenManager;
+import com.teragrep.cfe_16.config.Configuration;
+import com.teragrep.cfe_16.connection.RelpConnection;
 import com.teragrep.cfe_16.response.AcknowledgedJsonResponse;
 import com.teragrep.cfe_16.response.JsonResponse;
 import com.teragrep.cfe_16.server.TestServer;
 import com.teragrep.cfe_16.server.TestServerFactory;
+import com.teragrep.cfe_16.service.HECService;
+import com.teragrep.cfe_16.service.HECServiceImpl;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicLong;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import tools.jackson.databind.JsonNode;
 
-@TestPropertySource(properties = {
-        "syslog.server.host=127.0.0.1",
-        "syslog.server.port=1248",
-        "syslog.server.protocol=RELP",
-        "max.channels=1000000",
-        "max.ack.value=1000000",
-        "max.ack.age=20000",
-        "max.session.age=30000",
-        "poll.time=30000",
-        "spring.devtools.add-properties=false",
-        "server.print.times=true"
-})
-@SpringBootTest
-@AutoConfigureMockMvc
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-class HECRestControllerTest {
-
-    private static final int SERVER_PORT = 1248;
-    private static final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
-    private static final AtomicLong openCount = new AtomicLong();
-    private static final AtomicLong closeCount = new AtomicLong();
-    private static TestServer server;
-    @Autowired
-    private HECRestController hecRestController;
-    @Autowired
-    private MockMvc mockMvc;
-
-    @BeforeAll
-    static void init() {
-        final TestServerFactory serverFactory = new TestServerFactory();
-        server = Assertions
-                .assertDoesNotThrow(() -> serverFactory.create(SERVER_PORT, messageList, openCount, closeCount));
-        server.run();
-    }
-
-    @AfterAll
-    static void cleanup() {
-        Assertions.assertDoesNotThrow(() -> server.close());
-    }
-
-    @AfterEach
-    void clear() {
-        openCount.set(0);
-        closeCount.set(0);
-        messageList.clear();
-    }
+final class HECRestControllerTest {
 
     @Test
     @DisplayName("test JSON sendEvents endpoint with channel present")
     void testJsonSendEventsEndpointWithChannelPresent() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+        Assertions.assertEquals(1, openCount.intValue());
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         final String channel1 = "CHANNEL_11111";
@@ -136,16 +108,45 @@ class HECRestControllerTest {
                 + "{\"message\":\"Access log test message 2\"}}";
 
         final ResponseEntity<JsonNode> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.sendEvents(request1, eventInJson, channel1));
+                .assertDoesNotThrow(() -> hecRestController.sendEvents(request1, eventInJson, channel1));
         final AcknowledgedJsonResponse expectedResponse = new AcknowledgedJsonResponse("Success", 0);
         final ResponseEntity<JsonNode> expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();
 
         Assertions.assertEquals(expectedResponseEntity, responseEntity);
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test
     @DisplayName("test JSON sendEvents endpoint without channel present")
     void testJsonSendEventsEndpointWithoutChannelPresent() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+        Assertions.assertEquals(1, openCount.intValue());
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         final String eventInJson = "{\"sourcetype\":\"access\", \"source\":\"/var/log/access.log\", "
@@ -154,16 +155,45 @@ class HECRestControllerTest {
                 + "{\"message\":\"Access log test message 2\"}}";
 
         final ResponseEntity<JsonNode> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.sendEvents(request1, eventInJson, null));
+                .assertDoesNotThrow(() -> hecRestController.sendEvents(request1, eventInJson, null));
         final JsonResponse expectedResponse = new JsonResponse("Success");
         final ResponseEntity<JsonNode> expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();
 
         Assertions.assertEquals(expectedResponseEntity, responseEntity);
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test
     @DisplayName("test multiValueMap sendEvents endpoint with channel present")
     void testMultiValueMapSendEventsEndpointWithChannelPresent() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+        Assertions.assertEquals(1, openCount.intValue());
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         final String channel1 = "CHANNEL_11111";
@@ -177,16 +207,45 @@ class HECRestControllerTest {
         multiValueMap.add(eventInJson, null);
 
         final ResponseEntity<JsonNode> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.sendEvents(request1, multiValueMap, channel1));
+                .assertDoesNotThrow(() -> hecRestController.sendEvents(request1, multiValueMap, channel1));
         final AcknowledgedJsonResponse expectedResponse = new AcknowledgedJsonResponse("Success", 0);
         final ResponseEntity<JsonNode> expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();
 
         Assertions.assertEquals(expectedResponseEntity, responseEntity);
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test
     @DisplayName("test multiValueMap sendEvents endpoint without channel present")
     void testMultiValueMapSendEventsEndpointWithoutChannelPresent() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+        Assertions.assertEquals(1, openCount.intValue());
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.addHeader("Authorization", "AUTH_TOKEN_11111");
         // Send JSON without the outer object brackets
@@ -198,11 +257,15 @@ class HECRestControllerTest {
         multiValueMap.add(eventInJson, null);
 
         final ResponseEntity<JsonNode> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.sendEvents(request1, multiValueMap, null));
+                .assertDoesNotThrow(() -> hecRestController.sendEvents(request1, multiValueMap, null));
         final JsonResponse expectedResponse = new JsonResponse("Success");
         final ResponseEntity<JsonNode> expectedResponseEntity = expectedResponse.asJsonNodeResponseEntity();
 
         Assertions.assertEquals(expectedResponseEntity, responseEntity);
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test

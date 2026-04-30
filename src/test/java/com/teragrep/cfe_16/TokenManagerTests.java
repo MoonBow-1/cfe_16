@@ -53,16 +53,15 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /*
  * Tests the functionality of TokenManager
  */
-public class TokenManagerTests {
-
-    TokenManager manager = new TokenManager();
+final class TokenManagerTests {
 
     /*
      * Tests TokenManager's tokenIsMissing() method which checks if
      * HttpServletRequest's header has an authentication token in it.
      */
     @Test
-    public void tokenCheckingTest() {
+    void tokenCheckingTest() {
+        final TokenManager manager = new TokenManager();
 
         MockHttpServletRequest requestWithHttpHeaderAuth = new MockHttpServletRequest();
         MockHttpServletRequest requestWithBasicAuth = new MockHttpServletRequest();
@@ -84,7 +83,9 @@ public class TokenManagerTests {
      * format.
      */
     @Test
-    public void basicAuthCheckingTest() {
+    void basicAuthCheckingTest() {
+        final TokenManager manager = new TokenManager();
+
         String authToken = "AUTH_TOKEN_11111";
         String basicAuthHeader = "Basic x:" + authToken;
 
@@ -99,7 +100,9 @@ public class TokenManagerTests {
      * authentication token when it is given in basic authentication format.
      */
     @Test
-    public void getTokenFromBasicAuthTest() {
+    void getTokenFromBasicAuthTest() {
+        final TokenManager manager = new TokenManager();
+
         String authToken = "AUTH_TOKEN_11111";
         String basicAuthCredentials = "x:" + authToken;
         String credentialsEncoded = Base64.getEncoder().encodeToString(basicAuthCredentials.getBytes());

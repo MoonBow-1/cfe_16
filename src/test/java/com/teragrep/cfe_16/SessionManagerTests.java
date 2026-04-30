@@ -48,30 +48,20 @@ package com.teragrep.cfe_16;
 import com.teragrep.cfe_16.bo.Session;
 import com.teragrep.cfe_16.config.Configuration;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
  * Tests the functionality of SessionManager
  */
-public class SessionManagerTests {
-
-    private SessionManager sessionManager;
-
-    /*
-     * A SessionManager is initialized
-     */
-    @BeforeEach
-    public void initialize() {
-        sessionManager = new SessionManager(new Configuration());
-    }
+final class SessionManagerTests {
 
     /*
      * Tests creating a session with SessionManager and getting that same session
      * from SessionManager
      */
     @Test
-    public void createSessionAndGetItWithAuthTokenTest() {
+    void createSessionAndGetItWithAuthTokenTest() {
+        final SessionManager sessionManager = new SessionManager(new Configuration());
 
         String authToken1 = "AUTH_TOKEN_12345";
         String authToken2 = "AUTH_TOKEN_54321";
@@ -92,7 +82,9 @@ public class SessionManagerTests {
     }
 
     @Test
-    public void sessionCreationAndDeletionTests() {
+    void sessionCreationAndDeletionTests() {
+        final SessionManager sessionManager = new SessionManager(new Configuration());
+
         Session session = sessionManager.createSession("AUTH");
         Assertions.assertTrue(session.addChannel(Session.DEFAULT_CHANNEL));
         Assertions.assertFalse(session.addChannel(Session.DEFAULT_CHANNEL));

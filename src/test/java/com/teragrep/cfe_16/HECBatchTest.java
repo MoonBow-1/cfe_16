@@ -61,13 +61,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-class HECBatchTest {
-
-    private static final String channel1 = "CHANNEL_11111";
-    private static final String authToken1 = "AUTH_TOKEN_12223";
+final class HECBatchTest {
 
     @Test
-    public void toHECRecordListTest() {
+    void toHECRecordListTest() {
+        final String channel1 = "CHANNEL_11111";
+        final String authToken1 = "AUTH_TOKEN_12223";
+
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\", \"time\": 123456}";
         final HECRecord supposedResponse = new HECRecordImpl(
                 channel1,
@@ -105,7 +105,10 @@ class HECBatchTest {
      * Tests for JsonSyntaxException
      */
     @Test
-    public void toHECRecordListUsesAStubIfParsingFailsWithMalformedJSONTest() {
+    void toHECRecordListUsesAStubIfParsingFailsWithMalformedJSONTest() {
+        final String channel1 = "CHANNEL_11111";
+        final String authToken1 = "AUTH_TOKEN_12223";
+
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": {{{{}}}}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
@@ -121,7 +124,10 @@ class HECBatchTest {
      * Tests for EventStub existence, since the Event should not be valid
      */
     @Test
-    public void toHECRecordListUsesAStubIfParsingFailsWithEmptyJSONTest() {
+    void toHECRecordListUsesAStubIfParsingFailsWithEmptyJSONTest() {
+        final String channel1 = "CHANNEL_11111";
+        final String authToken1 = "AUTH_TOKEN_12223";
+
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": null}";
         final String supposedResponse = "Event field was not textual";
         final HECBatch HECBatch = new HECBatch(
@@ -139,7 +145,10 @@ class HECBatchTest {
     }
 
     @Test
-    public void noEventFieldInRequestTest() {
+    void noEventFieldInRequestTest() {
+        final String channel1 = "CHANNEL_11111";
+        final String authToken1 = "AUTH_TOKEN_12223";
+
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
@@ -152,7 +161,10 @@ class HECBatchTest {
     }
 
     @Test
-    public void eventFieldBlankInRequestTest() {
+    void eventFieldBlankInRequestTest() {
+        final String channel1 = "CHANNEL_11111";
+        final String authToken1 = "AUTH_TOKEN_12223";
+
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\"}";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
