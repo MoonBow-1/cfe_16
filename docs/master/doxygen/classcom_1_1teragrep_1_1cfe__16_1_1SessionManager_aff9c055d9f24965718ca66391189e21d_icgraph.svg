@@ -41,10 +41,10 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#a69a1ba2c78d1eaa5a0bf912ff73655fa" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="190.5,-41 0.5,-41 0.5,0 190.5,0 190.5,-41"/>
-<text text-anchor="start" x="8.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.Session</text>
-<text text-anchor="start" x="8.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">ManagerTests.sessionCreaationAnd</text>
+<g id="a_Node000003"><a xlink:href="classcom_1_1teragrep_1_1cfe__16_1_1SessionManagerTests.html#ab5dc10db207373aae24d51fea78d6c29" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="187.5,-41 3.5,-41 3.5,0 187.5,0 187.5,-41"/>
+<text text-anchor="start" x="11.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">com.teragrep.cfe_16.Session</text>
+<text text-anchor="start" x="11.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">ManagerTests.sessionCreationAnd</text>
 <text text-anchor="middle" x="95.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">DeletionTests</text>
 </a>
 </g>
@@ -53,7 +53,7 @@
 <g id="edge2_Node000001_Node000003" class="edge">
 <title>Node1&#45;&gt;Node3</title>
 <g id="a_edge2_Node000001_Node000003"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M216.73,-37.22C208.1,-36.02 199.33,-34.8 190.64,-33.59"/>
+<path fill="none" stroke="#63b8ff" d="M216.84,-37.24C207.24,-35.9 197.45,-34.54 187.81,-33.2"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="216.38,-40.71 226.77,-38.62 217.35,-33.77 216.38,-40.71"/>
 </a>
 </g>

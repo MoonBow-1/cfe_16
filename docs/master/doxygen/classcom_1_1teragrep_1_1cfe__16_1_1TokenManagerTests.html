@@ -96,7 +96,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00058">58</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00056">56</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6349eb6c2cd7533ff9ec5815ab42b3c1" name="a6349eb6c2cd7533ff9ec5815ab42b3c1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6349eb6c2cd7533ff9ec5815ab42b3c1">&#9670;&#160;</a></span>basicAuthCheckingTest()</h2>
@@ -113,17 +113,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00088">88</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   88</span>                                        {</div>
-<div class="line"><span class="lineno">   89</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
-<div class="line"><span class="lineno">   90</span>        String basicAuthHeader = <span class="stringliteral">&quot;Basic x:&quot;</span> + authToken;</div>
-<div class="line"><span class="lineno">   91</span> </div>
-<div class="line"><span class="lineno">   92</span>        assertTrue(<span class="stringliteral">&quot;Authorization header should be in basic format&quot;</span>, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(basicAuthHeader));</div>
-<div class="line"><span class="lineno">   93</span>        assertFalse(</div>
-<div class="line"><span class="lineno">   94</span>                <span class="stringliteral">&quot;Authorization should not be in basic format when querying with only the authentication token.&quot;</span>,</div>
-<div class="line"><span class="lineno">   95</span>                manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(authToken)</div>
-<div class="line"><span class="lineno">   96</span>        );</div>
-<div class="line"><span class="lineno">   97</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00087">87</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   87</span>                                        {</div>
+<div class="line"><span class="lineno">   88</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
+<div class="line"><span class="lineno">   89</span>        String basicAuthHeader = <span class="stringliteral">&quot;Basic x:&quot;</span> + authToken;</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>        Assertions</div>
+<div class="line"><span class="lineno">   92</span>                .assertTrue(manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(basicAuthHeader), <span class="stringliteral">&quot;Authorization header should be in basic format&quot;</span>);</div>
+<div class="line"><span class="lineno">   93</span>        Assertions</div>
+<div class="line"><span class="lineno">   94</span>                .assertFalse(manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">isTokenInBasic</a>(authToken), <span class="stringliteral">&quot;Authorization should not be in basic format when querying with only the &quot;</span> + <span class="stringliteral">&quot;authentication token.&quot;</span>);</div>
+<div class="line"><span class="lineno">   95</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1TokenManager_html_a687bbb785ceb8eeb5b314e44d0136279"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a687bbb785ceb8eeb5b314e44d0136279">com.teragrep.cfe_16.TokenManager.isTokenInBasic</a></div><div class="ttdeci">boolean isTokenInBasic(String authHeader)</div><div class="ttdef"><b>Definition</b> <a href="TokenManager_8java_source.html#l00087">TokenManager.java:87</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -148,18 +147,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00104">104</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  104</span>                                            {</div>
-<div class="line"><span class="lineno">  105</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
-<div class="line"><span class="lineno">  106</span>        String basicAuthCredentials = <span class="stringliteral">&quot;x:&quot;</span> + authToken;</div>
-<div class="line"><span class="lineno">  107</span>        String credentialsEncoded = Base64.getEncoder().encodeToString(basicAuthCredentials.getBytes());</div>
-<div class="line"><span class="lineno">  108</span>        String basicAuthHeader = <span class="stringliteral">&quot;Basic &quot;</span> + credentialsEncoded;</div>
-<div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>        assertEquals(</div>
-<div class="line"><span class="lineno">  111</span>                <span class="stringliteral">&quot;Method should return the authentication token extracted from the Basic Authentication format&quot;</span>,</div>
-<div class="line"><span class="lineno">  112</span>                authToken, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31">getTokenFromBasic</a>(basicAuthHeader)</div>
-<div class="line"><span class="lineno">  113</span>        );</div>
-<div class="line"><span class="lineno">  114</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00102">102</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>                                            {</div>
+<div class="line"><span class="lineno">  103</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
+<div class="line"><span class="lineno">  104</span>        String basicAuthCredentials = <span class="stringliteral">&quot;x:&quot;</span> + authToken;</div>
+<div class="line"><span class="lineno">  105</span>        String credentialsEncoded = Base64.getEncoder().encodeToString(basicAuthCredentials.getBytes());</div>
+<div class="line"><span class="lineno">  106</span>        String basicAuthHeader = <span class="stringliteral">&quot;Basic &quot;</span> + credentialsEncoded;</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>        Assertions</div>
+<div class="line"><span class="lineno">  109</span>                .assertEquals(authToken, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31">getTokenFromBasic</a>(basicAuthHeader), <span class="stringliteral">&quot;Method should return the authentication token extracted from the Basic &quot;</span> + <span class="stringliteral">&quot;Authentication format&quot;</span>);</div>
+<div class="line"><span class="lineno">  110</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1TokenManager_html_a7f77170018e53e2f570fec2880081c31"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a7f77170018e53e2f570fec2880081c31">com.teragrep.cfe_16.TokenManager.getTokenFromBasic</a></div><div class="ttdeci">String getTokenFromBasic(String authHeader)</div><div class="ttdef"><b>Definition</b> <a href="TokenManager_8java_source.html#l00108">TokenManager.java:108</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -184,21 +181,22 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00067">67</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   67</span>                                    {</div>
-<div class="line"><span class="lineno">   68</span> </div>
-<div class="line"><span class="lineno">   69</span>        MockHttpServletRequest requestWithHttpHeaderAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
-<div class="line"><span class="lineno">   70</span>        MockHttpServletRequest requestWithBasicAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
-<div class="line"><span class="lineno">   71</span>        MockHttpServletRequest requestWithoutAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
-<div class="line"><span class="lineno">   72</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
-<div class="line"><span class="lineno">   73</span> </div>
-<div class="line"><span class="lineno">   74</span>        requestWithHttpHeaderAuth.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, authToken);</div>
-<div class="line"><span class="lineno">   75</span>        requestWithBasicAuth.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, <span class="stringliteral">&quot;Basic x:&quot;</span> + authToken);</div>
-<div class="line"><span class="lineno">   76</span> </div>
-<div class="line"><span class="lineno">   77</span>        assertFalse(<span class="stringliteral">&quot;Token should be found from the request&quot;</span>, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithHttpHeaderAuth));</div>
-<div class="line"><span class="lineno">   78</span>        assertFalse(<span class="stringliteral">&quot;Token should be found from the request&quot;</span>, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithBasicAuth));</div>
-<div class="line"><span class="lineno">   79</span>        assertTrue(<span class="stringliteral">&quot;Token should not be found from the request&quot;</span>, manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithoutAuth));</div>
-<div class="line"><span class="lineno">   80</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="TokenManagerTests_8java_source.html#l00065">65</a> of file <a class="el" href="TokenManagerTests_8java_source.html">TokenManagerTests.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>                                    {</div>
+<div class="line"><span class="lineno">   66</span> </div>
+<div class="line"><span class="lineno">   67</span>        MockHttpServletRequest requestWithHttpHeaderAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
+<div class="line"><span class="lineno">   68</span>        MockHttpServletRequest requestWithBasicAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
+<div class="line"><span class="lineno">   69</span>        MockHttpServletRequest requestWithoutAuth = <span class="keyword">new</span> MockHttpServletRequest();</div>
+<div class="line"><span class="lineno">   70</span>        String authToken = <span class="stringliteral">&quot;AUTH_TOKEN_11111&quot;</span>;</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>        requestWithHttpHeaderAuth.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, authToken);</div>
+<div class="line"><span class="lineno">   73</span>        requestWithBasicAuth.addHeader(<span class="stringliteral">&quot;Authorization&quot;</span>, <span class="stringliteral">&quot;Basic x:&quot;</span> + authToken);</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>        Assertions</div>
+<div class="line"><span class="lineno">   76</span>                .assertFalse(manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithHttpHeaderAuth), <span class="stringliteral">&quot;Token should be found from the request&quot;</span>);</div>
+<div class="line"><span class="lineno">   77</span>        Assertions.assertFalse(manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithBasicAuth), <span class="stringliteral">&quot;Token should be found from the request&quot;</span>);</div>
+<div class="line"><span class="lineno">   78</span>        Assertions.assertTrue(manager.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(requestWithoutAuth), <span class="stringliteral">&quot;Token should not be found from the request&quot;</span>);</div>
+<div class="line"><span class="lineno">   79</span>    }</div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1TokenManager_html_a5d298916fc03c198d49fbf53205f88e8"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">com.teragrep.cfe_16.TokenManager.tokenIsMissing</a></div><div class="ttdeci">boolean tokenIsMissing(HttpServletRequest request)</div><div class="ttdef"><b>Definition</b> <a href="TokenManager_8java_source.html#l00070">TokenManager.java:70</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
