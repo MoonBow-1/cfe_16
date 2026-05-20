@@ -102,5 +102,6 @@ final class ConfigurationIT {
         assertEquals(expected, configuration.toString());
         assertEquals(0, messageList.size());
         assertEquals(1, openCount.get());
+        assertEquals(0, closeCount.get());
     }
 }
