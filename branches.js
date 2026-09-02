@@ -1,1 +1,1 @@
-var branches = ["issue-68", "event-time", "add-event-message", "junit5-migration", "refs", "ghcr-tag-fix", "issue-62", "issue-65", "remove-tcp-udp-connections", "cfe-16-31", "gh-issue-55", "issue-8", "master", "fix-mocking", "issue-35", "doxygen_documentation", "gh-issue-57"]
+var branches = ["issue-68", "event-time", "add-event-message", "junit5-migration", "refs", "ghcr-tag-fix", "issue-62", "issue-70", "issue-65", "remove-tcp-udp-connections", "cfe-16-31", "gh-issue-55", "issue-8", "master", "fix-mocking", "issue-35", "doxygen_documentation", "gh-issue-57"]
