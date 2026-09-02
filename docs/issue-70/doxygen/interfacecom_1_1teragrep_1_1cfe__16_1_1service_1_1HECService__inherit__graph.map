@@ -1,0 +1,5 @@
+<map id="com.teragrep.cfe_16.service.HECService" name="com.teragrep.cfe_16.service.HECService">
+<area shape="rect" id="Node000001" title="An interface that specified the REST back end API." alt="" coords="5,5,216,45"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html" title="Implementation of the REST Service back end." alt="" coords="5,93,216,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,59,113,93,108,93,108,59"/>
+</map>
