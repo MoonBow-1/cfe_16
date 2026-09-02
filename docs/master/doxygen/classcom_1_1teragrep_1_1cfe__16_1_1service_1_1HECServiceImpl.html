@@ -105,9 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ed9a0d5772181625f00edce5a2c611d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae25ae6381bbd75d4c499e4541962d2ff" id="r_ae25ae6381bbd75d4c499e4541962d2ff"><td class="memItemLeft" align="right" valign="top">Response&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#ae25ae6381bbd75d4c499e4541962d2ff">getAcks</a> (final HttpServletRequest request, final String channel, final JsonNode requestedAcksInJson)</td></tr>
 <tr class="separator:ae25ae6381bbd75d4c499e4541962d2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab00b59cd48f6f446c829da2ae5e54fbe" id="r_ab00b59cd48f6f446c829da2ae5e54fbe"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#ab00b59cd48f6f446c829da2ae5e54fbe">healthCheck</a> (HttpServletRequest request)</td></tr>
-<tr class="memdesc:ab00b59cd48f6f446c829da2ae5e54fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ping.  <br /></td></tr>
-<tr class="separator:ab00b59cd48f6f446c829da2ae5e54fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab9179253b6f0b62cf6e5e1cb485ae4" id="r_a3ab9179253b6f0b62cf6e5e1cb485ae4"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a3ab9179253b6f0b62cf6e5e1cb485ae4">healthCheck</a> ()</td></tr>
+<tr class="memdesc:a3ab9179253b6f0b62cf6e5e1cb485ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ping.  <br /></td></tr>
+<tr class="separator:a3ab9179253b6f0b62cf6e5e1cb485ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -377,8 +377,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ab00b59cd48f6f446c829da2ae5e54fbe" name="ab00b59cd48f6f446c829da2ae5e54fbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab00b59cd48f6f446c829da2ae5e54fbe">&#9670;&#160;</a></span>healthCheck()</h2>
+<a id="a3ab9179253b6f0b62cf6e5e1cb485ae4" name="a3ab9179253b6f0b62cf6e5e1cb485ae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab9179253b6f0b62cf6e5e1cb485ae4">&#9670;&#160;</a></span>healthCheck()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -386,37 +386,22 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">ResponseEntity&lt; String &gt; com.teragrep.cfe_16.service.HECServiceImpl.healthCheck </td>
           <td>(</td>
-          <td class="paramtype">HttpServletRequest&#160;</td>
-          <td class="paramname"><em>request</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Ping. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">request</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html#a3b3e3cc2f7e911b355c9636c2781af1e">com.teragrep.cfe_16.service.HECService</a>.</p>
+<p>Implements <a class="el" href="interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html#a88a06001c47841b7866fced9e9451650">com.teragrep.cfe_16.service.HECService</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="HECServiceImpl_8java_source.html#l00265">265</a> of file <a class="el" href="HECServiceImpl_8java_source.html">HECServiceImpl.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  265</span>                                                                          {</div>
-<div class="line"><span class="lineno">  266</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl.html#a24caa01f7b2070f18ed1fbf4624de18c">tokenManager</a>.<a class="code hl_function" href="classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html#a5d298916fc03c198d49fbf53205f88e8">tokenIsMissing</a>(request)) {</div>
-<div class="line"><span class="lineno">  267</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;Invalid HEC token&quot;</span>, HttpStatus.BAD_REQUEST);</div>
-<div class="line"><span class="lineno">  268</span>        }</div>
-<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;String&gt;(<span class="stringliteral">&quot;HEC is available and accepting input&quot;</span>, HttpStatus.OK);</div>
-<div class="line"><span class="lineno">  270</span>    }</div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcom_1_1teragrep_1_1cfe__16_1_1service_1_1HECServiceImpl_ab00b59cd48f6f446c829da2ae5e54fbe_cgraph.svg" width="467" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
+<div class="fragment"><div class="line"><span class="lineno">  265</span>                                                {</div>
+<div class="line"><span class="lineno">  266</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(<span class="stringliteral">&quot;HEC is available and accepting input&quot;</span>, HttpStatus.OK);</div>
+<div class="line"><span class="lineno">  267</span>    }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a9ed9a0d5772181625f00edce5a2c611d" name="a9ed9a0d5772181625f00edce5a2c611d"></a>

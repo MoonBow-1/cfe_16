@@ -387,53 +387,52 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    @GetMapping(<span class="stringliteral">&quot;services/collector/health&quot;</span>)</div>
 <div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a0531ee0c663ae543daed30c3fb8d5cb1">  291</a></span>    public ResponseEntity&lt;String&gt; getHealth(HttpServletRequest request) {</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="comment">// FIXME: Fix implementation to known standards</span></div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">return</span> service.healthCheck(request);</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7635ef91bdd227c32e226216568665fc">  291</a></span>    public ResponseEntity&lt;String&gt; getHealth(final HttpServletRequest ignoredRequest) {</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">return</span> service.healthCheck();</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }</div>
 </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    @GetMapping(<span class="stringliteral">&quot;services/collector/health/1.0&quot;</span>)</div>
-<div class="foldopen" id="foldopen00298" data-start="{" data-end="}">
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a61d52f708d05cb1808aa253dccbccdef">  298</a></span>    public String getHealthWithProtocolVersion() {</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    }</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    @GetMapping(<span class="stringliteral">&quot;services/collector/health/1.0&quot;</span>)</div>
+<div class="foldopen" id="foldopen00297" data-start="{" data-end="}">
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a61d52f708d05cb1808aa253dccbccdef">  297</a></span>    public String getHealthWithProtocolVersion() {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
 </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/mint&quot;</span>)</div>
-<div class="foldopen" id="foldopen00305" data-start="{" data-end="}">
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#ab7ddf761ceeb31bfb9f3f3e17ff6c6ed">  305</a></span>    public <span class="keywordtype">void</span> sendMintData(@RequestBody String mintData) {</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/mint&quot;</span>)</div>
+<div class="foldopen" id="foldopen00304" data-start="{" data-end="}">
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#ab7ddf761ceeb31bfb9f3f3e17ff6c6ed">  304</a></span>    public <span class="keywordtype">void</span> sendMintData(@RequestBody String mintData) {</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    }</div>
 </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/mint/1.0&quot;</span>)</div>
-<div class="foldopen" id="foldopen00311" data-start="{" data-end="}">
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7916acc4085eab559ce93b812f6b192f">  311</a></span>    public <span class="keywordtype">void</span> sendMintDataWithProtocolVersion(@RequestBody String mintData) {</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    }</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/mint/1.0&quot;</span>)</div>
+<div class="foldopen" id="foldopen00310" data-start="{" data-end="}">
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7916acc4085eab559ce93b812f6b192f">  310</a></span>    public <span class="keywordtype">void</span> sendMintDataWithProtocolVersion(@RequestBody String mintData) {</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
 </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/raw&quot;</span>)</div>
-<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a46727712d2930644ffbcfb47425f2875">  317</a></span>    public <span class="keywordtype">void</span> sendRawData(@RequestBody String rawData) {</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/raw&quot;</span>)</div>
+<div class="foldopen" id="foldopen00316" data-start="{" data-end="}">
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a46727712d2930644ffbcfb47425f2875">  316</a></span>    public <span class="keywordtype">void</span> sendRawData(@RequestBody String rawData) {</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    }</div>
 </div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/raw/1.0&quot;</span>)</div>
-<div class="foldopen" id="foldopen00323" data-start="{" data-end="}">
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#aa27ad835e132d7afef8281a1ea53e29f">  323</a></span>    public <span class="keywordtype">void</span> sendRawDataWithProtocolVersion(@RequestBody String rawData) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="comment">// @LogAnnotation(type = LogType.METRIC_DURATION)</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    @PostMapping(<span class="stringliteral">&quot;services/collector/raw/1.0&quot;</span>)</div>
+<div class="foldopen" id="foldopen00322" data-start="{" data-end="}">
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno"><a class="line" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#aa27ad835e132d7afef8281a1ea53e29f">  322</a></span>    public <span class="keywordtype">void</span> sendRawDataWithProtocolVersion(@RequestBody String rawData) {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
 </div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>}</div>
 </div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1MultiValueMapRequest_html"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1MultiValueMapRequest.html">com.teragrep.cfe_16.MultiValueMapRequest</a></div><div class="ttdoc">Cleans the request body so, that only the body of the request is left in the string.</div><div class="ttdef"><b>Definition</b> <a href="MultiValueMapRequest_8java_source.html#l00059">MultiValueMapRequest.java:59</a></div></div>
 <div class="ttc" id="aclasscom_1_1teragrep_1_1cfe__16_1_1MultiValueMapRequest_html_a977855c9c215f3cb40685959791127e9"><div class="ttname"><a href="classcom_1_1teragrep_1_1cfe__16_1_1MultiValueMapRequest.html#a977855c9c215f3cb40685959791127e9">com.teragrep.cfe_16.MultiValueMapRequest.asCleanedJsonString</a></div><div class="ttdeci">String asCleanedJsonString()</div><div class="ttdef"><b>Definition</b> <a href="MultiValueMapRequest_8java_source.html#l00071">MultiValueMapRequest.java:71</a></div></div>
