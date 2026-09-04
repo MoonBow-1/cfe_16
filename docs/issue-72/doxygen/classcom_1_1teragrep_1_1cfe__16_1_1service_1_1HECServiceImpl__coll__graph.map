@@ -1,0 +1,17 @@
+<map id="com.teragrep.cfe_16.service.HECServiceImpl" name="com.teragrep.cfe_16.service.HECServiceImpl">
+<area shape="rect" id="Node000001" title="Implementation of the REST Service back end." alt="" coords="707,89,917,129"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1service_1_1HECService.html" title="An interface that specified the REST back end API." alt="" coords="277,5,488,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="502,39,683,72,742,87,741,92,682,77,501,45"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1Acknowledgements.html" title=" " alt="" coords="239,70,527,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="540,90,707,100,706,105,540,95"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="56,69,139,94"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="152,78,213,77,238,77,238,83,213,83,152,83"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1SessionManager.html" title=" " alt="" coords="277,120,488,160"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="153,90,285,117,284,123,152,95"/>
+<area shape="rect" id="Node000005" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1LifeCycle.html" title="An interface that own resources like threads for doing graceful shutdown." alt="" coords="5,123,189,163"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="188,117,238,105,304,93,305,98,239,111,189,122"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="204,140,215,140,277,139,277,145,215,145,204,145"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="501,131,682,119,706,117,707,122,683,124,502,136"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1TokenManager.html" title=" " alt="" coords="284,184,481,224"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="494,184,586,168,682,147,751,127,753,132,683,152,587,173,495,190"/>
+</map>
