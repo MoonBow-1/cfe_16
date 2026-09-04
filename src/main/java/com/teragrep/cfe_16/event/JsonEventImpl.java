@@ -65,28 +65,30 @@ public final class JsonEventImpl implements JsonEvent {
             throw new EventFieldException("Event field is missing");
         }
         // Event field contains subfield "message"
-        else if (
-            this.asPayloadJsonNode().get("event").isObject() && this.asPayloadJsonNode().get("event").has("message")
-        ) {
-            if (
-                this.asPayloadJsonNode().get("event").get("message").isTextual()
-                        && !Objects.equals(this.asPayloadJsonNode().get("event").get("message").asText(), "")
-            ) {
-                eventMessage = new EventMessageImpl(this.asPayloadJsonNode().get("event").get("message").asText());
+        else {
+            final JsonNode eventJsonNode = this.asPayloadJsonNode().get("event");
+            if (eventJsonNode.isObject() && eventJsonNode.has("message")) {
+                if (
+                    eventJsonNode.get("message").isString()
+                            && !Objects.equals(eventJsonNode.get("message").asString(), "")
+                ) {
+                    eventMessage = new EventMessageImpl(eventJsonNode.get("message").asString());
+                }
+                else {
+                    throw new EventFieldException("Event field was not textual");
+                }
+            }
+            // Event field has a String value
+            else if (eventJsonNode.isString() && !Objects.equals(eventJsonNode.asString(), "")) {
+                eventMessage = new EventMessageImpl(eventJsonNode.asString());
+            }
+            // Event field is a JSON object but does not contain a message field in it
+            else if (eventJsonNode.isObject()) {
+                eventMessage = new EventMessageImpl(eventJsonNode.toString());
             }
             else {
                 throw new EventFieldException("Event field was not textual");
             }
-        }
-        // Event field has a String value
-        else if (
-            this.asPayloadJsonNode().get("event").isTextual()
-                    && !Objects.equals(this.asPayloadJsonNode().get("event").asText(), "")
-        ) {
-            eventMessage = new EventMessageImpl(this.jsonNode.get("event").asText());
-        }
-        else {
-            throw new EventFieldException("Event field was not textual");
         }
 
         return eventMessage;
