@@ -64,30 +64,19 @@ public final class JsonEventImpl implements JsonEvent {
         if (!this.asPayloadJsonNode().has("event")) {
             throw new EventFieldException("Event field is missing");
         }
+
         // Event field contains subfield "message"
         else {
             final JsonNode eventJsonNode = this.asPayloadJsonNode().get("event");
-            if (eventJsonNode.isObject() && eventJsonNode.has("message")) {
-                if (
-                    eventJsonNode.get("message").isString()
-                            && !Objects.equals(eventJsonNode.get("message").asString(), "")
-                ) {
-                    eventMessage = new EventMessageImpl(eventJsonNode.get("message").asString());
-                }
-                else {
-                    throw new EventFieldException("Event field was not textual");
-                }
-            }
-            // Event field has a String value
-            else if (eventJsonNode.isString() && !Objects.equals(eventJsonNode.asString(), "")) {
-                eventMessage = new EventMessageImpl(eventJsonNode.asString());
-            }
-            // Event field is a JSON object but does not contain a message field in it
-            else if (eventJsonNode.isObject()) {
-                eventMessage = new EventMessageImpl(eventJsonNode.toString());
+            // Event field is essentially empty
+            if (
+                eventJsonNode.isString() && Objects.equals(eventJsonNode.asString(), "") || eventJsonNode.isNull()
+                        || eventJsonNode.isObject() && eventJsonNode.asObject().isEmpty()
+            ) {
+                throw new EventFieldException("Event field is missing");
             }
             else {
-                throw new EventFieldException("Event field was not textual");
+                eventMessage = new EventMessageImpl(eventJsonNode.toString());
             }
         }
 

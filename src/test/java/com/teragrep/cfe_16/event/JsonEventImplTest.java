@@ -77,22 +77,23 @@ class JsonEventImplTest {
     }
 
     @Test
-    @DisplayName("event() throws EventFieldException if event node is an integer")
-    void eventThrowsEventFieldExceptionIfEventNodeIsAnInteger() {
+    @DisplayName("event() returns EventImpl if event node is an integer")
+    void eventReturnsEventImplIfEventNodeIsAnInteger() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("event", 123);
 
         final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
 
-        final Exception returnedEventMessage = Assertions
-                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
+        final EventMessage returnedEventMessage = Assertions.assertDoesNotThrow(jsonEventImpl::asEventMessage);
 
-        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
+        final EventMessage expectedEventMessage = new EventMessageImpl("123");
+
+        Assertions.assertEquals(expectedEventMessage, returnedEventMessage);
     }
 
     @Test
-    @DisplayName("event() throws EventFieldException is event is an empty string")
-    void eventThrowsEventFieldExceptionIsEventIsAnEmptyString() {
+    @DisplayName("event() throws EventFieldException if event is an empty string")
+    void eventThrowsEventFieldExceptionIfEventIsAnEmptyString() {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode jsonNode = mapper.createObjectNode().put("event", "");
 
@@ -101,7 +102,21 @@ class JsonEventImplTest {
         final Exception returnedEventMessage = Assertions
                 .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
 
-        Assertions.assertEquals("Event field was not textual", returnedEventMessage.getMessage());
+        Assertions.assertEquals("Event field is missing", returnedEventMessage.getMessage());
+    }
+
+    @Test
+    @DisplayName("event() throws EventFieldException if event is an empty object")
+    void eventThrowsEventFieldExceptionIfEventIsAnEmptyObject() {
+        final ObjectMapper mapper = new ObjectMapper();
+        final JsonNode jsonNode = mapper.createObjectNode().set("event", mapper.createObjectNode());
+
+        final JsonEventImpl jsonEventImpl = new JsonEventImpl(jsonNode);
+
+        final Exception returnedEventMessage = Assertions
+                .assertThrowsExactly(EventFieldException.class, jsonEventImpl::asEventMessage);
+
+        Assertions.assertEquals("Event field is missing", returnedEventMessage.getMessage());
     }
 
     @Test
@@ -114,7 +129,7 @@ class JsonEventImplTest {
 
         final EventMessage returnedEventMessage = Assertions.assertDoesNotThrow(jsonEventImpl::asEventMessage);
 
-        final EventMessage expectedEventMessage = new EventMessageImpl("Valid event");
+        final EventMessage expectedEventMessage = new EventMessageImpl("\"Valid event\"");
 
         Assertions.assertEquals(expectedEventMessage, returnedEventMessage);
     }

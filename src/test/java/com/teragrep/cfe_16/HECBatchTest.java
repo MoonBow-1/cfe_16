@@ -71,7 +71,7 @@ class HECBatchTest {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": \"Hello, world!\", \"host\": \"localhost\", \"source\": \"mysource\", \"index\": \"myindex\", \"time\": 123456}";
         final HECRecord supposedResponse = new HECRecordImpl(
                 channel1,
-                new EventMessageImpl("Hello, world!"),
+                new EventMessageImpl("\"Hello, world!\""),
                 authToken1,
                 0,
                 new HECTimeImplWithFallback(
@@ -123,7 +123,7 @@ class HECBatchTest {
     @Test
     public void toHECRecordListUsesAStubIfParsingFailsWithEmptyJSONTest() {
         final String allEventsInJson = "{\"sourcetype\": \"mysourcetype\", \"event\": null}";
-        final String supposedResponse = "Event field was not textual";
+        final String supposedResponse = "Event field is missing";
         final HECBatch HECBatch = new HECBatch(
                 authToken1,
                 channel1,

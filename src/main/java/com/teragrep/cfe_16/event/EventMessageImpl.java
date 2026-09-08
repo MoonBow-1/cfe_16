@@ -79,4 +79,9 @@ public final class EventMessageImpl implements EventMessage {
     public int hashCode() {
         return Objects.hashCode(eventAsString);
     }
+
+    @Override
+    public String toString() {
+        return "EventMessageImpl{" + "eventAsString='" + eventAsString + '\'' + '}';
+    }
 }
