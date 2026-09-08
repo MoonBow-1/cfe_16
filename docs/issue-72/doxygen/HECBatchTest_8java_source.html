@@ -154,7 +154,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">final</span> String allEventsInJson = <span class="stringliteral">&quot;{\&quot;sourcetype\&quot;: \&quot;mysourcetype\&quot;, \&quot;event\&quot;: \&quot;Hello, world!\&quot;, \&quot;host\&quot;: \&quot;localhost\&quot;, \&quot;source\&quot;: \&quot;mysource\&quot;, \&quot;index\&quot;: \&quot;myindex\&quot;, \&quot;time\&quot;: 123456}&quot;</span>;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">final</span> HECRecord supposedResponse = <span class="keyword">new</span> HECRecordImpl(</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                channel1,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="keyword">new</span> EventMessageImpl(<span class="stringliteral">&quot;Hello, world!&quot;</span>),</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="keyword">new</span> EventMessageImpl(<span class="stringliteral">&quot;\&quot;Hello, world!\&quot;&quot;</span>),</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                authToken1,</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                0,</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <span class="keyword">new</span> HECTimeImplWithFallback(</div>
@@ -200,7 +200,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    @Test</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> toHECRecordListUsesAStubIfParsingFailsWithEmptyJSONTest() {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keyword">final</span> String allEventsInJson = <span class="stringliteral">&quot;{\&quot;sourcetype\&quot;: \&quot;mysourcetype\&quot;, \&quot;event\&quot;: null}&quot;</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">final</span> String supposedResponse = <span class="stringliteral">&quot;Event field was not textual&quot;</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">final</span> String supposedResponse = <span class="stringliteral">&quot;Event field is missing&quot;</span>;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keyword">final</span> HECBatch HECBatch = <span class="keyword">new</span> HECBatch(</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                authToken1,</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                channel1,</div>
