@@ -273,10 +273,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00291">291</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  291</span>                                                                                     {</div>
-<div class="line"><span class="lineno">  292</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.healthCheck();</div>
-<div class="line"><span class="lineno">  293</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00293">293</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  293</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  294</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.healthCheck();</div>
+<div class="line"><span class="lineno">  295</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -295,11 +295,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00297">297</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  297</span>                                                 {</div>
-<div class="line"><span class="lineno">  298</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><span class="lineno">  299</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
-<div class="line"><span class="lineno">  300</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00299">299</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>                                                 {</div>
+<div class="line"><span class="lineno">  300</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><span class="lineno">  301</span>        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><span class="lineno">  302</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -511,21 +511,21 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00249">249</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  253</span>      {</div>
-<div class="line"><span class="lineno">  254</span>        <span class="comment">// FIXME: Fix implementation to known standards</span></div>
-<div class="line"><span class="lineno">  255</span>        <span class="comment">// This endpoint works identically to services/collector but introduces a format</span></div>
-<div class="line"><span class="lineno">  256</span>        <span class="comment">// option for future scalability.</span></div>
-<div class="line"><span class="lineno">  257</span>        <span class="keywordtype">long</span> t1 = System.nanoTime();</div>
-<div class="line"><span class="lineno">  258</span>        <span class="keyword">final</span> Response response = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.sendEvents(request, channel, eventInJson);</div>
-<div class="line"><span class="lineno">  259</span>        <span class="keywordtype">long</span> t2 = System.nanoTime();</div>
-<div class="line"><span class="lineno">  260</span>        <span class="keywordtype">long</span> dt = t2 - t1;</div>
-<div class="line"><span class="lineno">  261</span>        <span class="keywordtype">double</span> us = (double) dt / 1000.0;</div>
-<div class="line"><span class="lineno">  262</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a3397afcfc6d26722008290ba8fefeae6">configuration</a>.printTimes()) {</div>
-<div class="line"><span class="lineno">  263</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#af0433ca65b4bd14810d9180e8dc37231">LOGGER</a>.info(<span class="stringliteral">&quot;sendEvents took &lt;{}&gt; nanoseconds, that is &lt;{}&gt; microseconds&quot;</span>, dt, us);</div>
-<div class="line"><span class="lineno">  264</span>        }</div>
-<div class="line"><span class="lineno">  265</span>        <span class="keywordflow">return</span> response.asJsonNodeResponseEntity();</div>
-<div class="line"><span class="lineno">  266</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00251">251</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  255</span>      {</div>
+<div class="line"><span class="lineno">  256</span>        <span class="comment">// FIXME: Fix implementation to known standards</span></div>
+<div class="line"><span class="lineno">  257</span>        <span class="comment">// This endpoint works identically to services/collector but introduces a format</span></div>
+<div class="line"><span class="lineno">  258</span>        <span class="comment">// option for future scalability.</span></div>
+<div class="line"><span class="lineno">  259</span>        <span class="keywordtype">long</span> t1 = System.nanoTime();</div>
+<div class="line"><span class="lineno">  260</span>        <span class="keyword">final</span> Response response = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.sendEvents(request, channel, eventInJson);</div>
+<div class="line"><span class="lineno">  261</span>        <span class="keywordtype">long</span> t2 = System.nanoTime();</div>
+<div class="line"><span class="lineno">  262</span>        <span class="keywordtype">long</span> dt = t2 - t1;</div>
+<div class="line"><span class="lineno">  263</span>        <span class="keywordtype">double</span> us = (double) dt / 1000.0;</div>
+<div class="line"><span class="lineno">  264</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a3397afcfc6d26722008290ba8fefeae6">configuration</a>.printTimes()) {</div>
+<div class="line"><span class="lineno">  265</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#af0433ca65b4bd14810d9180e8dc37231">LOGGER</a>.info(<span class="stringliteral">&quot;sendEvents took &lt;{}&gt; nanoseconds, that is &lt;{}&gt; microseconds&quot;</span>, dt, us);</div>
+<div class="line"><span class="lineno">  266</span>        }</div>
+<div class="line"><span class="lineno">  267</span>        <span class="keywordflow">return</span> response.asJsonNodeResponseEntity();</div>
+<div class="line"><span class="lineno">  268</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -561,21 +561,21 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00270">270</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  274</span>      {</div>
-<div class="line"><span class="lineno">  275</span>        <span class="comment">// FIXME: Fix implementation to known standards</span></div>
-<div class="line"><span class="lineno">  276</span>        <span class="comment">// This endpoint works identically to services/collector/event but introduces a</span></div>
-<div class="line"><span class="lineno">  277</span>        <span class="comment">// protocol version for future scalability</span></div>
-<div class="line"><span class="lineno">  278</span>        <span class="keywordtype">long</span> t1 = System.nanoTime();</div>
-<div class="line"><span class="lineno">  279</span>        <span class="keyword">final</span> Response response = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.sendEvents(request, channel, eventInJson);</div>
-<div class="line"><span class="lineno">  280</span>        <span class="keywordtype">long</span> t2 = System.nanoTime();</div>
-<div class="line"><span class="lineno">  281</span>        <span class="keywordtype">long</span> dt = t2 - t1;</div>
-<div class="line"><span class="lineno">  282</span>        <span class="keywordtype">double</span> us = (double) dt / 1000.0;</div>
-<div class="line"><span class="lineno">  283</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a3397afcfc6d26722008290ba8fefeae6">configuration</a>.printTimes()) {</div>
-<div class="line"><span class="lineno">  284</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#af0433ca65b4bd14810d9180e8dc37231">LOGGER</a>.info(<span class="stringliteral">&quot;sendEvents took &lt;{}¦ nanoseconds, that is &lt;{}&gt; microseconds&quot;</span>, dt, us);</div>
-<div class="line"><span class="lineno">  285</span>        }</div>
-<div class="line"><span class="lineno">  286</span>        <span class="keywordflow">return</span> response.asJsonNodeResponseEntity();</div>
-<div class="line"><span class="lineno">  287</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00272">272</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  276</span>      {</div>
+<div class="line"><span class="lineno">  277</span>        <span class="comment">// FIXME: Fix implementation to known standards</span></div>
+<div class="line"><span class="lineno">  278</span>        <span class="comment">// This endpoint works identically to services/collector/event but introduces a</span></div>
+<div class="line"><span class="lineno">  279</span>        <span class="comment">// protocol version for future scalability</span></div>
+<div class="line"><span class="lineno">  280</span>        <span class="keywordtype">long</span> t1 = System.nanoTime();</div>
+<div class="line"><span class="lineno">  281</span>        <span class="keyword">final</span> Response response = <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a7932956d4d58c7fe5d0d3549f7730e86">service</a>.sendEvents(request, channel, eventInJson);</div>
+<div class="line"><span class="lineno">  282</span>        <span class="keywordtype">long</span> t2 = System.nanoTime();</div>
+<div class="line"><span class="lineno">  283</span>        <span class="keywordtype">long</span> dt = t2 - t1;</div>
+<div class="line"><span class="lineno">  284</span>        <span class="keywordtype">double</span> us = (double) dt / 1000.0;</div>
+<div class="line"><span class="lineno">  285</span>        <span class="keywordflow">if</span> (this.<a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#a3397afcfc6d26722008290ba8fefeae6">configuration</a>.printTimes()) {</div>
+<div class="line"><span class="lineno">  286</span>            <a class="code hl_variable" href="classcom_1_1teragrep_1_1cfe__16_1_1rest_1_1HECRestController.html#af0433ca65b4bd14810d9180e8dc37231">LOGGER</a>.info(<span class="stringliteral">&quot;sendEvents took &lt;{}¦ nanoseconds, that is &lt;{}&gt; microseconds&quot;</span>, dt, us);</div>
+<div class="line"><span class="lineno">  287</span>        }</div>
+<div class="line"><span class="lineno">  288</span>        <span class="keywordflow">return</span> response.asJsonNodeResponseEntity();</div>
+<div class="line"><span class="lineno">  289</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -595,10 +595,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00304">304</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  304</span>                                                           {</div>
-<div class="line"><span class="lineno">  305</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><span class="lineno">  306</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00306">306</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  306</span>                                                           {</div>
+<div class="line"><span class="lineno">  307</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><span class="lineno">  308</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -618,10 +618,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00310">310</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  310</span>                                                                              {</div>
-<div class="line"><span class="lineno">  311</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><span class="lineno">  312</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00312">312</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  312</span>                                                                              {</div>
+<div class="line"><span class="lineno">  313</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><span class="lineno">  314</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -641,10 +641,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00316">316</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  316</span>                                                         {</div>
-<div class="line"><span class="lineno">  317</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><span class="lineno">  318</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00318">318</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  318</span>                                                         {</div>
+<div class="line"><span class="lineno">  319</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><span class="lineno">  320</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -664,10 +664,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00322">322</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  322</span>                                                                            {</div>
-<div class="line"><span class="lineno">  323</span>        <span class="comment">// TODO: Implement endpoint</span></div>
-<div class="line"><span class="lineno">  324</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="HECRestController_8java_source.html#l00324">324</a> of file <a class="el" href="HECRestController_8java_source.html">HECRestController.java</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  324</span>                                                                            {</div>
+<div class="line"><span class="lineno">  325</span>        <span class="comment">// TODO: Implement endpoint</span></div>
+<div class="line"><span class="lineno">  326</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
