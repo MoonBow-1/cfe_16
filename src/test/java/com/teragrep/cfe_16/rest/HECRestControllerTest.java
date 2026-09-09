@@ -45,6 +45,9 @@
  */
 package com.teragrep.cfe_16.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+
 import com.teragrep.cfe_16.Acknowledgements;
 import com.teragrep.cfe_16.SessionManager;
 import com.teragrep.cfe_16.TokenManager;
@@ -63,8 +66,16 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import tools.jackson.databind.JsonNode;
@@ -271,29 +282,112 @@ final class HECRestControllerTest {
     @Test
     @DisplayName("Test healthCheck endpoint with empty request")
     void testHealthCheckEndpointWithEmptyRequest() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         final ResponseEntity<String> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.getHealth(mockHttpServletRequest));
+                .assertDoesNotThrow(() -> hecRestController.getHealth(mockHttpServletRequest));
 
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         Assertions.assertEquals("HEC is available and accepting input", responseEntity.getBody());
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test
     @DisplayName("Test healthCheck endpoint with a token in the request")
     void testHealthCheckEndpointWithATokenInTheRequest() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+
+        final HECRestController hecRestController = new HECRestController(service, configuration);
+
         final MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletRequest.addHeader("Authorization", "AUTH_TOKEN_11111");
         final ResponseEntity<String> responseEntity = Assertions
-                .assertDoesNotThrow(() -> this.hecRestController.getHealth(mockHttpServletRequest));
+                .assertDoesNotThrow(() -> hecRestController.getHealth(mockHttpServletRequest));
 
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         Assertions.assertEquals("HEC is available and accepting input", responseEntity.getBody());
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 
     @Test
     @DisplayName("Test event consumer with mediaType ALL")
     void testEventConsumerWithMediaTypeAll() {
+        final int serverPort = 1248;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+
+        final MockMvc mockMvc = standaloneSetup(new HECRestController(service, configuration))
+                .defaultRequest(get("/").accept(MediaType.APPLICATION_JSON))
+                .build();
         final MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders
                 .post("/services/collector/event")
                 .contentType(MediaType.ALL)
@@ -313,5 +407,10 @@ final class HECRestControllerTest {
         Assertions.assertEquals(200, response.getStatus());
         final String responseContentAsString = Assertions.assertDoesNotThrow(() -> response.getContentAsString());
         Assertions.assertEquals("{\"message\":\"Success\"}", responseContentAsString);
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 }

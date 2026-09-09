@@ -62,6 +62,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 final class HECServiceImplTest {
@@ -151,8 +153,35 @@ final class HECServiceImplTest {
     @Test
     @DisplayName("Test the healthCheck return value")
     void testTheHealthCheckReturnValue() {
-        final ResponseEntity<String> returnedResponse = Assertions.assertDoesNotThrow(() -> service.healthCheck());
+        final int serverPort = 1239;
+        final TestServerFactory serverFactory = new TestServerFactory();
+        final ConcurrentLinkedDeque<byte[]> messageList = new ConcurrentLinkedDeque<>();
+        final AtomicLong openCount = new AtomicLong();
+        final AtomicLong closeCount = new AtomicLong();
+
+        final TestServer server = Assertions
+                .assertDoesNotThrow(() -> serverFactory.create(serverPort, messageList, openCount, closeCount));
+
+        server.run();
+
+        final Configuration configuration = new Configuration();
+        final RelpConnection relpConnection = new RelpConnection("localhost", serverPort);
+        Assertions
+                .assertTimeout(Duration.of(5, ChronoUnit.SECONDS), relpConnection::connect, "RelpConnection did not connect in 5 seconds");
+        final HECService service = new HECServiceImpl(
+                new Acknowledgements(configuration),
+                new SessionManager(configuration),
+                new TokenManager(),
+                relpConnection
+        );
+
+        final ResponseEntity<String> returnedResponse = Assertions.assertDoesNotThrow(service::healthCheck);
         Assertions.assertEquals(HttpStatus.OK, returnedResponse.getStatusCode());
         Assertions.assertEquals("HEC is available and accepting input", returnedResponse.getBody());
+
+        Assertions.assertDoesNotThrow(relpConnection::close);
+        Assertions.assertDoesNotThrow(server::close);
+        Assertions.assertEquals(1, openCount.intValue());
+        Assertions.assertEquals(1, closeCount.intValue());
     }
 }
