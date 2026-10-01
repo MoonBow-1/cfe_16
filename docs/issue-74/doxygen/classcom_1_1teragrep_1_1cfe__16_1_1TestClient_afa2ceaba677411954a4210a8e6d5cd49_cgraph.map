@@ -1,0 +1,5 @@
+<map id="com.teragrep.cfe_16.TestClient.ensureTcpConnection" name="com.teragrep.cfe_16.TestClient.ensureTcpConnection">
+<area shape="rect" id="Node000001" title="Checks that the TCP connection is open, otherwis a new connection is created and returned." alt="" coords="5,5,208,45"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1teragrep_1_1cfe__16_1_1TestClient.html#ab44ab6c8d2bd008181c5e31a2a8dfaa3" title=" " alt="" coords="256,5,443,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,23,242,23,242,28,208,28"/>
+</map>

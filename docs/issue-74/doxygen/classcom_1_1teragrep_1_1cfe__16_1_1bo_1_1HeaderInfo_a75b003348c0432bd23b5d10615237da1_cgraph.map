@@ -1,0 +1,20 @@
+<map id="com.teragrep.cfe_16.bo.HeaderInfo.asSDElement" name="com.teragrep.cfe_16.bo.HeaderInfo.asSDElement">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,183,232,223"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html#a8e854db1814eeb807cd9049776c33923" title=" " alt="" coords="280,5,541,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,181,156,150,190,111,232,73,279,41,298,33,300,37,281,46,235,77,194,115,160,153,136,184"/>
+<area shape="rect" id="Node000003" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedFor.html#a113b5e3c48eba97ef47b0dbcb64ef592" title=" " alt="" coords="282,55,539,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,181,205,143,279,105,300,97,302,102,281,110,208,147,149,186"/>
+<area shape="rect" id="Node000004" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedHost.html#af36e894a4b77acf609737e584479e182" title=" " alt="" coords="282,119,539,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="210,181,305,160,306,165,211,186"/>
+<area shape="rect" id="Node000005" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1bo_1_1XForwardedProto.html#a43d7fb30c973c1c89906b9ac3b928e06" title=" " alt="" coords="282,183,539,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="232,201,268,201,268,206,232,206"/>
+<area shape="rect" id="Node000006" href="$classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#ad8923eda4b1a0fe860d17ad929d0e441" title=" " alt="" coords="297,271,524,311"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="187,221,331,265,329,270,185,226"/>
+<area shape="rect" id="Node000007" href="$classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a6140b9deaef2be853bab04cbd2757adf" title=" " alt="" coords="297,359,524,399"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="145,221,205,270,281,321,344,352,341,356,279,326,202,274,142,226"/>
+<area shape="rect" id="Node000008" href="$classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HeaderInfo.html#a047f093c1dfb35af9698976facc84233" title=" " alt="" coords="297,447,524,487"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="133,222,156,261,190,311,232,363,282,409,307,426,334,440,332,444,304,431,278,413,228,367,186,314,152,264,129,225"/>
+<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="357,272,354,262,362,252,381,247,411,245,444,247,463,255,461,260,443,253,411,250,382,252,365,257,359,263,362,270"/>
+<area shape="poly" id="edge8_Node000007_Node000007" title=" " alt="" coords="357,360,354,350,362,340,381,335,411,333,444,335,463,343,461,348,443,341,411,338,382,340,365,345,359,351,362,358"/>
+<area shape="poly" id="edge10_Node000008_Node000008" title=" " alt="" coords="357,448,354,438,362,428,381,423,411,421,444,423,463,431,461,436,443,429,411,426,382,428,365,433,359,439,362,446"/>
+</map>
