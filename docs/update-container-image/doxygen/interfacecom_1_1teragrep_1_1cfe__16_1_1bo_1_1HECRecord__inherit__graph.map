@@ -1,0 +1,9 @@
+<map id="com.teragrep.cfe_16.bo.HECRecord" name="com.teragrep.cfe_16.bo.HECRecord">
+<area shape="rect" id="Node000001" title=" " alt="" coords="172,79,424,104"/>
+<area shape="rect" id="Node000003" href="$classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordImpl.html" title=" " alt="" coords="5,152,287,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,112,172,154,170,149,260,107"/>
+<area shape="rect" id="Node000004" href="$classcom_1_1teragrep_1_1cfe__16_1_1bo_1_1HECRecordStub.html" title=" " alt="" coords="311,152,592,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="336,107,427,149,425,154,334,112"/>
+<area shape="rect" id="Node000002" href="$interfacecom_1_1teragrep_1_1cfe__16_1_1Stubable.html" title=" " alt="" coords="189,5,407,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,44,301,79,295,79,295,44"/>
+</map>
